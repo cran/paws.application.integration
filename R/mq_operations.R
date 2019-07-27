@@ -9,15 +9,16 @@ NULL
 #'
 #' @usage
 #' mq_create_broker(AutoMinorVersionUpgrade, BrokerName, Configuration,
-#'   CreatorRequestId, DeploymentMode, EngineType, EngineVersion,
-#'   HostInstanceType, Logs, MaintenanceWindowStartTime, PubliclyAccessible,
-#'   SecurityGroups, SubnetIds, Tags, Users)
+#'   CreatorRequestId, DeploymentMode, EncryptionOptions, EngineType,
+#'   EngineVersion, HostInstanceType, Logs, MaintenanceWindowStartTime,
+#'   PubliclyAccessible, SecurityGroups, SubnetIds, Tags, Users)
 #'
 #' @param AutoMinorVersionUpgrade Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
 #' @param BrokerName Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
 #' @param Configuration A list of information about the configuration.
 #' @param CreatorRequestId The unique ID that the requester receives for the created broker. Amazon MQ passes your ID with the API action. Note: We recommend using a Universally Unique Identifier (UUID) for the creatorRequestId. You may omit the creatorRequestId if your application doesn't require idempotency.
 #' @param DeploymentMode Required. The deployment mode of the broker.
+#' @param EncryptionOptions Encryption options for the broker.
 #' @param EngineType Required. The type of broker engine. Note: Currently, Amazon MQ supports only ACTIVEMQ.
 #' @param EngineVersion Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 #' @param HostInstanceType Required. The broker's instance type.
@@ -40,6 +41,10 @@ NULL
 #'   ),
 #'   CreatorRequestId = "string",
 #'   DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ",
+#'   EncryptionOptions = list(
+#'     KmsKeyId = "string",
+#'     UseAwsOwnedKey = TRUE|FALSE
+#'   ),
 #'   EngineType = "ACTIVEMQ",
 #'   EngineVersion = "string",
 #'   HostInstanceType = "string",
@@ -78,14 +83,14 @@ NULL
 #' @keywords internal
 #'
 #' @rdname mq_create_broker
-mq_create_broker <- function(AutoMinorVersionUpgrade = NULL, BrokerName = NULL, Configuration = NULL, CreatorRequestId = NULL, DeploymentMode = NULL, EngineType = NULL, EngineVersion = NULL, HostInstanceType = NULL, Logs = NULL, MaintenanceWindowStartTime = NULL, PubliclyAccessible = NULL, SecurityGroups = NULL, SubnetIds = NULL, Tags = NULL, Users = NULL) {
+mq_create_broker <- function(AutoMinorVersionUpgrade = NULL, BrokerName = NULL, Configuration = NULL, CreatorRequestId = NULL, DeploymentMode = NULL, EncryptionOptions = NULL, EngineType = NULL, EngineVersion = NULL, HostInstanceType = NULL, Logs = NULL, MaintenanceWindowStartTime = NULL, PubliclyAccessible = NULL, SecurityGroups = NULL, SubnetIds = NULL, Tags = NULL, Users = NULL) {
   op <- new_operation(
     name = "CreateBroker",
     http_method = "POST",
     http_path = "/v1/brokers",
     paginator = list()
   )
-  input <- .mq$create_broker_input(AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, BrokerName = BrokerName, Configuration = Configuration, CreatorRequestId = CreatorRequestId, DeploymentMode = DeploymentMode, EngineType = EngineType, EngineVersion = EngineVersion, HostInstanceType = HostInstanceType, Logs = Logs, MaintenanceWindowStartTime = MaintenanceWindowStartTime, PubliclyAccessible = PubliclyAccessible, SecurityGroups = SecurityGroups, SubnetIds = SubnetIds, Tags = Tags, Users = Users)
+  input <- .mq$create_broker_input(AutoMinorVersionUpgrade = AutoMinorVersionUpgrade, BrokerName = BrokerName, Configuration = Configuration, CreatorRequestId = CreatorRequestId, DeploymentMode = DeploymentMode, EncryptionOptions = EncryptionOptions, EngineType = EngineType, EngineVersion = EngineVersion, HostInstanceType = HostInstanceType, Logs = Logs, MaintenanceWindowStartTime = MaintenanceWindowStartTime, PubliclyAccessible = PubliclyAccessible, SecurityGroups = SecurityGroups, SubnetIds = SubnetIds, Tags = Tags, Users = Users)
   output <- .mq$create_broker_output()
   svc <- .mq$service()
   request <- new_request(svc, op, input, output)
@@ -144,7 +149,7 @@ mq_create_configuration <- function(EngineType = NULL, EngineVersion = NULL, Nam
 #' @usage
 #' mq_create_tags(ResourceArn, Tags)
 #'
-#' @param ResourceArn &#91;required&#93; the Amazon Resource Name (ARN)
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource tag.
 #' @param Tags The key-value pair for the resource tag.
 #'
 #' @section Request syntax:
@@ -256,14 +261,14 @@ mq_delete_broker <- function(BrokerId) {
 }
 .mq$operations$delete_broker <- mq_delete_broker
 
-#' Remove a tag from a resource
+#' Removes a tag from a resource
 #'
-#' Remove a tag from a resource.
+#' Removes a tag from a resource.
 #'
 #' @usage
 #' mq_delete_tags(ResourceArn, TagKeys)
 #'
-#' @param ResourceArn &#91;required&#93; the Amazon Resource Name (ARN)
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource tag.
 #' @param TagKeys &#91;required&#93; An array of tag keys to delete
 #'
 #' @section Request syntax:
@@ -366,6 +371,87 @@ mq_describe_broker <- function(BrokerId) {
   return(response)
 }
 .mq$operations$describe_broker <- mq_describe_broker
+
+#' Describe available engine types and versions
+#'
+#' Describe available engine types and versions.
+#'
+#' @usage
+#' mq_describe_broker_engine_types(EngineType, MaxResults, NextToken)
+#'
+#' @param EngineType Filter response by engine type.
+#' @param MaxResults The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+#' @param NextToken The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$describe_broker_engine_types(
+#'   EngineType = "string",
+#'   MaxResults = 123,
+#'   NextToken = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname mq_describe_broker_engine_types
+mq_describe_broker_engine_types <- function(EngineType = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "DescribeBrokerEngineTypes",
+    http_method = "GET",
+    http_path = "/v1/broker-engine-types",
+    paginator = list()
+  )
+  input <- .mq$describe_broker_engine_types_input(EngineType = EngineType, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .mq$describe_broker_engine_types_output()
+  svc <- .mq$service()
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.mq$operations$describe_broker_engine_types <- mq_describe_broker_engine_types
+
+#' Describe available broker instance options
+#'
+#' Describe available broker instance options.
+#'
+#' @usage
+#' mq_describe_broker_instance_options(EngineType, HostInstanceType,
+#'   MaxResults, NextToken)
+#'
+#' @param EngineType Filter response by engine type.
+#' @param HostInstanceType Filter response by host instance type.
+#' @param MaxResults The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+#' @param NextToken The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$describe_broker_instance_options(
+#'   EngineType = "string",
+#'   HostInstanceType = "string",
+#'   MaxResults = 123,
+#'   NextToken = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname mq_describe_broker_instance_options
+mq_describe_broker_instance_options <- function(EngineType = NULL, HostInstanceType = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "DescribeBrokerInstanceOptions",
+    http_method = "GET",
+    http_path = "/v1/broker-instance-options",
+    paginator = list()
+  )
+  input <- .mq$describe_broker_instance_options_input(EngineType = EngineType, HostInstanceType = HostInstanceType, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .mq$describe_broker_instance_options_output()
+  svc <- .mq$service()
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.mq$operations$describe_broker_instance_options <- mq_describe_broker_instance_options
 
 #' Returns information about the specified configuration
 #'
@@ -598,7 +684,7 @@ mq_list_configurations <- function(MaxResults = NULL, NextToken = NULL) {
 #' @usage
 #' mq_list_tags(ResourceArn)
 #'
-#' @param ResourceArn &#91;required&#93; the Amazon Resource Name (ARN)
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource tag.
 #'
 #' @section Request syntax:
 #' ```
