@@ -50,7 +50,7 @@ NULL
 #' ```
 #'
 #' @examples
-#' \donttest{svc <- eventbridge()
+#' \dontrun{svc <- eventbridge()
 #' svc$activate_event_source(
 #'   Foo = 123
 #' )}
@@ -113,8 +113,7 @@ eventbridge <- function(config = list()) {
   target_prefix = "AWSEvents"
 )
 
-.eventbridge$handlers <- new_handlers("jsonrpc", "v4")
-
 .eventbridge$service <- function(config = list()) {
-  new_service(.eventbridge$metadata, .eventbridge$handlers, config)
+  handlers <- new_handlers("jsonrpc", "v4")
+  new_service(.eventbridge$metadata, handlers, config)
 }

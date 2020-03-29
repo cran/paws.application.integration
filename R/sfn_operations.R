@@ -40,7 +40,7 @@ NULL
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' @param tags The list of tags to add to a resource.
@@ -53,7 +53,7 @@ NULL
 #' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @`.
+#' symbols: `_ . : / = + - @@`.
 #'
 #' @section Request syntax:
 #' ```
@@ -121,7 +121,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' @param definition &#91;required&#93; The Amazon States Language definition of the state machine. See [Amazon
@@ -143,7 +143,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @`.
+#' symbols: `_ . : / = + - @@`.
 #'
 #' @section Request syntax:
 #' ```
@@ -735,7 +735,7 @@ sfn_list_state_machines <- function(maxResults = NULL, nextToken = NULL) {
 #' List tags for a given resource.
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @`.
+#' symbols: `_ . : / = + - @@`.
 #'
 #' @usage
 #' sfn_list_tags_for_resource(resourceArn)
@@ -951,7 +951,7 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' @param input The string that contains the JSON input data for the execution, for
@@ -1043,7 +1043,7 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
 #' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @`.
+#' symbols: `_ . : / = + - @@`.
 #'
 #' @usage
 #' sfn_tag_resource(resourceArn, tags)
@@ -1053,7 +1053,7 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
 #' @param tags &#91;required&#93; The list of tags to add to a resource.
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @`.
+#' symbols: `_ . : / = + - @@`.
 #'
 #' @section Request syntax:
 #' ```
