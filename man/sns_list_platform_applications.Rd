@@ -21,9 +21,8 @@ available after the first page results, then a NextToken string will be
 returned. To receive the next page, you call \code{ListPlatformApplications}
 using the NextToken string received from the previous call. When there
 are no more records to return, \code{NextToken} will be null. For more
-information, see \href{https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html}{Using Amazon SNS Mobile Push Notifications}.
-}
-\details{
+information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html}{Using Amazon SNS Mobile Push Notifications}.
+
 This action is throttled at 15 transactions per second (TPS).
 }
 \section{Request syntax}{

@@ -5,7 +5,7 @@
 \title{Creates a state machine}
 \usage{
 sfn_create_state_machine(name, definition, roleArn, type,
-  loggingConfiguration, tags)
+  loggingConfiguration, tags, tracingConfiguration)
 }
 \arguments{
 \item{name}{[required] The name of the state machine.
@@ -15,7 +15,7 @@ A name must \emph{not} contain:
 \item white space
 \item brackets \verb{&lt; &gt; \\\{ \\\} \\\[ \\\]}
 \item wildcard characters \verb{? *}
-\item special characters \verb{\\" # \% \\\\ ^ | ~ \\` $ &amp; , ; : /}
+\item special characters \verb{\\" # \\\% \\\\ ^ | ~ \\` $ &amp; , ; : /}
 \item control characters (\verb{U+0000-001F}, \verb{U+007F-009F})
 }
 
@@ -44,6 +44,8 @@ in the \emph{AWS Billing and Cost Management User Guide}, and \href{https://docs
 
 Tags may only contain Unicode letters, digits, white space, or these
 symbols: \verb{_ . : / = + - @}.}
+
+\item{tracingConfiguration}{Selects whether AWS X-Ray tracing is enabled.}
 }
 \description{
 Creates a state machine. A state machine consists of a collection of
@@ -52,19 +54,18 @@ transition next (\code{Choice} states), stop an execution with an error
 (\code{Fail} states), and so on. State machines are specified using a
 JSON-based, structured language. For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language}
 in the AWS Step Functions User Guide.
-}
-\details{
+
 This operation is eventually consistent. The results are best effort and
 may not reflect very recent updates and changes.
 
-\code{CreateStateMachine} is an idempotent API. Subsequent requests won't
+\code{CreateStateMachine} is an idempotent API. Subsequent requests won’t
 create a duplicate resource if it was already created.
-\code{CreateStateMachine}\'s idempotency check is based on the state machine
-\code{name}, \code{definition}, \code{type}, and \code{LoggingConfiguration}. If a following
-request has a different \code{roleArn} or \code{tags}, Step Functions will ignore
-these differences and treat it as an idempotent request of the previous.
-In this case, \code{roleArn} and \code{tags} will not be updated, even if they are
-different.
+\code{CreateStateMachine}'s idempotency check is based on the state machine
+\code{name}, \code{definition}, \code{type}, \code{LoggingConfiguration} and
+\code{TracingConfiguration}. If a following request has a different \code{roleArn}
+or \code{tags}, Step Functions will ignore these differences and treat it as
+an idempotent request of the previous. In this case, \code{roleArn} and
+\code{tags} will not be updated, even if they are different.
 }
 \section{Request syntax}{
 \preformatted{svc$create_state_machine(
@@ -88,6 +89,9 @@ different.
       key = "string",
       value = "string"
     )
+  ),
+  tracingConfiguration = list(
+    enabled = TRUE|FALSE
   )
 )
 }

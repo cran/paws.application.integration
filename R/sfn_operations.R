@@ -5,6 +5,7 @@ NULL
 
 #' Creates an activity
 #'
+#' @description
 #' Creates an activity. An activity is a task that you write in any
 #' programming language and host on any machine that has access to AWS Step
 #' Functions. Activities must poll Step Functions using the
@@ -16,8 +17,8 @@ NULL
 #' This operation is eventually consistent. The results are best effort and
 #' may not reflect very recent updates and changes.
 #' 
-#' `CreateActivity` is an idempotent API. Subsequent requests won't create
-#' a duplicate resource if it was already created. `CreateActivity`\'s
+#' `CreateActivity` is an idempotent API. Subsequent requests won’t create
+#' a duplicate resource if it was already created. `CreateActivity`'s
 #' idempotency check is based on the activity `name`. If a following
 #' request has different `tags` values, Step Functions will ignore these
 #' differences and treat it as an idempotent request of the previous. In
@@ -40,7 +41,7 @@ NULL
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' 
@@ -93,6 +94,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 
 #' Creates a state machine
 #'
+#' @description
 #' Creates a state machine. A state machine consists of a collection of
 #' states that can do work (`Task` states), determine to which states to
 #' transition next (`Choice` states), stop an execution with an error
@@ -105,18 +107,18 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' This operation is eventually consistent. The results are best effort and
 #' may not reflect very recent updates and changes.
 #' 
-#' `CreateStateMachine` is an idempotent API. Subsequent requests won't
+#' `CreateStateMachine` is an idempotent API. Subsequent requests won’t
 #' create a duplicate resource if it was already created.
-#' `CreateStateMachine`\'s idempotency check is based on the state machine
-#' `name`, `definition`, `type`, and `LoggingConfiguration`. If a following
-#' request has a different `roleArn` or `tags`, Step Functions will ignore
-#' these differences and treat it as an idempotent request of the previous.
-#' In this case, `roleArn` and `tags` will not be updated, even if they are
-#' different.
+#' `CreateStateMachine`'s idempotency check is based on the state machine
+#' `name`, `definition`, `type`, `LoggingConfiguration` and
+#' `TracingConfiguration`. If a following request has a different `roleArn`
+#' or `tags`, Step Functions will ignore these differences and treat it as
+#' an idempotent request of the previous. In this case, `roleArn` and
+#' `tags` will not be updated, even if they are different.
 #'
 #' @usage
 #' sfn_create_state_machine(name, definition, roleArn, type,
-#'   loggingConfiguration, tags)
+#'   loggingConfiguration, tags, tracingConfiguration)
 #'
 #' @param name &#91;required&#93; The name of the state machine.
 #' 
@@ -128,7 +130,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' 
@@ -159,6 +161,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
 #' symbols: `_ . : / = + - @@`.
+#' @param tracingConfiguration Selects whether AWS X-Ray tracing is enabled.
 #'
 #' @section Request syntax:
 #' ```
@@ -183,6 +186,9 @@ sfn_create_activity <- function(name, tags = NULL) {
 #'       key = "string",
 #'       value = "string"
 #'     )
+#'   ),
+#'   tracingConfiguration = list(
+#'     enabled = TRUE|FALSE
 #'   )
 #' )
 #' ```
@@ -190,14 +196,14 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' @keywords internal
 #'
 #' @rdname sfn_create_state_machine
-sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, loggingConfiguration = NULL, tags = NULL) {
+sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, loggingConfiguration = NULL, tags = NULL, tracingConfiguration = NULL) {
   op <- new_operation(
     name = "CreateStateMachine",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sfn$create_state_machine_input(name = name, definition = definition, roleArn = roleArn, type = type, loggingConfiguration = loggingConfiguration, tags = tags)
+  input <- .sfn$create_state_machine_input(name = name, definition = definition, roleArn = roleArn, type = type, loggingConfiguration = loggingConfiguration, tags = tags, tracingConfiguration = tracingConfiguration)
   output <- .sfn$create_state_machine_output()
   config <- get_config()
   svc <- .sfn$service(config)
@@ -209,6 +215,7 @@ sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, log
 
 #' Deletes an activity
 #'
+#' @description
 #' Deletes an activity.
 #'
 #' @usage
@@ -245,8 +252,9 @@ sfn_delete_activity <- function(activityArn) {
 
 #' Deletes a state machine
 #'
+#' @description
 #' Deletes a state machine. This is an asynchronous operation: It sets the
-#' state machine\'s status to `DELETING` and begins the deletion process.
+#' state machine's status to `DELETING` and begins the deletion process.
 #' 
 #' For `EXPRESS`state machines, the deletion will happen eventually
 #' (usually less than a minute). Running executions may emit logs after
@@ -286,6 +294,7 @@ sfn_delete_state_machine <- function(stateMachineArn) {
 
 #' Describes an activity
 #'
+#' @description
 #' Describes an activity.
 #' 
 #' This operation is eventually consistent. The results are best effort and
@@ -325,6 +334,7 @@ sfn_describe_activity <- function(activityArn) {
 
 #' Describes an execution
 #'
+#' @description
 #' Describes an execution.
 #' 
 #' This operation is eventually consistent. The results are best effort and
@@ -366,6 +376,7 @@ sfn_describe_execution <- function(executionArn) {
 
 #' Describes a state machine
 #'
+#' @description
 #' Describes a state machine.
 #' 
 #' This operation is eventually consistent. The results are best effort and
@@ -405,6 +416,7 @@ sfn_describe_state_machine <- function(stateMachineArn) {
 
 #' Describes the state machine associated with a specific execution
 #'
+#' @description
 #' Describes the state machine associated with a specific execution.
 #' 
 #' This operation is eventually consistent. The results are best effort and
@@ -448,6 +460,7 @@ sfn_describe_state_machine_for_execution <- function(executionArn) {
 #' Used by workers to retrieve a task (with the specified activity ARN)
 #' which has been scheduled for execution by a running state machine
 #'
+#' @description
 #' Used by workers to retrieve a task (with the specified activity ARN)
 #' which has been scheduled for execution by a running state machine. This
 #' initiates a long poll, where the service holds the HTTP connection open
@@ -504,6 +517,7 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 
 #' Returns the history of the specified execution as a list of events
 #'
+#' @description
 #' Returns the history of the specified execution as a list of events. By
 #' default, the results are returned in ascending order of the `timeStamp`
 #' of the events. Use the `reverseOrder` parameter to get the latest events
@@ -520,7 +534,7 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 #'
 #' @usage
 #' sfn_get_execution_history(executionArn, maxResults, reverseOrder,
-#'   nextToken)
+#'   nextToken, includeExecutionData)
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution.
 #' @param maxResults The maximum number of results that are returned per call. You can use
@@ -536,6 +550,8 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 #' arguments unchanged. Each pagination token expires after 24 hours. Using
 #' an expired pagination token will return an *HTTP 400 InvalidToken*
 #' error.
+#' @param includeExecutionData You can select whether execution data (input or output of a history
+#' event) is returned. The default is `true`.
 #'
 #' @section Request syntax:
 #' ```
@@ -543,21 +559,22 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 #'   executionArn = "string",
 #'   maxResults = 123,
 #'   reverseOrder = TRUE|FALSE,
-#'   nextToken = "string"
+#'   nextToken = "string",
+#'   includeExecutionData = TRUE|FALSE
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_get_execution_history
-sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOrder = NULL, nextToken = NULL) {
+sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOrder = NULL, nextToken = NULL, includeExecutionData = NULL) {
   op <- new_operation(
     name = "GetExecutionHistory",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sfn$get_execution_history_input(executionArn = executionArn, maxResults = maxResults, reverseOrder = reverseOrder, nextToken = nextToken)
+  input <- .sfn$get_execution_history_input(executionArn = executionArn, maxResults = maxResults, reverseOrder = reverseOrder, nextToken = nextToken, includeExecutionData = includeExecutionData)
   output <- .sfn$get_execution_history_output()
   config <- get_config()
   svc <- .sfn$service(config)
@@ -569,6 +586,7 @@ sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOr
 
 #' Lists the existing activities
 #'
+#' @description
 #' Lists the existing activities.
 #' 
 #' If `nextToken` is returned, there are more results available. The value
@@ -627,6 +645,7 @@ sfn_list_activities <- function(maxResults = NULL, nextToken = NULL) {
 
 #' Lists the executions of a state machine that meet the filtering criteria
 #'
+#' @description
 #' Lists the executions of a state machine that meet the filtering
 #' criteria. Results are sorted by time, with the most recent execution
 #' first.
@@ -696,6 +715,7 @@ sfn_list_executions <- function(stateMachineArn, statusFilter = NULL, maxResults
 
 #' Lists the existing state machines
 #'
+#' @description
 #' Lists the existing state machines.
 #' 
 #' If `nextToken` is returned, there are more results available. The value
@@ -754,6 +774,7 @@ sfn_list_state_machines <- function(maxResults = NULL, nextToken = NULL) {
 
 #' List tags for a given resource
 #'
+#' @description
 #' List tags for a given resource.
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
@@ -795,6 +816,7 @@ sfn_list_tags_for_resource <- function(resourceArn) {
 #' Used by activity workers and task states using the callback pattern to
 #' report that the task identified by the taskToken failed
 #'
+#' @description
 #' Used by activity workers and task states using the
 #' [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 #' pattern to report that the task identified by the `taskToken` failed.
@@ -806,7 +828,7 @@ sfn_list_tags_for_resource <- function(resourceArn) {
 #' Functions when tasks are assigned to a worker, or in the [context
 #' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
 #' when a workflow enters a task state. See
-#' GetActivityTaskOutput\\$taskToken.
+#' GetActivityTaskOutput$taskToken.
 #' @param error The error code of the failure.
 #' @param cause A more detailed explanation of the cause of the failure.
 #'
@@ -843,12 +865,13 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
 #' report to Step Functions that the task represented by the specified
 #' taskToken is still making progress
 #'
+#' @description
 #' Used by activity workers and task states using the
 #' [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 #' pattern to report to Step Functions that the task represented by the
 #' specified `taskToken` is still making progress. This action resets the
 #' `Heartbeat` clock. The `Heartbeat` threshold is specified in the state
-#' machine\'s Amazon States Language definition (`HeartbeatSeconds`). This
+#' machine's Amazon States Language definition (`HeartbeatSeconds`). This
 #' action does not in itself create an event in the execution history.
 #' However, if the task times out, the execution history contains an
 #' `ActivityTimedOut` entry for activities, or a `TaskTimedOut` entry for
@@ -858,7 +881,7 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
 #' [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 #' pattern.
 #' 
-#' The `Timeout` of a task, defined in the state machine\'s Amazon States
+#' The `Timeout` of a task, defined in the state machine's Amazon States
 #' Language definition, is its maximum allowed duration, regardless of the
 #' number of SendTaskHeartbeat requests received. Use `HeartbeatSeconds` to
 #' configure the timeout interval for heartbeats.
@@ -870,7 +893,7 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
 #' Functions when tasks are assigned to a worker, or in the [context
 #' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
 #' when a workflow enters a task state. See
-#' GetActivityTaskOutput\\$taskToken.
+#' GetActivityTaskOutput$taskToken.
 #'
 #' @section Request syntax:
 #' ```
@@ -902,6 +925,7 @@ sfn_send_task_heartbeat <- function(taskToken) {
 #' Used by activity workers and task states using the callback pattern to
 #' report that the task identified by the taskToken completed successfully
 #'
+#' @description
 #' Used by activity workers and task states using the
 #' [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token)
 #' pattern to report that the task identified by the `taskToken` completed
@@ -914,8 +938,9 @@ sfn_send_task_heartbeat <- function(taskToken) {
 #' Functions when tasks are assigned to a worker, or in the [context
 #' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
 #' when a workflow enters a task state. See
-#' GetActivityTaskOutput\\$taskToken.
-#' @param output &#91;required&#93; The JSON output of the task.
+#' GetActivityTaskOutput$taskToken.
+#' @param output &#91;required&#93; The JSON output of the task. Length constraints apply to the payload
+#' size, and are expressed as bytes in UTF-8 encoding.
 #'
 #' @section Request syntax:
 #' ```
@@ -947,6 +972,7 @@ sfn_send_task_success <- function(taskToken, output) {
 
 #' Starts a state machine execution
 #'
+#' @description
 #' Starts a state machine execution.
 #' 
 #' `StartExecution` is idempotent. If `StartExecution` is called with the
@@ -956,7 +982,7 @@ sfn_send_task_success <- function(taskToken, output) {
 #' `ExecutionAlreadyExists` error. Names can be reused after 90 days.
 #'
 #' @usage
-#' sfn_start_execution(stateMachineArn, name, input)
+#' sfn_start_execution(stateMachineArn, name, input, traceHeader)
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to execute.
 #' @param name The name of the execution. This name must be unique for your AWS
@@ -973,7 +999,7 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' -   wildcard characters `? *`
 #' 
-#' -   special characters `` \" # % \\ ^ | ~ \` $ &amp; , ; : / ``
+#' -   special characters `` \" # \% \\ ^ | ~ \` $ &amp; , ; : / ``
 #' 
 #' -   control characters (`U+0000-001F`, `U+007F-009F`)
 #' 
@@ -984,29 +1010,35 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' `"input": "\{\"first_name\" : \"test\"\}"`
 #' 
-#' If you don\'t include any JSON input data, you still must include the
-#' two braces, for example: `"input": "\{\}"`
+#' If you don't include any JSON input data, you still must include the two
+#' braces, for example: `"input": "\{\}"`
+#' 
+#' Length constraints apply to the payload size, and are expressed as bytes
+#' in UTF-8 encoding.
+#' @param traceHeader Passes the AWS X-Ray trace header. The trace header can also be passed
+#' in the request payload.
 #'
 #' @section Request syntax:
 #' ```
 #' svc$start_execution(
 #'   stateMachineArn = "string",
 #'   name = "string",
-#'   input = "string"
+#'   input = "string",
+#'   traceHeader = "string"
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_start_execution
-sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL) {
+sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, traceHeader = NULL) {
   op <- new_operation(
     name = "StartExecution",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sfn$start_execution_input(stateMachineArn = stateMachineArn, name = name, input = input)
+  input <- .sfn$start_execution_input(stateMachineArn = stateMachineArn, name = name, input = input, traceHeader = traceHeader)
   output <- .sfn$start_execution_output()
   config <- get_config()
   svc <- .sfn$service(config)
@@ -1016,8 +1048,62 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL) {
 }
 .sfn$operations$start_execution <- sfn_start_execution
 
+#' Starts a Synchronous Express state machine execution
+#'
+#' @description
+#' Starts a Synchronous Express state machine execution.
+#'
+#' @usage
+#' sfn_start_sync_execution(stateMachineArn, name, input, traceHeader)
+#'
+#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to execute.
+#' @param name The name of the execution.
+#' @param input The string that contains the JSON input data for the execution, for
+#' example:
+#' 
+#' `"input": "\{\"first_name\" : \"test\"\}"`
+#' 
+#' If you don't include any JSON input data, you still must include the two
+#' braces, for example: `"input": "\{\}"`
+#' 
+#' Length constraints apply to the payload size, and are expressed as bytes
+#' in UTF-8 encoding.
+#' @param traceHeader Passes the AWS X-Ray trace header. The trace header can also be passed
+#' in the request payload.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$start_sync_execution(
+#'   stateMachineArn = "string",
+#'   name = "string",
+#'   input = "string",
+#'   traceHeader = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname sfn_start_sync_execution
+sfn_start_sync_execution <- function(stateMachineArn, name = NULL, input = NULL, traceHeader = NULL) {
+  op <- new_operation(
+    name = "StartSyncExecution",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .sfn$start_sync_execution_input(stateMachineArn = stateMachineArn, name = name, input = input, traceHeader = traceHeader)
+  output <- .sfn$start_sync_execution_output()
+  config <- get_config()
+  svc <- .sfn$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.sfn$operations$start_sync_execution <- sfn_start_sync_execution
+
 #' Stops an execution
 #'
+#' @description
 #' Stops an execution.
 #' 
 #' This API action is not supported by `EXPRESS` state machines.
@@ -1060,6 +1146,7 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
 
 #' Add a tag to a Step Functions resource
 #'
+#' @description
 #' Add a tag to a Step Functions resource.
 #' 
 #' An array of key-value pairs. For more information, see [Using Cost
@@ -1117,6 +1204,7 @@ sfn_tag_resource <- function(resourceArn, tags) {
 
 #' Remove a tag from a Step Functions resource
 #'
+#' @description
 #' Remove a tag from a Step Functions resource
 #'
 #' @usage
@@ -1159,6 +1247,7 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #' Updates an existing state machine by modifying its definition, roleArn,
 #' or loggingConfiguration
 #'
+#' @description
 #' Updates an existing state machine by modifying its `definition`,
 #' `roleArn`, or `loggingConfiguration`. Running executions will continue
 #' to use the previous `definition` and `roleArn`. You must include at
@@ -1172,7 +1261,7 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #'
 #' @usage
 #' sfn_update_state_machine(stateMachineArn, definition, roleArn,
-#'   loggingConfiguration)
+#'   loggingConfiguration, tracingConfiguration)
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine.
 #' @param definition The Amazon States Language definition of the state machine. See [Amazon
@@ -1181,6 +1270,7 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #' @param roleArn The Amazon Resource Name (ARN) of the IAM role of the state machine.
 #' @param loggingConfiguration The `LoggingConfiguration` data type is used to set CloudWatch Logs
 #' options.
+#' @param tracingConfiguration Selects whether AWS X-Ray tracing is enabled.
 #'
 #' @section Request syntax:
 #' ```
@@ -1198,6 +1288,9 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #'         )
 #'       )
 #'     )
+#'   ),
+#'   tracingConfiguration = list(
+#'     enabled = TRUE|FALSE
 #'   )
 #' )
 #' ```
@@ -1205,14 +1298,14 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #' @keywords internal
 #'
 #' @rdname sfn_update_state_machine
-sfn_update_state_machine <- function(stateMachineArn, definition = NULL, roleArn = NULL, loggingConfiguration = NULL) {
+sfn_update_state_machine <- function(stateMachineArn, definition = NULL, roleArn = NULL, loggingConfiguration = NULL, tracingConfiguration = NULL) {
   op <- new_operation(
     name = "UpdateStateMachine",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sfn$update_state_machine_input(stateMachineArn = stateMachineArn, definition = definition, roleArn = roleArn, loggingConfiguration = loggingConfiguration)
+  input <- .sfn$update_state_machine_input(stateMachineArn = stateMachineArn, definition = definition, roleArn = roleArn, loggingConfiguration = loggingConfiguration, tracingConfiguration = tracingConfiguration)
   output <- .sfn$update_state_machine_output()
   config <- get_config()
   svc <- .sfn$service(config)

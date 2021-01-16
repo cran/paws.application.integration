@@ -6,8 +6,9 @@ NULL
 #' Adds a statement to a topic's access control policy, granting access for
 #' the specified AWS accounts to the specified actions
 #'
-#' Adds a statement to a topic\'s access control policy, granting access
-#' for the specified AWS accounts to the specified actions.
+#' @description
+#' Adds a statement to a topic's access control policy, granting access for
+#' the specified AWS accounts to the specified actions.
 #'
 #' @usage
 #' sns_add_permission(TopicArn, Label, AWSAccountId, ActionName)
@@ -58,6 +59,7 @@ sns_add_permission <- function(TopicArn, Label, AWSAccountId, ActionName) {
 #' Accepts a phone number and indicates whether the phone holder has opted
 #' out of receiving SMS messages from your account
 #'
+#' @description
 #' Accepts a phone number and indicates whether the phone holder has opted
 #' out of receiving SMS messages from your account. You cannot send SMS
 #' messages to a number that is opted out.
@@ -100,11 +102,12 @@ sns_check_if_phone_number_is_opted_out <- function(phoneNumber) {
 #' Verifies an endpoint owner's intent to receive messages by validating
 #' the token sent to the endpoint by an earlier Subscribe action
 #'
-#' Verifies an endpoint owner\'s intent to receive messages by validating
+#' @description
+#' Verifies an endpoint owner's intent to receive messages by validating
 #' the token sent to the endpoint by an earlier `Subscribe` action. If the
 #' token is valid, the action creates a new subscription and returns its
 #' Amazon Resource Name (ARN). This call requires an AWS signature only
-#' when the `AuthenticateOnUnsubscribe` flag is set to \"true\".
+#' when the `AuthenticateOnUnsubscribe` flag is set to "true".
 #'
 #' @usage
 #' sns_confirm_subscription(TopicArn, Token, AuthenticateOnUnsubscribe)
@@ -149,6 +152,7 @@ sns_confirm_subscription <- function(TopicArn, Token, AuthenticateOnUnsubscribe 
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging),
 #' to which devices and mobile apps may register
 #'
+#' @description
 #' Creates a platform application object for one of the supported push
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging),
 #' to which devices and mobile apps may register. You must specify
@@ -226,6 +230,7 @@ sns_create_platform_application <- function(Name, Platform, Attributes) {
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS
 #'
+#' @description
 #' Creates an endpoint for a device and mobile app on one of the supported
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS. `CreatePlatformEndpoint` requires the `PlatformApplicationArn`
@@ -234,15 +239,15 @@ sns_create_platform_application <- function(Name, Platform, Attributes) {
 #' `Subscribe` action for subscription to a topic. The
 #' `CreatePlatformEndpoint` action is idempotent, so if the requester
 #' already owns an endpoint with the same device token and attributes, that
-#' endpoint\'s ARN is returned without creating a new endpoint. For more
+#' endpoint's ARN is returned without creating a new endpoint. For more
 #' information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #' 
 #' When using `CreatePlatformEndpoint` with Baidu, two attributes must be
 #' provided: ChannelId and UserId. The token field must also contain the
 #' ChannelId. For more information, see [Creating an Amazon SNS Endpoint
 #' for
-#' Baidu](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePushBaiduEndpoint.html).
+#' Baidu](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #'
 #' @usage
 #' sns_create_platform_endpoint(PlatformApplicationArn, Token,
@@ -295,12 +300,14 @@ sns_create_platform_endpoint <- function(PlatformApplicationArn, Token, CustomUs
 
 #' Creates a topic to which notifications can be published
 #'
+#' @description
 #' Creates a topic to which notifications can be published. Users can
 #' create at most 100,000 standard topics (at most 1,000 FIFO topics). For
 #' more information, see
-#' [https://aws.amazon.com/sns](http://aws.amazon.com/sns/). This action is
-#' idempotent, so if the requester already owns a topic with the specified
-#' name, that topic\'s ARN is returned without creating a new topic.
+#' [https://aws.amazon.com/sns](https://aws.amazon.com/sns/). This action
+#' is idempotent, so if the requester already owns a topic with the
+#' specified name, that topic's ARN is returned without creating a new
+#' topic.
 #'
 #' @usage
 #' sns_create_topic(Name, Attributes, Tags)
@@ -318,40 +325,50 @@ sns_create_platform_endpoint <- function(PlatformApplicationArn, Token, CustomUs
 #' The following lists the names, descriptions, and values of the special
 #' request parameters that the `CreateTopic` action uses:
 #' 
-#' -   `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
+#' -   `DeliveryPolicy` – The policy that defines how Amazon SNS retries
 #'     failed deliveries to HTTP/S endpoints.
 #' 
-#' -   `DisplayName` -- The display name to use for a topic with SMS
+#' -   `DisplayName` – The display name to use for a topic with SMS
 #'     subscriptions.
 #' 
-#' -   `FifoTopic` -- Set to true to create a FIFO topic.
+#' -   `FifoTopic` – Set to true to create a FIFO topic.
 #' 
-#' -   `Policy` -- The policy that defines who can access your topic. By
+#' -   `Policy` – The policy that defines who can access your topic. By
 #'     default, only the topic owner can publish or subscribe to the topic.
 #' 
 #' The following attribute applies only to
 #' [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 #' 
-#' -   `KmsMasterKeyId` -- The ID of an AWS-managed customer master key
+#' -   `KmsMasterKeyId` – The ID of an AWS-managed customer master key
 #'     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
 #'     Terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 #'     For more examples, see
 #'     [KeyId](https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 #'     in the *AWS Key Management Service API Reference*.
 #' 
-#' The following attribute applies only to FIFO topics:
+#' The following attributes apply only to [FIFO
+#' topics](https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
 #' 
-#' -   `ContentBasedDeduplication` -- Enables content-based deduplication.
-#'     Amazon SNS uses a SHA-256 hash to generate the
-#'     `MessageDeduplicationId` using the body of the message (but not the
-#'     attributes of the message).
+#' -   `FifoTopic` – When this is set to `true`, a FIFO topic is created.
 #' 
-#' -   When `ContentBasedDeduplication` is in effect, messages with
-#'     identical content sent within the deduplication interval are treated
-#'     as duplicates and only one copy of the message is delivered.
+#' -   `ContentBasedDeduplication` – Enables content-based deduplication
+#'     for FIFO topics.
 #' 
-#' -   If the queue has `ContentBasedDeduplication` set, your
-#'     `MessageDeduplicationId` overrides the generated one.
+#'     -   By default, `ContentBasedDeduplication` is set to `false`. If
+#'         you create a FIFO topic and this attribute is `false`, you must
+#'         specify a value for the `MessageDeduplicationId` parameter for
+#'         the
+#'         [Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
+#'         action.
+#' 
+#'     -   When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+#'         uses a SHA-256 hash to generate the `MessageDeduplicationId`
+#'         using the body of the message (but not the attributes of the
+#'         message).
+#' 
+#'         (Optional) To override the generated value, you can specify a
+#'         value for the the `MessageDeduplicationId` parameter for the
+#'         `Publish` action.
 #' @param Tags The list of tags to add to a new topic.
 #' 
 #' To be able to tag a topic on creation, you must have the
@@ -395,10 +412,11 @@ sns_create_topic <- function(Name, Attributes = NULL, Tags = NULL) {
 
 #' Deletes the endpoint for a device and mobile app from Amazon SNS
 #'
+#' @description
 #' Deletes the endpoint for a device and mobile app from Amazon SNS. This
 #' action is idempotent. For more information, see [Using Amazon SNS Mobile
 #' Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #' 
 #' When you delete an endpoint that is also subscribed to a topic, then you
 #' must also unsubscribe the endpoint from the topic.
@@ -438,10 +456,11 @@ sns_delete_endpoint <- function(EndpointArn) {
 #' Deletes a platform application object for one of the supported push
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging)
 #'
+#' @description
 #' Deletes a platform application object for one of the supported push
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging).
 #' For more information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #'
 #' @usage
 #' sns_delete_platform_application(PlatformApplicationArn)
@@ -477,6 +496,7 @@ sns_delete_platform_application <- function(PlatformApplicationArn) {
 
 #' Deletes a topic and all its subscriptions
 #'
+#' @description
 #' Deletes a topic and all its subscriptions. Deleting a topic might
 #' prevent some messages previously sent to the topic from being delivered
 #' to subscribers. This action is idempotent, so deleting a topic that does
@@ -518,10 +538,11 @@ sns_delete_topic <- function(TopicArn) {
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS
 #'
+#' @description
 #' Retrieves the endpoint attributes for a device on one of the supported
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS. For more information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #'
 #' @usage
 #' sns_get_endpoint_attributes(EndpointArn)
@@ -559,11 +580,12 @@ sns_get_endpoint_attributes <- function(EndpointArn) {
 #' supported push notification services, such as APNS and GCM (Firebase
 #' Cloud Messaging)
 #'
+#' @description
 #' Retrieves the attributes of the platform application object for the
 #' supported push notification services, such as APNS and GCM (Firebase
 #' Cloud Messaging). For more information, see [Using Amazon SNS Mobile
 #' Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #'
 #' @usage
 #' sns_get_platform_application_attributes(PlatformApplicationArn)
@@ -599,6 +621,7 @@ sns_get_platform_application_attributes <- function(PlatformApplicationArn) {
 
 #' Returns the settings for sending SMS messages from your account
 #'
+#' @description
 #' Returns the settings for sending SMS messages from your account.
 #' 
 #' These settings are set with the `SetSMSAttributes` action.
@@ -612,7 +635,7 @@ sns_get_platform_application_attributes <- function(PlatformApplicationArn) {
 #' For all attribute names, see
 #' [SetSMSAttributes](https://docs.aws.amazon.com/sns/latest/api/API_SetSMSAttributes.html).
 #' 
-#' If you don\'t use this parameter, Amazon SNS returns all SMS attributes.
+#' If you don't use this parameter, Amazon SNS returns all SMS attributes.
 #'
 #' @section Request syntax:
 #' ```
@@ -645,6 +668,7 @@ sns_get_sms_attributes <- function(attributes = NULL) {
 
 #' Returns all of the properties of a subscription
 #'
+#' @description
 #' Returns all of the properties of a subscription.
 #'
 #' @usage
@@ -681,6 +705,7 @@ sns_get_subscription_attributes <- function(SubscriptionArn) {
 
 #' Returns all of the properties of a topic
 #'
+#' @description
 #' Returns all of the properties of a topic. Topic properties returned
 #' might differ based on the authorization of the user.
 #'
@@ -720,6 +745,7 @@ sns_get_topic_attributes <- function(TopicArn) {
 #' push notification service, such as GCM (Firebase Cloud Messaging) and
 #' APNS
 #'
+#' @description
 #' Lists the endpoints and endpoint attributes for devices in a supported
 #' push notification service, such as GCM (Firebase Cloud Messaging) and
 #' APNS. The results for `ListEndpointsByPlatformApplication` are paginated
@@ -730,7 +756,7 @@ sns_get_topic_attributes <- function(TopicArn) {
 #' received from the previous call. When there are no more records to
 #' return, NextToken will be null. For more information, see [Using Amazon
 #' SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #' 
 #' This action is throttled at 30 transactions per second (TPS).
 #'
@@ -775,6 +801,7 @@ sns_list_endpoints_by_platform_application <- function(PlatformApplicationArn, N
 #' Returns a list of phone numbers that are opted out, meaning you cannot
 #' send SMS messages to them
 #'
+#' @description
 #' Returns a list of phone numbers that are opted out, meaning you cannot
 #' send SMS messages to them.
 #' 
@@ -823,6 +850,7 @@ sns_list_phone_numbers_opted_out <- function(nextToken = NULL) {
 #' Lists the platform application objects for the supported push
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging)
 #'
+#' @description
 #' Lists the platform application objects for the supported push
 #' notification services, such as APNS and GCM (Firebase Cloud Messaging).
 #' The results for `ListPlatformApplications` are paginated and return a
@@ -832,7 +860,7 @@ sns_list_phone_numbers_opted_out <- function(nextToken = NULL) {
 #' using the NextToken string received from the previous call. When there
 #' are no more records to return, `NextToken` will be null. For more
 #' information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #' 
 #' This action is throttled at 15 transactions per second (TPS).
 #'
@@ -872,7 +900,8 @@ sns_list_platform_applications <- function(NextToken = NULL) {
 
 #' Returns a list of the requester's subscriptions
 #'
-#' Returns a list of the requester\'s subscriptions. Each call returns a
+#' @description
+#' Returns a list of the requester's subscriptions. Each call returns a
 #' limited list of subscriptions, up to 100. If there are more
 #' subscriptions, a `NextToken` is also returned. Use the `NextToken`
 #' parameter in a new `ListSubscriptions` call to get further results.
@@ -913,6 +942,7 @@ sns_list_subscriptions <- function(NextToken = NULL) {
 
 #' Returns a list of the subscriptions to a specific topic
 #'
+#' @description
 #' Returns a list of the subscriptions to a specific topic. Each call
 #' returns a limited list of subscriptions, up to 100. If there are more
 #' subscriptions, a `NextToken` is also returned. Use the `NextToken`
@@ -957,6 +987,7 @@ sns_list_subscriptions_by_topic <- function(TopicArn, NextToken = NULL) {
 
 #' List all tags added to the specified Amazon SNS topic
 #'
+#' @description
 #' List all tags added to the specified Amazon SNS topic. For an overview,
 #' see [Amazon SNS
 #' Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the
@@ -996,7 +1027,8 @@ sns_list_tags_for_resource <- function(ResourceArn) {
 
 #' Returns a list of the requester's topics
 #'
-#' Returns a list of the requester\'s topics. Each call returns a limited
+#' @description
+#' Returns a list of the requester's topics. Each call returns a limited
 #' list of topics, up to 100. If there are more topics, a `NextToken` is
 #' also returned. Use the `NextToken` parameter in a new `ListTopics` call
 #' to get further results.
@@ -1038,6 +1070,7 @@ sns_list_topics <- function(NextToken = NULL) {
 #' Use this request to opt in a phone number that is opted out, which
 #' enables you to resume sending SMS messages to the number
 #'
+#' @description
 #' Use this request to opt in a phone number that is opted out, which
 #' enables you to resume sending SMS messages to the number.
 #' 
@@ -1079,6 +1112,7 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' directly to a phone number, or a message to a mobile platform endpoint
 #' (when you specify the TargetArn)
 #'
+#' @description
 #' Sends a message to an Amazon SNS topic, a text message (SMS message)
 #' directly to a phone number, or a message to a mobile platform endpoint
 #' (when you specify the `TargetArn`).
@@ -1097,25 +1131,26 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' 
 #' For more information about formatting messages, see [Send Custom
 #' Platform-Specific Payloads in Messages to Mobile
-#' Devices](https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html).
+#' Devices](https://docs.aws.amazon.com/sns/latest/dg/sns-send-custom-platform-specific-payloads-mobile-devices.html).
 #' 
 #' You can publish messages only to topics and endpoints in the same AWS
 #' Region.
 #'
 #' @usage
 #' sns_publish(TopicArn, TargetArn, PhoneNumber, Message, Subject,
-#'   MessageStructure, MessageAttributes)
+#'   MessageStructure, MessageAttributes, MessageDeduplicationId,
+#'   MessageGroupId)
 #'
 #' @param TopicArn The topic you want to publish to.
 #' 
-#' If you don\'t specify a value for the `TopicArn` parameter, you must
+#' If you don't specify a value for the `TopicArn` parameter, you must
 #' specify a value for the `PhoneNumber` or `TargetArn` parameters.
-#' @param TargetArn If you don\'t specify a value for the `TargetArn` parameter, you must
+#' @param TargetArn If you don't specify a value for the `TargetArn` parameter, you must
 #' specify a value for the `PhoneNumber` or `TopicArn` parameters.
 #' @param PhoneNumber The phone number to which you want to deliver an SMS message. Use E.164
 #' format.
 #' 
-#' If you don\'t specify a value for the `PhoneNumber` parameter, you must
+#' If you don't specify a value for the `PhoneNumber` parameter, you must
 #' specify a value for the `TargetArn` or `TopicArn` parameters.
 #' @param Message &#91;required&#93; The message you want to send.
 #' 
@@ -1137,7 +1172,7 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' 
 #'     If you publish a message that exceeds this size limit, Amazon SNS
 #'     sends the message as multiple messages, each fitting within the size
-#'     limit. Messages aren\'t truncated mid-word but are cut off at
+#'     limit. Messages aren't truncated mid-word but are cut off at
 #'     whole-word boundaries.
 #' 
 #'     The total size limit for a single SMS `Publish` action is 1,600
@@ -1154,7 +1189,7 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' -   Outbound notifications are JSON encoded (meaning that the characters
 #'     will be reescaped for sending).
 #' 
-#' -   Values have a minimum length of 0 (the empty string, \"\", is
+#' -   Values have a minimum length of 0 (the empty string, "", is
 #'     allowed).
 #' 
 #' -   Values have a maximum length bounded by the overall message size
@@ -1169,8 +1204,8 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' 
 #' -   Failure to parse or validate any key or value in the message will
 #'     cause the `Publish` call to return an error (no partial delivery).
-#' @param Subject Optional parameter to be used as the \"Subject\" line when the message
-#' is delivered to email endpoints. This field will also be included, if
+#' @param Subject Optional parameter to be used as the "Subject" line when the message is
+#' delivered to email endpoints. This field will also be included, if
 #' present, in the standard JSON messages delivered to other endpoints.
 #' 
 #' Constraints: Subjects must be ASCII text that begins with a letter,
@@ -1184,14 +1219,38 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' 
 #' -   be a syntactically valid JSON object; and
 #' 
-#' -   contain at least a top-level JSON key of \"default\" with a value
-#'     that is a string.
+#' -   contain at least a top-level JSON key of "default" with a value that
+#'     is a string.
 #' 
 #' You can define other top-level keys that define the message you want to
-#' send to a specific transport protocol (e.g., \"http\").
+#' send to a specific transport protocol (e.g., "http").
 #' 
 #' Valid value: `json`
 #' @param MessageAttributes Message attributes for Publish action.
+#' @param MessageDeduplicationId This parameter applies only to FIFO (first-in-first-out) topics. The
+#' `MessageDeduplicationId` can contain up to 128 alphanumeric characters
+#' (a-z, A-Z, 0-9) and punctuation
+#' `` (!\"#$\%&amp;\'()*+,-./:;&lt;=&gt;?@@\\[\\\]^_\`\{|\}~) ``.
+#' 
+#' Every message must have a unique `MessageDeduplicationId`, which is a
+#' token used for deduplication of sent messages. If a message with a
+#' particular `MessageDeduplicationId` is sent successfully, any message
+#' sent with the same `MessageDeduplicationId` during the 5-minute
+#' deduplication interval is treated as a duplicate.
+#' 
+#' If the topic has `ContentBasedDeduplication` set, the system generates a
+#' `MessageDeduplicationId` based on the contents of the message. Your
+#' `MessageDeduplicationId` overrides the generated one.
+#' @param MessageGroupId This parameter applies only to FIFO (first-in-first-out) topics. The
+#' `MessageGroupId` can contain up to 128 alphanumeric characters (a-z,
+#' A-Z, 0-9) and punctuation
+#' `` (!\"#$\%&amp;\'()*+,-./:;&lt;=&gt;?@@\\[\\\]^_\`\{|\}~) ``.
+#' 
+#' The `MessageGroupId` is a tag that specifies that a message belongs to a
+#' specific message group. Messages that belong to the same message group
+#' are processed in a FIFO manner (however, messages in different message
+#' groups might be processed out of order). Every message must include a
+#' `MessageGroupId`.
 #'
 #' @section Request syntax:
 #' ```
@@ -1208,21 +1267,23 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #'       StringValue = "string",
 #'       BinaryValue = raw
 #'     )
-#'   )
+#'   ),
+#'   MessageDeduplicationId = "string",
+#'   MessageGroupId = "string"
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname sns_publish
-sns_publish <- function(TopicArn = NULL, TargetArn = NULL, PhoneNumber = NULL, Message, Subject = NULL, MessageStructure = NULL, MessageAttributes = NULL) {
+sns_publish <- function(TopicArn = NULL, TargetArn = NULL, PhoneNumber = NULL, Message, Subject = NULL, MessageStructure = NULL, MessageAttributes = NULL, MessageDeduplicationId = NULL, MessageGroupId = NULL) {
   op <- new_operation(
     name = "Publish",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sns$publish_input(TopicArn = TopicArn, TargetArn = TargetArn, PhoneNumber = PhoneNumber, Message = Message, Subject = Subject, MessageStructure = MessageStructure, MessageAttributes = MessageAttributes)
+  input <- .sns$publish_input(TopicArn = TopicArn, TargetArn = TargetArn, PhoneNumber = PhoneNumber, Message = Message, Subject = Subject, MessageStructure = MessageStructure, MessageAttributes = MessageAttributes, MessageDeduplicationId = MessageDeduplicationId, MessageGroupId = MessageGroupId)
   output <- .sns$publish_output()
   config <- get_config()
   svc <- .sns$service(config)
@@ -1234,7 +1295,8 @@ sns_publish <- function(TopicArn = NULL, TargetArn = NULL, PhoneNumber = NULL, M
 
 #' Removes a statement from a topic's access control policy
 #'
-#' Removes a statement from a topic\'s access control policy.
+#' @description
+#' Removes a statement from a topic's access control policy.
 #'
 #' @usage
 #' sns_remove_permission(TopicArn, Label)
@@ -1274,10 +1336,11 @@ sns_remove_permission <- function(TopicArn, Label) {
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS
 #'
+#' @description
 #' Sets the attributes for an endpoint for a device on one of the supported
 #' push notification services, such as GCM (Firebase Cloud Messaging) and
 #' APNS. For more information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #'
 #' @usage
 #' sns_set_endpoint_attributes(EndpointArn, Attributes)
@@ -1286,16 +1349,16 @@ sns_remove_permission <- function(TopicArn, Label) {
 #' @param Attributes &#91;required&#93; A map of the endpoint attributes. Attributes in this map include the
 #' following:
 #' 
-#' -   `CustomUserData` -- arbitrary user data to associate with the
+#' -   `CustomUserData` – arbitrary user data to associate with the
 #'     endpoint. Amazon SNS does not use this data. The data must be in
 #'     UTF-8 format and less than 2KB.
 #' 
-#' -   `Enabled` -- flag that enables/disables delivery to the endpoint.
+#' -   `Enabled` – flag that enables/disables delivery to the endpoint.
 #'     Amazon SNS will set this to false when a notification service
 #'     indicates to Amazon SNS that the endpoint is invalid. Users can set
 #'     it back to true, typically after updating Token.
 #' 
-#' -   `Token` -- device token, also referred to as a registration id, for
+#' -   `Token` – device token, also referred to as a registration id, for
 #'     an app and mobile device. This is returned from the notification
 #'     service when an app and mobile device are registered with the
 #'     notification service.
@@ -1334,10 +1397,11 @@ sns_set_endpoint_attributes <- function(EndpointArn, Attributes) {
 #' push notification services, such as APNS and GCM (Firebase Cloud
 #' Messaging)
 #'
+#' @description
 #' Sets the attributes of the platform application object for the supported
 #' push notification services, such as APNS and GCM (Firebase Cloud
 #' Messaging). For more information, see [Using Amazon SNS Mobile Push
-#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html).
+#' Notifications](https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-application-as-subscriber.html).
 #' For information on configuring attributes for message delivery status,
 #' see [Using Amazon SNS Application Attributes for Message Delivery
 #' Status](https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html).
@@ -1350,37 +1414,37 @@ sns_set_endpoint_attributes <- function(EndpointArn, Attributes) {
 #' @param Attributes &#91;required&#93; A map of the platform application attributes. Attributes in this map
 #' include the following:
 #' 
-#' -   `PlatformCredential` -- The credential received from the
-#'     notification service. For `APNS` and `APNS_SANDBOX`,
-#'     `PlatformCredential` is `private key`. For `GCM` (Firebase Cloud
-#'     Messaging), `PlatformCredential` is `API key`. For `ADM`,
-#'     `PlatformCredential` is `client secret`.
+#' -   `PlatformCredential` – The credential received from the notification
+#'     service. For `APNS` and `APNS_SANDBOX`, `PlatformCredential` is
+#'     `private key`. For `GCM` (Firebase Cloud Messaging),
+#'     `PlatformCredential` is `API key`. For `ADM`, `PlatformCredential`
+#'     is `client secret`.
 #' 
-#' -   `PlatformPrincipal` -- The principal received from the notification
+#' -   `PlatformPrincipal` – The principal received from the notification
 #'     service. For `APNS` and `APNS_SANDBOX`, `PlatformPrincipal` is
 #'     `SSL certificate`. For `GCM` (Firebase Cloud Messaging), there is no
 #'     `PlatformPrincipal`. For `ADM`, `PlatformPrincipal` is `client id`.
 #' 
-#' -   `EventEndpointCreated` -- Topic ARN to which `EndpointCreated` event
+#' -   `EventEndpointCreated` – Topic ARN to which `EndpointCreated` event
 #'     notifications are sent.
 #' 
-#' -   `EventEndpointDeleted` -- Topic ARN to which `EndpointDeleted` event
+#' -   `EventEndpointDeleted` – Topic ARN to which `EndpointDeleted` event
 #'     notifications are sent.
 #' 
-#' -   `EventEndpointUpdated` -- Topic ARN to which `EndpointUpdate` event
+#' -   `EventEndpointUpdated` – Topic ARN to which `EndpointUpdate` event
 #'     notifications are sent.
 #' 
-#' -   `EventDeliveryFailure` -- Topic ARN to which `DeliveryFailure` event
+#' -   `EventDeliveryFailure` – Topic ARN to which `DeliveryFailure` event
 #'     notifications are sent upon Direct Publish delivery failure
-#'     (permanent) to one of the application\'s endpoints.
+#'     (permanent) to one of the application's endpoints.
 #' 
-#' -   `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+#' -   `SuccessFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
 #'     write access to use CloudWatch Logs on your behalf.
 #' 
-#' -   `FailureFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
+#' -   `FailureFeedbackRoleArn` – IAM role ARN used to give Amazon SNS
 #'     write access to use CloudWatch Logs on your behalf.
 #' 
-#' -   `SuccessFeedbackSampleRate` -- Sample rate percentage (0-100) of
+#' -   `SuccessFeedbackSampleRate` – Sample rate percentage (0-100) of
 #'     successfully delivered messages.
 #'
 #' @section Request syntax:
@@ -1416,13 +1480,14 @@ sns_set_platform_application_attributes <- function(PlatformApplicationArn, Attr
 #' Use this request to set the default settings for sending SMS messages
 #' and receiving daily SMS usage reports
 #'
+#' @description
 #' Use this request to set the default settings for sending SMS messages
 #' and receiving daily SMS usage reports.
 #' 
 #' You can override some of these settings for a single message when you
 #' use the `Publish` action with the `MessageAttributes.entry.N` parameter.
-#' For more information, see [Sending an SMS
-#' Message](https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
+#' For more information, see [Publishing to a mobile
+#' phone](https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html)
 #' in the *Amazon SNS Developer Guide*.
 #'
 #' @usage
@@ -1431,7 +1496,7 @@ sns_set_platform_application_attributes <- function(PlatformApplicationArn, Attr
 #' @param attributes &#91;required&#93; The default settings for sending SMS messages from your account. You can
 #' set values for the following attribute names:
 #' 
-#' `MonthlySpendLimit` -- The maximum amount in USD that you are willing to
+#' `MonthlySpendLimit` – The maximum amount in USD that you are willing to
 #' spend each month to send SMS messages. When Amazon SNS determines that
 #' sending an SMS message would incur a cost that exceeds this limit, it
 #' stops sending SMS messages within minutes.
@@ -1441,42 +1506,41 @@ sns_set_platform_application_attributes <- function(PlatformApplicationArn, Attr
 #' will incur costs that exceed your limit.
 #' 
 #' By default, the spend limit is set to the maximum allowed by Amazon SNS.
-#' If you want to raise the limit, submit an [SNS Limit Increase
-#' case](https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-sns).
-#' For **New limit value**, enter your desired monthly spend limit. In the
+#' If you want to raise the limit, submit an SNS Limit Increase case. For
+#' **New limit value**, enter your desired monthly spend limit. In the
 #' **Use Case Description** field, explain that you are requesting an SMS
 #' monthly spend limit increase.
 #' 
-#' `DeliveryStatusIAMRole` -- The ARN of the IAM role that allows Amazon
-#' SNS to write logs about SMS deliveries in CloudWatch Logs. For each SMS
+#' `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon SNS
+#' to write logs about SMS deliveries in CloudWatch Logs. For each SMS
 #' message that you send, Amazon SNS writes a log that includes the message
 #' price, the success or failure status, the reason for failure (if the
 #' message failed), the message dwell time, and other information.
 #' 
-#' `DeliveryStatusSuccessSamplingRate` -- The percentage of successful SMS
+#' `DeliveryStatusSuccessSamplingRate` – The percentage of successful SMS
 #' deliveries for which Amazon SNS will write logs in CloudWatch Logs. The
 #' value can be an integer from 0 - 100. For example, to write logs only
-#' for failed deliveries, set this value to `0`. To write logs for 10% of
+#' for failed deliveries, set this value to `0`. To write logs for 10\% of
 #' your successful deliveries, set it to `10`.
 #' 
-#' `DefaultSenderID` -- A string, such as your business brand, that is
+#' `DefaultSenderID` – A string, such as your business brand, that is
 #' displayed as the sender on the receiving device. Support for sender IDs
 #' varies by country. The sender ID can be 1 - 11 alphanumeric characters,
 #' and it must contain at least one letter.
 #' 
-#' `DefaultSMSType` -- The type of SMS message that you will send by
+#' `DefaultSMSType` – The type of SMS message that you will send by
 #' default. You can assign the following values:
 #' 
-#' -   `Promotional` -- (Default) Noncritical messages, such as marketing
+#' -   `Promotional` – (Default) Noncritical messages, such as marketing
 #'     messages. Amazon SNS optimizes the message delivery to incur the
 #'     lowest cost.
 #' 
-#' -   `Transactional` -- Critical messages that support customer
+#' -   `Transactional` – Critical messages that support customer
 #'     transactions, such as one-time passcodes for multi-factor
 #'     authentication. Amazon SNS optimizes the message delivery to achieve
 #'     the highest reliability.
 #' 
-#' `UsageReportS3Bucket` -- The name of the Amazon S3 bucket to receive
+#' `UsageReportS3Bucket` – The name of the Amazon S3 bucket to receive
 #' daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will
 #' deliver a usage report as a CSV file to the bucket. The report includes
 #' the following information for each SMS message that was successfully
@@ -1539,6 +1603,7 @@ sns_set_sms_attributes <- function(attributes) {
 #' Allows a subscription owner to set an attribute of the subscription to a
 #' new value
 #'
+#' @description
 #' Allows a subscription owner to set an attribute of the subscription to a
 #' new value.
 #'
@@ -1550,22 +1615,22 @@ sns_set_sms_attributes <- function(attributes) {
 #' @param AttributeName &#91;required&#93; A map of attributes with their corresponding values.
 #' 
 #' The following lists the names, descriptions, and values of the special
-#' request parameters that the `SetTopicAttributes` action uses:
+#' request parameters that this action uses:
 #' 
-#' -   `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
+#' -   `DeliveryPolicy` – The policy that defines how Amazon SNS retries
 #'     failed deliveries to HTTP/S endpoints.
 #' 
-#' -   `FilterPolicy` -- The simple JSON object that lets your subscriber
+#' -   `FilterPolicy` – The simple JSON object that lets your subscriber
 #'     receive only a subset of messages, rather than receiving every
 #'     message published to the topic.
 #' 
-#' -   `RawMessageDelivery` -- When set to `true`, enables raw message
+#' -   `RawMessageDelivery` – When set to `true`, enables raw message
 #'     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
 #'     for the endpoints to process JSON formatting, which is otherwise
 #'     created for Amazon SNS metadata.
 #' 
-#' -   `RedrivePolicy` -- When specified, sends undeliverable messages to
-#'     the specified Amazon SQS dead-letter queue. Messages that can\'t be
+#' -   `RedrivePolicy` – When specified, sends undeliverable messages to
+#'     the specified Amazon SQS dead-letter queue. Messages that can't be
 #'     delivered due to client errors (for example, when the subscribed
 #'     endpoint is unreachable) or server errors (for example, when the
 #'     service that powers the subscribed endpoint becomes unavailable) are
@@ -1603,6 +1668,7 @@ sns_set_subscription_attributes <- function(SubscriptionArn, AttributeName, Attr
 
 #' Allows a topic owner to set an attribute of the topic to a new value
 #'
+#' @description
 #' Allows a topic owner to set an attribute of the topic to a new value.
 #'
 #' @usage
@@ -1614,38 +1680,46 @@ sns_set_subscription_attributes <- function(SubscriptionArn, AttributeName, Attr
 #' The following lists the names, descriptions, and values of the special
 #' request parameters that the `SetTopicAttributes` action uses:
 #' 
-#' -   `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
+#' -   `DeliveryPolicy` – The policy that defines how Amazon SNS retries
 #'     failed deliveries to HTTP/S endpoints.
 #' 
-#' -   `DisplayName` -- The display name to use for a topic with SMS
+#' -   `DisplayName` – The display name to use for a topic with SMS
 #'     subscriptions.
 #' 
-#' -   `Policy` -- The policy that defines who can access your topic. By
+#' -   `Policy` – The policy that defines who can access your topic. By
 #'     default, only the topic owner can publish or subscribe to the topic.
 #' 
 #' The following attribute applies only to
 #' [server-side-encryption](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html):
 #' 
-#' -   `KmsMasterKeyId` -- The ID of an AWS-managed customer master key
+#' -   `KmsMasterKeyId` – The ID of an AWS-managed customer master key
 #'     (CMK) for Amazon SNS or a custom CMK. For more information, see [Key
 #'     Terms](https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms).
 #'     For more examples, see
 #'     [KeyId](https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters)
 #'     in the *AWS Key Management Service API Reference*.
 #' 
-#' The following attribute applies only to FIFO topics:
+#' The following attribute applies only to [FIFO
+#' topics](https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
 #' 
-#' -   `ContentBasedDeduplication` -- Enables content-based deduplication.
-#'     Amazon SNS uses a SHA-256 hash to generate the
-#'     `MessageDeduplicationId` using the body of the message (but not the
-#'     attributes of the message).
+#' -   `ContentBasedDeduplication` – Enables content-based deduplication
+#'     for FIFO topics.
 #' 
-#' -   When `ContentBasedDeduplication` is in effect, messages with
-#'     identical content sent within the deduplication interval are treated
-#'     as duplicates and only one copy of the message is delivered.
+#'     -   By default, `ContentBasedDeduplication` is set to `false`. If
+#'         you create a FIFO topic and this attribute is `false`, you must
+#'         specify a value for the `MessageDeduplicationId` parameter for
+#'         the
+#'         [Publish](https://docs.aws.amazon.com/sns/latest/api/API_Publish.html)
+#'         action.
 #' 
-#' -   If the queue has `ContentBasedDeduplication` set, your
-#'     `MessageDeduplicationId` overrides the generated one.
+#'     -   When you set `ContentBasedDeduplication` to `true`, Amazon SNS
+#'         uses a SHA-256 hash to generate the `MessageDeduplicationId`
+#'         using the body of the message (but not the attributes of the
+#'         message).
+#' 
+#'         (Optional) To override the generated value, you can specify a
+#'         value for the the `MessageDeduplicationId` parameter for the
+#'         `Publish` action.
 #' @param AttributeValue The new value for the attribute.
 #'
 #' @section Request syntax:
@@ -1679,10 +1753,11 @@ sns_set_topic_attributes <- function(TopicArn, AttributeName, AttributeValue = N
 
 #' Subscribes an endpoint to an Amazon SNS topic
 #'
+#' @description
 #' Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is
 #' HTTP/S or email, or if the endpoint and the topic are not in the same
-#' AWS account, the endpoint owner must the `ConfirmSubscription` action to
-#' confirm the subscription.
+#' AWS account, the endpoint owner must run the `ConfirmSubscription`
+#' action to confirm the subscription.
 #' 
 #' You call the `ConfirmSubscription` action with the token from the
 #' subscription response. Confirmation tokens are valid for three days.
@@ -1696,22 +1771,22 @@ sns_set_topic_attributes <- function(TopicArn, AttributeName, AttributeValue = N
 #' @param TopicArn &#91;required&#93; The ARN of the topic you want to subscribe to.
 #' @param Protocol &#91;required&#93; The protocol you want to use. Supported protocols include:
 #' 
-#' -   `http` -- delivery of JSON-encoded message via HTTP POST
+#' -   `http` – delivery of JSON-encoded message via HTTP POST
 #' 
-#' -   `https` -- delivery of JSON-encoded message via HTTPS POST
+#' -   `https` – delivery of JSON-encoded message via HTTPS POST
 #' 
-#' -   `email` -- delivery of message via SMTP
+#' -   `email` – delivery of message via SMTP
 #' 
-#' -   `email-json` -- delivery of JSON-encoded message via SMTP
+#' -   `email-json` – delivery of JSON-encoded message via SMTP
 #' 
-#' -   `sms` -- delivery of message via SMS
+#' -   `sms` – delivery of message via SMS
 #' 
-#' -   `sqs` -- delivery of JSON-encoded message to an Amazon SQS queue
+#' -   `sqs` – delivery of JSON-encoded message to an Amazon SQS queue
 #' 
-#' -   `application` -- delivery of JSON-encoded message to an EndpointArn
+#' -   `application` – delivery of JSON-encoded message to an EndpointArn
 #'     for a mobile app and device.
 #' 
-#' -   `lambda` -- delivery of JSON-encoded message to an Amazon Lambda
+#' -   `lambda` – delivery of JSON-encoded message to an Amazon Lambda
 #'     function.
 #' @param Endpoint The endpoint that you want to receive notifications. Endpoints vary by
 #' protocol:
@@ -1742,20 +1817,20 @@ sns_set_topic_attributes <- function(TopicArn, AttributeName, AttributeValue = N
 #' The following lists the names, descriptions, and values of the special
 #' request parameters that the `SetTopicAttributes` action uses:
 #' 
-#' -   `DeliveryPolicy` -- The policy that defines how Amazon SNS retries
+#' -   `DeliveryPolicy` – The policy that defines how Amazon SNS retries
 #'     failed deliveries to HTTP/S endpoints.
 #' 
-#' -   `FilterPolicy` -- The simple JSON object that lets your subscriber
+#' -   `FilterPolicy` – The simple JSON object that lets your subscriber
 #'     receive only a subset of messages, rather than receiving every
 #'     message published to the topic.
 #' 
-#' -   `RawMessageDelivery` -- When set to `true`, enables raw message
+#' -   `RawMessageDelivery` – When set to `true`, enables raw message
 #'     delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
 #'     for the endpoints to process JSON formatting, which is otherwise
 #'     created for Amazon SNS metadata.
 #' 
-#' -   `RedrivePolicy` -- When specified, sends undeliverable messages to
-#'     the specified Amazon SQS dead-letter queue. Messages that can\'t be
+#' -   `RedrivePolicy` – When specified, sends undeliverable messages to
+#'     the specified Amazon SQS dead-letter queue. Messages that can't be
 #'     delivered due to client errors (for example, when the subscribed
 #'     endpoint is unreachable) or server errors (for example, when the
 #'     service that powers the subscribed endpoint becomes unavailable) are
@@ -1763,13 +1838,12 @@ sns_set_topic_attributes <- function(TopicArn, AttributeName, AttributeValue = N
 #' @param ReturnSubscriptionArn Sets whether the response from the `Subscribe` request includes the
 #' subscription ARN, even if the subscription is not yet confirmed.
 #' 
-#' -   If you set this parameter to `true`, the response includes the ARN
-#'     in all cases, even if the subscription is not yet confirmed. In
-#'     addition to the ARN for confirmed subscriptions, the response also
-#'     includes the `pending subscription` ARN value for subscriptions that
-#'     aren\'t yet confirmed. A subscription becomes confirmed when the
-#'     subscriber calls the `ConfirmSubscription` action with a
-#'     confirmation token.
+#' If you set this parameter to `true`, the response includes the ARN in
+#' all cases, even if the subscription is not yet confirmed. In addition to
+#' the ARN for confirmed subscriptions, the response also includes the
+#' `pending subscription` ARN value for subscriptions that aren't yet
+#' confirmed. A subscription becomes confirmed when the subscriber calls
+#' the `ConfirmSubscription` action with a confirmation token.
 #' 
 #' The default value is `false`.
 #'
@@ -1808,15 +1882,16 @@ sns_subscribe <- function(TopicArn, Protocol, Endpoint = NULL, Attributes = NULL
 
 #' Add tags to the specified Amazon SNS topic
 #'
+#' @description
 #' Add tags to the specified Amazon SNS topic. For an overview, see [Amazon
 #' SNS Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in
 #' the *Amazon SNS Developer Guide*.
 #' 
 #' When you use topic tags, keep the following guidelines in mind:
 #' 
-#' -   Adding more than 50 tags to a topic isn\'t recommended.
+#' -   Adding more than 50 tags to a topic isn't recommended.
 #' 
-#' -   Tags don\'t have any semantic meaning. Amazon SNS interprets tags as
+#' -   Tags don't have any semantic meaning. Amazon SNS interprets tags as
 #'     character strings.
 #' 
 #' -   Tags are case-sensitive.
@@ -1826,8 +1901,7 @@ sns_subscribe <- function(TopicArn, Protocol, Endpoint = NULL, Attributes = NULL
 #' 
 #' -   Tagging actions are limited to 10 TPS per AWS account, per AWS
 #'     region. If your application requires a higher throughput, file a
-#'     [technical support
-#'     request](https://console.aws.amazon.com/support/home#/case/create?issueType=technical).
+#'     technical support request.
 #'
 #' @usage
 #' sns_tag_resource(ResourceArn, Tags)
@@ -1871,8 +1945,9 @@ sns_tag_resource <- function(ResourceArn, Tags) {
 
 #' Deletes a subscription
 #'
+#' @description
 #' Deletes a subscription. If the subscription requires authentication for
-#' deletion, only the owner of the subscription or the topic\'s owner can
+#' deletion, only the owner of the subscription or the topic's owner can
 #' unsubscribe, and an AWS signature is required. If the `Unsubscribe` call
 #' does not require authentication and the requester is not the
 #' subscription owner, a final cancellation message is delivered to the
@@ -1915,6 +1990,7 @@ sns_unsubscribe <- function(SubscriptionArn) {
 
 #' Remove tags from the specified Amazon SNS topic
 #'
+#' @description
 #' Remove tags from the specified Amazon SNS topic. For an overview, see
 #' [Amazon SNS
 #' Tags](https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html) in the

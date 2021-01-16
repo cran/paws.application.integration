@@ -12,12 +12,13 @@ sqs_send_message(QueueUrl, MessageBody, DelaySeconds, MessageAttributes,
 
 Queue URLs and names are case-sensitive.}
 
-\item{MessageBody}{[required] The message to send. The maximum string size is 256 KB.
+\item{MessageBody}{[required] The message to send. The minimum size is one character. The maximum size
+is 256 KB.
 
 A message can include only XML, JSON, and unformatted text. The
 following Unicode characters are allowed:
 
-\verb{#x9} \\| \verb{#xA} \\| \verb{#xD} \\| \verb{#x20} to \verb{#xD7FF} \\| \verb{#xE000} to \verb{#xFFFD} \\|
+\verb{#x9} | \verb{#xA} | \verb{#xD} | \verb{#x20} to \verb{#xD7FF} | \verb{#xE000} to \verb{#xFFFD} |
 \verb{#x10000} to \verb{#x10FFFF}
 
 Any characters not included in this list will be rejected. For more
@@ -26,14 +27,14 @@ information, see the \href{http://www.w3.org/TR/REC-xml/#charsets}{W3C specifica
 \item{DelaySeconds}{The length of time, in seconds, for which to delay a specific message.
 Valid values: 0 to 900. Maximum: 15 minutes. Messages with a positive
 \code{DelaySeconds} value become available for processing after the delay
-period is finished. If you don\'t specify a value, the default value for
+period is finished. If you don't specify a value, the default value for
 the queue applies.
 
-When you set \code{FifoQueue}, you can\'t set \code{DelaySeconds} per message. You
+When you set \code{FifoQueue}, you can't set \code{DelaySeconds} per message. You
 can set this parameter only on a queue level.}
 
 \item{MessageAttributes}{Each message attribute consists of a \code{Name}, \code{Type}, and \code{Value}. For
-more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html}{Amazon SQS Message Attributes}
+more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes}{Amazon SQS Message Attributes}
 in the \emph{Amazon Simple Queue Service Developer Guide}.}
 
 \item{MessageSystemAttributes}{The message system attribute to send. Each message system attribute
@@ -42,7 +43,7 @@ consists of a \code{Name}, \code{Type}, and \code{Value}.
 \item Currently, the only supported message system attribute is
 \code{AWSTraceHeader}. Its type must be \code{String} and its value must be a
 correctly formatted AWS X-Ray trace header string.
-\item The size of a message system attribute doesn\'t count towards the
+\item The size of a message system attribute doesn't count towards the
 total size of a message.
 }}
 
@@ -51,20 +52,20 @@ total size of a message.
 The token used for deduplication of sent messages. If a message with a
 particular \code{MessageDeduplicationId} is sent successfully, any messages
 sent with the same \code{MessageDeduplicationId} are accepted successfully
-but aren\'t delivered during the 5-minute deduplication interval. For
+but aren't delivered during the 5-minute deduplication interval. For
 more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing}{Exactly-Once Processing}
 in the \emph{Amazon Simple Queue Service Developer Guide}.
 \itemize{
 \item Every message must have a unique \code{MessageDeduplicationId},
 \itemize{
 \item You may provide a \code{MessageDeduplicationId} explicitly.
-\item If you aren\'t able to provide a \code{MessageDeduplicationId} and
-you enable \code{ContentBasedDeduplication} for your queue, Amazon
-SQS uses a SHA-256 hash to generate the \code{MessageDeduplicationId}
+\item If you aren't able to provide a \code{MessageDeduplicationId} and you
+enable \code{ContentBasedDeduplication} for your queue, Amazon SQS
+uses a SHA-256 hash to generate the \code{MessageDeduplicationId}
 using the body of the message (but not the attributes of the
 message).
-\item If you don\'t provide a \code{MessageDeduplicationId} and the queue
-doesn\'t have \code{ContentBasedDeduplication} set, the action fails
+\item If you don't provide a \code{MessageDeduplicationId} and the queue
+doesn't have \code{ContentBasedDeduplication} set, the action fails
 with an error.
 \item If the queue has \code{ContentBasedDeduplication} set, your
 \code{MessageDeduplicationId} overrides the generated one.
@@ -84,7 +85,7 @@ The \code{MessageDeduplicationId} is available to the consumer of the message
 
 If a message is sent successfully but the acknowledgement is lost and
 the message is resent with the same \code{MessageDeduplicationId} after the
-deduplication interval, Amazon SQS can\'t detect duplicate messages.
+deduplication interval, Amazon SQS can't detect duplicate messages.
 
 Amazon SQS continues to keep track of the message deduplication ID even
 after the message is received and deleted.
@@ -92,7 +93,7 @@ after the message is received and deleted.
 The maximum length of \code{MessageDeduplicationId} is 128 characters.
 \code{MessageDeduplicationId} can contain alphanumeric characters (\code{a-z},
 \code{A-Z}, \code{0-9}) and punctuation
-(\verb{!\\"#$\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~}).
+(\verb{!\\"#$\\\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~}).
 
 For best practices of using \code{MessageDeduplicationId}, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html}{Using the MessageDeduplicationId Property}
 in the \emph{Amazon Simple Queue Service Developer Guide}.}
@@ -108,30 +109,29 @@ multiple users). In this scenario, multiple consumers can process the
 queue, but the session data of each user is processed in a FIFO fashion.
 \itemize{
 \item You must associate a non-empty \code{MessageGroupId} with a message. If
-you don\'t provide a \code{MessageGroupId}, the action fails.
+you don't provide a \code{MessageGroupId}, the action fails.
 \item \code{ReceiveMessage} might return messages with multiple
 \code{MessageGroupId} values. For each \code{MessageGroupId}, the messages are
-sorted by time sent. The caller can\'t specify a \code{MessageGroupId}.
+sorted by time sent. The caller can't specify a \code{MessageGroupId}.
 }
 
 The length of \code{MessageGroupId} is 128 characters. Valid values:
 alphanumeric characters and punctuation
-\verb{(!\\"#$\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~)}.
+\verb{(!\\"#$\\\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~)}.
 
 For best practices of using \code{MessageGroupId}, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html}{Using the MessageGroupId Property}
 in the \emph{Amazon Simple Queue Service Developer Guide}.
 
-\code{MessageGroupId} is required for FIFO queues. You can\'t use it for
+\code{MessageGroupId} is required for FIFO queues. You can't use it for
 Standard queues.}
 }
 \description{
 Delivers a message to the specified queue.
-}
-\details{
+
 A message can include only XML, JSON, and unformatted text. The
 following Unicode characters are allowed:
 
-\verb{#x9} \\| \verb{#xA} \\| \verb{#xD} \\| \verb{#x20} to \verb{#xD7FF} \\| \verb{#xE000} to \verb{#xFFFD} \\|
+\verb{#x9} | \verb{#xA} | \verb{#xD} | \verb{#x20} to \verb{#xD7FF} | \verb{#xE000} to \verb{#xFFFD} |
 \verb{#x10000} to \verb{#x10FFFF}
 
 Any characters not included in this list will be rejected. For more

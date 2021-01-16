@@ -7,21 +7,22 @@ directly to a phone number, or a message to a mobile platform endpoint
 (when you specify the TargetArn)}
 \usage{
 sns_publish(TopicArn, TargetArn, PhoneNumber, Message, Subject,
-  MessageStructure, MessageAttributes)
+  MessageStructure, MessageAttributes, MessageDeduplicationId,
+  MessageGroupId)
 }
 \arguments{
 \item{TopicArn}{The topic you want to publish to.
 
-If you don\'t specify a value for the \code{TopicArn} parameter, you must
+If you don't specify a value for the \code{TopicArn} parameter, you must
 specify a value for the \code{PhoneNumber} or \code{TargetArn} parameters.}
 
-\item{TargetArn}{If you don\'t specify a value for the \code{TargetArn} parameter, you must
+\item{TargetArn}{If you don't specify a value for the \code{TargetArn} parameter, you must
 specify a value for the \code{PhoneNumber} or \code{TopicArn} parameters.}
 
 \item{PhoneNumber}{The phone number to which you want to deliver an SMS message. Use E.164
 format.
 
-If you don\'t specify a value for the \code{PhoneNumber} parameter, you must
+If you don't specify a value for the \code{PhoneNumber} parameter, you must
 specify a value for the \code{TargetArn} or \code{TopicArn} parameters.}
 
 \item{Message}{[required] The message you want to send.
@@ -43,7 +44,7 @@ UCS-2 characters.
 
 If you publish a message that exceeds this size limit, Amazon SNS
 sends the message as multiple messages, each fitting within the size
-limit. Messages aren\'t truncated mid-word but are cut off at
+limit. Messages aren't truncated mid-word but are cut off at
 whole-word boundaries.
 
 The total size limit for a single SMS \code{Publish} action is 1,600
@@ -58,7 +59,7 @@ protocols must have simple JSON string values.
 outgoing messages.
 \item Outbound notifications are JSON encoded (meaning that the characters
 will be reescaped for sending).
-\item Values have a minimum length of 0 (the empty string, \"\", is
+\item Values have a minimum length of 0 (the empty string, "", is
 allowed).
 \item Values have a maximum length bounded by the overall message size
 (so, including multiple protocols may limit message sizes).
@@ -70,8 +71,8 @@ ignored.
 cause the \code{Publish} call to return an error (no partial delivery).
 }}
 
-\item{Subject}{Optional parameter to be used as the \"Subject\" line when the message
-is delivered to email endpoints. This field will also be included, if
+\item{Subject}{Optional parameter to be used as the "Subject" line when the message is
+delivered to email endpoints. This field will also be included, if
 present, in the standard JSON messages delivered to other endpoints.
 
 Constraints: Subjects must be ASCII text that begins with a letter,
@@ -85,23 +86,48 @@ subscribers. If you set \code{MessageStructure} to \code{json}, the value of the
 \code{Message} parameter must:
 \itemize{
 \item be a syntactically valid JSON object; and
-\item contain at least a top-level JSON key of \"default\" with a value
-that is a string.
+\item contain at least a top-level JSON key of "default" with a value that
+is a string.
 }
 
 You can define other top-level keys that define the message you want to
-send to a specific transport protocol (e.g., \"http\").
+send to a specific transport protocol (e.g., "http").
 
 Valid value: \code{json}}
 
 \item{MessageAttributes}{Message attributes for Publish action.}
+
+\item{MessageDeduplicationId}{This parameter applies only to FIFO (first-in-first-out) topics. The
+\code{MessageDeduplicationId} can contain up to 128 alphanumeric characters
+(a-z, A-Z, 0-9) and punctuation
+\verb{(!\\"#$\\\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~)}.
+
+Every message must have a unique \code{MessageDeduplicationId}, which is a
+token used for deduplication of sent messages. If a message with a
+particular \code{MessageDeduplicationId} is sent successfully, any message
+sent with the same \code{MessageDeduplicationId} during the 5-minute
+deduplication interval is treated as a duplicate.
+
+If the topic has \code{ContentBasedDeduplication} set, the system generates a
+\code{MessageDeduplicationId} based on the contents of the message. Your
+\code{MessageDeduplicationId} overrides the generated one.}
+
+\item{MessageGroupId}{This parameter applies only to FIFO (first-in-first-out) topics. The
+\code{MessageGroupId} can contain up to 128 alphanumeric characters (a-z,
+A-Z, 0-9) and punctuation
+\verb{(!\\"#$\\\%&amp;\\'()*+,-./:;&lt;=&gt;?@\\\[\\\\\]^_\\`\\\{|\\\}~)}.
+
+The \code{MessageGroupId} is a tag that specifies that a message belongs to a
+specific message group. Messages that belong to the same message group
+are processed in a FIFO manner (however, messages in different message
+groups might be processed out of order). Every message must include a
+\code{MessageGroupId}.}
 }
 \description{
 Sends a message to an Amazon SNS topic, a text message (SMS message)
 directly to a phone number, or a message to a mobile platform endpoint
 (when you specify the \code{TargetArn}).
-}
-\details{
+
 If you send a message to a topic, Amazon SNS delivers the message to
 each endpoint that is subscribed to the topic. The format of the message
 depends on the notification protocol for each subscribed endpoint.
@@ -114,7 +140,7 @@ such as an app on a Kindle device or mobile phone, you must specify the
 EndpointArn for the TargetArn parameter. The EndpointArn is returned
 when making a call with the \code{CreatePlatformEndpoint} action.
 
-For more information about formatting messages, see \href{https://docs.aws.amazon.com/sns/latest/dg/mobile-push-send-custommessage.html}{Send Custom Platform-Specific Payloads in Messages to Mobile Devices}.
+For more information about formatting messages, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-send-custom-platform-specific-payloads-mobile-devices.html}{Send Custom Platform-Specific Payloads in Messages to Mobile Devices}.
 
 You can publish messages only to topics and endpoints in the same AWS
 Region.
@@ -133,7 +159,9 @@ Region.
       StringValue = "string",
       BinaryValue = raw
     )
-  )
+  ),
+  MessageDeduplicationId = "string",
+  MessageGroupId = "string"
 )
 }
 }

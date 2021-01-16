@@ -4,7 +4,7 @@
 \alias{sfn_start_execution}
 \title{Starts a state machine execution}
 \usage{
-sfn_start_execution(stateMachineArn, name, input)
+sfn_start_execution(stateMachineArn, name, input, traceHeader)
 }
 \arguments{
 \item{stateMachineArn}{[required] The Amazon Resource Name (ARN) of the state machine to execute.}
@@ -19,7 +19,7 @@ A name must \emph{not} contain:
 \item white space
 \item brackets \verb{&lt; &gt; \\\{ \\\} \\\[ \\\]}
 \item wildcard characters \verb{? *}
-\item special characters \verb{\\" # \% \\\\ ^ | ~ \\` $ &amp; , ; : /}
+\item special characters \verb{\\" # \\\% \\\\ ^ | ~ \\` $ &amp; , ; : /}
 \item control characters (\verb{U+0000-001F}, \verb{U+007F-009F})
 }
 
@@ -31,13 +31,18 @@ example:
 
 \verb{"input": "\\\{\\"first_name\\" : \\"test\\"\\\}"}
 
-If you don\'t include any JSON input data, you still must include the
-two braces, for example: \code{"input": "\\{\\}"}}
+If you don't include any JSON input data, you still must include the two
+braces, for example: \code{"input": "\\{\\}"}
+
+Length constraints apply to the payload size, and are expressed as bytes
+in UTF-8 encoding.}
+
+\item{traceHeader}{Passes the AWS X-Ray trace header. The trace header can also be passed
+in the request payload.}
 }
 \description{
 Starts a state machine execution.
-}
-\details{
+
 \code{StartExecution} is idempotent. If \code{StartExecution} is called with the
 same name and input as a running execution, the call will succeed and
 return the same response as the original request. If the execution is
@@ -48,7 +53,8 @@ closed or if the input is different, it will return a 400
 \preformatted{svc$start_execution(
   stateMachineArn = "string",
   name = "string",
-  input = "string"
+  input = "string",
+  traceHeader = "string"
 )
 }
 }

@@ -5,6 +5,7 @@ NULL
 
 #' Activates a partner event source that has been deactivated
 #'
+#' @description
 #' Activates a partner event source that has been deactivated. Once
 #' activated, your matching event bus will start receiving events from the
 #' event source.
@@ -41,8 +42,98 @@ eventbridge_activate_event_source <- function(Name) {
 }
 .eventbridge$operations$activate_event_source <- eventbridge_activate_event_source
 
+#' Cancels the specified replay
+#'
+#' @description
+#' Cancels the specified replay.
+#'
+#' @usage
+#' eventbridge_cancel_replay(ReplayName)
+#'
+#' @param ReplayName &#91;required&#93; The name of the replay to cancel.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$cancel_replay(
+#'   ReplayName = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_cancel_replay
+eventbridge_cancel_replay <- function(ReplayName) {
+  op <- new_operation(
+    name = "CancelReplay",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$cancel_replay_input(ReplayName = ReplayName)
+  output <- .eventbridge$cancel_replay_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$cancel_replay <- eventbridge_cancel_replay
+
+#' Creates an archive of events with the specified settings
+#'
+#' @description
+#' Creates an archive of events with the specified settings. When you
+#' create an archive, incoming events might not immediately start being
+#' sent to the archive. Allow a short period of time for changes to take
+#' effect. If you do not specify a pattern to filter events sent to the
+#' archive, all events are sent to the archive except replayed events.
+#' Replayed events are not sent to an archive.
+#'
+#' @usage
+#' eventbridge_create_archive(ArchiveName, EventSourceArn, Description,
+#'   EventPattern, RetentionDays)
+#'
+#' @param ArchiveName &#91;required&#93; The name for the archive to create.
+#' @param EventSourceArn &#91;required&#93; The ARN of the event source associated with the archive.
+#' @param Description A description for the archive.
+#' @param EventPattern An event pattern to use to filter events sent to the archive.
+#' @param RetentionDays The number of days to retain events for. Default value is 0. If set to
+#' 0, events are retained indefinitely
+#'
+#' @section Request syntax:
+#' ```
+#' svc$create_archive(
+#'   ArchiveName = "string",
+#'   EventSourceArn = "string",
+#'   Description = "string",
+#'   EventPattern = "string",
+#'   RetentionDays = 123
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_create_archive
+eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description = NULL, EventPattern = NULL, RetentionDays = NULL) {
+  op <- new_operation(
+    name = "CreateArchive",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$create_archive_input(ArchiveName = ArchiveName, EventSourceArn = EventSourceArn, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays)
+  output <- .eventbridge$create_archive_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$create_archive <- eventbridge_create_archive
+
 #' Creates a new event bus within your account
 #'
+#' @description
 #' Creates a new event bus within your account. This can be a custom event
 #' bus which you can use to receive events from your custom applications
 #' and services, or it can be a partner event bus which can be matched to a
@@ -53,9 +144,9 @@ eventbridge_activate_event_source <- function(Name) {
 #'
 #' @param Name &#91;required&#93; The name of the new event bus.
 #' 
-#' Event bus names cannot contain the / character. You can\'t use the name
+#' Event bus names cannot contain the / character. You can't use the name
 #' `default` for a custom event bus, as this name is already used for your
-#' account\'s default event bus.
+#' account's default event bus.
 #' 
 #' If this is a partner event bus, the name must exactly match the name of
 #' the partner event source that this event bus is matched to.
@@ -99,6 +190,7 @@ eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Tags = NU
 
 #' Called by an SaaS partner to create a partner event source
 #'
+#' @description
 #' Called by an SaaS partner to create a partner event source. This
 #' operation is not used by AWS customers.
 #' 
@@ -108,7 +200,7 @@ eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Tags = NU
 #' receive those event types.
 #' 
 #' A partner event source creates events based on resources within the SaaS
-#' partner\'s service or application.
+#' partner's service or application.
 #' 
 #' An AWS account that creates a partner event bus that matches the partner
 #' event source can use that event bus to receive events from the partner,
@@ -169,6 +261,7 @@ eventbridge_create_partner_event_source <- function(Name, Account) {
 #' You can use this operation to temporarily stop receiving events from the
 #' specified partner event source
 #'
+#' @description
 #' You can use this operation to temporarily stop receiving events from the
 #' specified partner event source. The matching event bus is not deleted.
 #' 
@@ -210,11 +303,49 @@ eventbridge_deactivate_event_source <- function(Name) {
 }
 .eventbridge$operations$deactivate_event_source <- eventbridge_deactivate_event_source
 
+#' Deletes the specified archive
+#'
+#' @description
+#' Deletes the specified archive.
+#'
+#' @usage
+#' eventbridge_delete_archive(ArchiveName)
+#'
+#' @param ArchiveName &#91;required&#93; The name of the archive to delete.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$delete_archive(
+#'   ArchiveName = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_delete_archive
+eventbridge_delete_archive <- function(ArchiveName) {
+  op <- new_operation(
+    name = "DeleteArchive",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$delete_archive_input(ArchiveName = ArchiveName)
+  output <- .eventbridge$delete_archive_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$delete_archive <- eventbridge_delete_archive
+
 #' Deletes the specified custom event bus or partner event bus
 #'
+#' @description
 #' Deletes the specified custom event bus or partner event bus. All rules
-#' associated with this event bus need to be deleted. You can\'t delete
-#' your account\'s default event bus.
+#' associated with this event bus need to be deleted. You can't delete your
+#' account's default event bus.
 #'
 #' @usage
 #' eventbridge_delete_event_bus(Name)
@@ -250,6 +381,7 @@ eventbridge_delete_event_bus <- function(Name) {
 
 #' This operation is used by SaaS partners to delete a partner event source
 #'
+#' @description
 #' This operation is used by SaaS partners to delete a partner event
 #' source. This operation is not used by AWS customers.
 #' 
@@ -293,6 +425,7 @@ eventbridge_delete_partner_event_source <- function(Name, Account) {
 
 #' Deletes the specified rule
 #'
+#' @description
 #' Deletes the specified rule.
 #' 
 #' Before you can delete the rule, you must remove all targets, using
@@ -311,8 +444,8 @@ eventbridge_delete_partner_event_source <- function(Name, Account) {
 #' eventbridge_delete_rule(Name, EventBusName, Force)
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #' @param Force If this is a managed rule, created by an AWS service on your behalf, you
 #' must specify `Force` as `True` to delete the rule. This parameter is
 #' ignored for rules that are not managed rules. You can check whether a
@@ -348,8 +481,46 @@ eventbridge_delete_rule <- function(Name, EventBusName = NULL, Force = NULL) {
 }
 .eventbridge$operations$delete_rule <- eventbridge_delete_rule
 
+#' Retrieves details about an archive
+#'
+#' @description
+#' Retrieves details about an archive.
+#'
+#' @usage
+#' eventbridge_describe_archive(ArchiveName)
+#'
+#' @param ArchiveName &#91;required&#93; The name of the archive to retrieve.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$describe_archive(
+#'   ArchiveName = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_describe_archive
+eventbridge_describe_archive <- function(ArchiveName) {
+  op <- new_operation(
+    name = "DescribeArchive",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$describe_archive_input(ArchiveName = ArchiveName)
+  output <- .eventbridge$describe_archive_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$describe_archive <- eventbridge_describe_archive
+
 #' Displays details about an event bus in your account
 #'
+#' @description
 #' Displays details about an event bus in your account. This can include
 #' the external AWS accounts that are permitted to write events to your
 #' default event bus, and the associated policy. For custom event buses and
@@ -364,8 +535,8 @@ eventbridge_delete_rule <- function(Name, EventBusName = NULL, Force = NULL) {
 #' @usage
 #' eventbridge_describe_event_bus(Name)
 #'
-#' @param Name The name of the event bus to show details for. If you omit this, the
-#' default event bus is displayed.
+#' @param Name The name or ARN of the event bus to show details for. If you omit this,
+#' the default event bus is displayed.
 #'
 #' @section Request syntax:
 #' ```
@@ -397,6 +568,7 @@ eventbridge_describe_event_bus <- function(Name = NULL) {
 #' This operation lists details about a partner event source that is shared
 #' with your account
 #'
+#' @description
 #' This operation lists details about a partner event source that is shared
 #' with your account.
 #'
@@ -435,6 +607,7 @@ eventbridge_describe_event_source <- function(Name) {
 #' An SaaS partner can use this operation to list details about a partner
 #' event source that they have created
 #'
+#' @description
 #' An SaaS partner can use this operation to list details about a partner
 #' event source that they have created. AWS customers do not use this
 #' operation. Instead, AWS customers can use DescribeEventSource to see
@@ -472,8 +645,55 @@ eventbridge_describe_partner_event_source <- function(Name) {
 }
 .eventbridge$operations$describe_partner_event_source <- eventbridge_describe_partner_event_source
 
+#' Retrieves details about a replay
+#'
+#' @description
+#' Retrieves details about a replay. Use `DescribeReplay` to determine the
+#' progress of a running replay. A replay processes events to replay based
+#' on the time in the event, and replays them using 1 minute intervals. If
+#' you use `StartReplay` and specify an `EventStartTime` and an
+#' `EventEndTime` that covers a 20 minute time range, the events are
+#' replayed from the first minute of that 20 minute range first. Then the
+#' events from the second minute are replayed. You can use `DescribeReplay`
+#' to determine the progress of a replay. The value returned for
+#' `EventLastReplayedTime` indicates the time within the specified time
+#' range associated with the last event replayed.
+#'
+#' @usage
+#' eventbridge_describe_replay(ReplayName)
+#'
+#' @param ReplayName &#91;required&#93; The name of the replay to retrieve.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$describe_replay(
+#'   ReplayName = "string"
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_describe_replay
+eventbridge_describe_replay <- function(ReplayName) {
+  op <- new_operation(
+    name = "DescribeReplay",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$describe_replay_input(ReplayName = ReplayName)
+  output <- .eventbridge$describe_replay_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$describe_replay <- eventbridge_describe_replay
+
 #' Describes the specified rule
 #'
+#' @description
 #' Describes the specified rule.
 #' 
 #' DescribeRule does not list the targets of a rule. To see the targets
@@ -483,8 +703,8 @@ eventbridge_describe_partner_event_source <- function(Name) {
 #' eventbridge_describe_rule(Name, EventBusName)
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #'
 #' @section Request syntax:
 #' ```
@@ -516,8 +736,9 @@ eventbridge_describe_rule <- function(Name, EventBusName = NULL) {
 
 #' Disables the specified rule
 #'
-#' Disables the specified rule. A disabled rule won\'t match any events,
-#' and won\'t self-trigger if it has a schedule expression.
+#' @description
+#' Disables the specified rule. A disabled rule won't match any events, and
+#' won't self-trigger if it has a schedule expression.
 #' 
 #' When you disable a rule, incoming events might continue to match to the
 #' disabled rule. Allow a short period of time for changes to take effect.
@@ -526,8 +747,8 @@ eventbridge_describe_rule <- function(Name, EventBusName = NULL) {
 #' eventbridge_disable_rule(Name, EventBusName)
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #'
 #' @section Request syntax:
 #' ```
@@ -559,6 +780,7 @@ eventbridge_disable_rule <- function(Name, EventBusName = NULL) {
 
 #' Enables the specified rule
 #'
+#' @description
 #' Enables the specified rule. If the rule does not exist, the operation
 #' fails.
 #' 
@@ -570,8 +792,8 @@ eventbridge_disable_rule <- function(Name, EventBusName = NULL) {
 #' eventbridge_enable_rule(Name, EventBusName)
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #'
 #' @section Request syntax:
 #' ```
@@ -601,9 +823,60 @@ eventbridge_enable_rule <- function(Name, EventBusName = NULL) {
 }
 .eventbridge$operations$enable_rule <- eventbridge_enable_rule
 
+#' Lists your archives
+#'
+#' @description
+#' Lists your archives. You can either list all the archives or you can
+#' provide a prefix to match to the archive names. Filter parameters are
+#' exclusive.
+#'
+#' @usage
+#' eventbridge_list_archives(NamePrefix, EventSourceArn, State, NextToken,
+#'   Limit)
+#'
+#' @param NamePrefix A name prefix to filter the archives returned. Only archives with name
+#' that match the prefix are returned.
+#' @param EventSourceArn The ARN of the event source associated with the archive.
+#' @param State The state of the archive.
+#' @param NextToken The token returned by a previous call to retrieve the next set of
+#' results.
+#' @param Limit The maximum number of results to return.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$list_archives(
+#'   NamePrefix = "string",
+#'   EventSourceArn = "string",
+#'   State = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED",
+#'   NextToken = "string",
+#'   Limit = 123
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_list_archives
+eventbridge_list_archives <- function(NamePrefix = NULL, EventSourceArn = NULL, State = NULL, NextToken = NULL, Limit = NULL) {
+  op <- new_operation(
+    name = "ListArchives",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$list_archives_input(NamePrefix = NamePrefix, EventSourceArn = EventSourceArn, State = State, NextToken = NextToken, Limit = Limit)
+  output <- .eventbridge$list_archives_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$list_archives <- eventbridge_list_archives
+
 #' Lists all the event buses in your account, including the default event
 #' bus, custom event buses, and partner event buses
 #'
+#' @description
 #' Lists all the event buses in your account, including the default event
 #' bus, custom event buses, and partner event buses.
 #'
@@ -650,6 +923,7 @@ eventbridge_list_event_buses <- function(NamePrefix = NULL, NextToken = NULL, Li
 #' You can use this to see all the partner event sources that have been
 #' shared with your AWS account
 #'
+#' @description
 #' You can use this to see all the partner event sources that have been
 #' shared with your AWS account. For more information about partner event
 #' sources, see CreateEventBus.
@@ -697,6 +971,7 @@ eventbridge_list_event_sources <- function(NamePrefix = NULL, NextToken = NULL, 
 #' An SaaS partner can use this operation to display the AWS account ID
 #' that a particular partner event source name is associated with
 #'
+#' @description
 #' An SaaS partner can use this operation to display the AWS account ID
 #' that a particular partner event source name is associated with. This
 #' operation is not used by AWS customers.
@@ -745,6 +1020,7 @@ eventbridge_list_partner_event_source_accounts <- function(EventSourceName, Next
 #' An SaaS partner can use this operation to list all the partner event
 #' source names that they have created
 #'
+#' @description
 #' An SaaS partner can use this operation to list all the partner event
 #' source names that they have created. This operation is not used by AWS
 #' customers.
@@ -789,8 +1065,59 @@ eventbridge_list_partner_event_sources <- function(NamePrefix, NextToken = NULL,
 }
 .eventbridge$operations$list_partner_event_sources <- eventbridge_list_partner_event_sources
 
+#' Lists your replays
+#'
+#' @description
+#' Lists your replays. You can either list all the replays or you can
+#' provide a prefix to match to the replay names. Filter parameters are
+#' exclusive.
+#'
+#' @usage
+#' eventbridge_list_replays(NamePrefix, State, EventSourceArn, NextToken,
+#'   Limit)
+#'
+#' @param NamePrefix A name prefix to filter the replays returned. Only replays with name
+#' that match the prefix are returned.
+#' @param State The state of the replay.
+#' @param EventSourceArn The ARN of the event source associated with the replay.
+#' @param NextToken The token returned by a previous call to retrieve the next set of
+#' results.
+#' @param Limit The maximum number of replays to retrieve.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$list_replays(
+#'   NamePrefix = "string",
+#'   State = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED",
+#'   EventSourceArn = "string",
+#'   NextToken = "string",
+#'   Limit = 123
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_list_replays
+eventbridge_list_replays <- function(NamePrefix = NULL, State = NULL, EventSourceArn = NULL, NextToken = NULL, Limit = NULL) {
+  op <- new_operation(
+    name = "ListReplays",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$list_replays_input(NamePrefix = NamePrefix, State = State, EventSourceArn = EventSourceArn, NextToken = NextToken, Limit = Limit)
+  output <- .eventbridge$list_replays_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$list_replays <- eventbridge_list_replays
+
 #' Lists the rules for the specified target
 #'
+#' @description
 #' Lists the rules for the specified target. You can see which of the rules
 #' in Amazon EventBridge can invoke a specific target in your account.
 #'
@@ -799,8 +1126,8 @@ eventbridge_list_partner_event_sources <- function(NamePrefix, NextToken = NULL,
 #'   NextToken, Limit)
 #'
 #' @param TargetArn &#91;required&#93; The Amazon Resource Name (ARN) of the target resource.
-#' @param EventBusName Limits the results to show only the rules associated with the specified
-#' event bus.
+#' @param EventBusName The name or ARN of the event bus to list rules for. If you omit this,
+#' the default event bus is used.
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
@@ -837,6 +1164,7 @@ eventbridge_list_rule_names_by_target <- function(TargetArn, EventBusName = NULL
 
 #' Lists your Amazon EventBridge rules
 #'
+#' @description
 #' Lists your Amazon EventBridge rules. You can either list all the rules
 #' or you can provide a prefix to match to the rule names.
 #' 
@@ -847,8 +1175,8 @@ eventbridge_list_rule_names_by_target <- function(TargetArn, EventBusName = NULL
 #' eventbridge_list_rules(NamePrefix, EventBusName, NextToken, Limit)
 #'
 #' @param NamePrefix The prefix matching the rule name.
-#' @param EventBusName Limits the results to show only the rules associated with the specified
-#' event bus.
+#' @param EventBusName The name or ARN of the event bus to list the rules for. If you omit
+#' this, the default event bus is used.
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
@@ -885,6 +1213,7 @@ eventbridge_list_rules <- function(NamePrefix = NULL, EventBusName = NULL, NextT
 
 #' Displays the tags associated with an EventBridge resource
 #'
+#' @description
 #' Displays the tags associated with an EventBridge resource. In
 #' EventBridge, rules and event buses can be tagged.
 #'
@@ -922,14 +1251,15 @@ eventbridge_list_tags_for_resource <- function(ResourceARN) {
 
 #' Lists the targets assigned to the specified rule
 #'
+#' @description
 #' Lists the targets assigned to the specified rule.
 #'
 #' @usage
 #' eventbridge_list_targets_by_rule(Rule, EventBusName, NextToken, Limit)
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
@@ -967,6 +1297,7 @@ eventbridge_list_targets_by_rule <- function(Rule, EventBusName = NULL, NextToke
 #' Sends custom events to Amazon EventBridge so that they can be matched to
 #' rules
 #'
+#' @description
 #' Sends custom events to Amazon EventBridge so that they can be matched to
 #' rules.
 #'
@@ -1020,7 +1351,8 @@ eventbridge_put_events <- function(Entries) {
 #' This is used by SaaS partners to write events to a customer's partner
 #' event bus
 #'
-#' This is used by SaaS partners to write events to a customer\'s partner
+#' @description
+#' This is used by SaaS partners to write events to a customer's partner
 #' event bus. AWS customers do not use this operation.
 #'
 #' @usage
@@ -1068,27 +1400,28 @@ eventbridge_put_partner_events <- function(Entries) {
 .eventbridge$operations$put_partner_events <- eventbridge_put_partner_events
 
 #' Running PutPermission permits the specified AWS account or AWS
-#' organization to put events to the specified _event bus_
+#' organization to put events to the specified event bus
 #'
+#' @description
 #' Running `PutPermission` permits the specified AWS account or AWS
 #' organization to put events to the specified *event bus*. Amazon
 #' EventBridge (CloudWatch Events) rules in your account are triggered by
 #' these events arriving to an event bus in your account.
 #' 
 #' For another account to send events to your account, that external
-#' account must have an EventBridge rule with your account\'s event bus as
-#' a target.
+#' account must have an EventBridge rule with your account's event bus as a
+#' target.
 #' 
 #' To enable multiple AWS accounts to put events to your event bus, run
 #' `PutPermission` once for each of these accounts. Or, if all the accounts
 #' are members of the same AWS organization, you can run `PutPermission`
-#' once specifying `Principal` as \"*\" and specifying the AWS
-#' organization ID in `Condition`, to grant permissions to all accounts in
-#' that organization.
+#' once specifying `Principal` as "*" and specifying the AWS organization
+#' ID in `Condition`, to grant permissions to all accounts in that
+#' organization.
 #' 
 #' If you grant permissions using an organization, then accounts in that
 #' organization must specify a `RoleArn` with proper permissions when they
-#' use `PutTarget` to add your account\'s event bus as a target. For more
+#' use `PutTarget` to add your account's event bus as a target. For more
 #' information, see [Sending and Receiving Events Between AWS
 #' Accounts](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html)
 #' in the *Amazon EventBridge User Guide*.
@@ -1098,22 +1431,22 @@ eventbridge_put_partner_events <- function(Entries) {
 #'
 #' @usage
 #' eventbridge_put_permission(EventBusName, Action, Principal, StatementId,
-#'   Condition)
+#'   Condition, Policy)
 #'
-#' @param EventBusName The event bus associated with the rule. If you omit this, the default
-#' event bus is used.
-#' @param Action &#91;required&#93; The action that you are enabling the other account to perform.
+#' @param EventBusName The name of the event bus associated with the rule. If you omit this,
+#' the default event bus is used.
+#' @param Action The action that you are enabling the other account to perform.
 #' Currently, this must be `events:PutEvents`.
-#' @param Principal &#91;required&#93; The 12-digit AWS account ID that you are permitting to put events to
-#' your default event bus. Specify \"*\" to permit any account to put
-#' events to your default event bus.
+#' @param Principal The 12-digit AWS account ID that you are permitting to put events to
+#' your default event bus. Specify "*" to permit any account to put events
+#' to your default event bus.
 #' 
-#' If you specify \"*\" without specifying `Condition`, avoid creating
-#' rules that may match undesirable events. To create more secure rules,
-#' make sure that the event pattern for each rule contains an `account`
-#' field with a specific account ID from which to receive events. Rules
-#' with an account field do not match any events sent from other accounts.
-#' @param StatementId &#91;required&#93; An identifier string for the external account that you are granting
+#' If you specify "*" without specifying `Condition`, avoid creating rules
+#' that may match undesirable events. To create more secure rules, make
+#' sure that the event pattern for each rule contains an `account` field
+#' with a specific account ID from which to receive events. Rules with an
+#' account field do not match any events sent from other accounts.
+#' @param StatementId An identifier string for the external account that you are granting
 #' permissions to. If you later want to revoke the permission for this
 #' external account, specify this `StatementId` when you run
 #' RemovePermission.
@@ -1124,12 +1457,15 @@ eventbridge_put_partner_events <- function(Entries) {
 #' Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
 #' in the *AWS Organizations User Guide*.
 #' 
-#' If you specify `Condition` with an AWS organization ID, and specify
-#' \"*\" as the value for `Principal`, you grant permission to all the
-#' accounts in the named organization.
+#' If you specify `Condition` with an AWS organization ID, and specify "*"
+#' as the value for `Principal`, you grant permission to all the accounts
+#' in the named organization.
 #' 
 #' The `Condition` is a JSON string which must contain `Type`, `Key`, and
 #' `Value` fields.
+#' @param Policy A JSON string that describes the permission policy statement. You can
+#' include a `Policy` parameter in the request instead of using the
+#' `StatementId`, `Action`, `Principal`, or `Condition` parameters.
 #'
 #' @section Request syntax:
 #' ```
@@ -1142,21 +1478,22 @@ eventbridge_put_partner_events <- function(Entries) {
 #'     Type = "string",
 #'     Key = "string",
 #'     Value = "string"
-#'   )
+#'   ),
+#'   Policy = "string"
 #' )
 #' ```
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_put_permission
-eventbridge_put_permission <- function(EventBusName = NULL, Action, Principal, StatementId, Condition = NULL) {
+eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Principal = NULL, StatementId = NULL, Condition = NULL, Policy = NULL) {
   op <- new_operation(
     name = "PutPermission",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .eventbridge$put_permission_input(EventBusName = EventBusName, Action = Action, Principal = Principal, StatementId = StatementId, Condition = Condition)
+  input <- .eventbridge$put_permission_input(EventBusName = EventBusName, Action = Action, Principal = Principal, StatementId = StatementId, Condition = Condition, Policy = Policy)
   output <- .eventbridge$put_permission_output()
   config <- get_config()
   svc <- .eventbridge$service(config)
@@ -1168,15 +1505,16 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action, Principal, S
 
 #' Creates or updates the specified rule
 #'
+#' @description
 #' Creates or updates the specified rule. Rules are enabled by default, or
 #' based on value of the state. You can disable a rule using DisableRule.
 #' 
 #' A single rule watches for events from a single event bus. Events
-#' generated by AWS services go to your account\'s default event bus.
-#' Events generated by SaaS partner services or applications go to the
-#' matching partner event bus. If you have custom applications or services,
-#' you can specify whether their events go to your default event bus or a
-#' custom event bus that you have created. For more information, see
+#' generated by AWS services go to your account's default event bus. Events
+#' generated by SaaS partner services or applications go to the matching
+#' partner event bus. If you have custom applications or services, you can
+#' specify whether their events go to your default event bus or a custom
+#' event bus that you have created. For more information, see
 #' CreateEventBus.
 #' 
 #' If you are updating an existing rule, the rule is replaced with what you
@@ -1234,8 +1572,8 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action, Principal, S
 #'   Description, RoleArn, Tags, EventBusName)
 #'
 #' @param Name &#91;required&#93; The name of the rule that you are creating or updating.
-#' @param ScheduleExpression The scheduling expression. For example, \"cron(0 20 * * ? *)\" or
-#' \"rate(5 minutes)\".
+#' @param ScheduleExpression The scheduling expression. For example, "cron(0 20 * * ? *)" or
+#' "rate(5 minutes)".
 #' @param EventPattern The event pattern. For more information, see [Events and Event
 #' Patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
 #' in the *Amazon EventBridge User Guide*.
@@ -1243,8 +1581,8 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action, Principal, S
 #' @param Description A description of the rule.
 #' @param RoleArn The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 #' @param Tags The list of key-value pairs to associate with the rule.
-#' @param EventBusName The event bus to associate with this rule. If you omit this, the default
-#' event bus is used.
+#' @param EventBusName The name or ARN of the event bus to associate with this rule. If you
+#' omit this, the default event bus is used.
 #'
 #' @section Request syntax:
 #' ```
@@ -1288,6 +1626,7 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' Adds the specified targets to the specified rule, or updates the targets
 #' if they are already associated with the rule
 #'
+#' @description
 #' Adds the specified targets to the specified rule, or updates the targets
 #' if they are already associated with the rule.
 #' 
@@ -1327,6 +1666,8 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' 
 #' -   Amazon API Gateway REST APIs
 #' 
+#' -   Redshift Clusters to invoke Data API ExecuteStatement on
+#' 
 #' Creating rules with built-in targets is supported only in the AWS
 #' Management Console. The built-in targets are
 #' `EC2 CreateSnapshot API call`, `EC2 RebootInstances API call`,
@@ -1350,8 +1691,8 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' 
 #' If another AWS account is in the same region and has granted you
 #' permission (using `PutPermission`), you can send events to that account.
-#' Set that account\'s event bus as a target of the rules in your account.
-#' To send the matched events to the other account, specify that account\'s
+#' Set that account's event bus as a target of the rules in your account.
+#' To send the matched events to the other account, specify that account's
 #' event bus as the `Arn` value when you run `PutTargets`. If your account
 #' sends events to another account, your account is charged for each sent
 #' event. Each event sent to another account is charged as a custom event.
@@ -1410,8 +1751,8 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' eventbridge_put_targets(Rule, EventBusName, Targets)
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The name of the event bus associated with the rule. If you omit this,
-#' the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #' @param Targets &#91;required&#93; The targets to update or add to the rule.
 #'
 #' @section Request syntax:
@@ -1486,6 +1827,21 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #'         QueryStringParameters = list(
 #'           "string"
 #'         )
+#'       ),
+#'       RedshiftDataParameters = list(
+#'         SecretManagerArn = "string",
+#'         Database = "string",
+#'         DbUser = "string",
+#'         Sql = "string",
+#'         StatementName = "string",
+#'         WithEvent = TRUE|FALSE
+#'       ),
+#'       DeadLetterConfig = list(
+#'         Arn = "string"
+#'       ),
+#'       RetryPolicy = list(
+#'         MaximumRetryAttempts = 123,
+#'         MaximumEventAgeInSeconds = 123
 #'       )
 #'     )
 #'   )
@@ -1515,6 +1871,7 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' Revokes the permission of another AWS account to be able to put events
 #' to the specified event bus
 #'
+#' @description
 #' Revokes the permission of another AWS account to be able to put events
 #' to the specified event bus. Specify the account to revoke by the
 #' `StatementId` value that you associated with the account when you
@@ -1522,10 +1879,12 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' `StatementId` by using DescribeEventBus.
 #'
 #' @usage
-#' eventbridge_remove_permission(StatementId, EventBusName)
+#' eventbridge_remove_permission(StatementId, RemoveAllPermissions,
+#'   EventBusName)
 #'
-#' @param StatementId &#91;required&#93; The statement ID corresponding to the account that is no longer allowed
+#' @param StatementId The statement ID corresponding to the account that is no longer allowed
 #' to put events to the default event bus.
+#' @param RemoveAllPermissions Specifies whether to remove all permissions.
 #' @param EventBusName The name of the event bus to revoke permissions for. If you omit this,
 #' the default event bus is used.
 #'
@@ -1533,6 +1892,7 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' ```
 #' svc$remove_permission(
 #'   StatementId = "string",
+#'   RemoveAllPermissions = TRUE|FALSE,
 #'   EventBusName = "string"
 #' )
 #' ```
@@ -1540,14 +1900,14 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' @keywords internal
 #'
 #' @rdname eventbridge_remove_permission
-eventbridge_remove_permission <- function(StatementId, EventBusName = NULL) {
+eventbridge_remove_permission <- function(StatementId = NULL, RemoveAllPermissions = NULL, EventBusName = NULL) {
   op <- new_operation(
     name = "RemovePermission",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .eventbridge$remove_permission_input(StatementId = StatementId, EventBusName = EventBusName)
+  input <- .eventbridge$remove_permission_input(StatementId = StatementId, RemoveAllPermissions = RemoveAllPermissions, EventBusName = EventBusName)
   output <- .eventbridge$remove_permission_output()
   config <- get_config()
   svc <- .eventbridge$service(config)
@@ -1559,6 +1919,7 @@ eventbridge_remove_permission <- function(StatementId, EventBusName = NULL) {
 
 #' Removes the specified targets from the specified rule
 #'
+#' @description
 #' Removes the specified targets from the specified rule. When the rule is
 #' triggered, those targets are no longer be invoked.
 #' 
@@ -1575,7 +1936,8 @@ eventbridge_remove_permission <- function(StatementId, EventBusName = NULL) {
 #' eventbridge_remove_targets(Rule, EventBusName, Ids, Force)
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The name of the event bus associated with the rule.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
+#' this, the default event bus is used.
 #' @param Ids &#91;required&#93; The IDs of the targets to remove from the rule.
 #' @param Force If this is a managed rule, created by an AWS service on your behalf, you
 #' must specify `Force` as `True` to remove targets. This parameter is
@@ -1615,17 +1977,87 @@ eventbridge_remove_targets <- function(Rule, EventBusName = NULL, Ids, Force = N
 }
 .eventbridge$operations$remove_targets <- eventbridge_remove_targets
 
+#' Starts the specified replay
+#'
+#' @description
+#' Starts the specified replay. Events are not necessarily replayed in the
+#' exact same order that they were added to the archive. A replay processes
+#' events to replay based on the time in the event, and replays them using
+#' 1 minute intervals. If you specify an `EventStartTime` and an
+#' `EventEndTime` that covers a 20 minute time range, the events are
+#' replayed from the first minute of that 20 minute range first. Then the
+#' events from the second minute are replayed. You can use `DescribeReplay`
+#' to determine the progress of a replay. The value returned for
+#' `EventLastReplayedTime` indicates the time within the specified time
+#' range associated with the last event replayed.
+#'
+#' @usage
+#' eventbridge_start_replay(ReplayName, Description, EventSourceArn,
+#'   EventStartTime, EventEndTime, Destination)
+#'
+#' @param ReplayName &#91;required&#93; The name of the replay to start.
+#' @param Description A description for the replay to start.
+#' @param EventSourceArn &#91;required&#93; The ARN of the archive to replay events from.
+#' @param EventStartTime &#91;required&#93; A time stamp for the time to start replaying events. Only events that
+#' occurred between the `EventStartTime` and `EventEndTime` are replayed.
+#' @param EventEndTime &#91;required&#93; A time stamp for the time to stop replaying events. Only events that
+#' occurred between the `EventStartTime` and `EventEndTime` are replayed.
+#' @param Destination &#91;required&#93; A `ReplayDestination` object that includes details about the destination
+#' for the replay.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$start_replay(
+#'   ReplayName = "string",
+#'   Description = "string",
+#'   EventSourceArn = "string",
+#'   EventStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EventEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   Destination = list(
+#'     Arn = "string",
+#'     FilterArns = list(
+#'       "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_start_replay
+eventbridge_start_replay <- function(ReplayName, Description = NULL, EventSourceArn, EventStartTime, EventEndTime, Destination) {
+  op <- new_operation(
+    name = "StartReplay",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$start_replay_input(ReplayName = ReplayName, Description = Description, EventSourceArn = EventSourceArn, EventStartTime = EventStartTime, EventEndTime = EventEndTime, Destination = Destination)
+  output <- .eventbridge$start_replay_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$start_replay <- eventbridge_start_replay
+
 #' Assigns one or more tags (key-value pairs) to the specified EventBridge
 #' resource
 #'
+#' @description
 #' Assigns one or more tags (key-value pairs) to the specified EventBridge
 #' resource. Tags can help you organize and categorize your resources. You
 #' can also use them to scope user permissions by granting a user
 #' permission to access or change only resources with certain tag values.
 #' In EventBridge, rules and event buses can be tagged.
 #' 
-#' Tags don\'t have any semantic meaning to AWS and are interpreted
-#' strictly as strings of characters.
+#' Tags don't have any semantic meaning to AWS and are interpreted strictly
+#' as strings of characters.
 #' 
 #' You can use the `TagResource` action with a resource that already has
 #' tags. If you specify a new tag key, this tag is appended to the list of
@@ -1638,7 +2070,7 @@ eventbridge_remove_targets <- function(Rule, EventBusName = NULL, Ids, Force = N
 #' @usage
 #' eventbridge_tag_resource(ResourceARN, Tags)
 #'
-#' @param ResourceARN &#91;required&#93; The ARN of the EventBridge resource that you\'re adding tags to.
+#' @param ResourceARN &#91;required&#93; The ARN of the EventBridge resource that you're adding tags to.
 #' @param Tags &#91;required&#93; The list of key-value pairs to associate with the resource.
 #'
 #' @section Request syntax:
@@ -1676,6 +2108,7 @@ eventbridge_tag_resource <- function(ResourceARN, Tags) {
 
 #' Tests whether the specified event pattern matches the provided event
 #'
+#' @description
 #' Tests whether the specified event pattern matches the provided event.
 #' 
 #' Most services in AWS treat : or / as the same character in Amazon
@@ -1722,6 +2155,7 @@ eventbridge_test_event_pattern <- function(EventPattern, Event) {
 
 #' Removes one or more tags from the specified EventBridge resource
 #'
+#' @description
 #' Removes one or more tags from the specified EventBridge resource. In
 #' Amazon EventBridge (CloudWatch Events, rules and event buses can be
 #' tagged.
@@ -1761,3 +2195,47 @@ eventbridge_untag_resource <- function(ResourceARN, TagKeys) {
   return(response)
 }
 .eventbridge$operations$untag_resource <- eventbridge_untag_resource
+
+#' Updates the specified archive
+#'
+#' @description
+#' Updates the specified archive.
+#'
+#' @usage
+#' eventbridge_update_archive(ArchiveName, Description, EventPattern,
+#'   RetentionDays)
+#'
+#' @param ArchiveName &#91;required&#93; The name of the archive to update.
+#' @param Description The description for the archive.
+#' @param EventPattern The event pattern to use to filter events sent to the archive.
+#' @param RetentionDays The number of days to retain events in the archive.
+#'
+#' @section Request syntax:
+#' ```
+#' svc$update_archive(
+#'   ArchiveName = "string",
+#'   Description = "string",
+#'   EventPattern = "string",
+#'   RetentionDays = 123
+#' )
+#' ```
+#'
+#' @keywords internal
+#'
+#' @rdname eventbridge_update_archive
+eventbridge_update_archive <- function(ArchiveName, Description = NULL, EventPattern = NULL, RetentionDays = NULL) {
+  op <- new_operation(
+    name = "UpdateArchive",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .eventbridge$update_archive_input(ArchiveName = ArchiveName, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays)
+  output <- .eventbridge$update_archive_output()
+  config <- get_config()
+  svc <- .eventbridge$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.eventbridge$operations$update_archive <- eventbridge_update_archive

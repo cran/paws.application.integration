@@ -14,35 +14,44 @@ sns_set_topic_attributes(TopicArn, AttributeName, AttributeValue)
 The following lists the names, descriptions, and values of the special
 request parameters that the \code{SetTopicAttributes} action uses:
 \itemize{
-\item \code{DeliveryPolicy} -- The policy that defines how Amazon SNS retries
+\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries
 failed deliveries to HTTP/S endpoints.
-\item \code{DisplayName} -- The display name to use for a topic with SMS
+\item \code{DisplayName} – The display name to use for a topic with SMS
 subscriptions.
-\item \code{Policy} -- The policy that defines who can access your topic. By
+\item \code{Policy} – The policy that defines who can access your topic. By
 default, only the topic owner can publish or subscribe to the topic.
 }
 
 The following attribute applies only to
 \href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html}{server-side-encryption}:
 \itemize{
-\item \code{KmsMasterKeyId} -- The ID of an AWS-managed customer master key
+\item \code{KmsMasterKeyId} – The ID of an AWS-managed customer master key
 (CMK) for Amazon SNS or a custom CMK. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms}{Key Terms}.
 For more examples, see
 \href{https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters}{KeyId}
 in the \emph{AWS Key Management Service API Reference}.
 }
 
-The following attribute applies only to FIFO topics:
+The following attribute applies only to \href{https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html}{FIFO topics}:
 \itemize{
-\item \code{ContentBasedDeduplication} -- Enables content-based deduplication.
-Amazon SNS uses a SHA-256 hash to generate the
-\code{MessageDeduplicationId} using the body of the message (but not the
-attributes of the message).
-\item When \code{ContentBasedDeduplication} is in effect, messages with
-identical content sent within the deduplication interval are treated
-as duplicates and only one copy of the message is delivered.
-\item If the queue has \code{ContentBasedDeduplication} set, your
-\code{MessageDeduplicationId} overrides the generated one.
+\item \code{ContentBasedDeduplication} – Enables content-based deduplication
+for FIFO topics.
+\itemize{
+\item By default, \code{ContentBasedDeduplication} is set to \code{false}. If
+you create a FIFO topic and this attribute is \code{false}, you must
+specify a value for the \code{MessageDeduplicationId} parameter for
+the
+\href{https://docs.aws.amazon.com/sns/latest/api/API_Publish.html}{Publish}
+action.
+\item When you set \code{ContentBasedDeduplication} to \code{true}, Amazon SNS
+uses a SHA-256 hash to generate the \code{MessageDeduplicationId}
+using the body of the message (but not the attributes of the
+message).
+
+(Optional) To override the generated value, you can specify a
+value for the the \code{MessageDeduplicationId} parameter for the
+\code{Publish} action.
+}
 }}
 
 \item{AttributeValue}{The new value for the attribute.}

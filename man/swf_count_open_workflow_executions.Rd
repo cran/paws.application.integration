@@ -34,14 +34,13 @@ You can specify at most one of these in a request.}
 \description{
 Returns the number of open workflow executions within the given domain
 that meet the specified filtering criteria.
-}
-\details{
+
 This operation is eventually consistent. The results are best effort and
 may not exactly reflect recent updates and changes.
 
 \strong{Access Control}
 
-You can use IAM policies to control this action\'s access to Amazon SWF
+You can use IAM policies to control this action's access to Amazon SWF
 resources as follows:
 \itemize{
 \item Use a \code{Resource} element with the domain name to limit the action to
@@ -60,9 +59,9 @@ with the appropriate keys.
 }
 }
 
-If the caller doesn\'t have sufficient permissions to invoke the action,
+If the caller doesn't have sufficient permissions to invoke the action,
 or the parameter values fall outside the specified constraints, the
-action fails. The associated event attribute\'s \code{cause} parameter is set
+action fails. The associated event attribute's \code{cause} parameter is set
 to \code{OPERATION_NOT_PERMITTED}. For details and example IAM policies, see
 \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html}{Using IAM to Manage Access to Amazon SWF Workflows}
 in the \emph{Amazon SWF Developer Guide}.

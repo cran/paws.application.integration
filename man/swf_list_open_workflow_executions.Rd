@@ -31,7 +31,7 @@ value of \code{NextPageToken} is a unique pagination token for each page.
 Make the call again using the returned token to retrieve the next page.
 Keep all other arguments unchanged. Each pagination token expires after
 60 seconds. Using an expired pagination token will return a \code{400} error:
-\"\verb{Specified token has exceeded its maximum lifetime}\".
+"\verb{Specified token has exceeded its maximum lifetime}".
 
 The configured \code{maximumPageSize} determines how many results can be
 returned in a single call.}
@@ -54,14 +54,13 @@ Returns a list of open workflow executions in the specified domain that
 meet the filtering criteria. The results may be split into multiple
 pages. To retrieve subsequent pages, make the call again using the
 nextPageToken returned by the initial call.
-}
-\details{
+
 This operation is eventually consistent. The results are best effort and
 may not exactly reflect recent updates and changes.
 
 \strong{Access Control}
 
-You can use IAM policies to control this action\'s access to Amazon SWF
+You can use IAM policies to control this action's access to Amazon SWF
 resources as follows:
 \itemize{
 \item Use a \code{Resource} element with the domain name to limit the action to
@@ -80,9 +79,9 @@ with the appropriate keys.
 }
 }
 
-If the caller doesn\'t have sufficient permissions to invoke the action,
+If the caller doesn't have sufficient permissions to invoke the action,
 or the parameter values fall outside the specified constraints, the
-action fails. The associated event attribute\'s \code{cause} parameter is set
+action fails. The associated event attribute's \code{cause} parameter is set
 to \code{OPERATION_NOT_PERMITTED}. For details and example IAM policies, see
 \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html}{Using IAM to Manage Access to Amazon SWF Workflows}
 in the \emph{Amazon SWF Developer Guide}.
