@@ -50,8 +50,8 @@ for which Amazon SQS retains a message.
 \item \code{Policy} – Returns the policy of the queue.
 \item \code{QueueArn} – Returns the Amazon resource name (ARN) of the queue.
 \item \code{ReceiveMessageWaitTimeSeconds} – Returns the length of time, in
-seconds, for which the \code{ReceiveMessage} action waits for a message
-to arrive.
+seconds, for which the \code{\link[=sqs_receive_message]{receive_message}}
+action waits for a message to arrive.
 \item \code{RedrivePolicy} – The string that includes the parameters for the
 dead-letter queue functionality of the source queue as a JSON
 object. For more information about the redrive policy and
@@ -140,6 +140,14 @@ This preview is available in the following AWS Regions:
 For more information about high throughput for FIFO queues, see
 \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html}{Preview: High throughput for FIFO queues}
 in the \emph{Amazon Simple Queue Service Developer Guide}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Attributes = list(
+    "string"
+  )
+)
+}
 }
 \description{
 Gets attributes for the specified queue.

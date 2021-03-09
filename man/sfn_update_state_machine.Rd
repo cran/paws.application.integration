@@ -20,6 +20,14 @@ options.}
 
 \item{tracingConfiguration}{Selects whether AWS X-Ray tracing is enabled.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  updateDate = as.POSIXct(
+    "2015-01-01"
+  )
+)
+}
+}
 \description{
 Updates an existing state machine by modifying its \code{definition},
 \code{roleArn}, or \code{loggingConfiguration}. Running executions will continue
@@ -27,10 +35,11 @@ to use the previous \code{definition} and \code{roleArn}. You must include at
 least one of \code{definition} or \code{roleArn} or you will receive a
 \code{MissingRequiredParameter} error.
 
-All \code{StartExecution} calls within a few seconds will use the updated
-\code{definition} and \code{roleArn}. Executions started immediately after calling
-\code{UpdateStateMachine} may use the previous state machine \code{definition} and
-\code{roleArn}.
+All \code{\link[=sfn_start_execution]{start_execution}} calls within a few seconds
+will use the updated \code{definition} and \code{roleArn}. Executions started
+immediately after calling
+\code{\link[=sfn_update_state_machine]{update_state_machine}} may use the previous
+state machine \code{definition} and \code{roleArn}.
 }
 \section{Request syntax}{
 \preformatted{svc$update_state_machine(

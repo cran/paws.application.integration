@@ -35,7 +35,7 @@ message failed), the message dwell time, and other information.
 \code{DeliveryStatusSuccessSamplingRate} – The percentage of successful SMS
 deliveries for which Amazon SNS will write logs in CloudWatch Logs. The
 value can be an integer from 0 - 100. For example, to write logs only
-for failed deliveries, set this value to \code{0}. To write logs for 10\\% of
+for failed deliveries, set this value to \code{0}. To write logs for 10\% of
 your successful deliveries, set it to \code{10}.
 
 \code{DefaultSenderID} – A string, such as your business brand, that is
@@ -79,13 +79,17 @@ Amazon SNS service principle to perform the \code{s3:PutObject} and
 For an example bucket policy and usage report, see \href{https://docs.aws.amazon.com/sns/latest/dg/sms_stats.html}{Monitoring SMS Activity} in
 the \emph{Amazon SNS Developer Guide}.}
 }
+\value{
+An empty list.
+}
 \description{
 Use this request to set the default settings for sending SMS messages
 and receiving daily SMS usage reports.
 
 You can override some of these settings for a single message when you
-use the \code{Publish} action with the \code{MessageAttributes.entry.N} parameter.
-For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html}{Publishing to a mobile phone}
+use the \code{\link[=sns_publish]{publish}} action with the
+\code{MessageAttributes.entry.N} parameter. For more information, see
+\href{https://docs.aws.amazon.com/sns/latest/dg/sms_publish-to-phone.html}{Publishing to a mobile phone}
 in the \emph{Amazon SNS Developer Guide}.
 }
 \section{Request syntax}{

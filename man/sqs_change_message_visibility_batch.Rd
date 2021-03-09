@@ -14,12 +14,32 @@ Queue URLs and names are case-sensitive.}
 \item{Entries}{[required] A list of receipt handles of the messages for which the visibility
 timeout must be changed.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  Successful = list(
+    list(
+      Id = "string"
+    )
+  ),
+  Failed = list(
+    list(
+      Id = "string",
+      SenderFault = TRUE|FALSE,
+      Code = "string",
+      Message = "string"
+    )
+  )
+)
+}
+}
 \description{
 Changes the visibility timeout of multiple messages. This is a batch
-version of \verb{ <a>ChangeMessageVisibility</a>.} The result of the action
-on each message is reported individually in the response. You can send
-up to 10 \verb{<a>ChangeMessageVisibility</a>} requests with each
-\code{ChangeMessageVisibilityBatch} action.
+version of \code{ ChangeMessageVisibility.} The result of the action on each
+message is reported individually in the response. You can send up to 10
+\code{\link[=sqs_change_message_visibility]{change_message_visibility}} requests
+with each
+\code{\link[=sqs_change_message_visibility_batch]{change_message_visibility_batch}}
+action.
 
 Because the batch request can result in a combination of successful and
 unsuccessful actions, you should check for batch errors even when the
@@ -29,9 +49,9 @@ Some actions take lists of parameters. These lists are specified using
 the \code{param.n} notation. Values of \code{n} are integers starting from 1. For
 example, a parameter list with two elements looks like this:
 
-\verb{&amp;AttributeName.1=first}
+\verb{&AttributeName.1=first}
 
-\verb{&amp;AttributeName.2=second}
+\verb{&AttributeName.2=second}
 }
 \section{Request syntax}{
 \preformatted{svc$change_message_visibility_batch(

@@ -40,6 +40,9 @@ default for the workflow type or through this parameter. If neither this
 parameter is set nor a default child policy was specified at
 registration time then a fault is returned.}
 }
+\value{
+An empty list.
+}
 \description{
 Records a \code{WorkflowExecutionTerminated} event and forces closure of the
 workflow execution identified by the given domain, runId, and
@@ -54,9 +57,11 @@ If a runId isn't specified, then the \code{WorkflowExecutionTerminated} event
 is recorded in the history of the current open workflow with the
 matching workflowId in the domain.
 
-You should consider using RequestCancelWorkflowExecution action instead
-because it allows the workflow to gracefully close while
-TerminateWorkflowExecution doesn't.
+You should consider using
+\code{\link[=swf_request_cancel_workflow_execution]{request_cancel_workflow_execution}}
+action instead because it allows the workflow to gracefully close while
+\code{\link[=swf_terminate_workflow_execution]{terminate_workflow_execution}}
+doesn't.
 
 \strong{Access Control}
 

@@ -21,7 +21,7 @@ within the same domain.
 
 The specified string must not start or end with whitespace. It must not
 contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
+characters (\verb{\\u0000-\\u001f} | \verb{\\u007f-\\u009f}). Also, it must not \emph{be}
 the literal string \code{arn}.}
 
 \item{workflowType}{[required] The type of the workflow to start.}
@@ -37,7 +37,7 @@ time then a fault is returned.
 
 The specified string must not start or end with whitespace. It must not
 contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
+characters (\verb{\\u0000-\\u001f} | \verb{\\u007f-\\u009f}). Also, it must not \emph{be}
 the literal string \code{arn}.}
 
 \item{taskPriority}{The task priority to use for this workflow execution. This overrides any
@@ -72,12 +72,15 @@ specified, a fault is returned.}
 
 \item{tagList}{The list of tags to associate with the workflow execution. You can
 specify a maximum of 5 tags. You can list workflow executions with a
-specific tag by calling ListOpenWorkflowExecutions or
-ListClosedWorkflowExecutions and specifying a TagFilter.}
+specific tag by calling
+\code{\link[=swf_list_open_workflow_executions]{list_open_workflow_executions}} or
+\code{\link[=swf_list_closed_workflow_executions]{list_closed_workflow_executions}}
+and specifying a TagFilter.}
 
 \item{taskStartToCloseTimeout}{Specifies the maximum duration of decision tasks for this workflow
 execution. This parameter overrides the \code{defaultTaskStartToCloseTimout}
-specified when registering the workflow type using RegisterWorkflowType.
+specified when registering the workflow type using
+\code{\link[=swf_register_workflow_type]{register_workflow_type}}.
 
 The duration is specified in seconds, an integer greater than or equal
 to \code{0}. You can use \code{NONE} to specify unlimited duration.
@@ -90,9 +93,10 @@ is returned.}
 
 \item{childPolicy}{If set, specifies the policy to use for the child workflow executions of
 this workflow execution if it is terminated, by calling the
-TerminateWorkflowExecution action explicitly or due to an expired
-timeout. This policy overrides the default child policy specified when
-registering the workflow type using RegisterWorkflowType.
+\code{\link[=swf_terminate_workflow_execution]{terminate_workflow_execution}}
+action explicitly or due to an expired timeout. This policy overrides
+the default child policy specified when registering the workflow type
+using \code{\link[=swf_register_workflow_type]{register_workflow_type}}.
 
 The supported child policies are:
 \itemize{
@@ -118,6 +122,12 @@ Lambda task fails. This results in a \code{ScheduleLambdaFunctionFailed}
 history event. For more information, see
 \url{https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html}
 in the \emph{Amazon SWF Developer Guide}.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  runId = "string"
+)
+}
 }
 \description{
 Starts an execution of the workflow type in the specified domain using

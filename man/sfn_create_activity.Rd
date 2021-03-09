@@ -14,14 +14,16 @@ in the \emph{AWS Step Functions Developer Guide}.
 A name must \emph{not} contain:
 \itemize{
 \item white space
-\item brackets \verb{&lt; &gt; \\\{ \\\} \\\[ \\\]}
+\item brackets \verb{< > \{ \} [ ]}
 \item wildcard characters \verb{? *}
-\item special characters \verb{\\" # \\\% \\\\ ^ | ~ \\` $ &amp; , ; : /}
+\item special characters \verb{\\" # \% \\ ^ | ~ \\` $ & , ; : /}
 \item control characters (\verb{U+0000-001F}, \verb{U+007F-009F})
 }
 
 To enable logging with CloudWatch Logs, the name should only contain
-0-9, A-Z, a-z, - and \\_.}
+0-9, A-Z, a-z, - and _.
+
+[ ]: R:\%20}
 
 \item{tags}{The list of tags to add to a resource.
 
@@ -31,24 +33,34 @@ in the \emph{AWS Billing and Cost Management User Guide}, and \href{https://docs
 Tags may only contain Unicode letters, digits, white space, or these
 symbols: \verb{_ . : / = + - @}.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  activityArn = "string",
+  creationDate = as.POSIXct(
+    "2015-01-01"
+  )
+)
+}
+}
 \description{
 Creates an activity. An activity is a task that you write in any
 programming language and host on any machine that has access to AWS Step
 Functions. Activities must poll Step Functions using the
-\code{GetActivityTask} API action and respond using \verb{SendTask*} API actions.
-This function lets Step Functions know the existence of your activity
-and returns an identifier for use in a state machine and when polling
-from the activity.
+\code{\link[=sfn_get_activity_task]{get_activity_task}} API action and respond
+using \verb{SendTask*} API actions. This function lets Step Functions know
+the existence of your activity and returns an identifier for use in a
+state machine and when polling from the activity.
 
 This operation is eventually consistent. The results are best effort and
 may not reflect very recent updates and changes.
 
-\code{CreateActivity} is an idempotent API. Subsequent requests won’t create
-a duplicate resource if it was already created. \code{CreateActivity}'s
-idempotency check is based on the activity \code{name}. If a following
-request has different \code{tags} values, Step Functions will ignore these
-differences and treat it as an idempotent request of the previous. In
-this case, \code{tags} will not be updated, even if they are different.
+\code{\link[=sfn_create_activity]{create_activity}} is an idempotent API.
+Subsequent requests won’t create a duplicate resource if it was already
+created. \code{\link[=sfn_create_activity]{create_activity}}'s idempotency check is
+based on the activity \code{name}. If a following request has different
+\code{tags} values, Step Functions will ignore these differences and treat it
+as an idempotent request of the previous. In this case, \code{tags} will not
+be updated, even if they are different.
 }
 \section{Request syntax}{
 \preformatted{svc$create_activity(

@@ -9,14 +9,32 @@ sns_list_subscriptions_by_topic(TopicArn, NextToken)
 \arguments{
 \item{TopicArn}{[required] The ARN of the topic for which you wish to find subscriptions.}
 
-\item{NextToken}{Token returned by the previous \code{ListSubscriptionsByTopic} request.}
+\item{NextToken}{Token returned by the previous
+\code{\link[=sns_list_subscriptions_by_topic]{list_subscriptions_by_topic}}
+request.}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  Subscriptions = list(
+    list(
+      SubscriptionArn = "string",
+      Owner = "string",
+      Protocol = "string",
+      Endpoint = "string",
+      TopicArn = "string"
+    )
+  ),
+  NextToken = "string"
+)
+}
 }
 \description{
 Returns a list of the subscriptions to a specific topic. Each call
 returns a limited list of subscriptions, up to 100. If there are more
 subscriptions, a \code{NextToken} is also returned. Use the \code{NextToken}
-parameter in a new \code{ListSubscriptionsByTopic} call to get further
-results.
+parameter in a new
+\code{\link[=sns_list_subscriptions_by_topic]{list_subscriptions_by_topic}} call to
+get further results.
 
 This action is throttled at 30 transactions per second (TPS).
 }

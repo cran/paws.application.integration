@@ -13,14 +13,16 @@ sfn_create_state_machine(name, definition, roleArn, type,
 A name must \emph{not} contain:
 \itemize{
 \item white space
-\item brackets \verb{&lt; &gt; \\\{ \\\} \\\[ \\\]}
+\item brackets \verb{< > \{ \} [ ]}
 \item wildcard characters \verb{? *}
-\item special characters \verb{\\" # \\\% \\\\ ^ | ~ \\` $ &amp; , ; : /}
+\item special characters \verb{\\" # \% \\ ^ | ~ \\` $ & , ; : /}
 \item control characters (\verb{U+0000-001F}, \verb{U+007F-009F})
 }
 
 To enable logging with CloudWatch Logs, the name should only contain
-0-9, A-Z, a-z, - and \\_.}
+0-9, A-Z, a-z, - and _.
+
+[ ]: R:\%20}
 
 \item{definition}{[required] The Amazon States Language definition of the state machine. See \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language}.}
 
@@ -47,6 +49,15 @@ symbols: \verb{_ . : / = + - @}.}
 
 \item{tracingConfiguration}{Selects whether AWS X-Ray tracing is enabled.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  stateMachineArn = "string",
+  creationDate = as.POSIXct(
+    "2015-01-01"
+  )
+)
+}
+}
 \description{
 Creates a state machine. A state machine consists of a collection of
 states that can do work (\code{Task} states), determine to which states to
@@ -58,14 +69,15 @@ in the AWS Step Functions User Guide.
 This operation is eventually consistent. The results are best effort and
 may not reflect very recent updates and changes.
 
-\code{CreateStateMachine} is an idempotent API. Subsequent requests won’t
-create a duplicate resource if it was already created.
-\code{CreateStateMachine}'s idempotency check is based on the state machine
-\code{name}, \code{definition}, \code{type}, \code{LoggingConfiguration} and
-\code{TracingConfiguration}. If a following request has a different \code{roleArn}
-or \code{tags}, Step Functions will ignore these differences and treat it as
-an idempotent request of the previous. In this case, \code{roleArn} and
-\code{tags} will not be updated, even if they are different.
+\code{\link[=sfn_create_state_machine]{create_state_machine}} is an idempotent API.
+Subsequent requests won’t create a duplicate resource if it was already
+created. \code{\link[=sfn_create_state_machine]{create_state_machine}}'s
+idempotency check is based on the state machine \code{name}, \code{definition},
+\code{type}, \code{LoggingConfiguration} and \code{TracingConfiguration}. If a
+following request has a different \code{roleArn} or \code{tags}, Step Functions
+will ignore these differences and treat it as an idempotent request of
+the previous. In this case, \code{roleArn} and \code{tags} will not be updated,
+even if they are different.
 }
 \section{Request syntax}{
 \preformatted{svc$create_state_machine(

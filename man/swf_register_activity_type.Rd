@@ -17,7 +17,7 @@ swf_register_activity_type(domain, name, version, description,
 
 The specified string must not start or end with whitespace. It must not
 contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
+characters (\verb{\\u0000-\\u001f} | \verb{\\u007f-\\u009f}). Also, it must not \emph{be}
 the literal string \code{arn}.}
 
 \item{version}{[required] The version of the activity type.
@@ -27,7 +27,7 @@ which must be unique within the domain.
 
 The specified string must not start or end with whitespace. It must not
 contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
+characters (\verb{\\u0000-\\u001f} | \verb{\\u007f-\\u009f}). Also, it must not \emph{be}
 the literal string \code{arn}.}
 
 \item{description}{A textual description of the activity type.}
@@ -41,13 +41,14 @@ to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 
 \item{defaultTaskHeartbeatTimeout}{If set, specifies the default maximum time before which a worker
 processing a task of this type must report progress by calling
-RecordActivityTaskHeartbeat. If the timeout is exceeded, the activity
-task is automatically timed out. This default can be overridden when
-scheduling an activity task using the \code{ScheduleActivityTask} Decision.
-If the activity worker subsequently attempts to record a heartbeat or
-returns a result, the activity worker receives an \code{UnknownResource}
-fault. In this case, Amazon SWF no longer considers the activity task to
-be valid; the activity worker should clean up the activity task.
+\code{\link[=swf_record_activity_task_heartbeat]{record_activity_task_heartbeat}}.
+If the timeout is exceeded, the activity task is automatically timed
+out. This default can be overridden when scheduling an activity task
+using the \code{ScheduleActivityTask} Decision. If the activity worker
+subsequently attempts to record a heartbeat or returns a result, the
+activity worker receives an \code{UnknownResource} fault. In this case,
+Amazon SWF no longer considers the activity task to be valid; the
+activity worker should clean up the activity task.
 
 The duration is specified in seconds, an integer greater than or equal
 to \code{0}. You can use \code{NONE} to specify unlimited duration.}
@@ -79,6 +80,9 @@ activity task using the \code{ScheduleActivityTask} Decision.
 
 The duration is specified in seconds, an integer greater than or equal
 to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+}
+\value{
+An empty list.
 }
 \description{
 Registers a new \emph{activity type} along with its configuration settings in

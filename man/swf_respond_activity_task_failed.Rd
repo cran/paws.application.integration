@@ -19,6 +19,9 @@ with results.}
 
 \item{details}{Detailed information about the failure.}
 }
+\value{
+An empty list.
+}
 \description{
 Used by workers to tell the service that the ActivityTask identified by
 the \code{taskToken} has failed with \code{reason} (if specified). The \code{reason}
@@ -28,7 +31,8 @@ workflow history.
 A task is considered open from the time that it is scheduled until it is
 closed. Therefore a task is reported as open while a worker is
 processing it. A task is closed after it has been specified in a call to
-RespondActivityTaskCompleted, RespondActivityTaskCanceled,
+\code{\link[=swf_respond_activity_task_completed]{respond_activity_task_completed}},
+\code{\link[=swf_respond_activity_task_canceled]{respond_activity_task_canceled}},
 RespondActivityTaskFailed, or the task has \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-basic.html#swf-dev-timeout-types}{timed out}.
 
 \strong{Access Control}

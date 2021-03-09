@@ -15,6 +15,9 @@ NULL
 #'
 #' @param Name &#91;required&#93; The name of the partner event source to activate.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$activate_event_source(
@@ -51,6 +54,16 @@ eventbridge_activate_event_source <- function(Name) {
 #' eventbridge_cancel_replay(ReplayName)
 #'
 #' @param ReplayName &#91;required&#93; The name of the replay to cancel.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplayArn = "string",
+#'   State = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED",
+#'   StateReason = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -99,6 +112,19 @@ eventbridge_cancel_replay <- function(ReplayName) {
 #' @param EventPattern An event pattern to use to filter events sent to the archive.
 #' @param RetentionDays The number of days to retain events for. Default value is 0. If set to
 #' 0, events are retained indefinitely
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArchiveArn = "string",
+#'   State = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED",
+#'   StateReason = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -154,6 +180,14 @@ eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description 
 #' event source that the new event bus will be matched with.
 #' @param Tags Tags to associate with the event bus.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventBusArn = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$create_event_bus(
@@ -208,27 +242,34 @@ eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Tags = NU
 #' 
 #' Partner event source names follow this format:
 #' 
-#' ` <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i> `
+#' ` partner_name/event_namespace/event_name `
 #' 
-#' *partner\\_name* is determined during partner registration and identifies
-#' the partner to AWS customers. *event\\_namespace* is determined by the
+#' *partner_name* is determined during partner registration and identifies
+#' the partner to AWS customers. *event_namespace* is determined by the
 #' partner and is a way for the partner to categorize their events.
-#' *event\\_name* is determined by the partner, and should uniquely identify
+#' *event_name* is determined by the partner, and should uniquely identify
 #' an event-generating resource within the partner system. The combination
-#' of *event\\_namespace* and *event\\_name* should help AWS customers decide
+#' of *event_namespace* and *event_name* should help AWS customers decide
 #' whether to create an event bus to receive these events.
 #'
 #' @usage
 #' eventbridge_create_partner_event_source(Name, Account)
 #'
 #' @param Name &#91;required&#93; The name of the partner event source. This name must be unique and must
-#' be in the format
-#' ` <i>partner_name</i>/<i>event_namespace</i>/<i>event_name</i> `. The
-#' AWS account that wants to use this partner event source must create a
+#' be in the format ` partner_name/event_namespace/event_name `. The AWS
+#' account that wants to use this partner event source must create a
 #' partner event bus with a name that matches the name of the partner event
 #' source.
 #' @param Account &#91;required&#93; The AWS account ID that is permitted to create a matching partner event
 #' bus for this partner event source.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSourceArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -269,12 +310,16 @@ eventbridge_create_partner_event_source <- function(Name, Account) {
 #' state. If it remains in PENDING state for more than two weeks, it is
 #' deleted.
 #' 
-#' To activate a deactivated partner event source, use ActivateEventSource.
+#' To activate a deactivated partner event source, use
+#' [`activate_event_source`][eventbridge_activate_event_source].
 #'
 #' @usage
 #' eventbridge_deactivate_event_source(Name)
 #'
 #' @param Name &#91;required&#93; The name of the partner event source to deactivate.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -312,6 +357,9 @@ eventbridge_deactivate_event_source <- function(Name) {
 #' eventbridge_delete_archive(ArchiveName)
 #'
 #' @param ArchiveName &#91;required&#93; The name of the archive to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -351,6 +399,9 @@ eventbridge_delete_archive <- function(ArchiveName) {
 #' eventbridge_delete_event_bus(Name)
 #'
 #' @param Name &#91;required&#93; The name of the event bus to delete.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -395,6 +446,9 @@ eventbridge_delete_event_bus <- function(Name) {
 #' @param Account &#91;required&#93; The AWS account ID of the AWS customer that the event source was created
 #' for.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$delete_partner_event_source(
@@ -429,7 +483,7 @@ eventbridge_delete_partner_event_source <- function(Name, Account) {
 #' Deletes the specified rule.
 #' 
 #' Before you can delete the rule, you must remove all targets, using
-#' RemoveTargets.
+#' [`remove_targets`][eventbridge_remove_targets].
 #' 
 #' When you delete a rule, incoming events might continue to match to the
 #' deleted rule. Allow a short period of time for changes to take effect.
@@ -449,8 +503,13 @@ eventbridge_delete_partner_event_source <- function(Name, Account) {
 #' @param Force If this is a managed rule, created by an AWS service on your behalf, you
 #' must specify `Force` as `True` to delete the rule. This parameter is
 #' ignored for rules that are not managed rules. You can check whether a
-#' rule is a managed rule by using `DescribeRule` or `ListRules` and
-#' checking the `ManagedBy` field of the response.
+#' rule is a managed rule by using
+#' [`describe_rule`][eventbridge_describe_rule] or
+#' [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy`
+#' field of the response.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -491,6 +550,26 @@ eventbridge_delete_rule <- function(Name, EventBusName = NULL, Force = NULL) {
 #'
 #' @param ArchiveName &#91;required&#93; The name of the archive to retrieve.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArchiveArn = "string",
+#'   ArchiveName = "string",
+#'   EventSourceArn = "string",
+#'   Description = "string",
+#'   EventPattern = "string",
+#'   State = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED",
+#'   StateReason = "string",
+#'   RetentionDays = 123,
+#'   SizeBytes = 123,
+#'   EventCount = 123,
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_archive(
@@ -528,15 +607,26 @@ eventbridge_describe_archive <- function(ArchiveName) {
 #' creation time.
 #' 
 #' To enable your account to receive events from other accounts on its
-#' default event bus, use PutPermission.
+#' default event bus, use [`put_permission`][eventbridge_put_permission].
 #' 
-#' For more information about partner event buses, see CreateEventBus.
+#' For more information about partner event buses, see
+#' [`create_event_bus`][eventbridge_create_event_bus].
 #'
 #' @usage
 #' eventbridge_describe_event_bus(Name)
 #'
 #' @param Name The name or ARN of the event bus to show details for. If you omit this,
 #' the default event bus is displayed.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Name = "string",
+#'   Arn = "string",
+#'   Policy = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -577,6 +667,23 @@ eventbridge_describe_event_bus <- function(Name = NULL) {
 #'
 #' @param Name &#91;required&#93; The name of the partner event source to display the details of.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Arn = "string",
+#'   CreatedBy = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ExpirationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   Name = "string",
+#'   State = "PENDING"|"ACTIVE"|"DELETED"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$describe_event_source(
@@ -610,13 +717,23 @@ eventbridge_describe_event_source <- function(Name) {
 #' @description
 #' An SaaS partner can use this operation to list details about a partner
 #' event source that they have created. AWS customers do not use this
-#' operation. Instead, AWS customers can use DescribeEventSource to see
+#' operation. Instead, AWS customers can use
+#' [`describe_event_source`][eventbridge_describe_event_source] to see
 #' details about a partner event source that is shared with them.
 #'
 #' @usage
 #' eventbridge_describe_partner_event_source(Name)
 #'
 #' @param Name &#91;required&#93; The name of the event source to display.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Arn = "string",
+#'   Name = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -648,21 +765,57 @@ eventbridge_describe_partner_event_source <- function(Name) {
 #' Retrieves details about a replay
 #'
 #' @description
-#' Retrieves details about a replay. Use `DescribeReplay` to determine the
+#' Retrieves details about a replay. Use
+#' [`describe_replay`][eventbridge_describe_replay] to determine the
 #' progress of a running replay. A replay processes events to replay based
 #' on the time in the event, and replays them using 1 minute intervals. If
-#' you use `StartReplay` and specify an `EventStartTime` and an
-#' `EventEndTime` that covers a 20 minute time range, the events are
-#' replayed from the first minute of that 20 minute range first. Then the
-#' events from the second minute are replayed. You can use `DescribeReplay`
-#' to determine the progress of a replay. The value returned for
-#' `EventLastReplayedTime` indicates the time within the specified time
-#' range associated with the last event replayed.
+#' you use [`start_replay`][eventbridge_start_replay] and specify an
+#' `EventStartTime` and an `EventEndTime` that covers a 20 minute time
+#' range, the events are replayed from the first minute of that 20 minute
+#' range first. Then the events from the second minute are replayed. You
+#' can use [`describe_replay`][eventbridge_describe_replay] to determine
+#' the progress of a replay. The value returned for `EventLastReplayedTime`
+#' indicates the time within the specified time range associated with the
+#' last event replayed.
 #'
 #' @usage
 #' eventbridge_describe_replay(ReplayName)
 #'
 #' @param ReplayName &#91;required&#93; The name of the replay to retrieve.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplayName = "string",
+#'   ReplayArn = "string",
+#'   Description = "string",
+#'   State = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED",
+#'   StateReason = "string",
+#'   EventSourceArn = "string",
+#'   Destination = list(
+#'     Arn = "string",
+#'     FilterArns = list(
+#'       "string"
+#'     )
+#'   ),
+#'   EventStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EventEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   EventLastReplayedTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ReplayStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   ),
+#'   ReplayEndTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -697,7 +850,8 @@ eventbridge_describe_replay <- function(ReplayName) {
 #' Describes the specified rule.
 #' 
 #' DescribeRule does not list the targets of a rule. To see the targets
-#' associated with a rule, use ListTargetsByRule.
+#' associated with a rule, use
+#' [`list_targets_by_rule`][eventbridge_list_targets_by_rule].
 #'
 #' @usage
 #' eventbridge_describe_rule(Name, EventBusName)
@@ -705,6 +859,23 @@ eventbridge_describe_replay <- function(ReplayName) {
 #' @param Name &#91;required&#93; The name of the rule.
 #' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
 #' this, the default event bus is used.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Name = "string",
+#'   Arn = "string",
+#'   EventPattern = "string",
+#'   ScheduleExpression = "string",
+#'   State = "ENABLED"|"DISABLED",
+#'   Description = "string",
+#'   RoleArn = "string",
+#'   ManagedBy = "string",
+#'   EventBusName = "string",
+#'   CreatedBy = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -750,6 +921,9 @@ eventbridge_describe_rule <- function(Name, EventBusName = NULL) {
 #' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
 #' this, the default event bus is used.
 #'
+#' @return
+#' An empty list.
+#'
 #' @section Request syntax:
 #' ```
 #' svc$disable_rule(
@@ -794,6 +968,9 @@ eventbridge_disable_rule <- function(Name, EventBusName = NULL) {
 #' @param Name &#91;required&#93; The name of the rule.
 #' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
 #' this, the default event bus is used.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -841,6 +1018,28 @@ eventbridge_enable_rule <- function(Name, EventBusName = NULL) {
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Archives = list(
+#'     list(
+#'       ArchiveName = "string",
+#'       EventSourceArn = "string",
+#'       State = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED",
+#'       StateReason = "string",
+#'       RetentionDays = 123,
+#'       SizeBytes = 123,
+#'       EventCount = 123,
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -891,6 +1090,21 @@ eventbridge_list_archives <- function(NamePrefix = NULL, EventSourceArn = NULL, 
 #' The operation also returns a NextToken which you can use in a subsequent
 #' operation to retrieve the next set of results.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventBuses = list(
+#'     list(
+#'       Name = "string",
+#'       Arn = "string",
+#'       Policy = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_event_buses(
@@ -926,7 +1140,7 @@ eventbridge_list_event_buses <- function(NamePrefix = NULL, NextToken = NULL, Li
 #' @description
 #' You can use this to see all the partner event sources that have been
 #' shared with your AWS account. For more information about partner event
-#' sources, see CreateEventBus.
+#' sources, see [`create_event_bus`][eventbridge_create_event_bus].
 #'
 #' @usage
 #' eventbridge_list_event_sources(NamePrefix, NextToken, Limit)
@@ -938,6 +1152,28 @@ eventbridge_list_event_buses <- function(NamePrefix = NULL, NextToken = NULL, Li
 #' @param Limit Specifying this limits the number of results returned by this operation.
 #' The operation also returns a NextToken which you can use in a subsequent
 #' operation to retrieve the next set of results.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   EventSources = list(
+#'     list(
+#'       Arn = "string",
+#'       CreatedBy = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       Name = "string",
+#'       State = "PENDING"|"ACTIVE"|"DELETED"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -988,6 +1224,26 @@ eventbridge_list_event_sources <- function(NamePrefix = NULL, NextToken = NULL, 
 #' The operation also returns a NextToken which you can use in a subsequent
 #' operation to retrieve the next set of results.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PartnerEventSourceAccounts = list(
+#'     list(
+#'       Account = "string",
+#'       CreationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ExpirationTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       State = "PENDING"|"ACTIVE"|"DELETED"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_partner_event_source_accounts(
@@ -1035,6 +1291,20 @@ eventbridge_list_partner_event_source_accounts <- function(EventSourceName, Next
 #' @param Limit pecifying this limits the number of results returned by this operation.
 #' The operation also returns a NextToken which you can use in a subsequent
 #' operation to retrieve the next set of results.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   PartnerEventSources = list(
+#'     list(
+#'       Arn = "string",
+#'       Name = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1084,6 +1354,37 @@ eventbridge_list_partner_event_sources <- function(NamePrefix, NextToken = NULL,
 #' results.
 #' @param Limit The maximum number of replays to retrieve.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Replays = list(
+#'     list(
+#'       ReplayName = "string",
+#'       EventSourceArn = "string",
+#'       State = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED",
+#'       StateReason = "string",
+#'       EventStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EventEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       EventLastReplayedTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ReplayStartTime = as.POSIXct(
+#'         "2015-01-01"
+#'       ),
+#'       ReplayEndTime = as.POSIXct(
+#'         "2015-01-01"
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_replays(
@@ -1132,6 +1433,17 @@ eventbridge_list_replays <- function(NamePrefix = NULL, State = NULL, EventSourc
 #' results.
 #' @param Limit The maximum number of results to return.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   RuleNames = list(
+#'     "string"
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_rule_names_by_target(
@@ -1169,7 +1481,8 @@ eventbridge_list_rule_names_by_target <- function(TargetArn, EventBusName = NULL
 #' or you can provide a prefix to match to the rule names.
 #' 
 #' ListRules does not list the targets of a rule. To see the targets
-#' associated with a rule, use ListTargetsByRule.
+#' associated with a rule, use
+#' [`list_targets_by_rule`][eventbridge_list_targets_by_rule].
 #'
 #' @usage
 #' eventbridge_list_rules(NamePrefix, EventBusName, NextToken, Limit)
@@ -1180,6 +1493,27 @@ eventbridge_list_rule_names_by_target <- function(TargetArn, EventBusName = NULL
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Rules = list(
+#'     list(
+#'       Name = "string",
+#'       Arn = "string",
+#'       EventPattern = "string",
+#'       State = "ENABLED"|"DISABLED",
+#'       Description = "string",
+#'       ScheduleExpression = "string",
+#'       RoleArn = "string",
+#'       ManagedBy = "string",
+#'       EventBusName = "string"
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1222,6 +1556,19 @@ eventbridge_list_rules <- function(NamePrefix = NULL, EventBusName = NULL, NextT
 #'
 #' @param ResourceARN &#91;required&#93; The ARN of the EventBridge resource for which you want to view tags.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Tags = list(
+#'     list(
+#'       Key = "string",
+#'       Value = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$list_tags_for_resource(
@@ -1263,6 +1610,99 @@ eventbridge_list_tags_for_resource <- function(ResourceARN) {
 #' @param NextToken The token returned by a previous call to retrieve the next set of
 #' results.
 #' @param Limit The maximum number of results to return.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Targets = list(
+#'     list(
+#'       Id = "string",
+#'       Arn = "string",
+#'       RoleArn = "string",
+#'       Input = "string",
+#'       InputPath = "string",
+#'       InputTransformer = list(
+#'         InputPathsMap = list(
+#'           "string"
+#'         ),
+#'         InputTemplate = "string"
+#'       ),
+#'       KinesisParameters = list(
+#'         PartitionKeyPath = "string"
+#'       ),
+#'       RunCommandParameters = list(
+#'         RunCommandTargets = list(
+#'           list(
+#'             Key = "string",
+#'             Values = list(
+#'               "string"
+#'             )
+#'           )
+#'         )
+#'       ),
+#'       EcsParameters = list(
+#'         TaskDefinitionArn = "string",
+#'         TaskCount = 123,
+#'         LaunchType = "EC2"|"FARGATE",
+#'         NetworkConfiguration = list(
+#'           awsvpcConfiguration = list(
+#'             Subnets = list(
+#'               "string"
+#'             ),
+#'             SecurityGroups = list(
+#'               "string"
+#'             ),
+#'             AssignPublicIp = "ENABLED"|"DISABLED"
+#'           )
+#'         ),
+#'         PlatformVersion = "string",
+#'         Group = "string"
+#'       ),
+#'       BatchParameters = list(
+#'         JobDefinition = "string",
+#'         JobName = "string",
+#'         ArrayProperties = list(
+#'           Size = 123
+#'         ),
+#'         RetryStrategy = list(
+#'           Attempts = 123
+#'         )
+#'       ),
+#'       SqsParameters = list(
+#'         MessageGroupId = "string"
+#'       ),
+#'       HttpParameters = list(
+#'         PathParameterValues = list(
+#'           "string"
+#'         ),
+#'         HeaderParameters = list(
+#'           "string"
+#'         ),
+#'         QueryStringParameters = list(
+#'           "string"
+#'         )
+#'       ),
+#'       RedshiftDataParameters = list(
+#'         SecretManagerArn = "string",
+#'         Database = "string",
+#'         DbUser = "string",
+#'         Sql = "string",
+#'         StatementName = "string",
+#'         WithEvent = TRUE|FALSE
+#'       ),
+#'       DeadLetterConfig = list(
+#'         Arn = "string"
+#'       ),
+#'       RetryPolicy = list(
+#'         MaximumRetryAttempts = 123,
+#'         MaximumEventAgeInSeconds = 123
+#'       )
+#'     )
+#'   ),
+#'   NextToken = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1307,6 +1747,21 @@ eventbridge_list_targets_by_rule <- function(Rule, EventBusName = NULL, NextToke
 #' @param Entries &#91;required&#93; The entry that defines an event in your system. You can specify several
 #' parameters for the entry such as the source and type of the event,
 #' resources associated with the event, and so on.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FailedEntryCount = 123,
+#'   Entries = list(
+#'     list(
+#'       EventId = "string",
+#'       ErrorCode = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1360,6 +1815,21 @@ eventbridge_put_events <- function(Entries) {
 #'
 #' @param Entries &#91;required&#93; The list of events to write to the event bus.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FailedEntryCount = 123,
+#'   Entries = list(
+#'     list(
+#'       EventId = "string",
+#'       ErrorCode = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$put_partner_events(
@@ -1403,18 +1873,20 @@ eventbridge_put_partner_events <- function(Entries) {
 #' organization to put events to the specified event bus
 #'
 #' @description
-#' Running `PutPermission` permits the specified AWS account or AWS
-#' organization to put events to the specified *event bus*. Amazon
-#' EventBridge (CloudWatch Events) rules in your account are triggered by
-#' these events arriving to an event bus in your account.
+#' Running [`put_permission`][eventbridge_put_permission] permits the
+#' specified AWS account or AWS organization to put events to the specified
+#' *event bus*. Amazon EventBridge (CloudWatch Events) rules in your
+#' account are triggered by these events arriving to an event bus in your
+#' account.
 #' 
 #' For another account to send events to your account, that external
 #' account must have an EventBridge rule with your account's event bus as a
 #' target.
 #' 
 #' To enable multiple AWS accounts to put events to your event bus, run
-#' `PutPermission` once for each of these accounts. Or, if all the accounts
-#' are members of the same AWS organization, you can run `PutPermission`
+#' [`put_permission`][eventbridge_put_permission] once for each of these
+#' accounts. Or, if all the accounts are members of the same AWS
+#' organization, you can run [`put_permission`][eventbridge_put_permission]
 #' once specifying `Principal` as "*" and specifying the AWS organization
 #' ID in `Condition`, to grant permissions to all accounts in that
 #' organization.
@@ -1449,7 +1921,7 @@ eventbridge_put_partner_events <- function(Entries) {
 #' @param StatementId An identifier string for the external account that you are granting
 #' permissions to. If you later want to revoke the permission for this
 #' external account, specify this `StatementId` when you run
-#' RemovePermission.
+#' [`remove_permission`][eventbridge_remove_permission].
 #' @param Condition This parameter enables you to limit the permission to accounts that
 #' fulfill a certain condition, such as being a member of a certain AWS
 #' organization. For more information about AWS Organizations, see [What Is
@@ -1466,6 +1938,9 @@ eventbridge_put_partner_events <- function(Entries) {
 #' @param Policy A JSON string that describes the permission policy statement. You can
 #' include a `Policy` parameter in the request instead of using the
 #' `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1507,7 +1982,8 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Princ
 #'
 #' @description
 #' Creates or updates the specified rule. Rules are enabled by default, or
-#' based on value of the state. You can disable a rule using DisableRule.
+#' based on value of the state. You can disable a rule using
+#' [`disable_rule`][eventbridge_disable_rule].
 #' 
 #' A single rule watches for events from a single event bus. Events
 #' generated by AWS services go to your account's default event bus. Events
@@ -1515,12 +1991,13 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Princ
 #' partner event bus. If you have custom applications or services, you can
 #' specify whether their events go to your default event bus or a custom
 #' event bus that you have created. For more information, see
-#' CreateEventBus.
+#' [`create_event_bus`][eventbridge_create_event_bus].
 #' 
 #' If you are updating an existing rule, the rule is replaced with what you
-#' specify in this `PutRule` command. If you omit arguments in `PutRule`,
-#' the old values for those arguments are not kept. Instead, they are
-#' replaced with null values.
+#' specify in this [`put_rule`][eventbridge_put_rule] command. If you omit
+#' arguments in [`put_rule`][eventbridge_put_rule], the old values for
+#' those arguments are not kept. Instead, they are replaced with null
+#' values.
 #' 
 #' When you create or update a rule, incoming events might not immediately
 #' start matching to new or updated rules. Allow a short period of time for
@@ -1537,12 +2014,14 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Princ
 #' tags to the rule. Tags can help you organize and categorize your
 #' resources. You can also use them to scope user permissions, by granting
 #' a user permission to access or change only rules with certain tag
-#' values. To use the `PutRule` operation and assign tags, you must have
-#' both the `events:PutRule` and `events:TagResource` permissions.
+#' values. To use the [`put_rule`][eventbridge_put_rule] operation and
+#' assign tags, you must have both the `events:PutRule` and
+#' `events:TagResource` permissions.
 #' 
 #' If you are updating an existing rule, any tags you specify in the
-#' `PutRule` operation are ignored. To update the tags of an existing rule,
-#' use TagResource and UntagResource.
+#' [`put_rule`][eventbridge_put_rule] operation are ignored. To update the
+#' tags of an existing rule, use [`tag_resource`][eventbridge_tag_resource]
+#' and [`untag_resource`][eventbridge_untag_resource].
 #' 
 #' Most services in AWS treat : or / as the same character in Amazon
 #' Resource Names (ARNs). However, EventBridge uses an exact match in event
@@ -1583,6 +2062,14 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Princ
 #' @param Tags The list of key-value pairs to associate with the rule.
 #' @param EventBusName The name or ARN of the event bus to associate with this rule. If you
 #' omit this, the default event bus is used.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   RuleArn = "string"
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1673,11 +2160,11 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' `EC2 CreateSnapshot API call`, `EC2 RebootInstances API call`,
 #' `EC2 StopInstances API call`, and `EC2 TerminateInstances API call`.
 #' 
-#' For some target types, `PutTargets` provides target-specific parameters.
-#' If the target is a Kinesis data stream, you can optionally specify which
-#' shard the event goes to by using the `KinesisParameters` argument. To
-#' invoke a command on multiple EC2 instances with one rule, you can use
-#' the `RunCommandParameters` field.
+#' For some target types, [`put_targets`][eventbridge_put_targets] provides
+#' target-specific parameters. If the target is a Kinesis data stream, you
+#' can optionally specify which shard the event goes to by using the
+#' `KinesisParameters` argument. To invoke a command on multiple EC2
+#' instances with one rule, you can use the `RunCommandParameters` field.
 #' 
 #' To be able to make API calls against the resources that you own, Amazon
 #' EventBridge (CloudWatch Events) needs the appropriate permissions. For
@@ -1685,19 +2172,21 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' resource-based policies. For EC2 instances, Kinesis data streams, AWS
 #' Step Functions state machines and API Gateway REST APIs, EventBridge
 #' relies on IAM roles that you specify in the `RoleARN` argument in
-#' `PutTargets`. For more information, see [Authentication and Access
+#' [`put_targets`][eventbridge_put_targets]. For more information, see
+#' [Authentication and Access
 #' Control](https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 #' in the *Amazon EventBridge User Guide*.
 #' 
 #' If another AWS account is in the same region and has granted you
-#' permission (using `PutPermission`), you can send events to that account.
-#' Set that account's event bus as a target of the rules in your account.
-#' To send the matched events to the other account, specify that account's
-#' event bus as the `Arn` value when you run `PutTargets`. If your account
-#' sends events to another account, your account is charged for each sent
-#' event. Each event sent to another account is charged as a custom event.
-#' The account receiving the event is not charged. For more information,
-#' see [Amazon EventBridge (CloudWatch Events)
+#' permission (using [`put_permission`][eventbridge_put_permission]), you
+#' can send events to that account. Set that account's event bus as a
+#' target of the rules in your account. To send the matched events to the
+#' other account, specify that account's event bus as the `Arn` value when
+#' you run [`put_targets`][eventbridge_put_targets]. If your account sends
+#' events to another account, your account is charged for each sent event.
+#' Each event sent to another account is charged as a custom event. The
+#' account receiving the event is not charged. For more information, see
+#' [Amazon EventBridge (CloudWatch Events)
 #' Pricing](https://aws.amazon.com/eventbridge/pricing/).
 #' 
 #' `Input`, `InputPath`, and `InputTransformer` are not available with
@@ -1712,7 +2201,7 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' in the *Amazon EventBridge User Guide*.
 #' 
 #' For more information about enabling cross-account events, see
-#' PutPermission.
+#' [`put_permission`][eventbridge_put_permission].
 #' 
 #' **Input**, **InputPath**, and **InputTransformer** are mutually
 #' exclusive and optional parameters of a target. When a rule is triggered
@@ -1754,6 +2243,21 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
 #' this, the default event bus is used.
 #' @param Targets &#91;required&#93; The targets to update or add to the rule.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FailedEntryCount = 123,
+#'   FailedEntries = list(
+#'     list(
+#'       TargetId = "string",
+#'       ErrorCode = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1875,8 +2379,10 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' Revokes the permission of another AWS account to be able to put events
 #' to the specified event bus. Specify the account to revoke by the
 #' `StatementId` value that you associated with the account when you
-#' granted it permission with `PutPermission`. You can find the
-#' `StatementId` by using DescribeEventBus.
+#' granted it permission with
+#' [`put_permission`][eventbridge_put_permission]. You can find the
+#' `StatementId` by using
+#' [`describe_event_bus`][eventbridge_describe_event_bus].
 #'
 #' @usage
 #' eventbridge_remove_permission(StatementId, RemoveAllPermissions,
@@ -1887,6 +2393,9 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #' @param RemoveAllPermissions Specifies whether to remove all permissions.
 #' @param EventBusName The name of the event bus to revoke permissions for. If you omit this,
 #' the default event bus is used.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -1942,8 +2451,25 @@ eventbridge_remove_permission <- function(StatementId = NULL, RemoveAllPermissio
 #' @param Force If this is a managed rule, created by an AWS service on your behalf, you
 #' must specify `Force` as `True` to remove targets. This parameter is
 #' ignored for rules that are not managed rules. You can check whether a
-#' rule is a managed rule by using `DescribeRule` or `ListRules` and
-#' checking the `ManagedBy` field of the response.
+#' rule is a managed rule by using
+#' [`describe_rule`][eventbridge_describe_rule] or
+#' [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy`
+#' field of the response.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   FailedEntryCount = 123,
+#'   FailedEntries = list(
+#'     list(
+#'       TargetId = "string",
+#'       ErrorCode = "string",
+#'       ErrorMessage = "string"
+#'     )
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -1986,10 +2512,11 @@ eventbridge_remove_targets <- function(Rule, EventBusName = NULL, Ids, Force = N
 #' 1 minute intervals. If you specify an `EventStartTime` and an
 #' `EventEndTime` that covers a 20 minute time range, the events are
 #' replayed from the first minute of that 20 minute range first. Then the
-#' events from the second minute are replayed. You can use `DescribeReplay`
-#' to determine the progress of a replay. The value returned for
-#' `EventLastReplayedTime` indicates the time within the specified time
-#' range associated with the last event replayed.
+#' events from the second minute are replayed. You can use
+#' [`describe_replay`][eventbridge_describe_replay] to determine the
+#' progress of a replay. The value returned for `EventLastReplayedTime`
+#' indicates the time within the specified time range associated with the
+#' last event replayed.
 #'
 #' @usage
 #' eventbridge_start_replay(ReplayName, Description, EventSourceArn,
@@ -2004,6 +2531,19 @@ eventbridge_remove_targets <- function(Rule, EventBusName = NULL, Ids, Force = N
 #' occurred between the `EventStartTime` and `EventEndTime` are replayed.
 #' @param Destination &#91;required&#93; A `ReplayDestination` object that includes details about the destination
 #' for the replay.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ReplayArn = "string",
+#'   State = "STARTING"|"RUNNING"|"CANCELLING"|"COMPLETED"|"CANCELLED"|"FAILED",
+#'   StateReason = "string",
+#'   ReplayStartTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```
@@ -2059,11 +2599,11 @@ eventbridge_start_replay <- function(ReplayName, Description = NULL, EventSource
 #' Tags don't have any semantic meaning to AWS and are interpreted strictly
 #' as strings of characters.
 #' 
-#' You can use the `TagResource` action with a resource that already has
-#' tags. If you specify a new tag key, this tag is appended to the list of
-#' tags associated with the resource. If you specify a tag key that is
-#' already associated with the resource, the new tag value that you specify
-#' replaces the previous value for that tag.
+#' You can use the [`tag_resource`][eventbridge_tag_resource] action with a
+#' resource that already has tags. If you specify a new tag key, this tag
+#' is appended to the list of tags associated with the resource. If you
+#' specify a tag key that is already associated with the resource, the new
+#' tag value that you specify replaces the previous value for that tag.
 #' 
 #' You can associate as many as 50 tags with a resource.
 #'
@@ -2072,6 +2612,9 @@ eventbridge_start_replay <- function(ReplayName, Description = NULL, EventSource
 #'
 #' @param ResourceARN &#91;required&#93; The ARN of the EventBridge resource that you're adding tags to.
 #' @param Tags &#91;required&#93; The list of key-value pairs to associate with the resource.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -2125,6 +2668,14 @@ eventbridge_tag_resource <- function(ResourceARN, Tags) {
 #' in the *Amazon EventBridge User Guide*.
 #' @param Event &#91;required&#93; The event, in JSON format, to test against the event pattern.
 #'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   Result = TRUE|FALSE
+#' )
+#' ```
+#'
 #' @section Request syntax:
 #' ```
 #' svc$test_event_pattern(
@@ -2165,6 +2716,9 @@ eventbridge_test_event_pattern <- function(EventPattern, Event) {
 #'
 #' @param ResourceARN &#91;required&#93; The ARN of the EventBridge resource from which you are removing tags.
 #' @param TagKeys &#91;required&#93; The list of tag keys to remove from the resource.
+#'
+#' @return
+#' An empty list.
 #'
 #' @section Request syntax:
 #' ```
@@ -2209,6 +2763,19 @@ eventbridge_untag_resource <- function(ResourceARN, TagKeys) {
 #' @param Description The description for the archive.
 #' @param EventPattern The event pattern to use to filter events sent to the archive.
 #' @param RetentionDays The number of days to retain events in the archive.
+#'
+#' @return
+#' A list with the following syntax:
+#' ```
+#' list(
+#'   ArchiveArn = "string",
+#'   State = "ENABLED"|"DISABLED"|"CREATING"|"UPDATING"|"CREATE_FAILED"|"UPDATE_FAILED",
+#'   StateReason = "string",
+#'   CreationTime = as.POSIXct(
+#'     "2015-01-01"
+#'   )
+#' )
+#' ```
 #'
 #' @section Request syntax:
 #' ```

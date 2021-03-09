@@ -14,6 +14,9 @@ Functions when tasks are assigned to a worker, or in the \href{https://docs.aws.
 when a workflow enters a task state. See
 GetActivityTaskOutput$taskToken.}
 }
+\value{
+An empty list.
+}
 \description{
 Used by activity workers and task states using the
 \href{https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token}{callback}
@@ -31,8 +34,9 @@ pattern.
 
 The \code{Timeout} of a task, defined in the state machine's Amazon States
 Language definition, is its maximum allowed duration, regardless of the
-number of SendTaskHeartbeat requests received. Use \code{HeartbeatSeconds} to
-configure the timeout interval for heartbeats.
+number of \code{\link[=sfn_send_task_heartbeat]{send_task_heartbeat}} requests
+received. Use \code{HeartbeatSeconds} to configure the timeout interval for
+heartbeats.
 }
 \section{Request syntax}{
 \preformatted{svc$send_task_heartbeat(

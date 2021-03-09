@@ -14,18 +14,24 @@ letters, numbers, underscores, hyphens, and periods, and must be between
 1 and 256 characters long.}
 
 \item{Platform}{[required] The following platforms are supported: ADM (Amazon Device Messaging),
-APNS (Apple Push Notification Service), APNS\\_SANDBOX, and GCM (Firebase
+APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase
 Cloud Messaging).}
 
 \item{Attributes}{[required] For a list of attributes, see
-\href{https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html}{SetPlatformApplicationAttributes}}
+\code{\link[=sns_set_platform_application_attributes]{set_platform_application_attributes}}}
+}
+\value{
+A list with the following syntax:\preformatted{list(
+  PlatformApplicationArn = "string"
+)
+}
 }
 \description{
 Creates a platform application object for one of the supported push
 notification services, such as APNS and GCM (Firebase Cloud Messaging),
 to which devices and mobile apps may register. You must specify
 \code{PlatformPrincipal} and \code{PlatformCredential} attributes when using the
-\code{CreatePlatformApplication} action.
+\code{\link[=sns_create_platform_application]{create_platform_application}} action.
 
 \code{PlatformPrincipal} and \code{PlatformCredential} are received from the
 notification service.
@@ -45,7 +51,7 @@ notification service.
 }
 
 You can use the returned \code{PlatformApplicationArn} as an attribute for
-the \code{CreatePlatformEndpoint} action.
+the \code{\link[=sns_create_platform_endpoint]{create_platform_endpoint}} action.
 }
 \section{Request syntax}{
 \preformatted{svc$create_platform_application(

@@ -13,10 +13,28 @@ Queue URLs and names are case-sensitive.}
 
 \item{Entries}{[required] A list of receipt handles for the messages to be deleted.}
 }
+\value{
+A list with the following syntax:\preformatted{list(
+  Successful = list(
+    list(
+      Id = "string"
+    )
+  ),
+  Failed = list(
+    list(
+      Id = "string",
+      SenderFault = TRUE|FALSE,
+      Code = "string",
+      Message = "string"
+    )
+  )
+)
+}
+}
 \description{
 Deletes up to ten messages from the specified queue. This is a batch
-version of \verb{ <a>DeleteMessage</a>.} The result of the action on each
-message is reported individually in the response.
+version of \code{ DeleteMessage.} The result of the action on each message is
+reported individually in the response.
 
 Because the batch request can result in a combination of successful and
 unsuccessful actions, you should check for batch errors even when the
@@ -26,9 +44,9 @@ Some actions take lists of parameters. These lists are specified using
 the \code{param.n} notation. Values of \code{n} are integers starting from 1. For
 example, a parameter list with two elements looks like this:
 
-\verb{&amp;AttributeName.1=first}
+\verb{&AttributeName.1=first}
 
-\verb{&amp;AttributeName.2=second}
+\verb{&AttributeName.2=second}
 }
 \section{Request syntax}{
 \preformatted{svc$delete_message_batch(

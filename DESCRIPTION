@@ -1,6 +1,6 @@
 Package: paws.application.integration
 Title: Amazon Web Services Application Integration Services
-Version: 0.1.10
+Version: 0.1.11
 Authors@R: 
     c(person(given = "David",
              family = "Kretch",
@@ -32,10 +32,10 @@ Collate: 'eventbridge_service.R' 'eventbridge_interfaces.R'
         'sqs_operations.R' 'swf_service.R' 'swf_interfaces.R'
         'swf_operations.R'
 NeedsCompilation: no
-Packaged: 2021-01-16 20:54:35 UTC; david.kretch
+Packaged: 2021-03-09 03:49:06 UTC; david.kretch
 Author: David Kretch [aut, cre],
   Adam Banker [aut],
   Amazon.com, Inc. [cph]
 Maintainer: David Kretch <david.kretch@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-01-16 21:20:02 UTC
+Date/Publication: 2021-03-09 14:20:02 UTC
