@@ -1,17 +1,12 @@
 Package: paws.application.integration
 Title: 'Amazon Web Services' Application Integration Services
-Version: 0.1.12
-Authors@R: 
-    c(person(given = "David",
-             family = "Kretch",
-             role = c("aut", "cre"),
-             email = "david.kretch@gmail.com"),
-      person(given = "Adam",
-             family = "Banker",
-             role = "aut",
-             email = "adam.banker39@gmail.com"),
-      person(given = "Amazon.com, Inc.",
-             role = "cph"))
+Version: 0.1.13
+Authors@R: c(
+    person("David", "Kretch", , "david.kretch@gmail.com", role = c("aut")),
+    person("Adam", "Banker", , "adam.banker39@gmail.com", role = "aut"),
+    person("Dyfan", "Jones", email = "dyfan.r.jones@gmail.com", role = "cre"),
+    person("Amazon.com, Inc.", role = "cph")
+  )
 Description: Interface to 'Amazon Web Services' application integration
     services, including 'Simple Queue Service' ('SQS') message queue,
     'Simple Notification Service' ('SNS') publish/subscribe messaging, and
@@ -31,10 +26,11 @@ Collate: 'eventbridge_service.R' 'eventbridge_interfaces.R'
         'sqs_operations.R' 'swf_service.R' 'swf_interfaces.R'
         'swf_operations.R'
 NeedsCompilation: no
-Packaged: 2021-08-22 20:58:33 UTC; david.kretch
-Author: David Kretch [aut, cre],
+Packaged: 2022-10-02 10:35:25 UTC; dyfanjones
+Author: David Kretch [aut],
   Adam Banker [aut],
+  Dyfan Jones [cre],
   Amazon.com, Inc. [cph]
-Maintainer: David Kretch <david.kretch@gmail.com>
+Maintainer: Dyfan Jones <dyfan.r.jones@gmail.com>
 Repository: CRAN
-Date/Publication: 2021-08-23 07:11:15 UTC
+Date/Publication: 2022-10-02 15:30:02 UTC
