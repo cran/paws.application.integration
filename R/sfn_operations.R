@@ -6,15 +6,15 @@ NULL
 #' Creates an activity
 #'
 #' @description
-#' Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the [`get_activity_task`][sfn_get_activity_task] API action and respond using `SendTask*` API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+#' Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to Step Functions. Activities must poll Step Functions using the [`get_activity_task`][sfn_get_activity_task] API action and respond using `SendTask*` API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
 #'
-#' See [https://paws-r.github.io/docs/sfn/create_activity.html](https://paws-r.github.io/docs/sfn/create_activity.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_create_activity/](https://www.paws-r-sdk.com/docs/sfn_create_activity/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the activity to create. This name must be unique for your
-#' AWS account and region for 90 days. For more information, see [Limits
-#' Related to State Machine
+#' Amazon Web Services account and region for 90 days. For more
+#' information, see [Limits Related to State Machine
 #' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions)
-#' in the *AWS Step Functions Developer Guide*.
+#' in the *Step Functions Developer Guide*.
 #' 
 #' A name must *not* contain:
 #' 
@@ -35,8 +35,8 @@ NULL
 #' An array of key-value pairs. For more information, see [Using Cost
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-#' in the *AWS Billing and Cost Management User Guide*, and [Controlling
-#' Access Using IAM
+#' in the *Amazon Web Services Billing and Cost Management User Guide*, and
+#' [Controlling Access Using IAM
 #' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
@@ -65,9 +65,9 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' Creates a state machine
 #'
 #' @description
-#' Creates a state machine. A state machine consists of a collection of states that can do work (`Task` states), determine to which states to transition next (`Choice` states), stop an execution with an error (`Fail` states), and so on. State machines are specified using a JSON-based, structured language. For more information, see [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) in the AWS Step Functions User Guide.
+#' Creates a state machine. A state machine consists of a collection of states that can do work (`Task` states), determine to which states to transition next (`Choice` states), stop an execution with an error (`Fail` states), and so on. State machines are specified using a JSON-based, structured language. For more information, see [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) in the Step Functions User Guide.
 #'
-#' See [https://paws-r.github.io/docs/sfn/create_state_machine.html](https://paws-r.github.io/docs/sfn/create_state_machine.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_create_state_machine/](https://www.paws-r-sdk.com/docs/sfn_create_state_machine/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the state machine.
 #' 
@@ -98,19 +98,19 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' 
 #' By default, the `level` is set to `OFF`. For more information see [Log
 #' Levels](https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
-#' in the AWS Step Functions User Guide.
+#' in the Step Functions User Guide.
 #' @param tags Tags to be added when creating a state machine.
 #' 
 #' An array of key-value pairs. For more information, see [Using Cost
 #' Allocation
 #' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-#' in the *AWS Billing and Cost Management User Guide*, and [Controlling
-#' Access Using IAM
+#' in the *Amazon Web Services Billing and Cost Management User Guide*, and
+#' [Controlling Access Using IAM
 #' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
 #' symbols: `_ . : / = + - @@`.
-#' @param tracingConfiguration Selects whether AWS X-Ray tracing is enabled.
+#' @param tracingConfiguration Selects whether X-Ray tracing is enabled.
 #'
 #' @keywords internal
 #'
@@ -137,7 +137,7 @@ sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, log
 #' @description
 #' Deletes an activity.
 #'
-#' See [https://paws-r.github.io/docs/sfn/delete_activity.html](https://paws-r.github.io/docs/sfn/delete_activity.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_delete_activity/](https://www.paws-r-sdk.com/docs/sfn_delete_activity/) for full documentation.
 #'
 #' @param activityArn &#91;required&#93; The Amazon Resource Name (ARN) of the activity to delete.
 #'
@@ -166,7 +166,7 @@ sfn_delete_activity <- function(activityArn) {
 #' @description
 #' Deletes a state machine. This is an asynchronous operation: It sets the state machine's status to `DELETING` and begins the deletion process.
 #'
-#' See [https://paws-r.github.io/docs/sfn/delete_state_machine.html](https://paws-r.github.io/docs/sfn/delete_state_machine.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_delete_state_machine/](https://www.paws-r-sdk.com/docs/sfn_delete_state_machine/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to delete.
 #'
@@ -195,7 +195,7 @@ sfn_delete_state_machine <- function(stateMachineArn) {
 #' @description
 #' Describes an activity.
 #'
-#' See [https://paws-r.github.io/docs/sfn/describe_activity.html](https://paws-r.github.io/docs/sfn/describe_activity.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_describe_activity/](https://www.paws-r-sdk.com/docs/sfn_describe_activity/) for full documentation.
 #'
 #' @param activityArn &#91;required&#93; The Amazon Resource Name (ARN) of the activity to describe.
 #'
@@ -219,12 +219,14 @@ sfn_describe_activity <- function(activityArn) {
 }
 .sfn$operations$describe_activity <- sfn_describe_activity
 
-#' Describes an execution
+#' Provides all information about a state machine execution, such as the
+#' state machine associated with the execution, the execution input and
+#' output, and relevant execution metadata
 #'
 #' @description
-#' Describes an execution.
+#' Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.
 #'
-#' See [https://paws-r.github.io/docs/sfn/describe_execution.html](https://paws-r.github.io/docs/sfn/describe_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_describe_execution/](https://www.paws-r-sdk.com/docs/sfn_describe_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution to describe.
 #'
@@ -248,12 +250,43 @@ sfn_describe_execution <- function(executionArn) {
 }
 .sfn$operations$describe_execution <- sfn_describe_execution
 
-#' Describes a state machine
+#' Provides information about a Map Run's configuration, progress, and
+#' results
 #'
 #' @description
-#' Describes a state machine.
+#' Provides information about a Map Run's configuration, progress, and results. For more information, see [Examining Map Run](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html) in the *Step Functions Developer Guide*.
 #'
-#' See [https://paws-r.github.io/docs/sfn/describe_state_machine.html](https://paws-r.github.io/docs/sfn/describe_state_machine.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_describe_map_run/](https://www.paws-r-sdk.com/docs/sfn_describe_map_run/) for full documentation.
+#'
+#' @param mapRunArn &#91;required&#93; The Amazon Resource Name (ARN) that identifies a Map Run.
+#'
+#' @keywords internal
+#'
+#' @rdname sfn_describe_map_run
+sfn_describe_map_run <- function(mapRunArn) {
+  op <- new_operation(
+    name = "DescribeMapRun",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .sfn$describe_map_run_input(mapRunArn = mapRunArn)
+  output <- .sfn$describe_map_run_output()
+  config <- get_config()
+  svc <- .sfn$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.sfn$operations$describe_map_run <- sfn_describe_map_run
+
+#' Provides information about a state machine's definition, its IAM role
+#' Amazon Resource Name (ARN), and configuration
+#'
+#' @description
+#' Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the `Map` state's label.
+#'
+#' See [https://www.paws-r-sdk.com/docs/sfn_describe_state_machine/](https://www.paws-r-sdk.com/docs/sfn_describe_state_machine/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to describe.
 #'
@@ -277,12 +310,13 @@ sfn_describe_state_machine <- function(stateMachineArn) {
 }
 .sfn$operations$describe_state_machine <- sfn_describe_state_machine
 
-#' Describes the state machine associated with a specific execution
+#' Provides information about a state machine's definition, its execution
+#' role ARN, and configuration
 #'
 #' @description
-#' Describes the state machine associated with a specific execution.
+#' Provides information about a state machine's definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.
 #'
-#' See [https://paws-r.github.io/docs/sfn/describe_state_machine_for_execution.html](https://paws-r.github.io/docs/sfn/describe_state_machine_for_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_describe_state_machine_for_execution/](https://www.paws-r-sdk.com/docs/sfn_describe_state_machine_for_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution you want state machine
 #' information for.
@@ -313,7 +347,7 @@ sfn_describe_state_machine_for_execution <- function(executionArn) {
 #' @description
 #' Used by workers to retrieve a task (with the specified activity ARN) which has been scheduled for execution by a running state machine. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available (i.e. an execution of a task of this type is needed.) The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns a `taskToken` with a null string.
 #'
-#' See [https://paws-r.github.io/docs/sfn/get_activity_task.html](https://paws-r.github.io/docs/sfn/get_activity_task.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_get_activity_task/](https://www.paws-r-sdk.com/docs/sfn_get_activity_task/) for full documentation.
 #'
 #' @param activityArn &#91;required&#93; The Amazon Resource Name (ARN) of the activity to retrieve tasks from
 #' (assigned when you create the task using
@@ -347,7 +381,7 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 #' @description
 #' Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the `timeStamp` of the events. Use the `reverseOrder` parameter to get the latest events first.
 #'
-#' See [https://paws-r.github.io/docs/sfn/get_execution_history.html](https://paws-r.github.io/docs/sfn/get_execution_history.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_get_execution_history/](https://www.paws-r-sdk.com/docs/sfn_get_execution_history/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution.
 #' @param maxResults The maximum number of results that are returned per call. You can use
@@ -391,7 +425,7 @@ sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOr
 #' @description
 #' Lists the existing activities.
 #'
-#' See [https://paws-r.github.io/docs/sfn/list_activities.html](https://paws-r.github.io/docs/sfn/list_activities.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_list_activities/](https://www.paws-r-sdk.com/docs/sfn_list_activities/) for full documentation.
 #'
 #' @param maxResults The maximum number of results that are returned per call. You can use
 #' `nextToken` to obtain further pages of results. The default is 100 and
@@ -426,17 +460,71 @@ sfn_list_activities <- function(maxResults = NULL, nextToken = NULL) {
 }
 .sfn$operations$list_activities <- sfn_list_activities
 
-#' Lists the executions of a state machine that meet the filtering criteria
+#' Lists all executions of a state machine or a Map Run
 #'
 #' @description
-#' Lists the executions of a state machine that meet the filtering criteria. Results are sorted by time, with the most recent execution first.
+#' Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.
 #'
-#' See [https://paws-r.github.io/docs/sfn/list_executions.html](https://paws-r.github.io/docs/sfn/list_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_list_executions/](https://www.paws-r-sdk.com/docs/sfn_list_executions/) for full documentation.
 #'
-#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine whose executions is
+#' @param stateMachineArn The Amazon Resource Name (ARN) of the state machine whose executions is
 #' listed.
+#' 
+#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+#' both.
 #' @param statusFilter If specified, only list the executions whose current execution status
 #' matches the given filter.
+#' @param maxResults The maximum number of results that are returned per call. You can use
+#' `nextToken` to obtain further pages of results. The default is 100 and
+#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' 
+#' This is only an upper limit. The actual number of results returned per
+#' call might be fewer than the specified maximum.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value
+#' of `nextToken` is a unique pagination token for each page. Make the call
+#' again using the returned token to retrieve the next page. Keep all other
+#' arguments unchanged. Each pagination token expires after 24 hours. Using
+#' an expired pagination token will return an *HTTP 400 InvalidToken*
+#' error.
+#' @param mapRunArn The Amazon Resource Name (ARN) of the Map Run that started the child
+#' workflow executions. If the `mapRunArn` field is specified, a list of
+#' all of the child workflow executions started by a Map Run is returned.
+#' For more information, see [Examining Map
+#' Run](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
+#' in the *Step Functions Developer Guide*.
+#' 
+#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not
+#' both.
+#'
+#' @keywords internal
+#'
+#' @rdname sfn_list_executions
+sfn_list_executions <- function(stateMachineArn = NULL, statusFilter = NULL, maxResults = NULL, nextToken = NULL, mapRunArn = NULL) {
+  op <- new_operation(
+    name = "ListExecutions",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .sfn$list_executions_input(stateMachineArn = stateMachineArn, statusFilter = statusFilter, maxResults = maxResults, nextToken = nextToken, mapRunArn = mapRunArn)
+  output <- .sfn$list_executions_output()
+  config <- get_config()
+  svc <- .sfn$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.sfn$operations$list_executions <- sfn_list_executions
+
+#' Lists all Map Runs that were started by a given state machine execution
+#'
+#' @description
+#' Lists all Map Runs that were started by a given state machine execution. Use this API action to obtain Map Run ARNs, and then call [`describe_map_run`][sfn_describe_map_run] to obtain more information, if needed.
+#'
+#' See [https://www.paws-r-sdk.com/docs/sfn_list_map_runs/](https://www.paws-r-sdk.com/docs/sfn_list_map_runs/) for full documentation.
+#'
+#' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution for which the Map Runs
+#' must be listed.
 #' @param maxResults The maximum number of results that are returned per call. You can use
 #' `nextToken` to obtain further pages of results. The default is 100 and
 #' the maximum allowed page size is 1000. A value of 0 uses the default.
@@ -452,30 +540,30 @@ sfn_list_activities <- function(maxResults = NULL, nextToken = NULL) {
 #'
 #' @keywords internal
 #'
-#' @rdname sfn_list_executions
-sfn_list_executions <- function(stateMachineArn, statusFilter = NULL, maxResults = NULL, nextToken = NULL) {
+#' @rdname sfn_list_map_runs
+sfn_list_map_runs <- function(executionArn, maxResults = NULL, nextToken = NULL) {
   op <- new_operation(
-    name = "ListExecutions",
+    name = "ListMapRuns",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .sfn$list_executions_input(stateMachineArn = stateMachineArn, statusFilter = statusFilter, maxResults = maxResults, nextToken = nextToken)
-  output <- .sfn$list_executions_output()
+  input <- .sfn$list_map_runs_input(executionArn = executionArn, maxResults = maxResults, nextToken = nextToken)
+  output <- .sfn$list_map_runs_output()
   config <- get_config()
   svc <- .sfn$service(config)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
 }
-.sfn$operations$list_executions <- sfn_list_executions
+.sfn$operations$list_map_runs <- sfn_list_map_runs
 
 #' Lists the existing state machines
 #'
 #' @description
 #' Lists the existing state machines.
 #'
-#' See [https://paws-r.github.io/docs/sfn/list_state_machines.html](https://paws-r.github.io/docs/sfn/list_state_machines.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_list_state_machines/](https://www.paws-r-sdk.com/docs/sfn_list_state_machines/) for full documentation.
 #'
 #' @param maxResults The maximum number of results that are returned per call. You can use
 #' `nextToken` to obtain further pages of results. The default is 100 and
@@ -515,7 +603,7 @@ sfn_list_state_machines <- function(maxResults = NULL, nextToken = NULL) {
 #' @description
 #' List tags for a given resource.
 #'
-#' See [https://paws-r.github.io/docs/sfn/list_tags_for_resource.html](https://paws-r.github.io/docs/sfn/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/sfn_list_tags_for_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
 #' activity.
@@ -546,7 +634,7 @@ sfn_list_tags_for_resource <- function(resourceArn) {
 #' @description
 #' Used by activity workers and task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern to report that the task identified by the `taskToken` failed.
 #'
-#' See [https://paws-r.github.io/docs/sfn/send_task_failure.html](https://paws-r.github.io/docs/sfn/send_task_failure.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_send_task_failure/](https://www.paws-r-sdk.com/docs/sfn_send_task_failure/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
 #' Functions when tasks are assigned to a worker, or in the [context
@@ -583,7 +671,7 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
 #' @description
 #' Used by activity workers and task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern to report to Step Functions that the task represented by the specified `taskToken` is still making progress. This action resets the `Heartbeat` clock. The `Heartbeat` threshold is specified in the state machine's Amazon States Language definition (`HeartbeatSeconds`). This action does not in itself create an event in the execution history. However, if the task times out, the execution history contains an `ActivityTimedOut` entry for activities, or a `TaskTimedOut` entry for for tasks using the [job run](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync) or [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern.
 #'
-#' See [https://paws-r.github.io/docs/sfn/send_task_heartbeat.html](https://paws-r.github.io/docs/sfn/send_task_heartbeat.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_send_task_heartbeat/](https://www.paws-r-sdk.com/docs/sfn_send_task_heartbeat/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
 #' Functions when tasks are assigned to a worker, or in the [context
@@ -617,7 +705,7 @@ sfn_send_task_heartbeat <- function(taskToken) {
 #' @description
 #' Used by activity workers and task states using the [callback](https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token) pattern to report that the task identified by the `taskToken` completed successfully.
 #'
-#' See [https://paws-r.github.io/docs/sfn/send_task_success.html](https://paws-r.github.io/docs/sfn/send_task_success.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_send_task_success/](https://www.paws-r-sdk.com/docs/sfn_send_task_success/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
 #' Functions when tasks are assigned to a worker, or in the [context
@@ -650,16 +738,16 @@ sfn_send_task_success <- function(taskToken, output) {
 #' Starts a state machine execution
 #'
 #' @description
-#' Starts a state machine execution.
+#' Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.
 #'
-#' See [https://paws-r.github.io/docs/sfn/start_execution.html](https://paws-r.github.io/docs/sfn/start_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_start_execution/](https://www.paws-r-sdk.com/docs/sfn_start_execution/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to execute.
-#' @param name The name of the execution. This name must be unique for your AWS
-#' account, region, and state machine for 90 days. For more information,
-#' see [Limits Related to State Machine
+#' @param name The name of the execution. This name must be unique for your Amazon Web
+#' Services account, region, and state machine for 90 days. For more
+#' information, see [Limits Related to State Machine
 #' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions)
-#' in the *AWS Step Functions Developer Guide*.
+#' in the *Step Functions Developer Guide*.
 #' 
 #' A name must *not* contain:
 #' 
@@ -685,8 +773,8 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' Length constraints apply to the payload size, and are expressed as bytes
 #' in UTF-8 encoding.
-#' @param traceHeader Passes the AWS X-Ray trace header. The trace header can also be passed
-#' in the request payload.
+#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in
+#' the request payload.
 #'
 #' @keywords internal
 #'
@@ -711,9 +799,9 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, trac
 #' Starts a Synchronous Express state machine execution
 #'
 #' @description
-#' Starts a Synchronous Express state machine execution.
+#' Starts a Synchronous Express state machine execution. [`start_sync_execution`][sfn_start_sync_execution] is not available for `STANDARD` workflows.
 #'
-#' See [https://paws-r.github.io/docs/sfn/start_sync_execution.html](https://paws-r.github.io/docs/sfn/start_sync_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_start_sync_execution/](https://www.paws-r-sdk.com/docs/sfn_start_sync_execution/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to execute.
 #' @param name The name of the execution.
@@ -727,8 +815,8 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, trac
 #' 
 #' Length constraints apply to the payload size, and are expressed as bytes
 #' in UTF-8 encoding.
-#' @param traceHeader Passes the AWS X-Ray trace header. The trace header can also be passed
-#' in the request payload.
+#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in
+#' the request payload.
 #'
 #' @keywords internal
 #'
@@ -755,7 +843,7 @@ sfn_start_sync_execution <- function(stateMachineArn, name = NULL, input = NULL,
 #' @description
 #' Stops an execution.
 #'
-#' See [https://paws-r.github.io/docs/sfn/stop_execution.html](https://paws-r.github.io/docs/sfn/stop_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_stop_execution/](https://www.paws-r-sdk.com/docs/sfn_stop_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution to stop.
 #' @param error The error code of the failure.
@@ -786,7 +874,7 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
 #' @description
 #' Add a tag to a Step Functions resource.
 #'
-#' See [https://paws-r.github.io/docs/sfn/tag_resource.html](https://paws-r.github.io/docs/sfn/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_tag_resource/](https://www.paws-r-sdk.com/docs/sfn_tag_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
 #' activity.
@@ -820,7 +908,7 @@ sfn_tag_resource <- function(resourceArn, tags) {
 #' @description
 #' Remove a tag from a Step Functions resource
 #'
-#' See [https://paws-r.github.io/docs/sfn/untag_resource.html](https://paws-r.github.io/docs/sfn/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_untag_resource/](https://www.paws-r-sdk.com/docs/sfn_untag_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
 #' activity.
@@ -846,13 +934,47 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 }
 .sfn$operations$untag_resource <- sfn_untag_resource
 
+#' Updates an in-progress Map Run's configuration to include changes to the
+#' settings that control maximum concurrency and Map Run failure
+#'
+#' @description
+#' Updates an in-progress Map Run's configuration to include changes to the settings that control maximum concurrency and Map Run failure.
+#'
+#' See [https://www.paws-r-sdk.com/docs/sfn_update_map_run/](https://www.paws-r-sdk.com/docs/sfn_update_map_run/) for full documentation.
+#'
+#' @param mapRunArn &#91;required&#93; The Amazon Resource Name (ARN) of a Map Run.
+#' @param maxConcurrency The maximum number of child workflow executions that can be specified to
+#' run in parallel for the Map Run at the same time.
+#' @param toleratedFailurePercentage The maximum percentage of failed items before the Map Run fails.
+#' @param toleratedFailureCount The maximum number of failed items before the Map Run fails.
+#'
+#' @keywords internal
+#'
+#' @rdname sfn_update_map_run
+sfn_update_map_run <- function(mapRunArn, maxConcurrency = NULL, toleratedFailurePercentage = NULL, toleratedFailureCount = NULL) {
+  op <- new_operation(
+    name = "UpdateMapRun",
+    http_method = "POST",
+    http_path = "/",
+    paginator = list()
+  )
+  input <- .sfn$update_map_run_input(mapRunArn = mapRunArn, maxConcurrency = maxConcurrency, toleratedFailurePercentage = toleratedFailurePercentage, toleratedFailureCount = toleratedFailureCount)
+  output <- .sfn$update_map_run_output()
+  config <- get_config()
+  svc <- .sfn$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.sfn$operations$update_map_run <- sfn_update_map_run
+
 #' Updates an existing state machine by modifying its definition, roleArn,
 #' or loggingConfiguration
 #'
 #' @description
 #' Updates an existing state machine by modifying its `definition`, `roleArn`, or `loggingConfiguration`. Running executions will continue to use the previous `definition` and `roleArn`. You must include at least one of `definition` or `roleArn` or you will receive a `MissingRequiredParameter` error.
 #'
-#' See [https://paws-r.github.io/docs/sfn/update_state_machine.html](https://paws-r.github.io/docs/sfn/update_state_machine.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/sfn_update_state_machine/](https://www.paws-r-sdk.com/docs/sfn_update_state_machine/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine.
 #' @param definition The Amazon States Language definition of the state machine. See [Amazon
@@ -861,7 +983,7 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #' @param roleArn The Amazon Resource Name (ARN) of the IAM role of the state machine.
 #' @param loggingConfiguration The `LoggingConfiguration` data type is used to set CloudWatch Logs
 #' options.
-#' @param tracingConfiguration Selects whether AWS X-Ray tracing is enabled.
+#' @param tracingConfiguration Selects whether X-Ray tracing is enabled.
 #'
 #' @keywords internal
 #'

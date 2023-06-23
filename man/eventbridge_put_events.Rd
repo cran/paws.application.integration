@@ -13,14 +13,14 @@ parameters for the entry such as the source and type of the event,
 resources associated with the event, and so on.}
 
 \item{EndpointId}{The URL subdomain of the endpoint. For example, if the URL for Endpoint
-is abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is
-\code{abcde.veo}.
+is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId
+is \code{abcde.veo}.
 
 When using Java, you must include \code{auth-crt} on the class path.}
 }
 \description{
 Sends custom events to Amazon EventBridge so that they can be matched to rules.
 
-See \url{https://paws-r.github.io/docs/eventbridge/put_events.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/eventbridge_put_events/} for full documentation.
 }
 \keyword{internal}

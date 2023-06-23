@@ -21,8 +21,8 @@ eventbridge_put_rule(
 \item{ScheduleExpression}{The scheduling expression. For example, "cron(0 20 * * ? *)" or
 "rate(5 minutes)".}
 
-\item{EventPattern}{The event pattern. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/}{EventBridge event patterns} in
-the \emph{Amazon EventBridge User Guide}.}
+\item{EventPattern}{The event pattern. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html}{Amazon EventBridge event patterns}
+in the \emph{Amazon EventBridge User Guide}.}
 
 \item{State}{Indicates whether the rule is enabled or disabled.}
 
@@ -44,6 +44,6 @@ omit this, the default event bus is used.}
 \description{
 Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using \code{\link[=eventbridge_disable_rule]{disable_rule}}.
 
-See \url{https://paws-r.github.io/docs/eventbridge/put_rule.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/eventbridge_put_rule/} for full documentation.
 }
 \keyword{internal}

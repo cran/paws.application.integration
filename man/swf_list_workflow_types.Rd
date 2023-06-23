@@ -24,7 +24,7 @@ swf_list_workflow_types(
 value of \code{NextPageToken} is a unique pagination token for each page.
 Make the call again using the returned token to retrieve the next page.
 Keep all other arguments unchanged. Each pagination token expires after
-60 seconds. Using an expired pagination token will return a \code{400} error:
+24 hours. Using an expired pagination token will return a \code{400} error:
 "\verb{Specified token has exceeded its maximum lifetime}".
 
 The configured \code{maximumPageSize} determines how many results can be
@@ -40,6 +40,6 @@ the workflow types.}
 \description{
 Returns information about workflow types in the specified domain. The results may be split into multiple pages that can be retrieved by making the call repeatedly.
 
-See \url{https://paws-r.github.io/docs/swf/list_workflow_types.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/swf_list_workflow_types/} for full documentation.
 }
 \keyword{internal}

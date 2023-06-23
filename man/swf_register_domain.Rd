@@ -17,7 +17,7 @@ that the domain is registered in.
 
 The specified string must not start or end with whitespace. It must not
 contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
+characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must \emph{not} be
 the literal string \code{arn}.}
 
 \item{description}{A text description of the domain.}
@@ -43,6 +43,6 @@ symbols: \verb{_ . : / = + - @}.}
 \description{
 Registers a new domain.
 
-See \url{https://paws-r.github.io/docs/swf/register_domain.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/swf_register_domain/} for full documentation.
 }
 \keyword{internal}

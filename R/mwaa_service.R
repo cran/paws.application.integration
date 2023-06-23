@@ -8,7 +8,7 @@ NULL
 #' Amazon Managed Workflows for Apache Airflow
 #' 
 #' This section contains the Amazon Managed Workflows for Apache Airflow
-#' (MWAA) API reference documentation. For more information, see [What Is
+#' (MWAA) API reference documentation. For more information, see [What is
 #' Amazon
 #' MWAA?](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html).
 #' 
@@ -39,8 +39,6 @@ NULL
 #'     -   [`create_cli_token`][mwaa_create_cli_token]
 #' 
 #'     -   [`create_web_login_token`][mwaa_create_web_login_token]
-#' 
-#'       
 #' 
 #' -   `ops.airflow.{region}.amazonaws.com` - This endpoint is used to push
 #'     environment metrics that track environment health.

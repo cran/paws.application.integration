@@ -58,8 +58,7 @@ characters: \code{AUS}.
 \item{IndexName}{[required] The name of the place index resource you want to use for the search.}
 
 \item{Language}{The preferred language used to return results. The value must be a valid
-\href{https://datatracker.ietf.org/doc/search?rfcs=on&activedrafts=on&name=bcp47}{BCP 47}
-language tag, for example, \code{en} for English.
+BCP 47 language tag, for example, \code{en} for English.
 
 This setting affects the languages used in the results. If no language
 is specified, or not supported for a particular result, the partner
@@ -87,6 +86,6 @@ example, \verb{eiffel tow}.}
 \description{
 Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching.
 
-See \url{https://paws-r.github.io/docs/locationservice/search_place_index_for_suggestions.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/} for full documentation.
 }
 \keyword{internal}

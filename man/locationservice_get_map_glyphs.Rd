@@ -4,7 +4,12 @@
 \alias{locationservice_get_map_glyphs}
 \title{Retrieves glyphs used to display labels on a map}
 \usage{
-locationservice_get_map_glyphs(FontStack, FontUnicodeRange, MapName)
+locationservice_get_map_glyphs(
+  FontStack,
+  FontUnicodeRange,
+  Key = NULL,
+  MapName
+)
 }
 \arguments{
 \item{FontStack}{[required] A comma-separated list of fonts to load glyphs from in order of
@@ -30,20 +35,56 @@ Valid font stacks for \href{https://docs.aws.amazon.com/location/latest/develope
 styles:
 \itemize{
 \item VectorHereContrast – \verb{Fira GO Regular} | \verb{Fira GO Bold}
-\item VectorHereExplore, VectorHereExploreTruck – \verb{Firo GO Italic} |
-\verb{Fira GO Map} | \verb{Fira GO Map Bold} | \verb{Noto Sans CJK JP Bold} |
+\item VectorHereExplore, VectorHereExploreTruck,
+HybridHereExploreSatellite – \verb{Fira GO Italic} | \verb{Fira GO Map} |
+\verb{Fira GO Map Bold} | \verb{Noto Sans CJK JP Bold} |
 \verb{Noto Sans CJK JP Light} | \verb{Noto Sans CJK JP Regular}
-}}
+}
+
+Valid font stacks for
+\href{https://docs.aws.amazon.com/location/latest/developerguide/grab.html}{GrabMaps}
+styles:
+\itemize{
+\item VectorGrabStandardLight, VectorGrabStandardDark –
+\verb{Noto Sans Regular} | \verb{Noto Sans Medium} | \verb{Noto Sans Bold}
+}
+
+Valid font stacks for \href{https://docs.aws.amazon.com/location/latest/developerguide/open-data.html}{Open Data}
+styles:
+\itemize{
+\item VectorOpenDataStandardLight, VectorOpenDataStandardDark,
+VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark –
+\verb{Amazon Ember Regular,Noto Sans Regular} |
+\verb{Amazon Ember Bold,Noto Sans Bold} |
+\verb{Amazon Ember Medium,Noto Sans Medium} |
+\verb{Amazon Ember Regular Italic,Noto Sans Italic} |
+\verb{Amazon Ember Condensed RC Regular,Noto Sans Regular} |
+\verb{Amazon Ember Condensed RC Bold,Noto Sans Bold} |
+\verb{Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular} |
+\verb{Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold}
+| \verb{Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold} |
+\verb{Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular}
+|
+\verb{Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular}
+| \verb{Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium}
+}
+
+The fonts used by the Open Data map styles are combined fonts that use
+\verb{Amazon Ember} for most glyphs but \verb{Noto Sans} for glyphs unsupported by
+\verb{Amazon Ember}.}
 
 \item{FontUnicodeRange}{[required] A Unicode range of characters to download glyphs for. Each response will
 contain 256 characters. For example, 0–255 includes all characters from
 range \code{U+0000} to \verb{00FF}. Must be aligned to multiples of 256.}
+
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
+to authorize the request.}
 
 \item{MapName}{[required] The map resource associated with the glyph ﬁle.}
 }
 \description{
 Retrieves glyphs used to display labels on a map.
 
-See \url{https://paws-r.github.io/docs/locationservice/get_map_glyphs.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/} for full documentation.
 }
 \keyword{internal}

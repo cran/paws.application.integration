@@ -50,15 +50,15 @@ options results in an error.}
 \item{FilterCountries}{An optional parameter that limits the search results by returning only
 places that are in a specified list of countries.
 \itemize{
-\item Valid values include \href{https://www.iso.org/iso-3166-country-codes.html}{ISO 3166} 3-digit country
-codes. For example, Australia uses three upper-case characters: \code{AUS}.
+\item Valid values include \href{https://www.iso.org/iso-3166-country-codes.html}{ISO 3166} 3-digit
+country codes. For example, Australia uses three upper-case
+characters: \code{AUS}.
 }}
 
 \item{IndexName}{[required] The name of the place index resource you want to use for the search.}
 
 \item{Language}{The preferred language used to return results. The value must be a valid
-\href{https://datatracker.ietf.org/doc/search?rfcs=on&activedrafts=on&name=bcp47}{BCP 47}
-language tag, for example, \code{en} for English.
+BCP 47 language tag, for example, \code{en} for English.
 
 This setting affects the languages used in the results, but not the
 results themselves. If no language is specified, or not supported for a
@@ -86,6 +86,6 @@ text format. For example, \verb{123 Any Street}.}
 \description{
 Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.
 
-See \url{https://paws-r.github.io/docs/locationservice/search_place_index_for_text.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_text/} for full documentation.
 }
 \keyword{internal}

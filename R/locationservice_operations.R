@@ -9,14 +9,14 @@ NULL
 #' @description
 #' Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/associate_tracker_consumer.html](https://paws-r.github.io/docs/locationservice/associate_tracker_consumer.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_associate_tracker_consumer/](https://www.paws-r-sdk.com/docs/locationservice_associate_tracker_consumer/) for full documentation.
 #'
 #' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be
 #' associated to tracker resource. Used when you need to specify a resource
-#' across all AWS.
+#' across all Amazon Web Services.
 #' 
-#' - Format example:
-#'   `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+#' -   Format example:
+#'     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to be associated with a geofence
 #' collection.
 #'
@@ -46,11 +46,11 @@ locationservice_associate_tracker_consumer <- function(ConsumerArn, TrackerName)
 #' @description
 #' Deletes the position history of one or more devices from a tracker resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_delete_device_position_history.html](https://paws-r.github.io/docs/locationservice/batch_delete_device_position_history.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_delete_device_position_history/](https://www.paws-r-sdk.com/docs/locationservice_batch_delete_device_position_history/) for full documentation.
 #'
 #' @param DeviceIds &#91;required&#93; Devices whose position history you want to delete.
 #' 
-#' - For example, for two devices: `“DeviceIds” : [DeviceId1,DeviceId2]`
+#' -   For example, for two devices: `“DeviceIds” : [DeviceId1,DeviceId2]`
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to delete the device position history
 #' from.
 #'
@@ -79,7 +79,7 @@ locationservice_batch_delete_device_position_history <- function(DeviceIds, Trac
 #' @description
 #' Deletes a batch of geofences from a geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_delete_geofence.html](https://paws-r.github.io/docs/locationservice/batch_delete_geofence.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_delete_geofence/](https://www.paws-r-sdk.com/docs/locationservice_batch_delete_geofence/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection storing the geofences to be deleted.
 #' @param GeofenceIds &#91;required&#93; The batch of geofences to be deleted.
@@ -110,7 +110,7 @@ locationservice_batch_delete_geofence <- function(CollectionName, GeofenceIds) {
 #' @description
 #' Evaluates device positions against the geofence geometries from a given geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_evaluate_geofences.html](https://paws-r.github.io/docs/locationservice/batch_evaluate_geofences.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_evaluate_geofences/](https://www.paws-r-sdk.com/docs/locationservice_batch_evaluate_geofences/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection used in evaluating the position of devices
 #' against its geofences.
@@ -142,12 +142,12 @@ locationservice_batch_evaluate_geofences <- function(CollectionName, DevicePosit
 #' @description
 #' Lists the latest device positions for requested devices.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_get_device_position.html](https://paws-r.github.io/docs/locationservice/batch_get_device_position.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_get_device_position/](https://www.paws-r-sdk.com/docs/locationservice_batch_get_device_position/) for full documentation.
 #'
 #' @param DeviceIds &#91;required&#93; Devices whose position you want to retrieve.
 #' 
-#' - For example, for two devices:
-#'   `device-ids=DeviceId1&device-ids=DeviceId2`
+#' -   For example, for two devices:
+#'     `device-ids=DeviceId1&device-ids=DeviceId2`
 #' @param TrackerName &#91;required&#93; The tracker resource retrieving the device position.
 #'
 #' @keywords internal
@@ -177,7 +177,7 @@ locationservice_batch_get_device_position <- function(DeviceIds, TrackerName) {
 #' @description
 #' A batch request for storing geofence geometries into a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_put_geofence.html](https://paws-r.github.io/docs/locationservice/batch_put_geofence.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_put_geofence/](https://www.paws-r-sdk.com/docs/locationservice_batch_put_geofence/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection storing the geofences.
 #' @param Entries &#91;required&#93; The batch of geofences to be stored in a geofence collection.
@@ -208,7 +208,7 @@ locationservice_batch_put_geofence <- function(CollectionName, Entries) {
 #' @description
 #' Uploads position update data for one or more devices to a tracker resource. Amazon Location uses the data when it reports the last known device position and position history. Amazon Location retains location data for 30 days.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/batch_update_device_position.html](https://paws-r.github.io/docs/locationservice/batch_update_device_position.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_batch_update_device_position/](https://www.paws-r-sdk.com/docs/locationservice_batch_update_device_position/) for full documentation.
 #'
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to update.
 #' @param Updates &#91;required&#93; Contains the position update details for each device.
@@ -239,7 +239,7 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' @description
 #' [Calculates a route](https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html) given the following required parameters: `DeparturePosition` and `DestinationPosition`. Requires that you first [create a route calculator resource](https://docs.aws.amazon.com/location/latest/APIReference/API_CreateRouteCalculator.html).
 #'
-#' See [https://paws-r.github.io/docs/locationservice/calculate_route.html](https://paws-r.github.io/docs/locationservice/calculate_route.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_calculate_route/](https://www.paws-r-sdk.com/docs/locationservice_calculate_route/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to
 #' calculate the route.
@@ -258,7 +258,7 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84)
 #' format: `[longitude, latitude]`.
 #' 
-#' - For example, `[-123.115, 49.285]`
+#' -   For example, `[-123.115, 49.285]`
 #' 
 #' If you specify a departure that's not located on a road, Amazon Location
 #' [moves the position to the nearest
@@ -275,14 +275,15 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' Setting a departure time in the past returns a `400 ValidationException`
 #' error.
 #' 
-#' - In [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
-#'   format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-#'   `2020–07-2T12:15:20.000Z+01:00`
+#' -   In [ISO
+#'     8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+#'     format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
+#'     `2020–07-2T12:15:20.000Z+01:00`
 #' @param DestinationPosition &#91;required&#93; The finish position for the route. Defined in [World Geodetic System
 #' (WGS 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84)
 #' format: `[longitude, latitude]`.
 #' 
-#' - For example, `[-122.339, 47.615]`
+#' -   For example, `[-122.339, 47.615]`
 #' 
 #' If you specify a destination that's not located on a road, Amazon
 #' Location [moves the position to the nearest
@@ -300,14 +301,25 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' Valid Values: `false` | `true`
 #' @param TravelMode Specifies the mode of transport when calculating a route. Used in
 #' estimating the speed of travel and road compatibility. You can choose
-#' `Car`, `Truck`, or `Walking` as options for the `TravelMode`.
+#' `Car`, `Truck`, `Walking`, `Bicycle` or `Motorcycle` as options for the
+#' `TravelMode`.
+#' 
+#' `Bicycle` and `Motorcycle` are only valid when using Grab as a data
+#' provider, and only within Southeast Asia.
+#' 
+#' `Truck` is not available for Grab.
+#' 
+#' For more details on the using Grab for routing, including areas of
+#' coverage, see
+#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
+#' in the *Amazon Location Service Developer Guide*.
 #' 
 #' The `TravelMode` you specify also determines how you specify route
 #' preferences:
 #' 
-#' - If traveling by `Car` use the `CarModeOptions` parameter.
+#' -   If traveling by `Car` use the `CarModeOptions` parameter.
 #' 
-#' - If traveling by `Truck` use the `TruckModeOptions` parameter.
+#' -   If traveling by `Truck` use the `TruckModeOptions` parameter.
 #' 
 #' Default Value: `Car`
 #' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding
@@ -318,9 +330,9 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' @param WaypointPositions Specifies an ordered list of up to 23 intermediate positions to include
 #' along a route between the departure position and destination position.
 #' 
-#' - For example, from the `DeparturePosition` `[-123.115, 49.285]`, the
-#'   route follows the order that the waypoint positions are given
-#'   `[[-122.757, 49.0021],[-122.349, 47.620]]`
+#' -   For example, from the `DeparturePosition` `[-123.115, 49.285]`, the
+#'     route follows the order that the waypoint positions are given
+#'     `[[-122.757, 49.0021],[-122.349, 47.620]]`
 #' 
 #' If you specify a waypoint position that's not located on a road, Amazon
 #' Location [moves the position to the nearest
@@ -361,7 +373,7 @@ locationservice_calculate_route <- function(CalculatorName, CarModeOptions = NUL
 #' @description
 #' [Calculates a route matrix](https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html) given the following required parameters: `DeparturePositions` and `DestinationPositions`. [`calculate_route_matrix`][locationservice_calculate_route_matrix] calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, [`calculate_route_matrix`][locationservice_calculate_route_matrix] will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of `DeparturePositions` times the number of `DestinationPositions`.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/calculate_route_matrix.html](https://paws-r.github.io/docs/locationservice/calculate_route_matrix.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_calculate_route_matrix/](https://www.paws-r-sdk.com/docs/locationservice_calculate_route_matrix/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to
 #' calculate the route matrix.
@@ -404,9 +416,10 @@ locationservice_calculate_route <- function(CalculatorName, CarModeOptions = NUL
 #' Setting a departure time in the past returns a `400 ValidationException`
 #' error.
 #' 
-#' - In [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html)
-#'   format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-#'   `2020–07-2T12:15:20.000Z+01:00`
+#' -   In [ISO
+#'     8601](https://www.iso.org/iso-8601-date-and-time-format.html)
+#'     format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
+#'     `2020–07-2T12:15:20.000Z+01:00`
 #' @param DestinationPositions &#91;required&#93; The list of destination positions for the route matrix. An array of
 #' points, each of which is itself a 2-value array defined in [WGS
 #' 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
@@ -435,9 +448,18 @@ locationservice_calculate_route <- function(CalculatorName, CarModeOptions = NUL
 #' The `TravelMode` you specify also determines how you specify route
 #' preferences:
 #' 
-#' - If traveling by `Car` use the `CarModeOptions` parameter.
+#' -   If traveling by `Car` use the `CarModeOptions` parameter.
 #' 
-#' - If traveling by `Truck` use the `TruckModeOptions` parameter.
+#' -   If traveling by `Truck` use the `TruckModeOptions` parameter.
+#' 
+#' `Bicycle` or `Motorcycle` are only valid when using `Grab` as a data
+#' provider, and only within Southeast Asia.
+#' 
+#' `Truck` is not available for Grab.
+#' 
+#' For more information about using Grab as a data provider, see
+#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
+#' in the *Amazon Location Service Developer Guide*.
 #' 
 #' Default Value: `Car`
 #' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding
@@ -471,20 +493,20 @@ locationservice_calculate_route_matrix <- function(CalculatorName, CarModeOption
 #' @description
 #' Creates a geofence collection, which manages and stores geofences.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/create_geofence_collection.html](https://paws-r.github.io/docs/locationservice/create_geofence_collection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_geofence_collection/](https://www.paws-r-sdk.com/docs/locationservice_create_geofence_collection/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; A custom name for the geofence collection.
 #' 
 #' Requirements:
 #' 
-#' - Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-#'   periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+#'     periods (.), and underscores (_).
 #' 
-#' - Must be a unique geofence collection name.
+#' -   Must be a unique geofence collection name.
 #' 
-#' - No spaces allowed. For example, `ExampleGeofenceCollection`.
+#' -   No spaces allowed. For example, `ExampleGeofenceCollection`.
 #' @param Description An optional description for the geofence collection.
-#' @param KmsKeyId A key identifier for an [AWS KMS customer managed
+#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed
 #' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
 #' Enter a key ID, key ARN, alias name, or alias ARN.
 #' @param PricingPlan No longer used. If included, the only allowed value is
@@ -498,18 +520,18 @@ locationservice_calculate_route_matrix <- function(CalculatorName, CarModeOption
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource
+#' -   Maximum 50 tags per resource
 #' 
-#' - Each resource tag must be unique with a maximum of one value.
+#' -   Each resource tag must be unique with a maximum of one value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8
+#' -   Maximum key length: 128 Unicode characters in UTF-8
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8
+#' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@.
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #'
 #' @keywords internal
 #'
@@ -531,26 +553,97 @@ locationservice_create_geofence_collection <- function(CollectionName, Descripti
 }
 .locationservice$operations$create_geofence_collection <- locationservice_create_geofence_collection
 
-#' Creates a map resource in your AWS account, which provides map tiles of
-#' different styles sourced from global location data providers
+#' Creates an API key resource in your Amazon Web Services account, which
+#' lets you grant geo:GetMap* actions for Amazon Location Map resources to
+#' the API key bearer
 #'
 #' @description
-#' Creates a map resource in your AWS account, which provides map tiles of different styles sourced from global location data providers.
+#' Creates an API key resource in your Amazon Web Services account, which lets you grant `geo:GetMap*` actions for Amazon Location Map resources to the API key bearer.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/create_map.html](https://paws-r.github.io/docs/locationservice/create_map.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_key/](https://www.paws-r-sdk.com/docs/locationservice_create_key/) for full documentation.
 #'
-#' @param Configuration &#91;required&#93; Specifies the map style selected from an available data provider.
+#' @param Description An optional description for the API key resource.
+#' @param ExpireTime The optional timestamp for when the API key resource will expire in [ISO
+#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
+#' `YYYY-MM-DDThh:mm:ss.sssZ`. One of `NoExpiry` or `ExpireTime` must be
+#' set.
+#' @param KeyName &#91;required&#93; A custom name for the API key resource.
+#' 
+#' Requirements:
+#' 
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+#'     periods (.), and underscores (_).
+#' 
+#' -   Must be a unique API key name.
+#' 
+#' -   No spaces allowed. For example, `ExampleAPIKey`.
+#' @param NoExpiry Optionally set to `true` to set no expiration time for the API key. One
+#' of `NoExpiry` or `ExpireTime` must be set.
+#' @param Restrictions &#91;required&#93; The API key restrictions for the API key resource.
+#' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair
+#' that helps manage, identify, search, and filter your resources by
+#' labelling them.
+#' 
+#' Format: `"key" : "value"`
+#' 
+#' Restrictions:
+#' 
+#' -   Maximum 50 tags per resource
+#' 
+#' -   Each resource tag must be unique with a maximum of one value.
+#' 
+#' -   Maximum key length: 128 Unicode characters in UTF-8
+#' 
+#' -   Maximum value length: 256 Unicode characters in UTF-8
+#' 
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@.
+#' 
+#' -   Cannot use "aws:" as a prefix for a key.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_create_key
+locationservice_create_key <- function(Description = NULL, ExpireTime = NULL, KeyName, NoExpiry = NULL, Restrictions, Tags = NULL) {
+  op <- new_operation(
+    name = "CreateKey",
+    http_method = "POST",
+    http_path = "/metadata/v0/keys",
+    paginator = list()
+  )
+  input <- .locationservice$create_key_input(Description = Description, ExpireTime = ExpireTime, KeyName = KeyName, NoExpiry = NoExpiry, Restrictions = Restrictions, Tags = Tags)
+  output <- .locationservice$create_key_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$create_key <- locationservice_create_key
+
+#' Creates a map resource in your Amazon Web Services account, which
+#' provides map tiles of different styles sourced from global location data
+#' providers
+#'
+#' @description
+#' Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_map/](https://www.paws-r-sdk.com/docs/locationservice_create_map/) for full documentation.
+#'
+#' @param Configuration &#91;required&#93; Specifies the `MapConfiguration`, including the map style, for the map
+#' resource that you create. The map style defines the look of maps and the
+#' data provider for your map resource.
 #' @param Description An optional description for the map resource.
 #' @param MapName &#91;required&#93; The name for the map resource.
 #' 
 #' Requirements:
 #' 
-#' - Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
-#'   (-), periods (.), and underscores (_).
+#' -   Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
+#'     (-), periods (.), and underscores (_).
 #' 
-#' - Must be a unique map resource name.
+#' -   Must be a unique map resource name.
 #' 
-#' - No spaces allowed. For example, `ExampleMap`.
+#' -   No spaces allowed. For example, `ExampleMap`.
 #' @param PricingPlan No longer used. If included, the only allowed value is
 #' `RequestBasedUsage`.
 #' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair
@@ -561,18 +654,18 @@ locationservice_create_geofence_collection <- function(CollectionName, Descripti
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource
+#' -   Maximum 50 tags per resource
 #' 
-#' - Each resource tag must be unique with a maximum of one value.
+#' -   Each resource tag must be unique with a maximum of one value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8
+#' -   Maximum key length: 128 Unicode characters in UTF-8
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8
+#' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@.
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #'
 #' @keywords internal
 #'
@@ -594,12 +687,12 @@ locationservice_create_map <- function(Configuration, Description = NULL, MapNam
 }
 .locationservice$operations$create_map <- locationservice_create_map
 
-#' Creates a place index resource in your AWS account
+#' Creates a place index resource in your Amazon Web Services account
 #'
 #' @description
-#' Creates a place index resource in your AWS account. Use a place index resource to geocode addresses and other text queries by using the [`search_place_index_for_text`][locationservice_search_place_index_for_text] operation, and reverse geocode coordinates by using the [`search_place_index_for_position`][locationservice_search_place_index_for_position] operation, and enable autosuggestions by using the [`search_place_index_for_suggestions`][locationservice_search_place_index_for_suggestions] operation.
+#' Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the [`search_place_index_for_text`][locationservice_search_place_index_for_text] operation, and reverse geocode coordinates by using the [`search_place_index_for_position`][locationservice_search_place_index_for_position] operation, and enable autosuggestions by using the [`search_place_index_for_suggestions`][locationservice_search_place_index_for_suggestions] operation.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/create_place_index.html](https://paws-r.github.io/docs/locationservice/create_place_index.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_place_index/](https://www.paws-r-sdk.com/docs/locationservice_create_place_index/) for full documentation.
 #'
 #' @param DataSource &#91;required&#93; Specifies the geospatial data provider for the new place index.
 #' 
@@ -608,22 +701,28 @@ locationservice_create_map <- function(Configuration, Description = NULL, MapNam
 #' 
 #' Valid values include:
 #' 
-#' - `Esri` – For additional information about
-#'   [Esri](https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
-#'   coverage in your region of interest, see [Esri details on geocoding
-#'   coverage](https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
+#' -   `Esri` – For additional information about
+#'     [Esri](https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
+#'     coverage in your region of interest, see [Esri details on geocoding
+#'     coverage](https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
 #' 
-#' - `Here` – For additional information about [HERE
-#'   Technologies](https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'
-#'   coverage in your region of interest, see HERE details on goecoding
-#'   coverage.
+#' -   `Grab` – Grab provides place index functionality for Southeast Asia.
+#'     For additional information about
+#'     [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/grab.html)'
+#'     coverage, see [GrabMaps countries and areas
+#'     covered](https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
 #' 
-#'   If you specify HERE Technologies (`Here`) as the data provider, you
-#'   may not [store
-#'   results](https://docs.aws.amazon.com/location/latest/APIReference/API_DataSourceConfiguration.html)
-#'   for locations in Japan. For more information, see the [AWS Service
-#'   Terms](https://aws.amazon.com/service-terms/) for Amazon Location
-#'   Service.
+#' -   `Here` – For additional information about [HERE
+#'     Technologies](https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'
+#'     coverage in your region of interest, see HERE details on goecoding
+#'     coverage.
+#' 
+#'     If you specify HERE Technologies (`Here`) as the data provider, you
+#'     may not [store
+#'     results](https://docs.aws.amazon.com/location/latest/APIReference/API_DataSourceConfiguration.html)
+#'     for locations in Japan. For more information, see the [Amazon Web
+#'     Services Service Terms](https://aws.amazon.com/service-terms/) for
+#'     Amazon Location Service.
 #' 
 #' For additional information , see [Data
 #' providers](https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
@@ -634,12 +733,12 @@ locationservice_create_map <- function(Configuration, Description = NULL, MapNam
 #' 
 #' Requirements:
 #' 
-#' - Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-#'   periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
+#'     periods (.), and underscores (_).
 #' 
-#' - Must be a unique place index resource name.
+#' -   Must be a unique place index resource name.
 #' 
-#' - No spaces allowed. For example, `ExamplePlaceIndex`.
+#' -   No spaces allowed. For example, `ExamplePlaceIndex`.
 #' @param PricingPlan No longer used. If included, the only allowed value is
 #' `RequestBasedUsage`.
 #' @param Tags Applies one or more tags to the place index resource. A tag is a
@@ -650,19 +749,19 @@ locationservice_create_map <- function(Configuration, Description = NULL, MapNam
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource.
+#' -   Maximum 50 tags per resource.
 #' 
-#' - Each tag key must be unique and must have exactly one associated
-#'   value.
+#' -   Each tag key must be unique and must have exactly one associated
+#'     value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8.
+#' -   Maximum key length: 128 Unicode characters in UTF-8.
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8.
+#' -   Maximum value length: 256 Unicode characters in UTF-8.
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #'
 #' @keywords internal
 #'
@@ -684,43 +783,49 @@ locationservice_create_place_index <- function(DataSource, DataSourceConfigurati
 }
 .locationservice$operations$create_place_index <- locationservice_create_place_index
 
-#' Creates a route calculator resource in your AWS account
+#' Creates a route calculator resource in your Amazon Web Services account
 #'
 #' @description
-#' Creates a route calculator resource in your AWS account.
+#' Creates a route calculator resource in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/create_route_calculator.html](https://paws-r.github.io/docs/locationservice/create_route_calculator.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_create_route_calculator/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource.
 #' 
 #' Requirements:
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9) , hyphens (-), periods
-#'   (.), and underscores (_).
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9) , hyphens (-),
+#'     periods (.), and underscores (_).
 #' 
-#' - Must be a unique Route calculator resource name.
+#' -   Must be a unique Route calculator resource name.
 #' 
-#' - No spaces allowed. For example, `ExampleRouteCalculator`.
+#' -   No spaces allowed. For example, `ExampleRouteCalculator`.
 #' @param DataSource &#91;required&#93; Specifies the data provider of traffic and road network data.
 #' 
 #' This field is case-sensitive. Enter the valid values as shown. For
-#' example, entering `HERE` returns an error. Route calculators that use
-#' Esri as a data source only calculate routes that are shorter than 400
-#' km.
+#' example, entering `HERE` returns an error.
 #' 
 #' Valid values include:
 #' 
-#' - `Esri` – For additional information about
-#'   [Esri](https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
-#'   coverage in your region of interest, see [Esri details on street
-#'   networks and traffic
-#'   coverage](https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
+#' -   `Esri` – For additional information about
+#'     [Esri](https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
+#'     coverage in your region of interest, see [Esri details on street
+#'     networks and traffic
+#'     coverage](https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
 #' 
-#' - `Here` – For additional information about [HERE
-#'   Technologies](https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'
-#'   coverage in your region of interest, see HERE car routing coverage and
-#'   [HERE truck routing
-#'   coverage](https://developer.here.com/documentation/routing-api/dev_guide/topics/coverage/truck-routing.html).
+#'     Route calculators that use Esri as a data source only calculate
+#'     routes that are shorter than 400 km.
+#' 
+#' -   `Grab` – Grab provides routing functionality for Southeast Asia. For
+#'     additional information about
+#'     [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/grab.html)'
+#'     coverage, see [GrabMaps countries and areas
+#'     covered](https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
+#' 
+#' -   `Here` – For additional information about [HERE
+#'     Technologies](https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'
+#'     coverage in your region of interest, see HERE car routing coverage
+#'     and HERE truck routing coverage.
 #' 
 #' For additional information , see [Data
 #' providers](https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
@@ -732,24 +837,24 @@ locationservice_create_place_index <- function(DataSource, DataSourceConfigurati
 #' key-value pair helps manage, identify, search, and filter your resources
 #' by labelling them.
 #' 
-#' - For example: \\ `"tag1" : "value1"`, `"tag2" : "value2"`\\
+#' -   For example: \{ `"tag1" : "value1"`, `"tag2" : "value2"`\}
 #' 
 #' Format: `"key" : "value"`
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource
+#' -   Maximum 50 tags per resource
 #' 
-#' - Each resource tag must be unique with a maximum of one value.
+#' -   Each resource tag must be unique with a maximum of one value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8
+#' -   Maximum key length: 128 Unicode characters in UTF-8
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8
+#' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@.
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #'
 #' @keywords internal
 #'
@@ -771,44 +876,44 @@ locationservice_create_route_calculator <- function(CalculatorName, DataSource, 
 }
 .locationservice$operations$create_route_calculator <- locationservice_create_route_calculator
 
-#' Creates a tracker resource in your AWS account, which lets you retrieve
-#' current and historical location of devices
+#' Creates a tracker resource in your Amazon Web Services account, which
+#' lets you retrieve current and historical location of devices
 #'
 #' @description
-#' Creates a tracker resource in your AWS account, which lets you retrieve current and historical location of devices.
+#' Creates a tracker resource in your Amazon Web Services account, which lets you retrieve current and historical location of devices.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/create_tracker.html](https://paws-r.github.io/docs/locationservice/create_tracker.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_create_tracker/](https://www.paws-r-sdk.com/docs/locationservice_create_tracker/) for full documentation.
 #'
 #' @param Description An optional description for the tracker resource.
-#' @param KmsKeyId A key identifier for an [AWS KMS customer managed
+#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed
 #' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
 #' Enter a key ID, key ARN, alias name, or alias ARN.
 #' @param PositionFiltering Specifies the position filtering for the tracker resource.
 #' 
 #' Valid values:
 #' 
-#' - `TimeBased` - Location updates are evaluated against linked geofence
-#'   collections, but not every location update is stored. If your update
-#'   frequency is more often than 30 seconds, only one update per 30
-#'   seconds is stored for each unique device ID.
+#' -   `TimeBased` - Location updates are evaluated against linked geofence
+#'     collections, but not every location update is stored. If your update
+#'     frequency is more often than 30 seconds, only one update per 30
+#'     seconds is stored for each unique device ID.
 #' 
-#' - `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
-#'   location updates are ignored. Location updates within this area are
-#'   neither evaluated against linked geofence collections, nor stored.
-#'   This helps control costs by reducing the number of geofence
-#'   evaluations and historical device positions to paginate through.
-#'   Distance-based filtering can also reduce the effects of GPS noise when
-#'   displaying device trajectories on a map.
+#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
+#'     location updates are ignored. Location updates within this area are
+#'     neither evaluated against linked geofence collections, nor stored.
+#'     This helps control costs by reducing the number of geofence
+#'     evaluations and historical device positions to paginate through.
+#'     Distance-based filtering can also reduce the effects of GPS noise
+#'     when displaying device trajectories on a map.
 #' 
-#' - `AccuracyBased` - If the device has moved less than the measured
-#'   accuracy, location updates are ignored. For example, if two
-#'   consecutive updates from a device have a horizontal accuracy of 5 m
-#'   and 10 m, the second update is ignored if the device has moved less
-#'   than 15 m. Ignored location updates are neither evaluated against
-#'   linked geofence collections, nor stored. This can reduce the effects
-#'   of GPS noise when displaying device trajectories on a map, and can
-#'   help control your costs by reducing the number of geofence
-#'   evaluations.
+#' -   `AccuracyBased` - If the device has moved less than the measured
+#'     accuracy, location updates are ignored. For example, if two
+#'     consecutive updates from a device have a horizontal accuracy of 5 m
+#'     and 10 m, the second update is ignored if the device has moved less
+#'     than 15 m. Ignored location updates are neither evaluated against
+#'     linked geofence collections, nor stored. This can reduce the effects
+#'     of GPS noise when displaying device trajectories on a map, and can
+#'     help control your costs by reducing the number of geofence
+#'     evaluations.
 #' 
 #' This field is optional. If not specified, the default value is
 #' `TimeBased`.
@@ -823,28 +928,28 @@ locationservice_create_route_calculator <- function(CalculatorName, DataSource, 
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource
+#' -   Maximum 50 tags per resource
 #' 
-#' - Each resource tag must be unique with a maximum of one value.
+#' -   Each resource tag must be unique with a maximum of one value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8
+#' -   Maximum key length: 128 Unicode characters in UTF-8
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8
+#' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@.
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #' @param TrackerName &#91;required&#93; The name for the tracker resource.
 #' 
 #' Requirements:
 #' 
-#' - Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-),
-#'   periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-),
+#'     periods (.), and underscores (_).
 #' 
-#' - Must be a unique tracker resource name.
+#' -   Must be a unique tracker resource name.
 #' 
-#' - No spaces allowed. For example, `ExampleTracker`.
+#' -   No spaces allowed. For example, `ExampleTracker`.
 #'
 #' @keywords internal
 #'
@@ -866,12 +971,12 @@ locationservice_create_tracker <- function(Description = NULL, KmsKeyId = NULL, 
 }
 .locationservice$operations$create_tracker <- locationservice_create_tracker
 
-#' Deletes a geofence collection from your AWS account
+#' Deletes a geofence collection from your Amazon Web Services account
 #'
 #' @description
-#' Deletes a geofence collection from your AWS account.
+#' Deletes a geofence collection from your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/delete_geofence_collection.html](https://paws-r.github.io/docs/locationservice/delete_geofence_collection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_geofence_collection/](https://www.paws-r-sdk.com/docs/locationservice_delete_geofence_collection/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection to be deleted.
 #'
@@ -895,12 +1000,41 @@ locationservice_delete_geofence_collection <- function(CollectionName) {
 }
 .locationservice$operations$delete_geofence_collection <- locationservice_delete_geofence_collection
 
-#' Deletes a map resource from your AWS account
+#' Deletes the specified API key
 #'
 #' @description
-#' Deletes a map resource from your AWS account.
+#' Deletes the specified API key. The API key must have been deactivated more than 90 days previously.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/delete_map.html](https://paws-r.github.io/docs/locationservice/delete_map.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_key/](https://www.paws-r-sdk.com/docs/locationservice_delete_key/) for full documentation.
+#'
+#' @param KeyName &#91;required&#93; The name of the API key to delete.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_delete_key
+locationservice_delete_key <- function(KeyName) {
+  op <- new_operation(
+    name = "DeleteKey",
+    http_method = "DELETE",
+    http_path = "/metadata/v0/keys/{KeyName}",
+    paginator = list()
+  )
+  input <- .locationservice$delete_key_input(KeyName = KeyName)
+  output <- .locationservice$delete_key_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$delete_key <- locationservice_delete_key
+
+#' Deletes a map resource from your Amazon Web Services account
+#'
+#' @description
+#' Deletes a map resource from your Amazon Web Services account.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_map/](https://www.paws-r-sdk.com/docs/locationservice_delete_map/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The name of the map resource to be deleted.
 #'
@@ -924,12 +1058,12 @@ locationservice_delete_map <- function(MapName) {
 }
 .locationservice$operations$delete_map <- locationservice_delete_map
 
-#' Deletes a place index resource from your AWS account
+#' Deletes a place index resource from your Amazon Web Services account
 #'
 #' @description
-#' Deletes a place index resource from your AWS account.
+#' Deletes a place index resource from your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/delete_place_index.html](https://paws-r.github.io/docs/locationservice/delete_place_index.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_place_index/](https://www.paws-r-sdk.com/docs/locationservice_delete_place_index/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource to be deleted.
 #'
@@ -953,12 +1087,13 @@ locationservice_delete_place_index <- function(IndexName) {
 }
 .locationservice$operations$delete_place_index <- locationservice_delete_place_index
 
-#' Deletes a route calculator resource from your AWS account
+#' Deletes a route calculator resource from your Amazon Web Services
+#' account
 #'
 #' @description
-#' Deletes a route calculator resource from your AWS account.
+#' Deletes a route calculator resource from your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/delete_route_calculator.html](https://paws-r.github.io/docs/locationservice/delete_route_calculator.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_delete_route_calculator/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource to be deleted.
 #'
@@ -982,12 +1117,12 @@ locationservice_delete_route_calculator <- function(CalculatorName) {
 }
 .locationservice$operations$delete_route_calculator <- locationservice_delete_route_calculator
 
-#' Deletes a tracker resource from your AWS account
+#' Deletes a tracker resource from your Amazon Web Services account
 #'
 #' @description
-#' Deletes a tracker resource from your AWS account.
+#' Deletes a tracker resource from your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/delete_tracker.html](https://paws-r.github.io/docs/locationservice/delete_tracker.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_delete_tracker/](https://www.paws-r-sdk.com/docs/locationservice_delete_tracker/) for full documentation.
 #'
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to be deleted.
 #'
@@ -1016,7 +1151,7 @@ locationservice_delete_tracker <- function(TrackerName) {
 #' @description
 #' Retrieves the geofence collection details.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/describe_geofence_collection.html](https://paws-r.github.io/docs/locationservice/describe_geofence_collection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_geofence_collection/](https://www.paws-r-sdk.com/docs/locationservice_describe_geofence_collection/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection.
 #'
@@ -1040,12 +1175,41 @@ locationservice_describe_geofence_collection <- function(CollectionName) {
 }
 .locationservice$operations$describe_geofence_collection <- locationservice_describe_geofence_collection
 
+#' Retrieves the API key resource details
+#'
+#' @description
+#' Retrieves the API key resource details.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_key/](https://www.paws-r-sdk.com/docs/locationservice_describe_key/) for full documentation.
+#'
+#' @param KeyName &#91;required&#93; The name of the API key resource.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_describe_key
+locationservice_describe_key <- function(KeyName) {
+  op <- new_operation(
+    name = "DescribeKey",
+    http_method = "GET",
+    http_path = "/metadata/v0/keys/{KeyName}",
+    paginator = list()
+  )
+  input <- .locationservice$describe_key_input(KeyName = KeyName)
+  output <- .locationservice$describe_key_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$describe_key <- locationservice_describe_key
+
 #' Retrieves the map resource details
 #'
 #' @description
 #' Retrieves the map resource details.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/describe_map.html](https://paws-r.github.io/docs/locationservice/describe_map.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_map/](https://www.paws-r-sdk.com/docs/locationservice_describe_map/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The name of the map resource.
 #'
@@ -1074,7 +1238,7 @@ locationservice_describe_map <- function(MapName) {
 #' @description
 #' Retrieves the place index resource details.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/describe_place_index.html](https://paws-r.github.io/docs/locationservice/describe_place_index.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_place_index/](https://www.paws-r-sdk.com/docs/locationservice_describe_place_index/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource.
 #'
@@ -1103,7 +1267,7 @@ locationservice_describe_place_index <- function(IndexName) {
 #' @description
 #' Retrieves the route calculator resource details.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/describe_route_calculator.html](https://paws-r.github.io/docs/locationservice/describe_route_calculator.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_describe_route_calculator/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource.
 #'
@@ -1132,7 +1296,7 @@ locationservice_describe_route_calculator <- function(CalculatorName) {
 #' @description
 #' Retrieves the tracker resource details.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/describe_tracker.html](https://paws-r.github.io/docs/locationservice/describe_tracker.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_describe_tracker/](https://www.paws-r-sdk.com/docs/locationservice_describe_tracker/) for full documentation.
 #'
 #' @param TrackerName &#91;required&#93; The name of the tracker resource.
 #'
@@ -1162,14 +1326,14 @@ locationservice_describe_tracker <- function(TrackerName) {
 #' @description
 #' Removes the association between a tracker resource and a geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/disassociate_tracker_consumer.html](https://paws-r.github.io/docs/locationservice/disassociate_tracker_consumer.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_disassociate_tracker_consumer/](https://www.paws-r-sdk.com/docs/locationservice_disassociate_tracker_consumer/) for full documentation.
 #'
 #' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be
 #' disassociated from the tracker resource. Used when you need to specify a
-#' resource across all AWS.
+#' resource across all Amazon Web Services.
 #' 
-#' - Format example:
-#'   `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+#' -   Format example:
+#'     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to be dissociated from the consumer.
 #'
 #' @keywords internal
@@ -1197,7 +1361,7 @@ locationservice_disassociate_tracker_consumer <- function(ConsumerArn, TrackerNa
 #' @description
 #' Retrieves a device's most recent position according to its sample time.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_device_position.html](https://paws-r.github.io/docs/locationservice/get_device_position.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_device_position/](https://www.paws-r-sdk.com/docs/locationservice_get_device_position/) for full documentation.
 #'
 #' @param DeviceId &#91;required&#93; The device whose position you want to retrieve.
 #' @param TrackerName &#91;required&#93; The tracker resource receiving the position update.
@@ -1228,7 +1392,7 @@ locationservice_get_device_position <- function(DeviceId, TrackerName) {
 #' @description
 #' Retrieves the device position history from a tracker resource within a specified range of time.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_device_position_history.html](https://paws-r.github.io/docs/locationservice/get_device_position_history.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_device_position_history/](https://www.paws-r-sdk.com/docs/locationservice_get_device_position_history/) for full documentation.
 #'
 #' @param DeviceId &#91;required&#93; The device whose position history you want to retrieve.
 #' @param EndTimeExclusive Specify the end time for the position history in [ISO
@@ -1238,8 +1402,8 @@ locationservice_get_device_position <- function(DeviceId, TrackerName) {
 #' 
 #' Requirement:
 #' 
-#' - The time specified for `EndTimeExclusive` must be after the time for
-#'   `StartTimeInclusive`.
+#' -   The time specified for `EndTimeExclusive` must be after the time for
+#'     `StartTimeInclusive`.
 #' @param MaxResults An optional limit for the number of device positions returned in a
 #' single call.
 #' 
@@ -1255,8 +1419,8 @@ locationservice_get_device_position <- function(DeviceId, TrackerName) {
 #' 
 #' Requirement:
 #' 
-#' - The time specified for `StartTimeInclusive` must be before
-#'   `EndTimeExclusive`.
+#' -   The time specified for `StartTimeInclusive` must be before
+#'     `EndTimeExclusive`.
 #' @param TrackerName &#91;required&#93; The tracker resource receiving the request for the device position
 #' history.
 #'
@@ -1285,7 +1449,7 @@ locationservice_get_device_position_history <- function(DeviceId, EndTimeExclusi
 #' @description
 #' Retrieves the geofence details from a geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_geofence.html](https://paws-r.github.io/docs/locationservice/get_geofence.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_geofence/](https://www.paws-r-sdk.com/docs/locationservice_get_geofence/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection storing the target geofence.
 #' @param GeofenceId &#91;required&#93; The geofence you're retrieving details for.
@@ -1315,7 +1479,7 @@ locationservice_get_geofence <- function(CollectionName, GeofenceId) {
 #' @description
 #' Retrieves glyphs used to display labels on a map.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_map_glyphs.html](https://paws-r.github.io/docs/locationservice/get_map_glyphs.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/](https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/) for full documentation.
 #'
 #' @param FontStack &#91;required&#93; A comma-separated list of fonts to load glyphs from in order of
 #' preference. For example, `Noto Sans Regular, Arial Unicode`.
@@ -1324,45 +1488,81 @@ locationservice_get_geofence <- function(CollectionName, GeofenceId) {
 #' [Esri](https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
 #' styles:
 #' 
-#' - VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` | `Ubuntu Medium` |
-#'   `Ubuntu Italic` | `Ubuntu Regular` | `Ubuntu Bold`
+#' -   VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` | `Ubuntu Medium`
+#'     | `Ubuntu Italic` | `Ubuntu Regular` | `Ubuntu Bold`
 #' 
-#' - VectorEsriLightGrayCanvas – `Ubuntu Italic` | `Ubuntu Regular` |
-#'   `Ubuntu Light` | `Ubuntu Bold`
+#' -   VectorEsriLightGrayCanvas – `Ubuntu Italic` | `Ubuntu Regular` |
+#'     `Ubuntu Light` | `Ubuntu Bold`
 #' 
-#' - VectorEsriTopographic – `Noto Sans Italic` | `Noto Sans Regular` |
-#'   `Noto Sans Bold` | `Noto Serif Regular` |
-#'   `Roboto Condensed Light Italic`
+#' -   VectorEsriTopographic – `Noto Sans Italic` | `Noto Sans Regular` |
+#'     `Noto Sans Bold` | `Noto Serif Regular` |
+#'     `Roboto Condensed Light Italic`
 #' 
-#' - VectorEsriStreets – `Arial Regular` | `Arial Italic` | `Arial Bold`
+#' -   VectorEsriStreets – `Arial Regular` | `Arial Italic` | `Arial Bold`
 #' 
-#' - VectorEsriNavigation – `Arial Regular` | `Arial Italic` | `Arial Bold`
+#' -   VectorEsriNavigation – `Arial Regular` | `Arial Italic` |
+#'     `Arial Bold`
 #' 
 #' Valid font stacks for [HERE
 #' Technologies](https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
 #' styles:
 #' 
-#' - VectorHereContrast – `Fira GO Regular` | `Fira GO Bold`
+#' -   VectorHereContrast – `Fira GO Regular` | `Fira GO Bold`
 #' 
-#' - VectorHereExplore, VectorHereExploreTruck – `Firo GO Italic` |
-#'   `Fira GO Map` | `Fira GO Map Bold` | `Noto Sans CJK JP Bold` |
-#'   `Noto Sans CJK JP Light` | `Noto Sans CJK JP Regular`
+#' -   VectorHereExplore, VectorHereExploreTruck,
+#'     HybridHereExploreSatellite – `Fira GO Italic` | `Fira GO Map` |
+#'     `Fira GO Map Bold` | `Noto Sans CJK JP Bold` |
+#'     `Noto Sans CJK JP Light` | `Noto Sans CJK JP Regular`
+#' 
+#' Valid font stacks for
+#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
+#' styles:
+#' 
+#' -   VectorGrabStandardLight, VectorGrabStandardDark –
+#'     `Noto Sans Regular` | `Noto Sans Medium` | `Noto Sans Bold`
+#' 
+#' Valid font stacks for [Open
+#' Data](https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
+#' styles:
+#' 
+#' -   VectorOpenDataStandardLight, VectorOpenDataStandardDark,
+#'     VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark –
+#'     `Amazon Ember Regular,Noto Sans Regular` |
+#'     `Amazon Ember Bold,Noto Sans Bold` |
+#'     `Amazon Ember Medium,Noto Sans Medium` |
+#'     `Amazon Ember Regular Italic,Noto Sans Italic` |
+#'     `Amazon Ember Condensed RC Regular,Noto Sans Regular` |
+#'     `Amazon Ember Condensed RC Bold,Noto Sans Bold` |
+#'     `Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular` |
+#'     `Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold`
+#'     | `Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold` |
+#'     `Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular`
+#'     |
+#'     `Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular`
+#'     | `Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium`
+#' 
+#' The fonts used by the Open Data map styles are combined fonts that use
+#' `Amazon Ember` for most glyphs but `Noto Sans` for glyphs unsupported by
+#' `Amazon Ember`.
 #' @param FontUnicodeRange &#91;required&#93; A Unicode range of characters to download glyphs for. Each response will
 #' contain 256 characters. For example, 0–255 includes all characters from
 #' range `U+0000` to `00FF`. Must be aligned to multiples of 256.
+#' @param Key The optional [API
+#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+#' to authorize the request.
 #' @param MapName &#91;required&#93; The map resource associated with the glyph ﬁle.
 #'
 #' @keywords internal
 #'
 #' @rdname locationservice_get_map_glyphs
-locationservice_get_map_glyphs <- function(FontStack, FontUnicodeRange, MapName) {
+locationservice_get_map_glyphs <- function(FontStack, FontUnicodeRange, Key = NULL, MapName) {
   op <- new_operation(
     name = "GetMapGlyphs",
     http_method = "GET",
     http_path = "/maps/v0/maps/{MapName}/glyphs/{FontStack}/{FontUnicodeRange}",
     paginator = list()
   )
-  input <- .locationservice$get_map_glyphs_input(FontStack = FontStack, FontUnicodeRange = FontUnicodeRange, MapName = MapName)
+  input <- .locationservice$get_map_glyphs_input(FontStack = FontStack, FontUnicodeRange = FontUnicodeRange, Key = Key, MapName = MapName)
   output <- .locationservice$get_map_glyphs_output()
   config <- get_config()
   svc <- .locationservice$service(config)
@@ -1377,34 +1577,37 @@ locationservice_get_map_glyphs <- function(FontStack, FontUnicodeRange, MapName)
 #' @description
 #' Retrieves the sprite sheet corresponding to a map resource. The sprite sheet is a PNG image paired with a JSON document describing the offsets of individual icons that will be displayed on a rendered map.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_map_sprites.html](https://paws-r.github.io/docs/locationservice/get_map_sprites.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_sprites/](https://www.paws-r-sdk.com/docs/locationservice_get_map_sprites/) for full documentation.
 #'
 #' @param FileName &#91;required&#93; The name of the sprite ﬁle. Use the following ﬁle names for the sprite
 #' sheet:
 #' 
-#' - `sprites.png`
+#' -   `sprites.png`
 #' 
-#' - `sprites@@2x.png` for high pixel density displays
+#' -   `sprites@@2x.png` for high pixel density displays
 #' 
-#' For the JSON document contain image offsets. Use the following ﬁle
+#' For the JSON document containing image offsets. Use the following ﬁle
 #' names:
 #' 
-#' - `sprites.json`
+#' -   `sprites.json`
 #' 
-#' - `sprites@@2x.json` for high pixel density displays
+#' -   `sprites@@2x.json` for high pixel density displays
+#' @param Key The optional [API
+#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+#' to authorize the request.
 #' @param MapName &#91;required&#93; The map resource associated with the sprite ﬁle.
 #'
 #' @keywords internal
 #'
 #' @rdname locationservice_get_map_sprites
-locationservice_get_map_sprites <- function(FileName, MapName) {
+locationservice_get_map_sprites <- function(FileName, Key = NULL, MapName) {
   op <- new_operation(
     name = "GetMapSprites",
     http_method = "GET",
     http_path = "/maps/v0/maps/{MapName}/sprites/{FileName}",
     paginator = list()
   )
-  input <- .locationservice$get_map_sprites_input(FileName = FileName, MapName = MapName)
+  input <- .locationservice$get_map_sprites_input(FileName = FileName, Key = Key, MapName = MapName)
   output <- .locationservice$get_map_sprites_output()
   config <- get_config()
   svc <- .locationservice$service(config)
@@ -1419,21 +1622,24 @@ locationservice_get_map_sprites <- function(FileName, MapName) {
 #' @description
 #' Retrieves the map style descriptor from a map resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_map_style_descriptor.html](https://paws-r.github.io/docs/locationservice/get_map_style_descriptor.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_style_descriptor/](https://www.paws-r-sdk.com/docs/locationservice_get_map_style_descriptor/) for full documentation.
 #'
+#' @param Key The optional [API
+#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+#' to authorize the request.
 #' @param MapName &#91;required&#93; The map resource to retrieve the style descriptor from.
 #'
 #' @keywords internal
 #'
 #' @rdname locationservice_get_map_style_descriptor
-locationservice_get_map_style_descriptor <- function(MapName) {
+locationservice_get_map_style_descriptor <- function(Key = NULL, MapName) {
   op <- new_operation(
     name = "GetMapStyleDescriptor",
     http_method = "GET",
     http_path = "/maps/v0/maps/{MapName}/style-descriptor",
     paginator = list()
   )
-  input <- .locationservice$get_map_style_descriptor_input(MapName = MapName)
+  input <- .locationservice$get_map_style_descriptor_input(Key = Key, MapName = MapName)
   output <- .locationservice$get_map_style_descriptor_output()
   config <- get_config()
   svc <- .locationservice$service(config)
@@ -1448,8 +1654,11 @@ locationservice_get_map_style_descriptor <- function(MapName) {
 #' @description
 #' Retrieves a vector data tile from the map resource. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/get_map_tile.html](https://paws-r.github.io/docs/locationservice/get_map_tile.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_tile/](https://www.paws-r-sdk.com/docs/locationservice_get_map_tile/) for full documentation.
 #'
+#' @param Key The optional [API
+#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
+#' to authorize the request.
 #' @param MapName &#91;required&#93; The map resource to retrieve the map tiles from.
 #' @param X &#91;required&#93; The X axis value for the map tile.
 #' @param Y &#91;required&#93; The Y axis value for the map tile.
@@ -1458,14 +1667,14 @@ locationservice_get_map_style_descriptor <- function(MapName) {
 #' @keywords internal
 #'
 #' @rdname locationservice_get_map_tile
-locationservice_get_map_tile <- function(MapName, X, Y, Z) {
+locationservice_get_map_tile <- function(Key = NULL, MapName, X, Y, Z) {
   op <- new_operation(
     name = "GetMapTile",
     http_method = "GET",
     http_path = "/maps/v0/maps/{MapName}/tiles/{Z}/{X}/{Y}",
     paginator = list()
   )
-  input <- .locationservice$get_map_tile_input(MapName = MapName, X = X, Y = Y, Z = Z)
+  input <- .locationservice$get_map_tile_input(Key = Key, MapName = MapName, X = X, Y = Y, Z = Z)
   output <- .locationservice$get_map_tile_output()
   config <- get_config()
   svc <- .locationservice$service(config)
@@ -1475,12 +1684,60 @@ locationservice_get_map_tile <- function(MapName, X, Y, Z) {
 }
 .locationservice$operations$get_map_tile <- locationservice_get_map_tile
 
+#' Finds a place by its unique ID
+#'
+#' @description
+#' Finds a place by its unique ID. A `PlaceId` is returned by other search operations.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_place/](https://www.paws-r-sdk.com/docs/locationservice_get_place/) for full documentation.
+#'
+#' @param IndexName &#91;required&#93; The name of the place index resource that you want to use for the
+#' search.
+#' @param Language The preferred language used to return results. The value must be a valid
+#' BCP 47 language tag, for example, `en` for English.
+#' 
+#' This setting affects the languages used in the results, but not the
+#' results themselves. If no language is specified, or not supported for a
+#' particular result, the partner automatically chooses a language for the
+#' result.
+#' 
+#' For an example, we'll use the Greek language. You search for a location
+#' around Athens, Greece, with the `language` parameter set to `en`. The
+#' `city` in the results will most likely be returned as `Athens`.
+#' 
+#' If you set the `language` parameter to `el`, for Greek, then the `city`
+#' in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+#' 
+#' If the data provider does not have a value for Greek, the result will be
+#' in a language that the provider does support.
+#' @param PlaceId &#91;required&#93; The identifier of the place to find.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_get_place
+locationservice_get_place <- function(IndexName, Language = NULL, PlaceId) {
+  op <- new_operation(
+    name = "GetPlace",
+    http_method = "GET",
+    http_path = "/places/v0/indexes/{IndexName}/places/{PlaceId}",
+    paginator = list()
+  )
+  input <- .locationservice$get_place_input(IndexName = IndexName, Language = Language, PlaceId = PlaceId)
+  output <- .locationservice$get_place_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$get_place <- locationservice_get_place
+
 #' A batch request to retrieve all device positions
 #'
 #' @description
 #' A batch request to retrieve all device positions.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_device_positions.html](https://paws-r.github.io/docs/locationservice/list_device_positions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_device_positions/](https://www.paws-r-sdk.com/docs/locationservice_list_device_positions/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of entries returned in a single call.
 #' 
@@ -1511,12 +1768,12 @@ locationservice_list_device_positions <- function(MaxResults = NULL, NextToken =
 }
 .locationservice$operations$list_device_positions <- locationservice_list_device_positions
 
-#' Lists geofence collections in your AWS account
+#' Lists geofence collections in your Amazon Web Services account
 #'
 #' @description
-#' Lists geofence collections in your AWS account.
+#' Lists geofence collections in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_geofence_collections.html](https://paws-r.github.io/docs/locationservice/list_geofence_collections.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_geofence_collections/](https://www.paws-r-sdk.com/docs/locationservice_list_geofence_collections/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
@@ -1551,7 +1808,7 @@ locationservice_list_geofence_collections <- function(MaxResults = NULL, NextTok
 #' @description
 #' Lists geofences stored in a given geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_geofences.html](https://paws-r.github.io/docs/locationservice/list_geofences.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_geofences/](https://www.paws-r-sdk.com/docs/locationservice_list_geofences/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection storing the list of geofences.
 #' @param MaxResults An optional limit for the number of geofences returned in a single call.
@@ -1582,12 +1839,48 @@ locationservice_list_geofences <- function(CollectionName, MaxResults = NULL, Ne
 }
 .locationservice$operations$list_geofences <- locationservice_list_geofences
 
-#' Lists map resources in your AWS account
+#' Lists API key resources in your Amazon Web Services account
 #'
 #' @description
-#' Lists map resources in your AWS account.
+#' Lists API key resources in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_maps.html](https://paws-r.github.io/docs/locationservice/list_maps.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_keys/](https://www.paws-r-sdk.com/docs/locationservice_list_keys/) for full documentation.
+#'
+#' @param Filter Optionally filter the list to only `Active` or `Expired` API keys.
+#' @param MaxResults An optional limit for the number of resources returned in a single call.
+#' 
+#' Default value: `100`
+#' @param NextToken The pagination token specifying which page of results to return in the
+#' response. If no token is provided, the default page is the first page.
+#' 
+#' Default value: `null`
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_list_keys
+locationservice_list_keys <- function(Filter = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "ListKeys",
+    http_method = "POST",
+    http_path = "/metadata/v0/list-keys",
+    paginator = list()
+  )
+  input <- .locationservice$list_keys_input(Filter = Filter, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .locationservice$list_keys_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$list_keys <- locationservice_list_keys
+
+#' Lists map resources in your Amazon Web Services account
+#'
+#' @description
+#' Lists map resources in your Amazon Web Services account.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_maps/](https://www.paws-r-sdk.com/docs/locationservice_list_maps/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
@@ -1617,12 +1910,12 @@ locationservice_list_maps <- function(MaxResults = NULL, NextToken = NULL) {
 }
 .locationservice$operations$list_maps <- locationservice_list_maps
 
-#' Lists place index resources in your AWS account
+#' Lists place index resources in your Amazon Web Services account
 #'
 #' @description
-#' Lists place index resources in your AWS account.
+#' Lists place index resources in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_place_indexes.html](https://paws-r.github.io/docs/locationservice/list_place_indexes.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_place_indexes/](https://www.paws-r-sdk.com/docs/locationservice_list_place_indexes/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the maximum number of results returned in a single
 #' call.
@@ -1653,12 +1946,12 @@ locationservice_list_place_indexes <- function(MaxResults = NULL, NextToken = NU
 }
 .locationservice$operations$list_place_indexes <- locationservice_list_place_indexes
 
-#' Lists route calculator resources in your AWS account
+#' Lists route calculator resources in your Amazon Web Services account
 #'
 #' @description
-#' Lists route calculator resources in your AWS account.
+#' Lists route calculator resources in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_route_calculators.html](https://paws-r.github.io/docs/locationservice/list_route_calculators.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_route_calculators/](https://www.paws-r-sdk.com/docs/locationservice_list_route_calculators/) for full documentation.
 #'
 #' @param MaxResults An optional maximum number of results returned in a single call.
 #' 
@@ -1694,13 +1987,13 @@ locationservice_list_route_calculators <- function(MaxResults = NULL, NextToken 
 #' @description
 #' Returns a list of tags that are applied to the specified Amazon Location resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_tags_for_resource.html](https://paws-r.github.io/docs/locationservice/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/locationservice_list_tags_for_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
 #' retrieve.
 #' 
-#' - Format example:
-#'   `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' -   Format example:
+#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
 #'
 #' @keywords internal
 #'
@@ -1728,7 +2021,7 @@ locationservice_list_tags_for_resource <- function(ResourceArn) {
 #' @description
 #' Lists geofence collections currently associated to the given tracker resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_tracker_consumers.html](https://paws-r.github.io/docs/locationservice/list_tracker_consumers.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_tracker_consumers/](https://www.paws-r-sdk.com/docs/locationservice_list_tracker_consumers/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
@@ -1760,12 +2053,12 @@ locationservice_list_tracker_consumers <- function(MaxResults = NULL, NextToken 
 }
 .locationservice$operations$list_tracker_consumers <- locationservice_list_tracker_consumers
 
-#' Lists tracker resources in your AWS account
+#' Lists tracker resources in your Amazon Web Services account
 #'
 #' @description
-#' Lists tracker resources in your AWS account.
+#' Lists tracker resources in your Amazon Web Services account.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/list_trackers.html](https://paws-r.github.io/docs/locationservice/list_trackers.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_trackers/](https://www.paws-r-sdk.com/docs/locationservice_list_trackers/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
@@ -1802,7 +2095,7 @@ locationservice_list_trackers <- function(MaxResults = NULL, NextToken = NULL) {
 #' @description
 #' Stores a geofence geometry in a given geofence collection, or updates the geometry of an existing geofence if a geofence ID is included in the request.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/put_geofence.html](https://paws-r.github.io/docs/locationservice/put_geofence.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_put_geofence/](https://www.paws-r-sdk.com/docs/locationservice_put_geofence/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection to store the geofence in.
 #' @param GeofenceId &#91;required&#93; An identifier for the geofence. For example, `ExampleGeofence-1`.
@@ -1839,7 +2132,7 @@ locationservice_put_geofence <- function(CollectionName, GeofenceId, Geometry) {
 #' @description
 #' Reverse geocodes a given coordinate and returns a legible address. Allows you to search for Places or points of interest near a given position.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/search_place_index_for_position.html](https://paws-r.github.io/docs/locationservice/search_place_index_for_position.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_position/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_position/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
 #' @param Language The preferred language used to return results. The value must be a valid
@@ -1898,7 +2191,7 @@ locationservice_search_place_index_for_position <- function(IndexName, Language 
 #' @description
 #' Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/search_place_index_for_suggestions.html](https://paws-r.github.io/docs/locationservice/search_place_index_for_suggestions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/) for full documentation.
 #'
 #' @param BiasPosition An optional parameter that indicates a preference for place suggestions
 #' that are closer to a specified position.
@@ -1932,14 +2225,12 @@ locationservice_search_place_index_for_position <- function(IndexName, Language 
 #' @param FilterCountries An optional parameter that limits the search results by returning only
 #' suggestions within the provided list of countries.
 #' 
-#' - Use the [ISO 3166](https://www.iso.org/iso-3166-country-codes.html)
-#'   3-digit country code. For example, Australia uses three upper-case
-#'   characters: `AUS`.
+#' -   Use the [ISO 3166](https://www.iso.org/iso-3166-country-codes.html)
+#'     3-digit country code. For example, Australia uses three upper-case
+#'     characters: `AUS`.
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
 #' @param Language The preferred language used to return results. The value must be a valid
-#' [BCP
-#' 47](https://datatracker.ietf.org/doc/search?rfcs=on&activedrafts=on&name=bcp47)
-#' language tag, for example, `en` for English.
+#' BCP 47 language tag, for example, `en` for English.
 #' 
 #' This setting affects the languages used in the results. If no language
 #' is specified, or not supported for a particular result, the partner
@@ -1988,7 +2279,7 @@ locationservice_search_place_index_for_suggestions <- function(BiasPosition = NU
 #' @description
 #' Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/search_place_index_for_text.html](https://paws-r.github.io/docs/locationservice/search_place_index_for_text.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_text/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_text/) for full documentation.
 #'
 #' @param BiasPosition An optional parameter that indicates a preference for places that are
 #' closer to a specified position.
@@ -2022,14 +2313,13 @@ locationservice_search_place_index_for_suggestions <- function(BiasPosition = NU
 #' @param FilterCountries An optional parameter that limits the search results by returning only
 #' places that are in a specified list of countries.
 #' 
-#' - Valid values include [ISO
-#'   3166](https://www.iso.org/iso-3166-country-codes.html) 3-digit country
-#'   codes. For example, Australia uses three upper-case characters: `AUS`.
+#' -   Valid values include [ISO
+#'     3166](https://www.iso.org/iso-3166-country-codes.html) 3-digit
+#'     country codes. For example, Australia uses three upper-case
+#'     characters: `AUS`.
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
 #' @param Language The preferred language used to return results. The value must be a valid
-#' [BCP
-#' 47](https://datatracker.ietf.org/doc/search?rfcs=on&activedrafts=on&name=bcp47)
-#' language tag, for example, `en` for English.
+#' BCP 47 language tag, for example, `en` for English.
 #' 
 #' This setting affects the languages used in the results, but not the
 #' results themselves. If no language is specified, or not supported for a
@@ -2078,13 +2368,13 @@ locationservice_search_place_index_for_text <- function(BiasPosition = NULL, Fil
 #' @description
 #' Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/tag_resource.html](https://paws-r.github.io/docs/locationservice/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_tag_resource/](https://www.paws-r-sdk.com/docs/locationservice_tag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
 #' update.
 #' 
-#' - Format example:
-#'   `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' -   Format example:
+#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
 #' @param Tags &#91;required&#93; Applies one or more tags to specific resource. A tag is a key-value pair
 #' that helps you manage, identify, search, and filter your resources.
 #' 
@@ -2092,19 +2382,19 @@ locationservice_search_place_index_for_text <- function(BiasPosition = NULL, Fil
 #' 
 #' Restrictions:
 #' 
-#' - Maximum 50 tags per resource.
+#' -   Maximum 50 tags per resource.
 #' 
-#' - Each tag key must be unique and must have exactly one associated
-#'   value.
+#' -   Each tag key must be unique and must have exactly one associated
+#'     value.
 #' 
-#' - Maximum key length: 128 Unicode characters in UTF-8.
+#' -   Maximum key length: 128 Unicode characters in UTF-8.
 #' 
-#' - Maximum value length: 256 Unicode characters in UTF-8.
+#' -   Maximum value length: 256 Unicode characters in UTF-8.
 #' 
-#' - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'   characters: + - = . _ : / @@
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
+#'     characters: + - = . _ : / @@
 #' 
-#' - Cannot use "aws:" as a prefix for a key.
+#' -   Cannot use "aws:" as a prefix for a key.
 #'
 #' @keywords internal
 #'
@@ -2131,13 +2421,13 @@ locationservice_tag_resource <- function(ResourceArn, Tags) {
 #' @description
 #' Removes one or more tags from the specified Amazon Location resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/untag_resource.html](https://paws-r.github.io/docs/locationservice/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_untag_resource/](https://www.paws-r-sdk.com/docs/locationservice_untag_resource/) for full documentation.
 #'
 #' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource from which you want to
 #' remove tags.
 #' 
-#' - Format example:
-#'   `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' -   Format example:
+#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
 #' @param TagKeys &#91;required&#93; The list of tag keys to remove from the specified resource.
 #'
 #' @keywords internal
@@ -2165,7 +2455,7 @@ locationservice_untag_resource <- function(ResourceArn, TagKeys) {
 #' @description
 #' Updates the specified properties of a given geofence collection.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/update_geofence_collection.html](https://paws-r.github.io/docs/locationservice/update_geofence_collection.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_geofence_collection/](https://www.paws-r-sdk.com/docs/locationservice_update_geofence_collection/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection to update.
 #' @param Description Updates the description for the geofence collection.
@@ -2193,13 +2483,60 @@ locationservice_update_geofence_collection <- function(CollectionName, Descripti
 }
 .locationservice$operations$update_geofence_collection <- locationservice_update_geofence_collection
 
+#' Updates the specified properties of a given API key resource
+#'
+#' @description
+#' Updates the specified properties of a given API key resource.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_key/](https://www.paws-r-sdk.com/docs/locationservice_update_key/) for full documentation.
+#'
+#' @param Description Updates the description for the API key resource.
+#' @param ExpireTime Updates the timestamp for when the API key resource will expire in [ISO
+#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
+#' `YYYY-MM-DDThh:mm:ss.sssZ`.
+#' @param ForceUpdate The boolean flag to be included for updating `ExpireTime` or
+#' `Restrictions` details.
+#' 
+#' Must be set to `true` to update an API key resource that has been used
+#' in the past 7 days.
+#' 
+#' `False` if force update is not preferred
+#' 
+#' Default value: `False`
+#' @param KeyName &#91;required&#93; The name of the API key resource to update.
+#' @param NoExpiry Whether the API key should expire. Set to `true` to set the API key to
+#' have no expiration time.
+#' @param Restrictions Updates the API key restrictions for the API key resource.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_update_key
+locationservice_update_key <- function(Description = NULL, ExpireTime = NULL, ForceUpdate = NULL, KeyName, NoExpiry = NULL, Restrictions = NULL) {
+  op <- new_operation(
+    name = "UpdateKey",
+    http_method = "PATCH",
+    http_path = "/metadata/v0/keys/{KeyName}",
+    paginator = list()
+  )
+  input <- .locationservice$update_key_input(Description = Description, ExpireTime = ExpireTime, ForceUpdate = ForceUpdate, KeyName = KeyName, NoExpiry = NoExpiry, Restrictions = Restrictions)
+  output <- .locationservice$update_key_output()
+  config <- get_config()
+  svc <- .locationservice$service(config)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$update_key <- locationservice_update_key
+
 #' Updates the specified properties of a given map resource
 #'
 #' @description
 #' Updates the specified properties of a given map resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/update_map.html](https://paws-r.github.io/docs/locationservice/update_map.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_map/](https://www.paws-r-sdk.com/docs/locationservice_update_map/) for full documentation.
 #'
+#' @param ConfigurationUpdate Updates the parts of the map configuration that can be updated,
+#' including the political view.
 #' @param Description Updates the description for the map resource.
 #' @param MapName &#91;required&#93; The name of the map resource to update.
 #' @param PricingPlan No longer used. If included, the only allowed value is
@@ -2208,14 +2545,14 @@ locationservice_update_geofence_collection <- function(CollectionName, Descripti
 #' @keywords internal
 #'
 #' @rdname locationservice_update_map
-locationservice_update_map <- function(Description = NULL, MapName, PricingPlan = NULL) {
+locationservice_update_map <- function(ConfigurationUpdate = NULL, Description = NULL, MapName, PricingPlan = NULL) {
   op <- new_operation(
     name = "UpdateMap",
     http_method = "PATCH",
     http_path = "/maps/v0/maps/{MapName}",
     paginator = list()
   )
-  input <- .locationservice$update_map_input(Description = Description, MapName = MapName, PricingPlan = PricingPlan)
+  input <- .locationservice$update_map_input(ConfigurationUpdate = ConfigurationUpdate, Description = Description, MapName = MapName, PricingPlan = PricingPlan)
   output <- .locationservice$update_map_output()
   config <- get_config()
   svc <- .locationservice$service(config)
@@ -2230,7 +2567,7 @@ locationservice_update_map <- function(Description = NULL, MapName, PricingPlan 
 #' @description
 #' Updates the specified properties of a given place index resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/update_place_index.html](https://paws-r.github.io/docs/locationservice/update_place_index.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_place_index/](https://www.paws-r-sdk.com/docs/locationservice_update_place_index/) for full documentation.
 #'
 #' @param DataSourceConfiguration Updates the data storage option for the place index resource.
 #' @param Description Updates the description for the place index resource.
@@ -2263,7 +2600,7 @@ locationservice_update_place_index <- function(DataSourceConfiguration = NULL, D
 #' @description
 #' Updates the specified properties for a given route calculator resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/update_route_calculator.html](https://paws-r.github.io/docs/locationservice/update_route_calculator.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_update_route_calculator/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource to update.
 #' @param Description Updates the description for the route calculator resource.
@@ -2295,34 +2632,35 @@ locationservice_update_route_calculator <- function(CalculatorName, Description 
 #' @description
 #' Updates the specified properties of a given tracker resource.
 #'
-#' See [https://paws-r.github.io/docs/locationservice/update_tracker.html](https://paws-r.github.io/docs/locationservice/update_tracker.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/locationservice_update_tracker/](https://www.paws-r-sdk.com/docs/locationservice_update_tracker/) for full documentation.
 #'
 #' @param Description Updates the description for the tracker resource.
 #' @param PositionFiltering Updates the position filtering for the tracker resource.
 #' 
 #' Valid values:
 #' 
-#' - `TimeBased` - Location updates are evaluated against linked geofence
-#'   collections, but not every location update is stored. If your update
-#'   frequency is more often than 30 seconds, only one update per 30
-#'   seconds is stored for each unique device ID.
+#' -   `TimeBased` - Location updates are evaluated against linked geofence
+#'     collections, but not every location update is stored. If your update
+#'     frequency is more often than 30 seconds, only one update per 30
+#'     seconds is stored for each unique device ID.
 #' 
-#' - `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
-#'   location updates are ignored. Location updates within this distance
-#'   are neither evaluated against linked geofence collections, nor stored.
-#'   This helps control costs by reducing the number of geofence
-#'   evaluations and historical device positions to paginate through.
-#'   Distance-based filtering can also reduce the effects of GPS noise when
-#'   displaying device trajectories on a map.
+#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
+#'     location updates are ignored. Location updates within this distance
+#'     are neither evaluated against linked geofence collections, nor
+#'     stored. This helps control costs by reducing the number of geofence
+#'     evaluations and historical device positions to paginate through.
+#'     Distance-based filtering can also reduce the effects of GPS noise
+#'     when displaying device trajectories on a map.
 #' 
-#' - `AccuracyBased` - If the device has moved less than the measured
-#'   accuracy, location updates are ignored. For example, if two
-#'   consecutive updates from a device have a horizontal accuracy of 5 m
-#'   and 10 m, the second update is ignored if the device has moved less
-#'   than 15 m. Ignored location updates are neither evaluated against
-#'   linked geofence collections, nor stored. This helps educe the effects
-#'   of GPS noise when displaying device trajectories on a map, and can
-#'   help control costs by reducing the number of geofence evaluations.
+#' -   `AccuracyBased` - If the device has moved less than the measured
+#'     accuracy, location updates are ignored. For example, if two
+#'     consecutive updates from a device have a horizontal accuracy of 5 m
+#'     and 10 m, the second update is ignored if the device has moved less
+#'     than 15 m. Ignored location updates are neither evaluated against
+#'     linked geofence collections, nor stored. This helps educe the
+#'     effects of GPS noise when displaying device trajectories on a map,
+#'     and can help control costs by reducing the number of geofence
+#'     evaluations.
 #' @param PricingPlan No longer used. If included, the only allowed value is
 #' `RequestBasedUsage`.
 #' @param PricingPlanDataSource This parameter is no longer used.

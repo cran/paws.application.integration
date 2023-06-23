@@ -94,6 +94,15 @@ preferences:
 \item If traveling by \code{Truck} use the \code{TruckModeOptions} parameter.
 }
 
+\code{Bicycle} or \code{Motorcycle} are only valid when using \code{Grab} as a data
+provider, and only within Southeast Asia.
+
+\code{Truck} is not available for Grab.
+
+For more information about using Grab as a data provider, see
+\href{https://docs.aws.amazon.com/location/latest/developerguide/grab.html}{GrabMaps}
+in the \emph{Amazon Location Service Developer Guide}.
+
 Default Value: \code{Car}}
 
 \item{TruckModeOptions}{Specifies route preferences when traveling by \code{Truck}, such as avoiding
@@ -105,6 +114,6 @@ Requirements: \code{TravelMode} must be specified as \code{Truck}.}
 \description{
 \href{https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html}{Calculates a route matrix} given the following required parameters: \code{DeparturePositions} and \code{DestinationPositions}. \code{\link[=locationservice_calculate_route_matrix]{calculate_route_matrix}} calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, \code{\link[=locationservice_calculate_route_matrix]{calculate_route_matrix}} will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of \code{DeparturePositions} times the number of \code{DestinationPositions}.
 
-See \url{https://paws-r.github.io/docs/locationservice/calculate_route_matrix.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_calculate_route_matrix/} for full documentation.
 }
 \keyword{internal}

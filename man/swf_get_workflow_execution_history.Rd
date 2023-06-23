@@ -21,7 +21,7 @@ swf_get_workflow_execution_history(
 value of \code{NextPageToken} is a unique pagination token for each page.
 Make the call again using the returned token to retrieve the next page.
 Keep all other arguments unchanged. Each pagination token expires after
-60 seconds. Using an expired pagination token will return a \code{400} error:
+24 hours. Using an expired pagination token will return a \code{400} error:
 "\verb{Specified token has exceeded its maximum lifetime}".
 
 The configured \code{maximumPageSize} determines how many results can be
@@ -37,6 +37,6 @@ events.}
 \description{
 Returns the history of the specified workflow execution. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the \code{nextPageToken} returned by the initial call.
 
-See \url{https://paws-r.github.io/docs/swf/get_workflow_execution_history.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/swf_get_workflow_execution_history/} for full documentation.
 }
 \keyword{internal}

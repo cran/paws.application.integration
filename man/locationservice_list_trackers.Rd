@@ -2,7 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_list_trackers}
 \alias{locationservice_list_trackers}
-\title{Lists tracker resources in your AWS account}
+\title{Lists tracker resources in your Amazon Web Services account}
 \usage{
 locationservice_list_trackers(MaxResults = NULL, NextToken = NULL)
 }
@@ -17,8 +17,8 @@ response. If no token is provided, the default page is the first page.
 Default value: \code{null}}
 }
 \description{
-Lists tracker resources in your AWS account.
+Lists tracker resources in your Amazon Web Services account.
 
-See \url{https://paws-r.github.io/docs/locationservice/list_trackers.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_list_trackers/} for full documentation.
 }
 \keyword{internal}

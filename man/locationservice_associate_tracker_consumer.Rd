@@ -10,7 +10,7 @@ locationservice_associate_tracker_consumer(ConsumerArn, TrackerName)
 \arguments{
 \item{ConsumerArn}{[required] The Amazon Resource Name (ARN) for the geofence collection to be
 associated to tracker resource. Used when you need to specify a resource
-across all AWS.
+across all Amazon Web Services.
 \itemize{
 \item Format example:
 \code{arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer}
@@ -22,6 +22,6 @@ collection.}
 \description{
 Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.
 
-See \url{https://paws-r.github.io/docs/locationservice/associate_tracker_consumer.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_associate_tracker_consumer/} for full documentation.
 }
 \keyword{internal}

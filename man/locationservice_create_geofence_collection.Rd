@@ -26,7 +26,7 @@ periods (.), and underscores (_).
 
 \item{Description}{An optional description for the geofence collection.}
 
-\item{KmsKeyId}{A key identifier for an \href{https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html}{AWS KMS customer managed key}.
+\item{KmsKeyId}{A key identifier for an \href{https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html}{Amazon Web Services KMS customer managed key}.
 Enter a key ID, key ARN, alias name, or alias ARN.}
 
 \item{PricingPlan}{No longer used. If included, the only allowed value is
@@ -54,6 +54,6 @@ characters: + - = . _ : / @.
 \description{
 Creates a geofence collection, which manages and stores geofences.
 
-See \url{https://paws-r.github.io/docs/locationservice/create_geofence_collection.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_create_geofence_collection/} for full documentation.
 }
 \keyword{internal}

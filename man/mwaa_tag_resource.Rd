@@ -13,11 +13,11 @@ example,
 \code{arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment}.}
 
 \item{Tags}{[required] The key-value tag pairs you want to associate to your environment. For
-example, \code{"Environment": "Staging"}. To learn more, see \href{https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html}{Tagging Amazon Web Services resources}.}
+example, \code{"Environment": "Staging"}. For more information, see \href{https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html}{Tagging Amazon Web Services resources}.}
 }
 \description{
 Associates key-value tag pairs to your Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 
-See \url{https://paws-r.github.io/docs/mwaa/tag_resource.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/mwaa_tag_resource/} for full documentation.
 }
 \keyword{internal}

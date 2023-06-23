@@ -61,6 +61,13 @@ failed deliveries to HTTP/S endpoints.
 \item \code{FilterPolicy} – The simple JSON object that lets your subscriber
 receive only a subset of messages, rather than receiving every
 message published to the topic.
+\item \code{FilterPolicyScope} – This attribute lets you choose the filtering
+scope by using one of the following string value types:
+\itemize{
+\item \code{MessageAttributes} (default) – The filter is applied on the
+message attributes.
+\item \code{MessageBody} – The filter is applied on the message body.
+}
 \item \code{RawMessageDelivery} – When set to \code{true}, enables raw message
 delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
 for the endpoints to process JSON formatting, which is otherwise
@@ -106,6 +113,6 @@ The default value is \code{false}.}
 \description{
 Subscribes an endpoint to an Amazon SNS topic. If the endpoint type is HTTP/S or email, or if the endpoint and the topic are not in the same Amazon Web Services account, the endpoint owner must run the \code{\link[=sns_confirm_subscription]{confirm_subscription}} action to confirm the subscription.
 
-See \url{https://paws-r.github.io/docs/sns/subscribe.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/sns_subscribe/} for full documentation.
 }
 \keyword{internal}

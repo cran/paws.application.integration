@@ -9,7 +9,7 @@ NULL
 #' @description
 #' Returns the number of closed workflow executions within the given domain that meet the specified filtering criteria.
 #'
-#' See [https://paws-r.github.io/docs/swf/count_closed_workflow_executions.html](https://paws-r.github.io/docs/swf/count_closed_workflow_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_count_closed_workflow_executions/](https://www.paws-r-sdk.com/docs/swf_count_closed_workflow_executions/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow executions to count.
 #' @param startTimeFilter If specified, only workflow executions that meet the start time criteria
@@ -70,7 +70,7 @@ swf_count_closed_workflow_executions <- function(domain, startTimeFilter = NULL,
 #' @description
 #' Returns the number of open workflow executions within the given domain that meet the specified filtering criteria.
 #'
-#' See [https://paws-r.github.io/docs/swf/count_open_workflow_executions.html](https://paws-r.github.io/docs/swf/count_open_workflow_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_count_open_workflow_executions/](https://www.paws-r-sdk.com/docs/swf_count_open_workflow_executions/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow executions to count.
 #' @param startTimeFilter &#91;required&#93; Specifies the start time criteria that workflow executions must meet in
@@ -116,7 +116,7 @@ swf_count_open_workflow_executions <- function(domain, startTimeFilter, typeFilt
 #' @description
 #' Returns the estimated number of activity tasks in the specified task list. The count returned is an approximation and isn't guaranteed to be exact. If you specify a task list that no activity task was ever scheduled in then `0` is returned.
 #'
-#' See [https://paws-r.github.io/docs/swf/count_pending_activity_tasks.html](https://paws-r.github.io/docs/swf/count_pending_activity_tasks.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_count_pending_activity_tasks/](https://www.paws-r-sdk.com/docs/swf_count_pending_activity_tasks/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain that contains the task list.
 #' @param taskList &#91;required&#93; The name of the task list.
@@ -147,7 +147,7 @@ swf_count_pending_activity_tasks <- function(domain, taskList) {
 #' @description
 #' Returns the estimated number of decision tasks in the specified task list. The count returned is an approximation and isn't guaranteed to be exact. If you specify a task list that no decision task was ever scheduled in then `0` is returned.
 #'
-#' See [https://paws-r.github.io/docs/swf/count_pending_decision_tasks.html](https://paws-r.github.io/docs/swf/count_pending_decision_tasks.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_count_pending_decision_tasks/](https://www.paws-r-sdk.com/docs/swf_count_pending_decision_tasks/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain that contains the task list.
 #' @param taskList &#91;required&#93; The name of the task list.
@@ -177,7 +177,7 @@ swf_count_pending_decision_tasks <- function(domain, taskList) {
 #' @description
 #' Deprecates the specified *activity type*. After an activity type has been deprecated, you cannot create new tasks of that activity type. Tasks of this type that were scheduled before the type was deprecated continue to run.
 #'
-#' See [https://paws-r.github.io/docs/swf/deprecate_activity_type.html](https://paws-r.github.io/docs/swf/deprecate_activity_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_deprecate_activity_type/](https://www.paws-r-sdk.com/docs/swf_deprecate_activity_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the activity type is registered.
 #' @param activityType &#91;required&#93; The activity type to deprecate.
@@ -207,7 +207,7 @@ swf_deprecate_activity_type <- function(domain, activityType) {
 #' @description
 #' Deprecates the specified domain. After a domain has been deprecated it cannot be used to create new workflow executions or register new types. However, you can still use visibility actions on this domain. Deprecating a domain also deprecates all activity and workflow types registered in the domain. Executions that were started before the domain was deprecated continues to run.
 #'
-#' See [https://paws-r.github.io/docs/swf/deprecate_domain.html](https://paws-r.github.io/docs/swf/deprecate_domain.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_deprecate_domain/](https://www.paws-r-sdk.com/docs/swf_deprecate_domain/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the domain to deprecate.
 #'
@@ -236,7 +236,7 @@ swf_deprecate_domain <- function(name) {
 #' @description
 #' Deprecates the specified *workflow type*. After a workflow type has been deprecated, you cannot create new executions of that type. Executions that were started before the type was deprecated continues to run. A deprecated workflow type may still be used when calling visibility actions.
 #'
-#' See [https://paws-r.github.io/docs/swf/deprecate_workflow_type.html](https://paws-r.github.io/docs/swf/deprecate_workflow_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_deprecate_workflow_type/](https://www.paws-r-sdk.com/docs/swf_deprecate_workflow_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the workflow type is registered.
 #' @param workflowType &#91;required&#93; The workflow type to deprecate.
@@ -266,7 +266,7 @@ swf_deprecate_workflow_type <- function(domain, workflowType) {
 #' @description
 #' Returns information about the specified activity type. This includes configuration settings provided when the type was registered and other general information about the type.
 #'
-#' See [https://paws-r.github.io/docs/swf/describe_activity_type.html](https://paws-r.github.io/docs/swf/describe_activity_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_describe_activity_type/](https://www.paws-r-sdk.com/docs/swf_describe_activity_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the activity type is registered.
 #' @param activityType &#91;required&#93; The activity type to get information about. Activity types are
@@ -299,7 +299,7 @@ swf_describe_activity_type <- function(domain, activityType) {
 #' @description
 #' Returns information about the specified domain, including description and status.
 #'
-#' See [https://paws-r.github.io/docs/swf/describe_domain.html](https://paws-r.github.io/docs/swf/describe_domain.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_describe_domain/](https://www.paws-r-sdk.com/docs/swf_describe_domain/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the domain to describe.
 #'
@@ -329,7 +329,7 @@ swf_describe_domain <- function(name) {
 #' @description
 #' Returns information about the specified workflow execution including its type and some statistics.
 #'
-#' See [https://paws-r.github.io/docs/swf/describe_workflow_execution.html](https://paws-r.github.io/docs/swf/describe_workflow_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_describe_workflow_execution/](https://www.paws-r-sdk.com/docs/swf_describe_workflow_execution/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow execution.
 #' @param execution &#91;required&#93; The workflow execution to describe.
@@ -359,7 +359,7 @@ swf_describe_workflow_execution <- function(domain, execution) {
 #' @description
 #' Returns information about the specified *workflow type*. This includes configuration settings specified when the type was registered and other information such as creation date, current status, etc.
 #'
-#' See [https://paws-r.github.io/docs/swf/describe_workflow_type.html](https://paws-r.github.io/docs/swf/describe_workflow_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_describe_workflow_type/](https://www.paws-r-sdk.com/docs/swf_describe_workflow_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which this workflow type is registered.
 #' @param workflowType &#91;required&#93; The workflow type to describe.
@@ -389,7 +389,7 @@ swf_describe_workflow_type <- function(domain, workflowType) {
 #' @description
 #' Returns the history of the specified workflow execution. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the `nextPageToken` returned by the initial call.
 #'
-#' See [https://paws-r.github.io/docs/swf/get_workflow_execution_history.html](https://paws-r.github.io/docs/swf/get_workflow_execution_history.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_get_workflow_execution_history/](https://www.paws-r-sdk.com/docs/swf_get_workflow_execution_history/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow execution.
 #' @param execution &#91;required&#93; Specifies the workflow execution for which to return the history.
@@ -397,7 +397,7 @@ swf_describe_workflow_type <- function(domain, workflowType) {
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -434,7 +434,7 @@ swf_get_workflow_execution_history <- function(domain, execution, nextPageToken 
 #' @description
 #' Returns information about all activities registered in the specified domain that match the specified name and registration status. The result includes information like creation date, current status of the activity, etc. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the `nextPageToken` returned by the initial call.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_activity_types.html](https://paws-r.github.io/docs/swf/list_activity_types.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_activity_types/](https://www.paws-r-sdk.com/docs/swf_list_activity_types/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the activity types have been registered.
 #' @param name If specified, only lists the activity types that have this name.
@@ -443,7 +443,7 @@ swf_get_workflow_execution_history <- function(domain, execution, nextPageToken 
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -480,7 +480,7 @@ swf_list_activity_types <- function(domain, name = NULL, registrationStatus, nex
 #' @description
 #' Returns a list of closed workflow executions in the specified domain that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_closed_workflow_executions.html](https://paws-r.github.io/docs/swf/list_closed_workflow_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_closed_workflow_executions/](https://www.paws-r-sdk.com/docs/swf_list_closed_workflow_executions/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain that contains the workflow executions to list.
 #' @param startTimeFilter If specified, the workflow executions are included in the returned
@@ -521,7 +521,7 @@ swf_list_activity_types <- function(domain, name = NULL, registrationStatus, nex
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -557,13 +557,13 @@ swf_list_closed_workflow_executions <- function(domain, startTimeFilter = NULL, 
 #' @description
 #' Returns the list of domains registered in the account. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_domains.html](https://paws-r.github.io/docs/swf/list_domains.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_domains/](https://www.paws-r-sdk.com/docs/swf_list_domains/) for full documentation.
 #'
 #' @param nextPageToken If `NextPageToken` is returned there are more results available. The
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -601,7 +601,7 @@ swf_list_domains <- function(nextPageToken = NULL, registrationStatus, maximumPa
 #' @description
 #' Returns a list of open workflow executions in the specified domain that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_open_workflow_executions.html](https://paws-r.github.io/docs/swf/list_open_workflow_executions.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_open_workflow_executions/](https://www.paws-r-sdk.com/docs/swf_list_open_workflow_executions/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain that contains the workflow executions to list.
 #' @param startTimeFilter &#91;required&#93; Workflow executions are included in the returned results based on
@@ -619,7 +619,7 @@ swf_list_domains <- function(nextPageToken = NULL, registrationStatus, maximumPa
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -660,7 +660,7 @@ swf_list_open_workflow_executions <- function(domain, startTimeFilter, typeFilte
 #' @description
 #' List tags for a given domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_tags_for_resource.html](https://paws-r.github.io/docs/swf/list_tags_for_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/swf_list_tags_for_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Amazon SWF domain.
 #'
@@ -689,7 +689,7 @@ swf_list_tags_for_resource <- function(resourceArn) {
 #' @description
 #' Returns information about workflow types in the specified domain. The results may be split into multiple pages that can be retrieved by making the call repeatedly.
 #'
-#' See [https://paws-r.github.io/docs/swf/list_workflow_types.html](https://paws-r.github.io/docs/swf/list_workflow_types.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_list_workflow_types/](https://www.paws-r-sdk.com/docs/swf_list_workflow_types/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the workflow types have been registered.
 #' @param name If specified, lists the workflow type with this name.
@@ -698,7 +698,7 @@ swf_list_tags_for_resource <- function(resourceArn) {
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -735,14 +735,14 @@ swf_list_workflow_types <- function(domain, name = NULL, registrationStatus, nex
 #' @description
 #' Used by workers to get an ActivityTask from the specified activity `taskList`. This initiates a long poll, where the service holds the HTTP connection open and responds as soon as a task becomes available. The maximum time the service holds on to the request before responding is 60 seconds. If no task is available within 60 seconds, the poll returns an empty result. An empty result, in this context, means that an ActivityTask is returned, but that the value of taskToken is an empty string. If a task is returned, the worker should use its type to identify and process it correctly.
 #'
-#' See [https://paws-r.github.io/docs/swf/poll_for_activity_task.html](https://paws-r.github.io/docs/swf/poll_for_activity_task.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_poll_for_activity_task/](https://www.paws-r-sdk.com/docs/swf_poll_for_activity_task/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain that contains the task lists being polled.
 #' @param taskList &#91;required&#93; Specifies the task list to poll for activity tasks.
 #' 
 #' The specified string must not start or end with whitespace. It must not
 #' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
+#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must *not* be
 #' the literal string `arn`.
 #' @param identity Identity of the worker making the request, recorded in the
 #' `ActivityTaskStarted` event in the workflow history. This enables
@@ -775,15 +775,14 @@ swf_poll_for_activity_task <- function(domain, taskList, identity = NULL) {
 #' @description
 #' Used by deciders to get a DecisionTask from the specified decision `taskList`. A decision task may be returned for any open workflow execution that is using the specified task list. The task includes a paginated view of the history of the workflow execution. The decider should use the workflow type and the history to determine how to properly handle the task.
 #'
-#' See [https://paws-r.github.io/docs/swf/poll_for_decision_task.html](https://paws-r.github.io/docs/swf/poll_for_decision_task.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_poll_for_decision_task/](https://www.paws-r-sdk.com/docs/swf_poll_for_decision_task/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the task lists to poll.
 #' @param taskList &#91;required&#93; Specifies the task list to poll for decision tasks.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param identity Identity of the decider making the request, which is recorded in the
 #' DecisionTaskStarted event in the workflow history. This enables
 #' diagnostic tracing when problems arise. The form of this identity is
@@ -792,7 +791,7 @@ swf_poll_for_activity_task <- function(domain, taskList, identity = NULL) {
 #' value of `NextPageToken` is a unique pagination token for each page.
 #' Make the call again using the returned token to retrieve the next page.
 #' Keep all other arguments unchanged. Each pagination token expires after
-#' 60 seconds. Using an expired pagination token will return a `400` error:
+#' 24 hours. Using an expired pagination token will return a `400` error:
 #' "`Specified token has exceeded its maximum lifetime`".
 #' 
 #' The configured `maximumPageSize` determines how many results can be
@@ -813,18 +812,22 @@ swf_poll_for_activity_task <- function(domain, taskList, identity = NULL) {
 #' @param reverseOrder When set to `true`, returns the events in reverse order. By default the
 #' results are returned in ascending order of the `eventTimestamp` of the
 #' events.
+#' @param startAtPreviousStartedEvent When set to `true`, returns the events with `eventTimestamp` greater
+#' than or equal to `eventTimestamp` of the most recent
+#' `DecisionTaskStarted` event. By default, this parameter is set to
+#' `false`.
 #'
 #' @keywords internal
 #'
 #' @rdname swf_poll_for_decision_task
-swf_poll_for_decision_task <- function(domain, taskList, identity = NULL, nextPageToken = NULL, maximumPageSize = NULL, reverseOrder = NULL) {
+swf_poll_for_decision_task <- function(domain, taskList, identity = NULL, nextPageToken = NULL, maximumPageSize = NULL, reverseOrder = NULL, startAtPreviousStartedEvent = NULL) {
   op <- new_operation(
     name = "PollForDecisionTask",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .swf$poll_for_decision_task_input(domain = domain, taskList = taskList, identity = identity, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
+  input <- .swf$poll_for_decision_task_input(domain = domain, taskList = taskList, identity = identity, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder, startAtPreviousStartedEvent = startAtPreviousStartedEvent)
   output <- .swf$poll_for_decision_task_output()
   config <- get_config()
   svc <- .swf$service(config)
@@ -840,7 +843,7 @@ swf_poll_for_decision_task <- function(domain, taskList, identity = NULL, nextPa
 #' @description
 #' Used by activity workers to report to the service that the ActivityTask represented by the specified `taskToken` is still making progress. The worker can also specify details of the progress, for example percent complete, using the `details` parameter. This action can also be used by the worker as a mechanism to check if cancellation is being requested for the activity task. If a cancellation is being attempted for the specified task, then the boolean `cancelRequested` flag returned by the service is set to `true`.
 #'
-#' See [https://paws-r.github.io/docs/swf/record_activity_task_heartbeat.html](https://paws-r.github.io/docs/swf/record_activity_task_heartbeat.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_record_activity_task_heartbeat/](https://www.paws-r-sdk.com/docs/swf_record_activity_task_heartbeat/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The `taskToken` of the ActivityTask.
 #' 
@@ -876,24 +879,22 @@ swf_record_activity_task_heartbeat <- function(taskToken, details = NULL) {
 #' @description
 #' Registers a new *activity type* along with its configuration settings in the specified domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/register_activity_type.html](https://paws-r.github.io/docs/swf/register_activity_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_register_activity_type/](https://www.paws-r-sdk.com/docs/swf_register_activity_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which this activity is to be registered.
 #' @param name &#91;required&#93; The name of the activity type within the domain.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param version &#91;required&#93; The version of the activity type.
 #' 
 #' The activity type consists of the name and version, the combination of
 #' which must be unique within the domain.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param description A textual description of the activity type.
 #' @param defaultTaskStartToCloseTimeout If set, specifies the default maximum duration that a worker can take to
 #' process tasks of this activity type. This default can be overridden when
@@ -965,14 +966,14 @@ swf_register_activity_type <- function(domain, name, version, description = NULL
 #' @description
 #' Registers a new domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/register_domain.html](https://paws-r.github.io/docs/swf/register_domain.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_register_domain/](https://www.paws-r-sdk.com/docs/swf_register_domain/) for full documentation.
 #'
 #' @param name &#91;required&#93; Name of the domain to register. The name must be unique in the region
 #' that the domain is registered in.
 #' 
 #' The specified string must not start or end with whitespace. It must not
 #' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
+#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must *not* be
 #' the literal string `arn`.
 #' @param description A text description of the domain.
 #' @param workflowExecutionRetentionPeriodInDays &#91;required&#93; The duration (in days) that records and histories of workflow executions
@@ -1019,15 +1020,14 @@ swf_register_domain <- function(name, description = NULL, workflowExecutionReten
 #' @description
 #' Registers a new *workflow type* and its configuration settings in the specified domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/register_workflow_type.html](https://paws-r.github.io/docs/swf/register_workflow_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_register_workflow_type/](https://www.paws-r-sdk.com/docs/swf_register_workflow_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which to register the workflow type.
 #' @param name &#91;required&#93; The name of the workflow type.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param version &#91;required&#93; The version of the workflow type.
 #' 
 #' The workflow type consists of the name and version, the combination of
@@ -1035,10 +1035,9 @@ swf_register_domain <- function(name, description = NULL, workflowExecutionReten
 #' registered workflow types, use the
 #' [`list_workflow_types`][swf_list_workflow_types] action.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param description Textual description of the workflow type.
 #' @param defaultTaskStartToCloseTimeout If set, specifies the default maximum duration of decision tasks for
 #' this workflow type. This default can be overridden when starting a
@@ -1128,7 +1127,7 @@ swf_register_workflow_type <- function(domain, name, version, description = NULL
 #' @description
 #' Records a `WorkflowExecutionCancelRequested` event in the currently running workflow execution identified by the given domain, workflowId, and runId. This logically requests the cancellation of the workflow execution as a whole. It is up to the decider to take appropriate actions when it receives an execution history with this event.
 #'
-#' See [https://paws-r.github.io/docs/swf/request_cancel_workflow_execution.html](https://paws-r.github.io/docs/swf/request_cancel_workflow_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_request_cancel_workflow_execution/](https://www.paws-r-sdk.com/docs/swf_request_cancel_workflow_execution/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow execution to cancel.
 #' @param workflowId &#91;required&#93; The workflowId of the workflow execution to cancel.
@@ -1160,7 +1159,7 @@ swf_request_cancel_workflow_execution <- function(domain, workflowId, runId = NU
 #' @description
 #' Used by workers to tell the service that the ActivityTask identified by the `taskToken` was successfully canceled. Additional `details` can be provided using the `details` argument.
 #'
-#' See [https://paws-r.github.io/docs/swf/respond_activity_task_canceled.html](https://paws-r.github.io/docs/swf/respond_activity_task_canceled.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_respond_activity_task_canceled/](https://www.paws-r-sdk.com/docs/swf_respond_activity_task_canceled/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The `taskToken` of the ActivityTask.
 #' 
@@ -1196,7 +1195,7 @@ swf_respond_activity_task_canceled <- function(taskToken, details = NULL) {
 #' @description
 #' Used by workers to tell the service that the ActivityTask identified by the `taskToken` completed successfully with a `result` (if provided). The `result` appears in the `ActivityTaskCompleted` event in the workflow history.
 #'
-#' See [https://paws-r.github.io/docs/swf/respond_activity_task_completed.html](https://paws-r.github.io/docs/swf/respond_activity_task_completed.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_respond_activity_task_completed/](https://www.paws-r-sdk.com/docs/swf_respond_activity_task_completed/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The `taskToken` of the ActivityTask.
 #' 
@@ -1233,7 +1232,7 @@ swf_respond_activity_task_completed <- function(taskToken, result = NULL) {
 #' @description
 #' Used by workers to tell the service that the ActivityTask identified by the `taskToken` has failed with `reason` (if specified). The `reason` and `details` appear in the `ActivityTaskFailed` event added to the workflow history.
 #'
-#' See [https://paws-r.github.io/docs/swf/respond_activity_task_failed.html](https://paws-r.github.io/docs/swf/respond_activity_task_failed.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_respond_activity_task_failed/](https://www.paws-r-sdk.com/docs/swf_respond_activity_task_failed/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The `taskToken` of the ActivityTask.
 #' 
@@ -1270,7 +1269,7 @@ swf_respond_activity_task_failed <- function(taskToken, reason = NULL, details =
 #' @description
 #' Used by deciders to tell the service that the DecisionTask identified by the `taskToken` has successfully completed. The `decisions` argument specifies the list of decisions made while processing the task.
 #'
-#' See [https://paws-r.github.io/docs/swf/respond_decision_task_completed.html](https://paws-r.github.io/docs/swf/respond_decision_task_completed.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_respond_decision_task_completed/](https://www.paws-r-sdk.com/docs/swf_respond_decision_task_completed/) for full documentation.
 #'
 #' @param taskToken &#91;required&#93; The `taskToken` from the DecisionTask.
 #' 
@@ -1310,7 +1309,7 @@ swf_respond_decision_task_completed <- function(taskToken, decisions = NULL, exe
 #' @description
 #' Records a `WorkflowExecutionSignaled` event in the workflow execution history and creates a decision task for the workflow execution identified by the given domain, workflowId and runId. The event is recorded with the specified user defined signalName and input (if provided).
 #'
-#' See [https://paws-r.github.io/docs/swf/signal_workflow_execution.html](https://paws-r.github.io/docs/swf/signal_workflow_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_signal_workflow_execution/](https://www.paws-r-sdk.com/docs/swf_signal_workflow_execution/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain containing the workflow execution to signal.
 #' @param workflowId &#91;required&#93; The workflowId of the workflow execution to signal.
@@ -1346,9 +1345,13 @@ swf_signal_workflow_execution <- function(domain, workflowId, runId = NULL, sign
 #' @description
 #' Starts an execution of the workflow type in the specified domain using the provided `workflowId` and input data.
 #'
-#' See [https://paws-r.github.io/docs/swf/start_workflow_execution.html](https://paws-r.github.io/docs/swf/start_workflow_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_start_workflow_execution/](https://www.paws-r-sdk.com/docs/swf_start_workflow_execution/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain in which the workflow execution is created.
+#' 
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param workflowId &#91;required&#93; The user defined identifier associated with the workflow execution. You
 #' can use this to associate a custom identifier with the workflow
 #' execution. You may specify the same identifier if a workflow execution
@@ -1356,10 +1359,9 @@ swf_signal_workflow_execution <- function(domain, workflowId, runId = NULL, sign
 #' open workflow executions with the same `workflowId` at the same time
 #' within the same domain.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param workflowType &#91;required&#93; The type of the workflow to start.
 #' @param taskList The task list to use for the decision tasks generated for this workflow
 #' execution. This overrides the `defaultTaskList` specified when
@@ -1370,10 +1372,9 @@ swf_signal_workflow_execution <- function(domain, workflowId, runId = NULL, sign
 #' parameter is set nor a default task list was specified at registration
 #' time then a fault is returned.
 #' 
-#' The specified string must not start or end with whitespace. It must not
-#' contain a `:` (colon), `/` (slash), `|` (vertical bar), or any control
-#' characters (``U+0000`-`U+001f`` | ``U+007f`-`U+009f``). Also, it must not *be*
-#' the literal string `arn`.
+#' The specified string must not contain a `:` (colon), `/` (slash), `|`
+#' (vertical bar), or any control characters (``U+0000`-`U+001f`` |
+#' ``U+007f`-`U+009f``). Also, it must *not* be the literal string `arn`.
 #' @param taskPriority The task priority to use for this workflow execution. This overrides any
 #' default priority that was assigned when the workflow type was
 #' registered. If not set, then the default task priority for the workflow
@@ -1478,7 +1479,7 @@ swf_start_workflow_execution <- function(domain, workflowId, workflowType, taskL
 #' @description
 #' Add a tag to a Amazon SWF domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/tag_resource.html](https://paws-r.github.io/docs/swf/tag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_tag_resource/](https://www.paws-r-sdk.com/docs/swf_tag_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Amazon SWF domain.
 #' @param tags &#91;required&#93; The list of tags to add to a domain.
@@ -1512,7 +1513,7 @@ swf_tag_resource <- function(resourceArn, tags) {
 #' @description
 #' Records a `WorkflowExecutionTerminated` event and forces closure of the workflow execution identified by the given domain, runId, and workflowId. The child policy, registered with the workflow type or specified when starting this execution, is applied to any open child workflow executions of this workflow execution.
 #'
-#' See [https://paws-r.github.io/docs/swf/terminate_workflow_execution.html](https://paws-r.github.io/docs/swf/terminate_workflow_execution.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_terminate_workflow_execution/](https://www.paws-r-sdk.com/docs/swf_terminate_workflow_execution/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The domain of the workflow execution to terminate.
 #' @param workflowId &#91;required&#93; The workflowId of the workflow execution to terminate.
@@ -1566,7 +1567,7 @@ swf_terminate_workflow_execution <- function(domain, workflowId, runId = NULL, r
 #' @description
 #' Undeprecates a previously deprecated *activity type*. After an activity type has been undeprecated, you can create new tasks of that activity type.
 #'
-#' See [https://paws-r.github.io/docs/swf/undeprecate_activity_type.html](https://paws-r.github.io/docs/swf/undeprecate_activity_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_undeprecate_activity_type/](https://www.paws-r-sdk.com/docs/swf_undeprecate_activity_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain of the deprecated activity type.
 #' @param activityType &#91;required&#93; The activity type to undeprecate.
@@ -1596,7 +1597,7 @@ swf_undeprecate_activity_type <- function(domain, activityType) {
 #' @description
 #' Undeprecates a previously deprecated domain. After a domain has been undeprecated it can be used to create new workflow executions or register new types.
 #'
-#' See [https://paws-r.github.io/docs/swf/undeprecate_domain.html](https://paws-r.github.io/docs/swf/undeprecate_domain.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_undeprecate_domain/](https://www.paws-r-sdk.com/docs/swf_undeprecate_domain/) for full documentation.
 #'
 #' @param name &#91;required&#93; The name of the domain of the deprecated workflow type.
 #'
@@ -1625,7 +1626,7 @@ swf_undeprecate_domain <- function(name) {
 #' @description
 #' Undeprecates a previously deprecated *workflow type*. After a workflow type has been undeprecated, you can create new executions of that type.
 #'
-#' See [https://paws-r.github.io/docs/swf/undeprecate_workflow_type.html](https://paws-r.github.io/docs/swf/undeprecate_workflow_type.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_undeprecate_workflow_type/](https://www.paws-r-sdk.com/docs/swf_undeprecate_workflow_type/) for full documentation.
 #'
 #' @param domain &#91;required&#93; The name of the domain of the deprecated workflow type.
 #' @param workflowType &#91;required&#93; The name of the domain of the deprecated workflow type.
@@ -1655,7 +1656,7 @@ swf_undeprecate_workflow_type <- function(domain, workflowType) {
 #' @description
 #' Remove a tag from a Amazon SWF domain.
 #'
-#' See [https://paws-r.github.io/docs/swf/untag_resource.html](https://paws-r.github.io/docs/swf/untag_resource.html) for full documentation.
+#' See [https://www.paws-r-sdk.com/docs/swf_untag_resource/](https://www.paws-r-sdk.com/docs/swf_untag_resource/) for full documentation.
 #'
 #' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Amazon SWF domain.
 #' @param tagKeys &#91;required&#93; The list of tags to remove from the Amazon SWF domain.

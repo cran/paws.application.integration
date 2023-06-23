@@ -20,7 +20,11 @@ swf_start_workflow_execution(
 )
 }
 \arguments{
-\item{domain}{[required] The name of the domain in which the workflow execution is created.}
+\item{domain}{[required] The name of the domain in which the workflow execution is created.
+
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
+(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
+\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{workflowId}{[required] The user defined identifier associated with the workflow execution. You
 can use this to associate a custom identifier with the workflow
@@ -29,10 +33,9 @@ is logically a \emph{restart} of a previous execution. You cannot have two
 open workflow executions with the same \code{workflowId} at the same time
 within the same domain.
 
-The specified string must not start or end with whitespace. It must not
-contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
-the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
+(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
+\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{workflowType}{[required] The type of the workflow to start.}
 
@@ -45,10 +48,9 @@ default for the workflow type or through this parameter. If neither this
 parameter is set nor a default task list was specified at registration
 time then a fault is returned.
 
-The specified string must not start or end with whitespace. It must not
-contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
-the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
+(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
+\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{taskPriority}{The task priority to use for this workflow execution. This overrides any
 default priority that was assigned when the workflow type was
@@ -136,6 +138,6 @@ in the \emph{Amazon SWF Developer Guide}.}
 \description{
 Starts an execution of the workflow type in the specified domain using the provided \code{workflowId} and input data.
 
-See \url{https://paws-r.github.io/docs/swf/start_workflow_execution.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/swf_start_workflow_execution/} for full documentation.
 }
 \keyword{internal}

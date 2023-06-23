@@ -23,20 +23,18 @@ swf_register_activity_type(
 
 \item{name}{[required] The name of the activity type within the domain.
 
-The specified string must not start or end with whitespace. It must not
-contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
-the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
+(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
+\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{version}{[required] The version of the activity type.
 
 The activity type consists of the name and version, the combination of
 which must be unique within the domain.
 
-The specified string must not start or end with whitespace. It must not
-contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control
-characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must not \emph{be}
-the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
+(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
+\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{description}{A textual description of the activity type.}
 
@@ -92,6 +90,6 @@ to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 \description{
 Registers a new \emph{activity type} along with its configuration settings in the specified domain.
 
-See \url{https://paws-r.github.io/docs/swf/register_activity_type.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/swf_register_activity_type/} for full documentation.
 }
 \keyword{internal}

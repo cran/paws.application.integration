@@ -4,14 +4,17 @@
 \alias{locationservice_get_map_style_descriptor}
 \title{Retrieves the map style descriptor from a map resource}
 \usage{
-locationservice_get_map_style_descriptor(MapName)
+locationservice_get_map_style_descriptor(Key = NULL, MapName)
 }
 \arguments{
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
+to authorize the request.}
+
 \item{MapName}{[required] The map resource to retrieve the style descriptor from.}
 }
 \description{
 Retrieves the map style descriptor from a map resource.
 
-See \url{https://paws-r.github.io/docs/locationservice/get_map_style_descriptor.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_get_map_style_descriptor/} for full documentation.
 }
 \keyword{internal}

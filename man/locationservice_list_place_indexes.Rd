@@ -2,7 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_list_place_indexes}
 \alias{locationservice_list_place_indexes}
-\title{Lists place index resources in your AWS account}
+\title{Lists place index resources in your Amazon Web Services account}
 \usage{
 locationservice_list_place_indexes(MaxResults = NULL, NextToken = NULL)
 }
@@ -18,8 +18,8 @@ response. If no token is provided, the default page is the first page.
 Default value: \code{null}}
 }
 \description{
-Lists place index resources in your AWS account.
+Lists place index resources in your Amazon Web Services account.
 
-See \url{https://paws-r.github.io/docs/locationservice/list_place_indexes.html} for full documentation.
+See \url{https://www.paws-r-sdk.com/docs/locationservice_list_place_indexes/} for full documentation.
 }
 \keyword{internal}
