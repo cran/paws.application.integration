@@ -416,7 +416,7 @@ swf_get_workflow_execution_history <- function(domain, execution, nextPageToken 
     name = "GetWorkflowExecutionHistory",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "events")
   )
   input <- .swf$get_workflow_execution_history_input(domain = domain, execution = execution, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
   output <- .swf$get_workflow_execution_history_output()
@@ -462,7 +462,7 @@ swf_list_activity_types <- function(domain, name = NULL, registrationStatus, nex
     name = "ListActivityTypes",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "typeInfos")
   )
   input <- .swf$list_activity_types_input(domain = domain, name = name, registrationStatus = registrationStatus, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
   output <- .swf$list_activity_types_output()
@@ -540,7 +540,7 @@ swf_list_closed_workflow_executions <- function(domain, startTimeFilter = NULL, 
     name = "ListClosedWorkflowExecutions",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "executionInfos")
   )
   input <- .swf$list_closed_workflow_executions_input(domain = domain, startTimeFilter = startTimeFilter, closeTimeFilter = closeTimeFilter, executionFilter = executionFilter, closeStatusFilter = closeStatusFilter, typeFilter = typeFilter, tagFilter = tagFilter, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
   output <- .swf$list_closed_workflow_executions_output()
@@ -583,7 +583,7 @@ swf_list_domains <- function(nextPageToken = NULL, registrationStatus, maximumPa
     name = "ListDomains",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "domainInfos")
   )
   input <- .swf$list_domains_input(nextPageToken = nextPageToken, registrationStatus = registrationStatus, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
   output <- .swf$list_domains_output()
@@ -643,7 +643,7 @@ swf_list_open_workflow_executions <- function(domain, startTimeFilter, typeFilte
     name = "ListOpenWorkflowExecutions",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "executionInfos")
   )
   input <- .swf$list_open_workflow_executions_input(domain = domain, startTimeFilter = startTimeFilter, typeFilter = typeFilter, tagFilter = tagFilter, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder, executionFilter = executionFilter)
   output <- .swf$list_open_workflow_executions_output()
@@ -717,7 +717,7 @@ swf_list_workflow_types <- function(domain, name = NULL, registrationStatus, nex
     name = "ListWorkflowTypes",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "typeInfos")
   )
   input <- .swf$list_workflow_types_input(domain = domain, name = name, registrationStatus = registrationStatus, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder)
   output <- .swf$list_workflow_types_output()
@@ -825,7 +825,7 @@ swf_poll_for_decision_task <- function(domain, taskList, identity = NULL, nextPa
     name = "PollForDecisionTask",
     http_method = "POST",
     http_path = "/",
-    paginator = list()
+    paginator = list(input_token = "nextPageToken", limit_key = "maximumPageSize", output_token = "nextPageToken", result_key = "events")
   )
   input <- .swf$poll_for_decision_task_input(domain = domain, taskList = taskList, identity = identity, nextPageToken = nextPageToken, maximumPageSize = maximumPageSize, reverseOrder = reverseOrder, startAtPreviousStartedEvent = startAtPreviousStartedEvent)
   output <- .swf$poll_for_decision_task_output()
@@ -1281,18 +1281,32 @@ swf_respond_activity_task_failed <- function(taskToken, reason = NULL, details =
 #' processing this decision task. See the docs for the Decision structure
 #' for details.
 #' @param executionContext User defined context to add to workflow execution.
+#' @param taskList The task list to use for the future decision tasks of this workflow
+#' execution. This list overrides the original task list you specified
+#' while starting the workflow execution.
+#' @param taskListScheduleToStartTimeout Specifies a timeout (in seconds) for the task list override. When this
+#' parameter is missing, the task list override is permanent. This
+#' parameter makes it possible to temporarily override the task list. If a
+#' decision task scheduled on the override task list is not started within
+#' the timeout, the decision task will time out. Amazon SWF will revert the
+#' override and schedule a new decision task to the original task list.
+#' 
+#' If a decision task scheduled on the override task list is started within
+#' the timeout, but not completed within the start-to-close timeout, Amazon
+#' SWF will also revert the override and schedule a new decision task to
+#' the original task list.
 #'
 #' @keywords internal
 #'
 #' @rdname swf_respond_decision_task_completed
-swf_respond_decision_task_completed <- function(taskToken, decisions = NULL, executionContext = NULL) {
+swf_respond_decision_task_completed <- function(taskToken, decisions = NULL, executionContext = NULL, taskList = NULL, taskListScheduleToStartTimeout = NULL) {
   op <- new_operation(
     name = "RespondDecisionTaskCompleted",
     http_method = "POST",
     http_path = "/",
     paginator = list()
   )
-  input <- .swf$respond_decision_task_completed_input(taskToken = taskToken, decisions = decisions, executionContext = executionContext)
+  input <- .swf$respond_decision_task_completed_input(taskToken = taskToken, decisions = decisions, executionContext = executionContext, taskList = taskList, taskListScheduleToStartTimeout = taskListScheduleToStartTimeout)
   output <- .swf$respond_decision_task_completed_output()
   config <- get_config()
   svc <- .swf$service(config)
