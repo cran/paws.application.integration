@@ -9,32 +9,32 @@ sfn(config = list(), credentials = list(), endpoint = NULL, region = NULL)
 \arguments{
 \item{config}{Optional configuration of credentials, endpoint, and/or region.
 \itemize{
-\item{\strong{credentials}:} {\itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{credentials}: \itemize{
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
-\item{\strong{endpoint}:} {The complete URL to use for the constructed client.}
-\item{\strong{region}:} {The AWS Region used in instantiating the client.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
-\item{\strong{close_connection}:} {Immediately close all HTTP connections.}
-\item{\strong{timeout}:} {The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
-\item{\strong{s3_force_path_style}:} {Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
-\item{\strong{sts_regional_endpoint}:} {Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
+\item{\strong{endpoint}: The complete URL to use for the constructed client.}
+\item{\strong{region}: The AWS Region used in instantiating the client.}
+\item{\strong{close_connection}: Immediately close all HTTP connections.}
+\item{\strong{timeout}: The time in seconds till a timeout exception is thrown when attempting to make a connection. The default is 60 seconds.}
+\item{\strong{s3_force_path_style}: Set this to \code{true} to force the request to use path-style addressing, i.e. \verb{http://s3.amazonaws.com/BUCKET/KEY}.}
+\item{\strong{sts_regional_endpoint}: Set sts regional endpoint resolver to regional or legacy \url{https://docs.aws.amazon.com/sdkref/latest/guide/feature-sts-regionalized-endpoints.html}}
 }}
 
 \item{credentials}{Optional credentials shorthand for the config parameter
 \itemize{
-\item{\strong{creds}:} {\itemize{
-\item{\strong{access_key_id}:} {AWS access key ID}
-\item{\strong{secret_access_key}:} {AWS secret access key}
-\item{\strong{session_token}:} {AWS temporary session token}
+\item{\strong{creds}: \itemize{
+\item{\strong{access_key_id}: AWS access key ID}
+\item{\strong{secret_access_key}: AWS secret access key}
+\item{\strong{session_token}: AWS temporary session token}
 }}
-\item{\strong{profile}:} {The name of a profile to use. If not given, then the default profile is used.}
-\item{\strong{anonymous}:} {Set anonymous credentials.}
+\item{\strong{profile}: The name of a profile to use. If not given, then the default profile is used.}
+\item{\strong{anonymous}: Set anonymous credentials.}
 }}
 
 \item{endpoint}{Optional shorthand for complete URL to use for the constructed client.}
@@ -68,7 +68,13 @@ ensure your application is available at any scale. You can run tasks on
 Amazon Web Services, your own servers, or any system that has access to
 Amazon Web Services. You can access and use Step Functions using the
 console, the Amazon Web Services SDKs, or an HTTP API. For more
-information about Step Functions, see the \emph{\href{https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html}{StepFunctions Developer Guide}} .
+information about Step Functions, see the \emph{\href{https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html}{Step Functions Developer Guide}} .
+
+If you use the Step Functions API actions using Amazon Web Services SDK
+integrations, make sure the API actions are in camel case and parameter
+names are in Pascal case. For example, you could use Step Functions API
+action \code{startSyncExecution} and specify its parameter as
+\code{StateMachineArn}.
 }
 \section{Service syntax}{
 
@@ -132,13 +138,15 @@ information about Step Functions, see the \emph{\href{https://docs.aws.amazon.co
 \link[=sfn_list_state_machine_versions]{list_state_machine_versions} \tab Lists versions for the specified state machine Amazon Resource Name (ARN)\cr
 \link[=sfn_list_tags_for_resource]{list_tags_for_resource} \tab List tags for a given resource\cr
 \link[=sfn_publish_state_machine_version]{publish_state_machine_version} \tab Creates a version from the current revision of a state machine\cr
-\link[=sfn_send_task_failure]{send_task_failure} \tab Used by activity workers and task states using the callback pattern to report that the task identified by the taskToken failed\cr
-\link[=sfn_send_task_heartbeat]{send_task_heartbeat} \tab Used by activity workers and task states using the callback pattern to report to Step Functions that the task represented by the specified taskToken is still making progress\cr
-\link[=sfn_send_task_success]{send_task_success} \tab Used by activity workers and task states using the callback pattern to report that the task identified by the taskToken completed successfully\cr
+\link[=sfn_redrive_execution]{redrive_execution} \tab Restarts unsuccessful executions of Standard workflows that didn't complete successfully in the last 14 days\cr
+\link[=sfn_send_task_failure]{send_task_failure} \tab Used by activity workers, Task states using the callback pattern, and optionally Task states using the job run pattern to report that the task identified by the taskToken failed\cr
+\link[=sfn_send_task_heartbeat]{send_task_heartbeat} \tab Used by activity workers and Task states using the callback pattern, and optionally Task states using the job run pattern to report to Step Functions that the task represented by the specified taskToken is still making progress\cr
+\link[=sfn_send_task_success]{send_task_success} \tab Used by activity workers, Task states using the callback pattern, and optionally Task states using the job run pattern to report that the task identified by the taskToken completed successfully\cr
 \link[=sfn_start_execution]{start_execution} \tab Starts a state machine execution\cr
 \link[=sfn_start_sync_execution]{start_sync_execution} \tab Starts a Synchronous Express state machine execution\cr
 \link[=sfn_stop_execution]{stop_execution} \tab Stops an execution\cr
 \link[=sfn_tag_resource]{tag_resource} \tab Add a tag to a Step Functions resource\cr
+\link[=sfn_test_state]{test_state} \tab Accepts the definition of a single state and executes it\cr
 \link[=sfn_untag_resource]{untag_resource} \tab Remove a tag from a Step Functions resource\cr
 \link[=sfn_update_map_run]{update_map_run} \tab Updates an in-progress Map Run's configuration to include changes to the settings that control maximum concurrency and Map Run failure\cr
 \link[=sfn_update_state_machine]{update_state_machine} \tab Updates an existing state machine by modifying its definition, roleArn, or loggingConfiguration\cr
