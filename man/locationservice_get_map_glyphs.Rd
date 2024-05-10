@@ -28,7 +28,7 @@ styles:
 \verb{Roboto Condensed Light Italic}
 \item VectorEsriStreets – \verb{Arial Regular} | \verb{Arial Italic} | \verb{Arial Bold}
 \item VectorEsriNavigation – \verb{Arial Regular} | \verb{Arial Italic} |
-\verb{Arial Bold}
+\verb{Arial Bold} | \verb{Arial Unicode MS Bold} | \verb{Arial Unicode MS Regular}
 }
 
 Valid font stacks for \href{https://docs.aws.amazon.com/location/latest/developerguide/HERE.html}{HERE Technologies}
