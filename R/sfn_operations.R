@@ -13,7 +13,7 @@ NULL
 #' @param name &#91;required&#93; The name of the activity to create. This name must be unique for your
 #' Amazon Web Services account and region for 90 days. For more
 #' information, see [Limits Related to State Machine
-#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions)
+#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions)
 #' in the *Step Functions Developer Guide*.
 #' 
 #' A name must *not* contain:
@@ -41,21 +41,23 @@ NULL
 #' 
 #' Tags may only contain Unicode letters, digits, white space, or these
 #' symbols: `_ . : / = + - @@`.
+#' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_create_activity
-sfn_create_activity <- function(name, tags = NULL) {
+sfn_create_activity <- function(name, tags = NULL, encryptionConfiguration = NULL) {
   op <- new_operation(
     name = "CreateActivity",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$create_activity_input(name = name, tags = tags)
+  input <- .sfn$create_activity_input(name = name, tags = tags, encryptionConfiguration = encryptionConfiguration)
   output <- .sfn$create_activity_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -97,7 +99,7 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' logged.
 #' 
 #' By default, the `level` is set to `OFF`. For more information see [Log
-#' Levels](https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
+#' Levels](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html)
 #' in the Step Functions User Guide.
 #' @param tags Tags to be added when creating a state machine.
 #' 
@@ -117,21 +119,23 @@ sfn_create_activity <- function(name, tags = NULL) {
 #' description if the `publish` parameter is set to `true`. Otherwise, if
 #' you set `versionDescription`, but `publish` to `false`, this API action
 #' throws `ValidationException`.
+#' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_create_state_machine
-sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, loggingConfiguration = NULL, tags = NULL, tracingConfiguration = NULL, publish = NULL, versionDescription = NULL) {
+sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, loggingConfiguration = NULL, tags = NULL, tracingConfiguration = NULL, publish = NULL, versionDescription = NULL, encryptionConfiguration = NULL) {
   op <- new_operation(
     name = "CreateStateMachine",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$create_state_machine_input(name = name, definition = definition, roleArn = roleArn, type = type, loggingConfiguration = loggingConfiguration, tags = tags, tracingConfiguration = tracingConfiguration, publish = publish, versionDescription = versionDescription)
+  input <- .sfn$create_state_machine_input(name = name, definition = definition, roleArn = roleArn, type = type, loggingConfiguration = loggingConfiguration, tags = tags, tracingConfiguration = tracingConfiguration, publish = publish, versionDescription = versionDescription, encryptionConfiguration = encryptionConfiguration)
   output <- .sfn$create_state_machine_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -166,12 +170,13 @@ sfn_create_state_machine_alias <- function(description = NULL, name, routingConf
     name = "CreateStateMachineAlias",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$create_state_machine_alias_input(description = description, name = name, routingConfiguration = routingConfiguration)
   output <- .sfn$create_state_machine_alias_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -195,12 +200,13 @@ sfn_delete_activity <- function(activityArn) {
     name = "DeleteActivity",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$delete_activity_input(activityArn = activityArn)
   output <- .sfn$delete_activity_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -224,12 +230,13 @@ sfn_delete_state_machine <- function(stateMachineArn) {
     name = "DeleteStateMachine",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$delete_state_machine_input(stateMachineArn = stateMachineArn)
   output <- .sfn$delete_state_machine_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -253,12 +260,13 @@ sfn_delete_state_machine_alias <- function(stateMachineAliasArn) {
     name = "DeleteStateMachineAlias",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$delete_state_machine_alias_input(stateMachineAliasArn = stateMachineAliasArn)
   output <- .sfn$delete_state_machine_alias_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -282,12 +290,13 @@ sfn_delete_state_machine_version <- function(stateMachineVersionArn) {
     name = "DeleteStateMachineVersion",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$delete_state_machine_version_input(stateMachineVersionArn = stateMachineVersionArn)
   output <- .sfn$delete_state_machine_version_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -311,12 +320,13 @@ sfn_describe_activity <- function(activityArn) {
     name = "DescribeActivity",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$describe_activity_input(activityArn = activityArn)
   output <- .sfn$describe_activity_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -333,21 +343,27 @@ sfn_describe_activity <- function(activityArn) {
 #' See [https://www.paws-r-sdk.com/docs/sfn_describe_execution/](https://www.paws-r-sdk.com/docs/sfn_describe_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution to describe.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers
+#' must have `kms:Decrypt` permission to decrypt the definition.
+#' Alternatively, you can call DescribeStateMachine API with
+#' `includedData = METADATA_ONLY` to get a successful response without the
+#' encrypted definition.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_describe_execution
-sfn_describe_execution <- function(executionArn) {
+sfn_describe_execution <- function(executionArn, includedData = NULL) {
   op <- new_operation(
     name = "DescribeExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$describe_execution_input(executionArn = executionArn)
+  input <- .sfn$describe_execution_input(executionArn = executionArn, includedData = includedData)
   output <- .sfn$describe_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -372,12 +388,13 @@ sfn_describe_map_run <- function(mapRunArn) {
     name = "DescribeMapRun",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$describe_map_run_input(mapRunArn = mapRunArn)
   output <- .sfn$describe_map_run_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -399,21 +416,32 @@ sfn_describe_map_run <- function(mapRunArn) {
 #' about that version. The version ARN is a combination of state machine
 #' ARN and the version number separated by a colon (:). For example,
 #' `stateMachineARN:1`.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers
+#' must have `kms:Decrypt` permission to decrypt the definition.
+#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
+#' to get a successful response without the encrypted definition.
+#' 
+#' When calling a labelled ARN for an encrypted state machine, the
+#' `includedData = METADATA_ONLY` parameter will not apply because Step
+#' Functions needs to decrypt the entire state machine definition to get
+#' the Distributed Map state’s definition. In this case, the API caller
+#' needs to have `kms:Decrypt` permission.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_describe_state_machine
-sfn_describe_state_machine <- function(stateMachineArn) {
+sfn_describe_state_machine <- function(stateMachineArn, includedData = NULL) {
   op <- new_operation(
     name = "DescribeStateMachine",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$describe_state_machine_input(stateMachineArn = stateMachineArn)
+  input <- .sfn$describe_state_machine_input(stateMachineArn = stateMachineArn, includedData = includedData)
   output <- .sfn$describe_state_machine_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -437,12 +465,13 @@ sfn_describe_state_machine_alias <- function(stateMachineAliasArn) {
     name = "DescribeStateMachineAlias",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$describe_state_machine_alias_input(stateMachineAliasArn = stateMachineAliasArn)
   output <- .sfn$describe_state_machine_alias_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -459,21 +488,26 @@ sfn_describe_state_machine_alias <- function(stateMachineAliasArn) {
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution you want state machine
 #' information for.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers
+#' must have `kms:Decrypt` permission to decrypt the definition.
+#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
+#' to get a successful response without the encrypted definition.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_describe_state_machine_for_execution
-sfn_describe_state_machine_for_execution <- function(executionArn) {
+sfn_describe_state_machine_for_execution <- function(executionArn, includedData = NULL) {
   op <- new_operation(
     name = "DescribeStateMachineForExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$describe_state_machine_for_execution_input(executionArn = executionArn)
+  input <- .sfn$describe_state_machine_for_execution_input(executionArn = executionArn, includedData = includedData)
   output <- .sfn$describe_state_machine_for_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -503,12 +537,13 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
     name = "GetActivityTask",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$get_activity_task_input(activityArn = activityArn, workerName = workerName)
   output <- .sfn$get_activity_task_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -547,12 +582,13 @@ sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOr
     name = "GetExecutionHistory",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list(input_token = "nextToken", limit_key = "maxResults", output_token = "nextToken", result_key = "events")
   )
   input <- .sfn$get_execution_history_input(executionArn = executionArn, maxResults = maxResults, reverseOrder = reverseOrder, nextToken = nextToken, includeExecutionData = includeExecutionData)
   output <- .sfn$get_execution_history_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -587,12 +623,13 @@ sfn_list_activities <- function(maxResults = NULL, nextToken = NULL) {
     name = "ListActivities",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list(input_token = "nextToken", limit_key = "maxResults", output_token = "nextToken", result_key = "activities")
   )
   input <- .sfn$list_activities_input(maxResults = maxResults, nextToken = nextToken)
   output <- .sfn$list_activities_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -661,12 +698,13 @@ sfn_list_executions <- function(stateMachineArn = NULL, statusFilter = NULL, max
     name = "ListExecutions",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list(input_token = "nextToken", limit_key = "maxResults", output_token = "nextToken", result_key = "executions")
   )
   input <- .sfn$list_executions_input(stateMachineArn = stateMachineArn, statusFilter = statusFilter, maxResults = maxResults, nextToken = nextToken, mapRunArn = mapRunArn, redriveFilter = redriveFilter)
   output <- .sfn$list_executions_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -703,12 +741,13 @@ sfn_list_map_runs <- function(executionArn, maxResults = NULL, nextToken = NULL)
     name = "ListMapRuns",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list(input_token = "nextToken", limit_key = "maxResults", output_token = "nextToken", result_key = "mapRuns")
   )
   input <- .sfn$list_map_runs_input(executionArn = executionArn, maxResults = maxResults, nextToken = nextToken)
   output <- .sfn$list_map_runs_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -748,12 +787,13 @@ sfn_list_state_machine_aliases <- function(stateMachineArn, nextToken = NULL, ma
     name = "ListStateMachineAliases",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$list_state_machine_aliases_input(stateMachineArn = stateMachineArn, nextToken = nextToken, maxResults = maxResults)
   output <- .sfn$list_state_machine_aliases_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -790,12 +830,13 @@ sfn_list_state_machine_versions <- function(stateMachineArn, nextToken = NULL, m
     name = "ListStateMachineVersions",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$list_state_machine_versions_input(stateMachineArn = stateMachineArn, nextToken = nextToken, maxResults = maxResults)
   output <- .sfn$list_state_machine_versions_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -830,12 +871,13 @@ sfn_list_state_machines <- function(maxResults = NULL, nextToken = NULL) {
     name = "ListStateMachines",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list(input_token = "nextToken", limit_key = "maxResults", output_token = "nextToken", result_key = "stateMachines")
   )
   input <- .sfn$list_state_machines_input(maxResults = maxResults, nextToken = nextToken)
   output <- .sfn$list_state_machines_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -860,12 +902,13 @@ sfn_list_tags_for_resource <- function(resourceArn) {
     name = "ListTagsForResource",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$list_tags_for_resource_input(resourceArn = resourceArn)
   output <- .sfn$list_tags_for_resource_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -903,12 +946,13 @@ sfn_publish_state_machine_version <- function(stateMachineArn, revisionId = NULL
     name = "PublishStateMachineVersion",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$publish_state_machine_version_input(stateMachineArn = stateMachineArn, revisionId = revisionId, description = description)
   output <- .sfn$publish_state_machine_version_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -940,12 +984,13 @@ sfn_redrive_execution <- function(executionArn, clientToken = NULL) {
     name = "RedriveExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$redrive_execution_input(executionArn = executionArn, clientToken = clientToken)
   output <- .sfn$redrive_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -977,12 +1022,13 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
     name = "SendTaskFailure",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$send_task_failure_input(taskToken = taskToken, error = error, cause = cause)
   output <- .sfn$send_task_failure_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1013,12 +1059,13 @@ sfn_send_task_heartbeat <- function(taskToken) {
     name = "SendTaskHeartbeat",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$send_task_heartbeat_input(taskToken = taskToken)
   output <- .sfn$send_task_heartbeat_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1050,12 +1097,13 @@ sfn_send_task_success <- function(taskToken, output) {
     name = "SendTaskSuccess",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$send_task_success_input(taskToken = taskToken, output = output)
   output <- .sfn$send_task_success_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1106,7 +1154,7 @@ sfn_send_task_success <- function(taskToken, output) {
 #' @param name Optional name of the execution. This name must be unique for your Amazon
 #' Web Services account, Region, and state machine for 90 days. For more
 #' information, see [Limits Related to State Machine
-#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/limits-overview.html#service-limits-state-machine-executions)
+#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions)
 #' in the *Step Functions Developer Guide*.
 #' 
 #' If you don't provide a name for the execution, Step Functions
@@ -1148,12 +1196,13 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, trac
     name = "StartExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$start_execution_input(stateMachineArn = stateMachineArn, name = name, input = input, traceHeader = traceHeader)
   output <- .sfn$start_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1181,21 +1230,26 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, trac
 #' in UTF-8 encoding.
 #' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in
 #' the request payload.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers
+#' must have `kms:Decrypt` permission to decrypt the definition.
+#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
+#' to get a successful response without the encrypted definition.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_start_sync_execution
-sfn_start_sync_execution <- function(stateMachineArn, name = NULL, input = NULL, traceHeader = NULL) {
+sfn_start_sync_execution <- function(stateMachineArn, name = NULL, input = NULL, traceHeader = NULL, includedData = NULL) {
   op <- new_operation(
     name = "StartSyncExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "sync-",
     paginator = list()
   )
-  input <- .sfn$start_sync_execution_input(stateMachineArn = stateMachineArn, name = name, input = input, traceHeader = traceHeader)
+  input <- .sfn$start_sync_execution_input(stateMachineArn = stateMachineArn, name = name, input = input, traceHeader = traceHeader, includedData = includedData)
   output <- .sfn$start_sync_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1221,12 +1275,13 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
     name = "StopExecution",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$stop_execution_input(executionArn = executionArn, error = error, cause = cause)
   output <- .sfn$stop_execution_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1255,12 +1310,13 @@ sfn_tag_resource <- function(resourceArn, tags) {
     name = "TagResource",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$tag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .sfn$tag_resource_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1319,12 +1375,13 @@ sfn_test_state <- function(definition, roleArn, input = NULL, inspectionLevel = 
     name = "TestState",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "sync-",
     paginator = list()
   )
   input <- .sfn$test_state_input(definition = definition, roleArn = roleArn, input = input, inspectionLevel = inspectionLevel, revealSecrets = revealSecrets)
   output <- .sfn$test_state_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1350,12 +1407,13 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
     name = "UntagResource",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$untag_resource_input(resourceArn = resourceArn, tagKeys = tagKeys)
   output <- .sfn$untag_resource_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1384,12 +1442,13 @@ sfn_update_map_run <- function(mapRunArn, maxConcurrency = NULL, toleratedFailur
     name = "UpdateMapRun",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$update_map_run_input(mapRunArn = mapRunArn, maxConcurrency = maxConcurrency, toleratedFailurePercentage = toleratedFailurePercentage, toleratedFailureCount = toleratedFailureCount)
   output <- .sfn$update_map_run_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1397,10 +1456,10 @@ sfn_update_map_run <- function(mapRunArn, maxConcurrency = NULL, toleratedFailur
 .sfn$operations$update_map_run <- sfn_update_map_run
 
 #' Updates an existing state machine by modifying its definition, roleArn,
-#' or loggingConfiguration
+#' loggingConfiguration, or EncryptionConfiguration
 #'
 #' @description
-#' Updates an existing state machine by modifying its `definition`, `roleArn`, or `loggingConfiguration`. Running executions will continue to use the previous `definition` and `roleArn`. You must include at least one of `definition` or `roleArn` or you will receive a `MissingRequiredParameter` error.
+#' Updates an existing state machine by modifying its `definition`, `roleArn`, `loggingConfiguration`, or `EncryptionConfiguration`. Running executions will continue to use the previous `definition` and `roleArn`. You must include at least one of `definition` or `roleArn` or you will receive a `MissingRequiredParameter` error.
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_update_state_machine/](https://www.paws-r-sdk.com/docs/sfn_update_state_machine/) for full documentation.
 #'
@@ -1418,21 +1477,23 @@ sfn_update_map_run <- function(mapRunArn, maxConcurrency = NULL, toleratedFailur
 #' 
 #' You can only specify the `versionDescription` parameter if you've set
 #' `publish` to `true`.
+#' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_update_state_machine
-sfn_update_state_machine <- function(stateMachineArn, definition = NULL, roleArn = NULL, loggingConfiguration = NULL, tracingConfiguration = NULL, publish = NULL, versionDescription = NULL) {
+sfn_update_state_machine <- function(stateMachineArn, definition = NULL, roleArn = NULL, loggingConfiguration = NULL, tracingConfiguration = NULL, publish = NULL, versionDescription = NULL, encryptionConfiguration = NULL) {
   op <- new_operation(
     name = "UpdateStateMachine",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$update_state_machine_input(stateMachineArn = stateMachineArn, definition = definition, roleArn = roleArn, loggingConfiguration = loggingConfiguration, tracingConfiguration = tracingConfiguration, publish = publish, versionDescription = versionDescription)
+  input <- .sfn$update_state_machine_input(stateMachineArn = stateMachineArn, definition = definition, roleArn = roleArn, loggingConfiguration = loggingConfiguration, tracingConfiguration = tracingConfiguration, publish = publish, versionDescription = versionDescription, encryptionConfiguration = encryptionConfiguration)
   output <- .sfn$update_state_machine_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1462,12 +1523,13 @@ sfn_update_state_machine_alias <- function(stateMachineAliasArn, description = N
     name = "UpdateStateMachineAlias",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
   input <- .sfn$update_state_machine_alias_input(stateMachineAliasArn = stateMachineAliasArn, description = description, routingConfiguration = routingConfiguration)
   output <- .sfn$update_state_machine_alias_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
@@ -1487,21 +1549,32 @@ sfn_update_state_machine_alias <- function(stateMachineAliasArn, description = N
 #' (ASL).
 #' @param type The target type of state machine for this definition. The default is
 #' `STANDARD`.
+#' @param severity Minimum level of diagnostics to return. `ERROR` returns only `ERROR`
+#' diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR`
+#' diagnostics. The default is `ERROR`.
+#' @param maxResults The maximum number of diagnostics that are returned per call. The
+#' default and maximum value is 100. Setting the value to 0 will also use
+#' the default of 100.
+#' 
+#' If the number of diagnostics returned in the response exceeds
+#' `maxResults`, the value of the `truncated` field in the response will be
+#' set to `true`.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_validate_state_machine_definition
-sfn_validate_state_machine_definition <- function(definition, type = NULL) {
+sfn_validate_state_machine_definition <- function(definition, type = NULL, severity = NULL, maxResults = NULL) {
   op <- new_operation(
     name = "ValidateStateMachineDefinition",
     http_method = "POST",
     http_path = "/",
+    host_prefix = "",
     paginator = list()
   )
-  input <- .sfn$validate_state_machine_definition_input(definition = definition, type = type)
+  input <- .sfn$validate_state_machine_definition_input(definition = definition, type = type, severity = severity, maxResults = maxResults)
   output <- .sfn$validate_state_machine_definition_output()
   config <- get_config()
-  svc <- .sfn$service(config)
+  svc <- .sfn$service(config, op)
   request <- new_request(svc, op, input, output)
   response <- send_request(request)
   return(response)
