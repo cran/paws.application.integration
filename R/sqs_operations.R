@@ -48,7 +48,8 @@ sqs_add_permission <- function(QueueUrl, Label, AWSAccountIds, Actions) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$add_permission_input(QueueUrl = QueueUrl, Label = Label, AWSAccountIds = AWSAccountIds, Actions = Actions)
   output <- .sqs$add_permission_output()
@@ -78,7 +79,8 @@ sqs_cancel_message_move_task <- function(TaskHandle) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$cancel_message_move_task_input(TaskHandle = TaskHandle)
   output <- .sqs$cancel_message_move_task_output()
@@ -116,7 +118,8 @@ sqs_change_message_visibility <- function(QueueUrl, ReceiptHandle, VisibilityTim
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$change_message_visibility_input(QueueUrl = QueueUrl, ReceiptHandle = ReceiptHandle, VisibilityTimeout = VisibilityTimeout)
   output <- .sqs$change_message_visibility_output()
@@ -150,7 +153,8 @@ sqs_change_message_visibility_batch <- function(QueueUrl, Entries) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$change_message_visibility_batch_input(QueueUrl = QueueUrl, Entries = Entries)
   output <- .sqs$change_message_visibility_batch_output()
@@ -414,7 +418,8 @@ sqs_create_queue <- function(QueueName, Attributes = NULL, tags = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$create_queue_input(QueueName = QueueName, Attributes = Attributes, tags = tags)
   output <- .sqs$create_queue_output()
@@ -447,7 +452,8 @@ sqs_delete_message <- function(QueueUrl, ReceiptHandle) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$delete_message_input(QueueUrl = QueueUrl, ReceiptHandle = ReceiptHandle)
   output <- .sqs$delete_message_output()
@@ -480,7 +486,8 @@ sqs_delete_message_batch <- function(QueueUrl, Entries) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$delete_message_batch_input(QueueUrl = QueueUrl, Entries = Entries)
   output <- .sqs$delete_message_batch_output()
@@ -513,7 +520,8 @@ sqs_delete_queue <- function(QueueUrl) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$delete_queue_input(QueueUrl = QueueUrl)
   output <- .sqs$delete_queue_output()
@@ -728,7 +736,8 @@ sqs_get_queue_attributes <- function(QueueUrl, AttributeNames = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$get_queue_attributes_input(QueueUrl = QueueUrl, AttributeNames = AttributeNames)
   output <- .sqs$get_queue_attributes_output()
@@ -740,20 +749,20 @@ sqs_get_queue_attributes <- function(QueueUrl, AttributeNames = NULL) {
 }
 .sqs$operations$get_queue_attributes <- sqs_get_queue_attributes
 
-#' Returns the URL of an existing Amazon SQS queue
+#' The GetQueueUrl API returns the URL of an existing Amazon SQS queue
 #'
 #' @description
-#' Returns the URL of an existing Amazon SQS queue.
+#' The [`get_queue_url`][sqs_get_queue_url] API returns the URL of an existing Amazon SQS queue. This is useful when you know the queue's name but need to retrieve its URL for further operations.
 #'
 #' See [https://www.paws-r-sdk.com/docs/sqs_get_queue_url/](https://www.paws-r-sdk.com/docs/sqs_get_queue_url/) for full documentation.
 #'
-#' @param QueueName &#91;required&#93; The name of the queue whose URL must be fetched. Maximum 80 characters.
-#' Valid values: alphanumeric characters, hyphens (`-`), and underscores
-#' (`_`).
-#' 
-#' Queue URLs and names are case-sensitive.
-#' @param QueueOwnerAWSAccountId The Amazon Web Services account ID of the account that created the
-#' queue.
+#' @param QueueName &#91;required&#93; (Required) The name of the queue for which you want to fetch the URL.
+#' The name can be up to 80 characters long and can include alphanumeric
+#' characters, hyphens (-), and underscores (_). Queue URLs and names are
+#' case-sensitive.
+#' @param QueueOwnerAWSAccountId (Optional) The Amazon Web Services account ID of the account that
+#' created the queue. This is only required when you are attempting to
+#' access a queue owned by another Amazon Web Services account.
 #'
 #' @keywords internal
 #'
@@ -764,7 +773,8 @@ sqs_get_queue_url <- function(QueueName, QueueOwnerAWSAccountId = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$get_queue_url_input(QueueName = QueueName, QueueOwnerAWSAccountId = QueueOwnerAWSAccountId)
   output <- .sqs$get_queue_url_output()
@@ -801,7 +811,8 @@ sqs_list_dead_letter_source_queues <- function(QueueUrl, NextToken = NULL, MaxRe
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", limit_key = "MaxResults", result_key = "queueUrls")
+    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "queueUrls"),
+    stream_api = FALSE
   )
   input <- .sqs$list_dead_letter_source_queues_input(QueueUrl = QueueUrl, NextToken = NextToken, MaxResults = MaxResults)
   output <- .sqs$list_dead_letter_source_queues_output()
@@ -835,7 +846,8 @@ sqs_list_message_move_tasks <- function(SourceArn, MaxResults = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$list_message_move_tasks_input(SourceArn = SourceArn, MaxResults = MaxResults)
   output <- .sqs$list_message_move_tasks_output()
@@ -865,7 +877,8 @@ sqs_list_queue_tags <- function(QueueUrl) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$list_queue_tags_input(QueueUrl = QueueUrl)
   output <- .sqs$list_queue_tags_output()
@@ -902,7 +915,8 @@ sqs_list_queues <- function(QueueNamePrefix = NULL, NextToken = NULL, MaxResults
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", limit_key = "MaxResults", result_key = "QueueUrls")
+    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "QueueUrls"),
+    stream_api = FALSE
   )
   input <- .sqs$list_queues_input(QueueNamePrefix = QueueNamePrefix, NextToken = NextToken, MaxResults = MaxResults)
   output <- .sqs$list_queues_output()
@@ -936,7 +950,8 @@ sqs_purge_queue <- function(QueueUrl) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$purge_queue_input(QueueUrl = QueueUrl)
   output <- .sqs$purge_queue_output()
@@ -958,7 +973,7 @@ sqs_purge_queue <- function(QueueUrl) {
 #' @param QueueUrl &#91;required&#93; The URL of the Amazon SQS queue from which messages are received.
 #' 
 #' Queue URLs and names are case-sensitive.
-#' @param AttributeNames This parameter has been deprecated but will be supported for backward
+#' @param AttributeNames This parameter has been discontinued but will be supported for backward
 #' compatibility. To provide attribute names, you are encouraged to use
 #' `MessageSystemAttributeNames`.
 #' 
@@ -1069,11 +1084,41 @@ sqs_purge_queue <- function(QueueUrl) {
 #' Valid values: 1 to 10. Default: 1.
 #' @param VisibilityTimeout The duration (in seconds) that the received messages are hidden from
 #' subsequent retrieve requests after being retrieved by a
-#' [`receive_message`][sqs_receive_message] request.
+#' [`receive_message`][sqs_receive_message] request. If not specified, the
+#' default visibility timeout for the queue is used, which is 30 seconds.
+#' 
+#' Understanding `VisibilityTimeout`:
+#' 
+#' -   When a message is received from a queue, it becomes temporarily
+#'     invisible to other consumers for the duration of the visibility
+#'     timeout. This prevents multiple consumers from processing the same
+#'     message simultaneously. If the message is not deleted or its
+#'     visibility timeout is not extended before the timeout expires, it
+#'     becomes visible again and can be retrieved by other consumers.
+#' 
+#' -   Setting an appropriate visibility timeout is crucial. If it's too
+#'     short, the message might become visible again before processing is
+#'     complete, leading to duplicate processing. If it's too long, it
+#'     delays the reprocessing of messages if the initial processing fails.
+#' 
+#' -   You can adjust the visibility timeout using the
+#'     `--visibility-timeout` parameter in the `receive-message` command to
+#'     match the processing time required by your application.
+#' 
+#' -   A message that isn't deleted or a message whose visibility isn't
+#'     extended before the visibility timeout expires counts as a failed
+#'     receive. Depending on the configuration of the queue, the message
+#'     might be sent to the dead-letter queue.
+#' 
+#' For more information, see [Visibility
+#' Timeout](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
+#' in the *Amazon SQS Developer Guide*.
 #' @param WaitTimeSeconds The duration (in seconds) for which the call waits for a message to
 #' arrive in the queue before returning. If a message is available, the
 #' call returns sooner than `WaitTimeSeconds`. If no messages are available
-#' and the wait time expires, the call does not return a message list.
+#' and the wait time expires, the call does not return a message list. If
+#' you are using the Java SDK, it returns a `ReceiveMessageResponse`
+#' object, which has a empty list instead of a Null object.
 #' 
 #' To avoid HTTP errors, ensure that the HTTP response timeout for
 #' [`receive_message`][sqs_receive_message] requests is longer than the
@@ -1153,7 +1198,8 @@ sqs_receive_message <- function(QueueUrl, AttributeNames = NULL, MessageSystemAt
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$receive_message_input(QueueUrl = QueueUrl, AttributeNames = AttributeNames, MessageSystemAttributeNames = MessageSystemAttributeNames, MessageAttributeNames = MessageAttributeNames, MaxNumberOfMessages = MaxNumberOfMessages, VisibilityTimeout = VisibilityTimeout, WaitTimeSeconds = WaitTimeSeconds, ReceiveRequestAttemptId = ReceiveRequestAttemptId)
   output <- .sqs$receive_message_output()
@@ -1188,7 +1234,8 @@ sqs_remove_permission <- function(QueueUrl, Label) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$remove_permission_input(QueueUrl = QueueUrl, Label = Label)
   output <- .sqs$remove_permission_output()
@@ -1341,7 +1388,8 @@ sqs_send_message <- function(QueueUrl, MessageBody, DelaySeconds = NULL, Message
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$send_message_input(QueueUrl = QueueUrl, MessageBody = MessageBody, DelaySeconds = DelaySeconds, MessageAttributes = MessageAttributes, MessageSystemAttributes = MessageSystemAttributes, MessageDeduplicationId = MessageDeduplicationId, MessageGroupId = MessageGroupId)
   output <- .sqs$send_message_output()
@@ -1376,7 +1424,8 @@ sqs_send_message_batch <- function(QueueUrl, Entries) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$send_message_batch_input(QueueUrl = QueueUrl, Entries = Entries)
   output <- .sqs$send_message_batch_output()
@@ -1593,7 +1642,8 @@ sqs_set_queue_attributes <- function(QueueUrl, Attributes) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$set_queue_attributes_input(QueueUrl = QueueUrl, Attributes = Attributes)
   output <- .sqs$set_queue_attributes_output()
@@ -1638,7 +1688,8 @@ sqs_start_message_move_task <- function(SourceArn, DestinationArn = NULL, MaxNum
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$start_message_move_task_input(SourceArn = SourceArn, DestinationArn = DestinationArn, MaxNumberOfMessagesPerSecond = MaxNumberOfMessagesPerSecond)
   output <- .sqs$start_message_move_task_output()
@@ -1669,7 +1720,8 @@ sqs_tag_queue <- function(QueueUrl, Tags) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$tag_queue_input(QueueUrl = QueueUrl, Tags = Tags)
   output <- .sqs$tag_queue_output()
@@ -1700,7 +1752,8 @@ sqs_untag_queue <- function(QueueUrl, TagKeys) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sqs$untag_queue_input(QueueUrl = QueueUrl, TagKeys = TagKeys)
   output <- .sqs$untag_queue_output()

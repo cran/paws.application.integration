@@ -30,7 +30,8 @@ sns_add_permission <- function(TopicArn, Label, AWSAccountId, ActionName) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$add_permission_input(TopicArn = TopicArn, Label = Label, AWSAccountId = AWSAccountId, ActionName = ActionName)
   output <- .sns$add_permission_output()
@@ -61,7 +62,8 @@ sns_check_if_phone_number_is_opted_out <- function(phoneNumber) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$check_if_phone_number_is_opted_out_input(phoneNumber = phoneNumber)
   output <- .sns$check_if_phone_number_is_opted_out_output()
@@ -99,7 +101,8 @@ sns_confirm_subscription <- function(TopicArn, Token, AuthenticateOnUnsubscribe 
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$confirm_subscription_input(TopicArn = TopicArn, Token = Token, AuthenticateOnUnsubscribe = AuthenticateOnUnsubscribe)
   output <- .sns$confirm_subscription_output()
@@ -139,7 +142,8 @@ sns_create_platform_application <- function(Name, Platform, Attributes) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$create_platform_application_input(Name = Name, Platform = Platform, Attributes = Attributes)
   output <- .sns$create_platform_application_output()
@@ -183,7 +187,8 @@ sns_create_platform_endpoint <- function(PlatformApplicationArn, Token, CustomUs
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$create_platform_endpoint_input(PlatformApplicationArn = PlatformApplicationArn, Token = Token, CustomUserData = CustomUserData, Attributes = Attributes)
   output <- .sns$create_platform_endpoint_output()
@@ -217,7 +222,8 @@ sns_create_sms_sandbox_phone_number <- function(PhoneNumber, LanguageCode = NULL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$create_sms_sandbox_phone_number_input(PhoneNumber = PhoneNumber, LanguageCode = LanguageCode)
   output <- .sns$create_sms_sandbox_phone_number_output()
@@ -288,13 +294,8 @@ sns_create_sms_sandbox_phone_number <- function(PhoneNumber, LanguageCode = NULL
 #' The following attributes apply only to [FIFO
 #' topics](https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
 #' 
-#' -   `ArchivePolicy` – Adds or updates an inline policy document to
-#'     archive messages stored in the specified Amazon SNS topic.
-#' 
-#' -   `BeginningArchiveTime` – The earliest starting point at which a
-#'     message in the topic’s archive can be replayed from. This point in
-#'     time is based on the configured message retention period set by the
-#'     topic’s message archiving policy.
+#' -   `ArchivePolicy` – The policy that sets the retention period for
+#'     messages stored in the message archive of an Amazon SNS FIFO topic.
 #' 
 #' -   `ContentBasedDeduplication` – Enables content-based deduplication
 #'     for FIFO topics.
@@ -312,6 +313,23 @@ sns_create_sms_sandbox_phone_number <- function(PhoneNumber, LanguageCode = NULL
 #'         (Optional) To override the generated value, you can specify a
 #'         value for the `MessageDeduplicationId` parameter for the
 #'         [`publish`][sns_publish] action.
+#' 
+#' 
+#' -   `FifoThroughputScope` – Enables higher throughput for your FIFO
+#'     topic by adjusting the scope of deduplication. This attribute has
+#'     two possible values:
+#' 
+#'     -   `Topic` – The scope of message deduplication is across the
+#'         entire topic. This is the default value and maintains existing
+#'         behavior, with a maximum throughput of 3000 messages per second
+#'         or 20MB per second, whichever comes first.
+#' 
+#'     -   `MessageGroup` – The scope of deduplication is within each
+#'         individual message group, which enables higher throughput per
+#'         topic subject to regional quotas. For more information on quotas
+#'         or to request an increase, see [Amazon SNS service
+#'         quotas](https://docs.aws.amazon.com/general/latest/gr/sns.html)
+#'         in the Amazon Web Services General Reference.
 #' @param Tags The list of tags to add to a new topic.
 #' 
 #' To be able to tag a topic on creation, you must have the
@@ -333,7 +351,8 @@ sns_create_topic <- function(Name, Attributes = NULL, Tags = NULL, DataProtectio
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$create_topic_input(Name = Name, Attributes = Attributes, Tags = Tags, DataProtectionPolicy = DataProtectionPolicy)
   output <- .sns$create_topic_output()
@@ -363,7 +382,8 @@ sns_delete_endpoint <- function(EndpointArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$delete_endpoint_input(EndpointArn = EndpointArn)
   output <- .sns$delete_endpoint_output()
@@ -394,7 +414,8 @@ sns_delete_platform_application <- function(PlatformApplicationArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$delete_platform_application_input(PlatformApplicationArn = PlatformApplicationArn)
   output <- .sns$delete_platform_application_output()
@@ -425,7 +446,8 @@ sns_delete_sms_sandbox_phone_number <- function(PhoneNumber) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$delete_sms_sandbox_phone_number_input(PhoneNumber = PhoneNumber)
   output <- .sns$delete_sms_sandbox_phone_number_output()
@@ -455,7 +477,8 @@ sns_delete_topic <- function(TopicArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$delete_topic_input(TopicArn = TopicArn)
   output <- .sns$delete_topic_output()
@@ -490,7 +513,8 @@ sns_get_data_protection_policy <- function(ResourceArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_data_protection_policy_input(ResourceArn = ResourceArn)
   output <- .sns$get_data_protection_policy_output()
@@ -523,7 +547,8 @@ sns_get_endpoint_attributes <- function(EndpointArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_endpoint_attributes_input(EndpointArn = EndpointArn)
   output <- .sns$get_endpoint_attributes_output()
@@ -555,7 +580,8 @@ sns_get_platform_application_attributes <- function(PlatformApplicationArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_platform_application_attributes_input(PlatformApplicationArn = PlatformApplicationArn)
   output <- .sns$get_platform_application_attributes_output()
@@ -592,7 +618,8 @@ sns_get_sms_attributes <- function(attributes = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_sms_attributes_input(attributes = attributes)
   output <- .sns$get_sms_attributes_output()
@@ -623,7 +650,8 @@ sns_get_sms_sandbox_account_status <- function() {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_sms_sandbox_account_status_input()
   output <- .sns$get_sms_sandbox_account_status_output()
@@ -653,7 +681,8 @@ sns_get_subscription_attributes <- function(SubscriptionArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_subscription_attributes_input(SubscriptionArn = SubscriptionArn)
   output <- .sns$get_subscription_attributes_output()
@@ -683,7 +712,8 @@ sns_get_topic_attributes <- function(TopicArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$get_topic_attributes_input(TopicArn = TopicArn)
   output <- .sns$get_topic_attributes_output()
@@ -720,7 +750,8 @@ sns_list_endpoints_by_platform_application <- function(PlatformApplicationArn, N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Endpoints")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Endpoints"),
+    stream_api = FALSE
   )
   input <- .sns$list_endpoints_by_platform_application_input(PlatformApplicationArn = PlatformApplicationArn, NextToken = NextToken)
   output <- .sns$list_endpoints_by_platform_application_output()
@@ -736,7 +767,7 @@ sns_list_endpoints_by_platform_application <- function(PlatformApplicationArn, N
 #' numbers and their metadata
 #'
 #' @description
-#' Lists the calling Amazon Web Services account's dedicated origination numbers and their metadata. For more information about origination numbers, see [Origination numbers](https://docs.aws.amazon.com/sns/latest/dg/channels-sms-originating-identities-origination-numbers.html) in the *Amazon SNS Developer Guide*.
+#' Lists the calling Amazon Web Services account's dedicated origination numbers and their metadata. For more information about origination numbers, see [Origination numbers](https://docs.aws.amazon.com/sns/latest/dg/) in the *Amazon SNS Developer Guide*.
 #'
 #' See [https://www.paws-r-sdk.com/docs/sns_list_origination_numbers/](https://www.paws-r-sdk.com/docs/sns_list_origination_numbers/) for full documentation.
 #'
@@ -754,7 +785,8 @@ sns_list_origination_numbers <- function(NextToken = NULL, MaxResults = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "PhoneNumbers")
+    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "PhoneNumbers"),
+    stream_api = FALSE
   )
   input <- .sns$list_origination_numbers_input(NextToken = NextToken, MaxResults = MaxResults)
   output <- .sns$list_origination_numbers_output()
@@ -788,7 +820,8 @@ sns_list_phone_numbers_opted_out <- function(nextToken = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "nextToken", output_token = "nextToken", result_key = "phoneNumbers")
+    paginator = list(input_token = "nextToken", output_token = "nextToken", result_key = "phoneNumbers"),
+    stream_api = FALSE
   )
   input <- .sns$list_phone_numbers_opted_out_input(nextToken = nextToken)
   output <- .sns$list_phone_numbers_opted_out_output()
@@ -822,7 +855,8 @@ sns_list_platform_applications <- function(NextToken = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "PlatformApplications")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "PlatformApplications"),
+    stream_api = FALSE
   )
   input <- .sns$list_platform_applications_input(NextToken = NextToken)
   output <- .sns$list_platform_applications_output()
@@ -855,7 +889,8 @@ sns_list_sms_sandbox_phone_numbers <- function(NextToken = NULL, MaxResults = NU
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "PhoneNumbers")
+    paginator = list(input_token = "NextToken", limit_key = "MaxResults", output_token = "NextToken", result_key = "PhoneNumbers"),
+    stream_api = FALSE
   )
   input <- .sns$list_sms_sandbox_phone_numbers_input(NextToken = NextToken, MaxResults = MaxResults)
   output <- .sns$list_sms_sandbox_phone_numbers_output()
@@ -886,7 +921,8 @@ sns_list_subscriptions <- function(NextToken = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Subscriptions")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Subscriptions"),
+    stream_api = FALSE
   )
   input <- .sns$list_subscriptions_input(NextToken = NextToken)
   output <- .sns$list_subscriptions_output()
@@ -919,7 +955,8 @@ sns_list_subscriptions_by_topic <- function(TopicArn, NextToken = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Subscriptions")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Subscriptions"),
+    stream_api = FALSE
   )
   input <- .sns$list_subscriptions_by_topic_input(TopicArn = TopicArn, NextToken = NextToken)
   output <- .sns$list_subscriptions_by_topic_output()
@@ -949,7 +986,8 @@ sns_list_tags_for_resource <- function(ResourceArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$list_tags_for_resource_input(ResourceArn = ResourceArn)
   output <- .sns$list_tags_for_resource_output()
@@ -979,7 +1017,8 @@ sns_list_topics <- function(NextToken = NULL) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Topics")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", result_key = "Topics"),
+    stream_api = FALSE
   )
   input <- .sns$list_topics_input(NextToken = NextToken)
   output <- .sns$list_topics_output()
@@ -1010,7 +1049,8 @@ sns_opt_in_phone_number <- function(phoneNumber) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$opt_in_phone_number_input(phoneNumber = phoneNumber)
   output <- .sns$opt_in_phone_number_output()
@@ -1117,20 +1157,52 @@ sns_opt_in_phone_number <- function(phoneNumber) {
 #' 
 #' Valid value: `json`
 #' @param MessageAttributes Message attributes for Publish action.
-#' @param MessageDeduplicationId This parameter applies only to FIFO (first-in-first-out) topics. The
-#' `MessageDeduplicationId` can contain up to 128 alphanumeric characters
-#' `(a-z, A-Z, 0-9)` and punctuation
-#' `` (!\"#$%&\'()*+,-./:;<=>?@@[\]^_\`{|}~) ``.
+#' @param MessageDeduplicationId -   This parameter applies only to FIFO (first-in-first-out) topics. The
+#'     `MessageDeduplicationId` can contain up to 128 alphanumeric
+#'     characters `(a-z, A-Z, 0-9)` and punctuation
+#'     `` (!\"#$%&\'()*+,-./:;<=>?@@[\]^_\`{|}~) ``.
 #' 
-#' Every message must have a unique `MessageDeduplicationId`, which is a
-#' token used for deduplication of sent messages. If a message with a
-#' particular `MessageDeduplicationId` is sent successfully, any message
-#' sent with the same `MessageDeduplicationId` during the 5-minute
-#' deduplication interval is treated as a duplicate.
+#' -   Every message must have a unique `MessageDeduplicationId`, which is
+#'     a token used for deduplication of sent messages within the 5 minute
+#'     minimum deduplication interval.
 #' 
-#' If the topic has `ContentBasedDeduplication` set, the system generates a
-#' `MessageDeduplicationId` based on the contents of the message. Your
-#' `MessageDeduplicationId` overrides the generated one.
+#' -   The scope of deduplication depends on the `FifoThroughputScope`
+#'     attribute, when set to `Topic` the message deduplication scope is
+#'     across the entire topic, when set to `MessageGroup` the message
+#'     deduplication scope is within each individual message group.
+#' 
+#' -   If a message with a particular `MessageDeduplicationId` is sent
+#'     successfully, subsequent messages within the deduplication scope and
+#'     interval, with the same `MessageDeduplicationId`, are accepted
+#'     successfully but aren't delivered.
+#' 
+#' -   Every message must have a unique `MessageDeduplicationId`:
+#' 
+#'     -   You may provide a `MessageDeduplicationId` explicitly.
+#' 
+#'     -   If you aren't able to provide a `MessageDeduplicationId` and you
+#'         enable `ContentBasedDeduplication` for your topic, Amazon SNS
+#'         uses a SHA-256 hash to generate the `MessageDeduplicationId`
+#'         using the body of the message (but not the attributes of the
+#'         message).
+#' 
+#'     -   If you don't provide a `MessageDeduplicationId` and the topic
+#'         doesn't have `ContentBasedDeduplication` set, the action fails
+#'         with an error.
+#' 
+#'     -   If the topic has a `ContentBasedDeduplication` set, your
+#'         `MessageDeduplicationId` overrides the generated one.
+#' 
+#' -   When `ContentBasedDeduplication` is in effect, messages with
+#'     identical content sent within the deduplication scope and interval
+#'     are treated as duplicates and only one copy of the message is
+#'     delivered.
+#' 
+#' -   If you send one message with `ContentBasedDeduplication` enabled,
+#'     and then another message with a `MessageDeduplicationId` that is the
+#'     same as the one generated for the first `MessageDeduplicationId`,
+#'     the two messages are treated as duplicates, within the deduplication
+#'     scope and interval, and only one copy of the message is delivered.
 #' @param MessageGroupId This parameter applies only to FIFO (first-in-first-out) topics. The
 #' `MessageGroupId` can contain up to 128 alphanumeric characters
 #' `(a-z, A-Z, 0-9)` and punctuation
@@ -1151,7 +1223,8 @@ sns_publish <- function(TopicArn = NULL, TargetArn = NULL, PhoneNumber = NULL, M
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$publish_input(TopicArn = TopicArn, TargetArn = TargetArn, PhoneNumber = PhoneNumber, Message = Message, Subject = Subject, MessageStructure = MessageStructure, MessageAttributes = MessageAttributes, MessageDeduplicationId = MessageDeduplicationId, MessageGroupId = MessageGroupId)
   output <- .sns$publish_output()
@@ -1184,7 +1257,8 @@ sns_publish_batch <- function(TopicArn, PublishBatchRequestEntries) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$publish_batch_input(TopicArn = TopicArn, PublishBatchRequestEntries = PublishBatchRequestEntries)
   output <- .sns$publish_batch_output()
@@ -1225,7 +1299,8 @@ sns_put_data_protection_policy <- function(ResourceArn, DataProtectionPolicy) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$put_data_protection_policy_input(ResourceArn = ResourceArn, DataProtectionPolicy = DataProtectionPolicy)
   output <- .sns$put_data_protection_policy_output()
@@ -1256,7 +1331,8 @@ sns_remove_permission <- function(TopicArn, Label) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$remove_permission_input(TopicArn = TopicArn, Label = Label)
   output <- .sns$remove_permission_output()
@@ -1305,7 +1381,8 @@ sns_set_endpoint_attributes <- function(EndpointArn, Attributes) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$set_endpoint_attributes_input(EndpointArn = EndpointArn, Attributes = Attributes)
   output <- .sns$set_endpoint_attributes_output()
@@ -1411,7 +1488,8 @@ sns_set_platform_application_attributes <- function(PlatformApplicationArn, Attr
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$set_platform_application_attributes_input(PlatformApplicationArn = PlatformApplicationArn, Attributes = Attributes)
   output <- .sns$set_platform_application_attributes_output()
@@ -1518,7 +1596,8 @@ sns_set_sms_attributes <- function(attributes) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$set_sms_attributes_input(attributes = attributes)
   output <- .sns$set_sms_attributes_output()
@@ -1597,7 +1676,8 @@ sns_set_subscription_attributes <- function(SubscriptionArn, AttributeName, Attr
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$set_subscription_attributes_input(SubscriptionArn = SubscriptionArn, AttributeName = AttributeName, AttributeValue = AttributeValue)
   output <- .sns$set_subscription_attributes_output()
@@ -1751,6 +1831,9 @@ sns_set_subscription_attributes <- function(SubscriptionArn, AttributeName, Attr
 #' The following attribute applies only to [FIFO
 #' topics](https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html):
 #' 
+#' -   `ArchivePolicy` – The policy that sets the retention period for
+#'     messages stored in the message archive of an Amazon SNS FIFO topic.
+#' 
 #' -   `ContentBasedDeduplication` – Enables content-based deduplication
 #'     for FIFO topics.
 #' 
@@ -1767,6 +1850,23 @@ sns_set_subscription_attributes <- function(SubscriptionArn, AttributeName, Attr
 #'         (Optional) To override the generated value, you can specify a
 #'         value for the `MessageDeduplicationId` parameter for the
 #'         [`publish`][sns_publish] action.
+#' 
+#' 
+#' -   `FifoThroughputScope` – Enables higher throughput for your FIFO
+#'     topic by adjusting the scope of deduplication. This attribute has
+#'     two possible values:
+#' 
+#'     -   `Topic` – The scope of message deduplication is across the
+#'         entire topic. This is the default value and maintains existing
+#'         behavior, with a maximum throughput of 3000 messages per second
+#'         or 20MB per second, whichever comes first.
+#' 
+#'     -   `MessageGroup` – The scope of deduplication is within each
+#'         individual message group, which enables higher throughput per
+#'         topic subject to regional quotas. For more information on quotas
+#'         or to request an increase, see [Amazon SNS service
+#'         quotas](https://docs.aws.amazon.com/general/latest/gr/sns.html)
+#'         in the Amazon Web Services General Reference.
 #' @param AttributeValue The new value for the attribute.
 #'
 #' @keywords internal
@@ -1778,7 +1878,8 @@ sns_set_topic_attributes <- function(TopicArn, AttributeName, AttributeValue = N
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$set_topic_attributes_input(TopicArn = TopicArn, AttributeName = AttributeName, AttributeValue = AttributeValue)
   output <- .sns$set_topic_attributes_output()
@@ -1938,7 +2039,8 @@ sns_subscribe <- function(TopicArn, Protocol, Endpoint = NULL, Attributes = NULL
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$subscribe_input(TopicArn = TopicArn, Protocol = Protocol, Endpoint = Endpoint, Attributes = Attributes, ReturnSubscriptionArn = ReturnSubscriptionArn)
   output <- .sns$subscribe_output()
@@ -1970,7 +2072,8 @@ sns_tag_resource <- function(ResourceArn, Tags) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$tag_resource_input(ResourceArn = ResourceArn, Tags = Tags)
   output <- .sns$tag_resource_output()
@@ -2000,7 +2103,8 @@ sns_unsubscribe <- function(SubscriptionArn) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$unsubscribe_input(SubscriptionArn = SubscriptionArn)
   output <- .sns$unsubscribe_output()
@@ -2031,7 +2135,8 @@ sns_untag_resource <- function(ResourceArn, TagKeys) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$untag_resource_input(ResourceArn = ResourceArn, TagKeys = TagKeys)
   output <- .sns$untag_resource_output()
@@ -2064,7 +2169,8 @@ sns_verify_sms_sandbox_phone_number <- function(PhoneNumber, OneTimePassword) {
     http_method = "POST",
     http_path = "/",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .sns$verify_sms_sandbox_phone_number_input(PhoneNumber = PhoneNumber, OneTimePassword = OneTimePassword)
   output <- .sns$verify_sms_sandbox_phone_number_output()

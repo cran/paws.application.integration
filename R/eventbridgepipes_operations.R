@@ -27,19 +27,31 @@ NULL
 #' @param RoleArn &#91;required&#93; The ARN of the role that allows the pipe to send data to the target.
 #' @param Tags The list of key-value pairs to associate with the pipe.
 #' @param LogConfiguration The logging configuration settings for the pipe.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
+#' if you choose to use a customer managed key to encrypt pipe data. The
+#' identifier can be the key Amazon Resource Name (ARN), KeyId, key alias,
+#' or key alias ARN.
+#' 
+#' If you do not specify a customer managed key identifier, EventBridge
+#' uses an Amazon Web Services owned key to encrypt pipe data.
+#' 
+#' For more information, see [Managing
+#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
+#' *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridgepipes_create_pipe
-eventbridgepipes_create_pipe <- function(Name, Description = NULL, DesiredState = NULL, Source, SourceParameters = NULL, Enrichment = NULL, EnrichmentParameters = NULL, Target, TargetParameters = NULL, RoleArn, Tags = NULL, LogConfiguration = NULL) {
+eventbridgepipes_create_pipe <- function(Name, Description = NULL, DesiredState = NULL, Source, SourceParameters = NULL, Enrichment = NULL, EnrichmentParameters = NULL, Target, TargetParameters = NULL, RoleArn, Tags = NULL, LogConfiguration = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "CreatePipe",
     http_method = "POST",
     http_path = "/v1/pipes/{Name}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .eventbridgepipes$create_pipe_input(Name = Name, Description = Description, DesiredState = DesiredState, Source = Source, SourceParameters = SourceParameters, Enrichment = Enrichment, EnrichmentParameters = EnrichmentParameters, Target = Target, TargetParameters = TargetParameters, RoleArn = RoleArn, Tags = Tags, LogConfiguration = LogConfiguration)
+  input <- .eventbridgepipes$create_pipe_input(Name = Name, Description = Description, DesiredState = DesiredState, Source = Source, SourceParameters = SourceParameters, Enrichment = Enrichment, EnrichmentParameters = EnrichmentParameters, Target = Target, TargetParameters = TargetParameters, RoleArn = RoleArn, Tags = Tags, LogConfiguration = LogConfiguration, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridgepipes$create_pipe_output()
   config <- get_config()
   svc <- .eventbridgepipes$service(config, op)
@@ -67,7 +79,8 @@ eventbridgepipes_delete_pipe <- function(Name) {
     http_method = "DELETE",
     http_path = "/v1/pipes/{Name}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$delete_pipe_input(Name = Name)
   output <- .eventbridgepipes$delete_pipe_output()
@@ -97,7 +110,8 @@ eventbridgepipes_describe_pipe <- function(Name) {
     http_method = "GET",
     http_path = "/v1/pipes/{Name}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$describe_pipe_input(Name = Name)
   output <- .eventbridgepipes$describe_pipe_output()
@@ -139,7 +153,8 @@ eventbridgepipes_list_pipes <- function(NamePrefix = NULL, DesiredState = NULL, 
     http_method = "GET",
     http_path = "/v1/pipes",
     host_prefix = "",
-    paginator = list(input_token = "NextToken", output_token = "NextToken", limit_key = "Limit", result_key = "Pipes")
+    paginator = list(input_token = "NextToken", output_token = "NextToken", limit_key = "Limit", result_key = "Pipes"),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$list_pipes_input(NamePrefix = NamePrefix, DesiredState = DesiredState, CurrentState = CurrentState, SourcePrefix = SourcePrefix, TargetPrefix = TargetPrefix, NextToken = NextToken, Limit = Limit)
   output <- .eventbridgepipes$list_pipes_output()
@@ -169,7 +184,8 @@ eventbridgepipes_list_tags_for_resource <- function(resourceArn) {
     http_method = "GET",
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$list_tags_for_resource_input(resourceArn = resourceArn)
   output <- .eventbridgepipes$list_tags_for_resource_output()
@@ -199,7 +215,8 @@ eventbridgepipes_start_pipe <- function(Name) {
     http_method = "POST",
     http_path = "/v1/pipes/{Name}/start",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$start_pipe_input(Name = Name)
   output <- .eventbridgepipes$start_pipe_output()
@@ -229,7 +246,8 @@ eventbridgepipes_stop_pipe <- function(Name) {
     http_method = "POST",
     http_path = "/v1/pipes/{Name}/stop",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$stop_pipe_input(Name = Name)
   output <- .eventbridgepipes$stop_pipe_output()
@@ -260,7 +278,8 @@ eventbridgepipes_tag_resource <- function(resourceArn, tags) {
     http_method = "POST",
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$tag_resource_input(resourceArn = resourceArn, tags = tags)
   output <- .eventbridgepipes$tag_resource_output()
@@ -291,7 +310,8 @@ eventbridgepipes_untag_resource <- function(resourceArn, tagKeys) {
     http_method = "DELETE",
     http_path = "/tags/{resourceArn}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
   input <- .eventbridgepipes$untag_resource_input(resourceArn = resourceArn, tagKeys = tagKeys)
   output <- .eventbridgepipes$untag_resource_output()
@@ -325,19 +345,36 @@ eventbridgepipes_untag_resource <- function(resourceArn, tagKeys) {
 #' in the *Amazon EventBridge User Guide*.
 #' @param RoleArn &#91;required&#93; The ARN of the role that allows the pipe to send data to the target.
 #' @param LogConfiguration The logging configuration settings for the pipe.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
+#' if you choose to use a customer managed key to encrypt pipe data. The
+#' identifier can be the key Amazon Resource Name (ARN), KeyId, key alias,
+#' or key alias ARN.
+#' 
+#' To update a pipe that is using the default Amazon Web Services owned key
+#' to use a customer managed key instead, or update a pipe that is using a
+#' customer managed key to use a different customer managed key, specify a
+#' customer managed key identifier.
+#' 
+#' To update a pipe that is using a customer managed key to use the default
+#' Amazon Web Services owned key, specify an empty string.
+#' 
+#' For more information, see [Managing
+#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
+#' *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridgepipes_update_pipe
-eventbridgepipes_update_pipe <- function(Name, Description = NULL, DesiredState = NULL, SourceParameters = NULL, Enrichment = NULL, EnrichmentParameters = NULL, Target = NULL, TargetParameters = NULL, RoleArn, LogConfiguration = NULL) {
+eventbridgepipes_update_pipe <- function(Name, Description = NULL, DesiredState = NULL, SourceParameters = NULL, Enrichment = NULL, EnrichmentParameters = NULL, Target = NULL, TargetParameters = NULL, RoleArn, LogConfiguration = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "UpdatePipe",
     http_method = "PUT",
     http_path = "/v1/pipes/{Name}",
     host_prefix = "",
-    paginator = list()
+    paginator = list(),
+    stream_api = FALSE
   )
-  input <- .eventbridgepipes$update_pipe_input(Name = Name, Description = Description, DesiredState = DesiredState, SourceParameters = SourceParameters, Enrichment = Enrichment, EnrichmentParameters = EnrichmentParameters, Target = Target, TargetParameters = TargetParameters, RoleArn = RoleArn, LogConfiguration = LogConfiguration)
+  input <- .eventbridgepipes$update_pipe_input(Name = Name, Description = Description, DesiredState = DesiredState, SourceParameters = SourceParameters, Enrichment = Enrichment, EnrichmentParameters = EnrichmentParameters, Target = Target, TargetParameters = TargetParameters, RoleArn = RoleArn, LogConfiguration = LogConfiguration, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridgepipes$update_pipe_output()
   config <- get_config()
   svc <- .eventbridgepipes$service(config, op)

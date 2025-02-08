@@ -143,7 +143,7 @@ NULL
 #'  \link[=sqs_delete_message_batch]{delete_message_batch} \tab Deletes up to ten messages from the specified queue\cr
 #'  \link[=sqs_delete_queue]{delete_queue} \tab Deletes the queue specified by the QueueUrl, regardless of the queue's contents\cr
 #'  \link[=sqs_get_queue_attributes]{get_queue_attributes} \tab Gets attributes for the specified queue\cr
-#'  \link[=sqs_get_queue_url]{get_queue_url} \tab Returns the URL of an existing Amazon SQS queue\cr
+#'  \link[=sqs_get_queue_url]{get_queue_url} \tab The GetQueueUrl API returns the URL of an existing Amazon SQS queue\cr
 #'  \link[=sqs_list_dead_letter_source_queues]{list_dead_letter_source_queues} \tab Returns a list of your queues that have the RedrivePolicy queue attribute configured with a dead-letter queue\cr
 #'  \link[=sqs_list_message_move_tasks]{list_message_move_tasks} \tab Gets the most recent message movement tasks (up to 10) under a specific source queue\cr
 #'  \link[=sqs_list_queues]{list_queues} \tab Returns a list of your queues in the current region\cr
@@ -188,7 +188,7 @@ sqs <- function(config = list(), credentials = list(), endpoint = NULL, region =
 
 .sqs$metadata <- list(
   service_name = "sqs",
-  endpoints = list("*" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "cn-*" = list(endpoint = "sqs.{region}.amazonaws.com.cn", global = FALSE), "eu-isoe-*" = list(endpoint = "sqs.{region}.cloud.adc-e.uk", global = FALSE), "us-iso-*" = list(endpoint = "sqs.{region}.c2s.ic.gov", global = FALSE), "us-isob-*" = list(endpoint = "sqs.{region}.sc2s.sgov.gov", global = FALSE), "us-isof-*" = list(endpoint = "sqs.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.csp.hci.ic.gov", global = FALSE)),
   service_id = "SQS",
   api_version = "2012-11-05",
   signing_name = "sqs",

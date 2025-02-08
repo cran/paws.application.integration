@@ -32,9 +32,8 @@ there may be additional restrictions on the inputs you can choose. See
 in the \emph{Amazon Location Service Developer Guide}.
 
 For route calculators that use Esri as the data provider, if you specify
-a departure that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html}{moves the position to the nearest road}.
-The snapped value is available in the result in
-\code{SnappedDeparturePositions}.
+a departure that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/latest/developerguide/}{moves the position to the nearest road}. The
+snapped value is available in the result in \code{SnappedDeparturePositions}.
 
 Valid Values: \verb{[-180 to 180,-90 to 90]}}
 
@@ -48,8 +47,8 @@ there may be additional restrictions on the inputs you can choose. See
 in the \emph{Amazon Location Service Developer Guide}.
 
 For route calculators that use Esri as the data provider, if you specify
-a destination that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/latest/developerguide/snap-to-nearby-road.html}{moves the position to the nearest road}.
-The snapped value is available in the result in
+a destination that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/latest/developerguide/}{moves the position to the nearest road}. The
+snapped value is available in the result in
 \code{SnappedDestinationPositions}.
 
 Valid Values: \verb{[-180 to 180,-90 to 90]}}
@@ -70,7 +69,7 @@ provider, and only within Southeast Asia.
 \code{Truck} is not available for Grab.
 
 For more information about using Grab as a data provider, see
-\href{https://docs.aws.amazon.com/location/latest/developerguide/grab.html}{GrabMaps}
+\href{https://docs.aws.amazon.com/location/latest/developerguide/}{GrabMaps}
 in the \emph{Amazon Location Service Developer Guide}.
 
 Default Value: \code{Car}}
@@ -83,8 +82,7 @@ best traffic conditions is used to calculate the route matrix.
 Setting a departure time in the past returns a \verb{400 ValidationException}
 error.
 \itemize{
-\item In \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601}
-format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. For example,
+\item In ISO 8601 format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. For example,
 \verb{2020–07-2T12:15:20.000Z+01:00}
 }}
 

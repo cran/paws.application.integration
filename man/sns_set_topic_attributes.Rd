@@ -126,6 +126,8 @@ confirmation messages sent by Amazon SNS. By default,
 
 The following attribute applies only to \href{https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html}{FIFO topics}:
 \itemize{
+\item \code{ArchivePolicy} – The policy that sets the retention period for
+messages stored in the message archive of an Amazon SNS FIFO topic.
 \item \code{ContentBasedDeduplication} – Enables content-based deduplication
 for FIFO topics.
 \itemize{
@@ -141,6 +143,20 @@ message).
 (Optional) To override the generated value, you can specify a
 value for the \code{MessageDeduplicationId} parameter for the
 \code{\link[=sns_publish]{publish}} action.
+}
+\item \code{FifoThroughputScope} – Enables higher throughput for your FIFO
+topic by adjusting the scope of deduplication. This attribute has
+two possible values:
+\itemize{
+\item \code{Topic} – The scope of message deduplication is across the
+entire topic. This is the default value and maintains existing
+behavior, with a maximum throughput of 3000 messages per second
+or 20MB per second, whichever comes first.
+\item \code{MessageGroup} – The scope of deduplication is within each
+individual message group, which enables higher throughput per
+topic subject to regional quotas. For more information on quotas
+or to request an increase, see \href{https://docs.aws.amazon.com/general/latest/gr/sns.html}{Amazon SNS service quotas}
+in the Amazon Web Services General Reference.
 }
 }}
 
