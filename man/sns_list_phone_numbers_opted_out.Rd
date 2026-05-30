@@ -8,10 +8,7 @@ send SMS messages to them}
 sns_list_phone_numbers_opted_out(nextToken = NULL)
 }
 \arguments{
-\item{nextToken}{A \code{NextToken} string is used when you call the
-\code{\link[=sns_list_phone_numbers_opted_out]{list_phone_numbers_opted_out}}
-action to retrieve additional records that are available after the first
-page of results.}
+\item{nextToken}{A \code{NextToken} string is used when you call the \code{\link[=sns_list_phone_numbers_opted_out]{list_phone_numbers_opted_out}} action to retrieve additional records that are available after the first page of results.}
 }
 \description{
 Returns a list of phone numbers that are opted out, meaning you cannot send SMS messages to them.

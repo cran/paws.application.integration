@@ -7,8 +7,7 @@
 resourceexplorer_delete_view(ViewArn)
 }
 \arguments{
-\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)}
-of the view that you want to delete.}
+\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)} of the view that you want to delete.}
 }
 \description{
 Deletes the specified view.

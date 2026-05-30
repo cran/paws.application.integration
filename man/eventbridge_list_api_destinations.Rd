@@ -12,20 +12,15 @@ eventbridge_list_api_destinations(
 )
 }
 \arguments{
-\item{NamePrefix}{A name prefix to filter results returned. Only API destinations with a
-name that starts with the prefix are returned.}
+\item{NamePrefix}{A name prefix to filter results returned. Only API destinations with a name that starts with the prefix are returned.}
 
 \item{ConnectionArn}{The ARN of the connection specified for the API destination.}
 
-\item{NextToken}{The token returned by a previous call, which you can use to retrieve the
-next set of results.
+\item{NextToken}{The token returned by a previous call, which you can use to retrieve the next set of results.
 
-The value of \code{nextToken} is a unique pagination token for each page. To
-retrieve the next page of results, make the call again using the
-returned token. Keep all other arguments unchanged.
+The value of \code{nextToken} is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 
-Using an expired pagination token results in an \verb{HTTP 400 InvalidToken}
-error.}
+Using an expired pagination token results in an \verb{HTTP 400 InvalidToken} error.}
 
 \item{Limit}{The maximum number of API destinations to include in the response.}
 }

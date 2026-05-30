@@ -11,8 +11,7 @@ locationservice_batch_get_device_position(TrackerName, DeviceIds)
 
 \item{DeviceIds}{[required] Devices whose position you want to retrieve.
 \itemize{
-\item For example, for two devices:
-\code{device-ids=DeviceId1&device-ids=DeviceId2}
+\item For example, for two devices: \code{device-ids=DeviceId1&device-ids=DeviceId2}
 }}
 }
 \description{

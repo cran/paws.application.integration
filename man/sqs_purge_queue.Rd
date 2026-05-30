@@ -8,8 +8,7 @@ specified by the QueueURL parameter}
 sqs_purge_queue(QueueUrl)
 }
 \arguments{
-\item{QueueUrl}{[required] The URL of the queue from which the \code{\link[=sqs_purge_queue]{purge_queue}}
-action deletes messages.
+\item{QueueUrl}{[required] The URL of the queue from which the \code{\link[=sqs_purge_queue]{purge_queue}} action deletes messages.
 
 Queue URLs and names are case-sensitive.}
 }

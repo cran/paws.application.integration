@@ -13,21 +13,13 @@ mq_create_configuration(
 )
 }
 \arguments{
-\item{AuthenticationStrategy}{Optional. The authentication strategy associated with the configuration.
-The default is SIMPLE.}
+\item{AuthenticationStrategy}{Optional. The authentication strategy associated with the configuration. The default is SIMPLE.}
 
-\item{EngineType}{[required] Required. The type of broker engine. Currently, Amazon MQ supports
-ACTIVEMQ and RABBITMQ.}
+\item{EngineType}{[required] Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.}
 
-\item{EngineVersion}{The broker engine version. Defaults to the latest available version for
-the specified broker engine type. For more information, see the
-\href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/activemq-version-management.html}{ActiveMQ version management}
-and the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/rabbitmq-version-management.html}{RabbitMQ version management}
-sections in the Amazon MQ Developer Guide.}
+\item{EngineVersion}{The broker engine version. Defaults to the latest available version for the specified broker engine type. For more information, see the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/activemq-version-management.html}{ActiveMQ version management} and the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/rabbitmq-version-management.html}{RabbitMQ version management} sections in the Amazon MQ Developer Guide.}
 
-\item{Name}{[required] Required. The name of the configuration. This value can contain only
-alphanumeric characters, dashes, periods, underscores, and tildes (- .
-_ ~). This value must be 1-150 characters long.}
+\item{Name}{[required] Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.}
 
 \item{Tags}{Create tags when creating the configuration.}
 }

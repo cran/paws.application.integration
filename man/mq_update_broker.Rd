@@ -19,41 +19,29 @@ mq_update_broker(
 )
 }
 \arguments{
-\item{AuthenticationStrategy}{Optional. The authentication strategy used to secure the broker. The
-default is SIMPLE.}
+\item{AuthenticationStrategy}{Optional. The authentication strategy used to secure the broker. The default is SIMPLE.}
 
-\item{AutoMinorVersionUpgrade}{Enables automatic upgrades to new patch versions for brokers as new
-versions are released and supported by Amazon MQ. Automatic upgrades
-occur during the scheduled maintenance window or after a manual broker
-reboot.
+\item{AutoMinorVersionUpgrade}{Enables automatic upgrades to new patch versions for brokers as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window or after a manual broker reboot.
 
-Must be set to true for ActiveMQ brokers version 5.18 and above and for
-RabbitMQ brokers version 3.13 and above.}
+Must be set to true for ActiveMQ brokers version 5.18 and above and for RabbitMQ brokers version 3.13 and above.}
 
 \item{BrokerId}{[required] The unique ID that Amazon MQ generates for the broker.}
 
 \item{Configuration}{A list of information about the configuration.}
 
-\item{EngineVersion}{The broker engine version. For more information, see the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/activemq-version-management.html}{ActiveMQ version management}
-and the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/rabbitmq-version-management.html}{RabbitMQ version management}
-sections in the Amazon MQ Developer Guide.
+\item{EngineVersion}{The broker engine version. For more information, see the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/activemq-version-management.html}{ActiveMQ version management} and the \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/rabbitmq-version-management.html}{RabbitMQ version management} sections in the Amazon MQ Developer Guide.
 
-When upgrading to ActiveMQ version 5.18 and above or RabbitMQ version
-3.13 and above, you must have autoMinorVersionUpgrade set to true for
-the broker.}
+When upgrading to ActiveMQ version 5.18 and above or RabbitMQ version 3.13 and above, you must have autoMinorVersionUpgrade set to true for the broker.}
 
-\item{HostInstanceType}{The broker's host instance type to upgrade to. For a list of supported
-instance types, see \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/#broker-instance-types}{Broker instance types}.}
+\item{HostInstanceType}{The broker's host instance type to upgrade to. For a list of supported instance types, see \href{https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/#broker-instance-types}{Broker instance types}.}
 
-\item{LdapServerMetadata}{Optional. The metadata of the LDAP server used to authenticate and
-authorize connections to the broker. Does not apply to RabbitMQ brokers.}
+\item{LdapServerMetadata}{Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.}
 
 \item{Logs}{Enables Amazon CloudWatch logging for brokers.}
 
 \item{MaintenanceWindowStartTime}{The parameters that determine the WeeklyStartTime.}
 
-\item{SecurityGroups}{The list of security groups (1 minimum, 5 maximum) that authorizes
-connections to brokers.}
+\item{SecurityGroups}{The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.}
 
 \item{DataReplicationMode}{Defines whether this broker is a part of a data replication pair.}
 }

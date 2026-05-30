@@ -7,8 +7,7 @@
 eventbridgescheduler_list_tags_for_resource(ResourceArn)
 }
 \arguments{
-\item{ResourceArn}{[required] The ARN of the EventBridge Scheduler resource for which you want to view
-tags.}
+\item{ResourceArn}{[required] The ARN of the EventBridge Scheduler resource for which you want to view tags.}
 }
 \description{
 Lists the tags associated with the Scheduler resource.

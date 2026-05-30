@@ -11,152 +11,70 @@ sns_set_topic_attributes(TopicArn, AttributeName, AttributeValue = NULL)
 
 \item{AttributeName}{[required] A map of attributes with their corresponding values.
 
-The following lists the names, descriptions, and values of the special
-request parameters that the
-\code{\link[=sns_set_topic_attributes]{set_topic_attributes}} action uses:
+The following lists the names, descriptions, and values of the special request parameters that the \code{\link[=sns_set_topic_attributes]{set_topic_attributes}} action uses:
 \itemize{
-\item \code{ApplicationSuccessFeedbackRoleArn} – Indicates failed message
-delivery status for an Amazon SNS topic that is subscribed to a
-platform application endpoint.
-\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries
-failed deliveries to HTTP/S endpoints.
-\item \code{DisplayName} – The display name to use for a topic with SMS
-subscriptions.
-\item \code{Policy} – The policy that defines who can access your topic. By
-default, only the topic owner can publish or subscribe to the topic.
-\item \code{TracingConfig} – Tracing mode of an Amazon SNS topic. By default
-\code{TracingConfig} is set to \code{PassThrough}, and the topic passes
-through the tracing header it receives from an Amazon SNS publisher
-to its subscriptions. If set to \code{Active}, Amazon SNS will vend X-Ray
-segment data to topic owner account if the sampled flag in the
-tracing header is true. This is only supported on standard topics.
+\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.
+\item \code{DisplayName} – The display name to use for a topic with SMS subscriptions.
+\item \code{Policy} – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.
+\item \code{TracingConfig} – Tracing mode of an Amazon SNS topic. By default \code{TracingConfig} is set to \code{PassThrough}, and the topic passes through the tracing header it receives from an Amazon SNS publisher to its subscriptions. If set to \code{Active}, Amazon SNS will vend X-Ray segment data to topic owner account if the sampled flag in the tracing header is true. This is only supported on standard topics.
 \item HTTP
 \itemize{
-\item \code{HTTPSuccessFeedbackRoleArn} – Indicates successful message
-delivery status for an Amazon SNS topic that is subscribed to an
-HTTP endpoint.
-\item \code{HTTPSuccessFeedbackSampleRate} – Indicates percentage of
-successful messages to sample for an Amazon SNS topic that is
-subscribed to an HTTP endpoint.
-\item \code{HTTPFailureFeedbackRoleArn} – Indicates failed message delivery
-status for an Amazon SNS topic that is subscribed to an HTTP
-endpoint.
+\item \code{HTTPSuccessFeedbackRoleArn} – Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an HTTP endpoint.
+\item \code{HTTPSuccessFeedbackSampleRate} – Indicates percentage of successful messages to sample for an Amazon SNS topic that is subscribed to an HTTP endpoint.
+\item \code{HTTPFailureFeedbackRoleArn} – Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an HTTP endpoint.
 }
-\item Amazon Kinesis Data Firehose
+\item Amazon Data Firehose
 \itemize{
-\item \code{FirehoseSuccessFeedbackRoleArn} – Indicates successful message
-delivery status for an Amazon SNS topic that is subscribed to an
-Amazon Kinesis Data Firehose endpoint.
-\item \code{FirehoseSuccessFeedbackSampleRate} – Indicates percentage of
-successful messages to sample for an Amazon SNS topic that is
-subscribed to an Amazon Kinesis Data Firehose endpoint.
-\item \code{FirehoseFailureFeedbackRoleArn} – Indicates failed message
-delivery status for an Amazon SNS topic that is subscribed to an
-Amazon Kinesis Data Firehose endpoint.
+\item \code{FirehoseSuccessFeedbackRoleArn} – Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an Amazon Data Firehose endpoint.
+\item \code{FirehoseSuccessFeedbackSampleRate} – Indicates percentage of successful messages to sample for an Amazon SNS topic that is subscribed to an Amazon Data Firehose endpoint.
+\item \code{FirehoseFailureFeedbackRoleArn} – Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an Amazon Data Firehose endpoint.
 }
 \item Lambda
 \itemize{
-\item \code{LambdaSuccessFeedbackRoleArn} – Indicates successful message
-delivery status for an Amazon SNS topic that is subscribed to an
-Lambda endpoint.
-\item \code{LambdaSuccessFeedbackSampleRate} – Indicates percentage of
-successful messages to sample for an Amazon SNS topic that is
-subscribed to an Lambda endpoint.
-\item \code{LambdaFailureFeedbackRoleArn} – Indicates failed message
-delivery status for an Amazon SNS topic that is subscribed to an
-Lambda endpoint.
+\item \code{LambdaSuccessFeedbackRoleArn} – Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an Lambda endpoint.
+\item \code{LambdaSuccessFeedbackSampleRate} – Indicates percentage of successful messages to sample for an Amazon SNS topic that is subscribed to an Lambda endpoint.
+\item \code{LambdaFailureFeedbackRoleArn} – Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an Lambda endpoint.
 }
 \item Platform application endpoint
 \itemize{
-\item \code{ApplicationSuccessFeedbackRoleArn} – Indicates successful
-message delivery status for an Amazon SNS topic that is
-subscribed to an Amazon Web Services application endpoint.
-\item \code{ApplicationSuccessFeedbackSampleRate} – Indicates percentage of
-successful messages to sample for an Amazon SNS topic that is
-subscribed to an Amazon Web Services application endpoint.
-\item \code{ApplicationFailureFeedbackRoleArn} – Indicates failed message
-delivery status for an Amazon SNS topic that is subscribed to an
-Amazon Web Services application endpoint.
+\item \code{ApplicationSuccessFeedbackRoleArn} – Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an platform application endpoint.
+\item \code{ApplicationSuccessFeedbackSampleRate} – Indicates percentage of successful messages to sample for an Amazon SNS topic that is subscribed to an platform application endpoint.
+\item \code{ApplicationFailureFeedbackRoleArn} – Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an platform application endpoint.
 }
 
-In addition to being able to configure topic attributes for message
-delivery status of notification messages sent to Amazon SNS
-application endpoints, you can also configure application attributes
-for the delivery status of push notification messages sent to push
-notification services.
+In addition to being able to configure topic attributes for message delivery status of notification messages sent to Amazon SNS application endpoints, you can also configure application attributes for the delivery status of push notification messages sent to push notification services.
 
 For example, For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-msg-status.html}{Using Amazon SNS Application Attributes for Message Delivery Status}.
 \item Amazon SQS
 \itemize{
-\item \code{SQSSuccessFeedbackRoleArn} – Indicates successful message
-delivery status for an Amazon SNS topic that is subscribed to an
-Amazon SQS endpoint.
-\item \code{SQSSuccessFeedbackSampleRate} – Indicates percentage of
-successful messages to sample for an Amazon SNS topic that is
-subscribed to an Amazon SQS endpoint.
-\item \code{SQSFailureFeedbackRoleArn} – Indicates failed message delivery
-status for an Amazon SNS topic that is subscribed to an Amazon
-SQS endpoint.
+\item \code{SQSSuccessFeedbackRoleArn} – Indicates successful message delivery status for an Amazon SNS topic that is subscribed to an Amazon SQS endpoint.
+\item \code{SQSSuccessFeedbackSampleRate} – Indicates percentage of successful messages to sample for an Amazon SNS topic that is subscribed to an Amazon SQS endpoint.
+\item \code{SQSFailureFeedbackRoleArn} – Indicates failed message delivery status for an Amazon SNS topic that is subscribed to an Amazon SQS endpoint.
 }
 }
 
-The \<ENDPOINT\>SuccessFeedbackRoleArn and
-\<ENDPOINT\>FailureFeedbackRoleArn attributes are used to give Amazon
-SNS write access to use CloudWatch Logs on your behalf. The
-\<ENDPOINT\>SuccessFeedbackSampleRate attribute is for specifying the
-sample rate percentage (0-100) of successfully delivered messages. After
-you configure the \<ENDPOINT\>FailureFeedbackRoleArn attribute, then all
-failed message deliveries generate CloudWatch Logs.
+The \<ENDPOINT\>SuccessFeedbackRoleArn and \<ENDPOINT\>FailureFeedbackRoleArn attributes are used to give Amazon SNS write access to use CloudWatch Logs on your behalf. The \<ENDPOINT\>SuccessFeedbackSampleRate attribute is for specifying the sample rate percentage (0-100) of successfully delivered messages. After you configure the \<ENDPOINT\>FailureFeedbackRoleArn attribute, then all failed message deliveries generate CloudWatch Logs.
 
-The following attribute applies only to
-\href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html}{server-side-encryption}:
+The following attribute applies only to \href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html}{server-side-encryption}:
 \itemize{
-\item \code{KmsMasterKeyId} – The ID of an Amazon Web Services managed customer
-master key (CMK) for Amazon SNS or a custom CMK. For more
-information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms}{Key Terms}.
-For more examples, see
-\href{https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters}{KeyId}
-in the \emph{Key Management Service API Reference}.
-\item \code{SignatureVersion} – The signature version corresponds to the
-hashing algorithm used while creating the signature of the
-notifications, subscription confirmations, or unsubscribe
-confirmation messages sent by Amazon SNS. By default,
-\code{SignatureVersion} is set to \code{1}.
+\item \code{KmsMasterKeyId} – The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom CMK. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-server-side-encryption.html#sse-key-terms}{Key Terms}. For more examples, see \href{https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters}{KeyId} in the \emph{Key Management Service API Reference}.
+\item \code{SignatureVersion} – The signature version corresponds to the hashing algorithm used while creating the signature of the notifications, subscription confirmations, or unsubscribe confirmation messages sent by Amazon SNS. By default, \code{SignatureVersion} is set to \code{1}.
 }
 
 The following attribute applies only to \href{https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html}{FIFO topics}:
 \itemize{
-\item \code{ArchivePolicy} – The policy that sets the retention period for
-messages stored in the message archive of an Amazon SNS FIFO topic.
-\item \code{ContentBasedDeduplication} – Enables content-based deduplication
-for FIFO topics.
+\item \code{ArchivePolicy} – The policy that sets the retention period for messages stored in the message archive of an Amazon SNS FIFO topic.
+\item \code{ContentBasedDeduplication} – Enables content-based deduplication for FIFO topics.
 \itemize{
-\item By default, \code{ContentBasedDeduplication} is set to \code{false}. If
-you create a FIFO topic and this attribute is \code{false}, you must
-specify a value for the \code{MessageDeduplicationId} parameter for
-the \code{\link[=sns_publish]{publish}} action.
-\item When you set \code{ContentBasedDeduplication} to \code{true}, Amazon SNS
-uses a SHA-256 hash to generate the \code{MessageDeduplicationId}
-using the body of the message (but not the attributes of the
-message).
+\item By default, \code{ContentBasedDeduplication} is set to \code{false}. If you create a FIFO topic and this attribute is \code{false}, you must specify a value for the \code{MessageDeduplicationId} parameter for the \code{\link[=sns_publish]{publish}} action.
+\item When you set \code{ContentBasedDeduplication} to \code{true}, Amazon SNS uses a SHA-256 hash to generate the \code{MessageDeduplicationId} using the body of the message (but not the attributes of the message).
 
-(Optional) To override the generated value, you can specify a
-value for the \code{MessageDeduplicationId} parameter for the
-\code{\link[=sns_publish]{publish}} action.
+(Optional) To override the generated value, you can specify a value for the \code{MessageDeduplicationId} parameter for the \code{\link[=sns_publish]{publish}} action.
 }
-\item \code{FifoThroughputScope} – Enables higher throughput for your FIFO
-topic by adjusting the scope of deduplication. This attribute has
-two possible values:
+\item \code{FifoThroughputScope} – Enables higher throughput for your FIFO topic by adjusting the scope of deduplication. This attribute has two possible values:
 \itemize{
-\item \code{Topic} – The scope of message deduplication is across the
-entire topic. This is the default value and maintains existing
-behavior, with a maximum throughput of 3000 messages per second
-or 20MB per second, whichever comes first.
-\item \code{MessageGroup} – The scope of deduplication is within each
-individual message group, which enables higher throughput per
-topic subject to regional quotas. For more information on quotas
-or to request an increase, see \href{https://docs.aws.amazon.com/general/latest/gr/sns.html}{Amazon SNS service quotas}
-in the Amazon Web Services General Reference.
+\item \code{Topic} – The scope of message deduplication is across the entire topic. This is the default value and maintains existing behavior, with a maximum throughput of 3000 messages per second or 20MB per second, whichever comes first.
+\item \code{MessageGroup} – The scope of deduplication is within each individual message group, which enables higher throughput per topic subject to regional quotas. For more information on quotas or to request an increase, see \href{https://docs.aws.amazon.com/general/latest/gr/sns.html}{Amazon SNS service quotas} in the Amazon Web Services General Reference.
 }
 }}
 

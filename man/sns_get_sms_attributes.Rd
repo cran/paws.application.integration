@@ -8,11 +8,9 @@ Services account}
 sns_get_sms_attributes(attributes = NULL)
 }
 \arguments{
-\item{attributes}{A list of the individual attribute names, such as \code{MonthlySpendLimit},
-for which you want values.
+\item{attributes}{A list of the individual attribute names, such as \code{MonthlySpendLimit}, for which you want values.
 
-For all attribute names, see
-\code{\link[=sns_set_sms_attributes]{set_sms_attributes}}.
+For all attribute names, see \code{\link[=sns_set_sms_attributes]{set_sms_attributes}}.
 
 If you don't use this parameter, Amazon SNS returns all SMS attributes.}
 }

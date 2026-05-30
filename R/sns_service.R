@@ -5,26 +5,11 @@ NULL
 #' Amazon Simple Notification Service
 #'
 #' @description
-#' Amazon Simple Notification Service (Amazon SNS) is a web service that
-#' enables you to build distributed web-enabled applications. Applications
-#' can use Amazon SNS to easily push real-time notification messages to
-#' interested subscribers over multiple delivery protocols. For more
-#' information about this product see the [Amazon SNS product
-#' page](https://aws.amazon.com/sns/). For detailed information about
-#' Amazon SNS features and their associated API calls, see the [Amazon SNS
-#' Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/).
+#' Amazon Simple Notification Service (Amazon SNS) is a web service that enables you to build distributed web-enabled applications. Applications can use Amazon SNS to easily push real-time notification messages to interested subscribers over multiple delivery protocols. For more information about this product see the [Amazon SNS product page](https://aws.amazon.com/sns/). For detailed information about Amazon SNS features and their associated API calls, see the [Amazon SNS Developer Guide](https://docs.aws.amazon.com/sns/latest/dg/).
 #' 
-#' For information on the permissions you need to use this API, see
-#' [Identity and access management in Amazon
-#' SNS](https://docs.aws.amazon.com/sns/latest/dg/) in the *Amazon SNS
-#' Developer Guide.*
+#' For information on the permissions you need to use this API, see [Identity and access management in Amazon SNS](https://docs.aws.amazon.com/sns/latest/dg/) in the *Amazon SNS Developer Guide.*
 #' 
-#' We also provide SDKs that enable you to access Amazon SNS from your
-#' preferred programming language. The SDKs contain functionality that
-#' automatically takes care of tasks such as: cryptographically signing
-#' your service requests, retrying requests, and handling error responses.
-#' For a list of available SDKs, go to [Tools for Amazon Web
-#' Services](https://aws.amazon.com/developer/tools/).
+#' We also provide SDKs that enable you to access Amazon SNS from your preferred programming language. The SDKs contain functionality that automatically takes care of tasks such as: cryptographically signing your service requests, retrying requests, and handling error responses. For a list of available SDKs, go to [Tools for Amazon Web Services](https://builder.aws.com/build/tools).
 #'
 #' @param
 #' config
@@ -138,7 +123,7 @@ NULL
 #'  \link[=sns_list_topics]{list_topics} \tab Returns a list of the requester's topics\cr
 #'  \link[=sns_opt_in_phone_number]{opt_in_phone_number} \tab Use this request to opt in a phone number that is opted out, which enables you to resume sending SMS messages to the number\cr
 #'  \link[=sns_publish]{publish} \tab Sends a message to an Amazon SNS topic, a text message (SMS message) directly to a phone number, or a message to a mobile platform endpoint (when you specify the TargetArn)\cr
-#'  \link[=sns_publish_batch]{publish_batch} \tab Publishes up to ten messages to the specified topic\cr
+#'  \link[=sns_publish_batch]{publish_batch} \tab Publishes up to 10 messages to the specified topic in a single batch\cr
 #'  \link[=sns_put_data_protection_policy]{put_data_protection_policy} \tab Adds or updates an inline policy document that is stored in the specified Amazon SNS topic\cr
 #'  \link[=sns_remove_permission]{remove_permission} \tab Removes a statement from a topic's access control policy\cr
 #'  \link[=sns_set_endpoint_attributes]{set_endpoint_attributes} \tab Sets the attributes for an endpoint for a device on one of the supported push notification services, such as GCM (Firebase Cloud Messaging) and APNS\cr
@@ -182,7 +167,7 @@ sns <- function(config = list(), credentials = list(), endpoint = NULL, region =
 
 .sns$metadata <- list(
   service_name = "sns",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "sns.{region}.amazonaws.eu", global = FALSE)),
   service_id = "SNS",
   api_version = "2010-03-31",
   signing_name = "sns",

@@ -2,8 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_calculate_route}
 \alias{locationservice_calculate_route}
-\title{Calculates a route given the following required parameters:
-DeparturePosition and DestinationPosition}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_calculate_route(
   CalculatorName,
@@ -23,70 +22,48 @@ locationservice_calculate_route(
 )
 }
 \arguments{
-\item{CalculatorName}{[required] The name of the route calculator resource that you want to use to
-calculate the route.}
+\item{CalculatorName}{[required] The name of the route calculator resource that you want to use to calculate the route.}
 
-\item{DeparturePosition}{[required] The start position for the route. Defined in \href{https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84}{World Geodetic System (WGS 84)}
-format: \verb{[longitude, latitude]}.
+\item{DeparturePosition}{[required] The start position for the route. Defined in \href{https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84}{World Geodetic System (WGS 84)} format: \verb{[longitude, latitude]}.
 \itemize{
 \item For example, \verb{[-123.115, 49.285]}
 }
 
-If you specify a departure that's not located on a road, Amazon Location
-\href{https://docs.aws.amazon.com/location/latest/developerguide/}{moves the position to the nearest road}. If
-Esri is the provider for your route calculator, specifying a route that
-is longer than 400 km returns a \verb{400 RoutesValidationException} error.
+If you specify a departure that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html}{moves the position to the nearest road}. If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a \verb{400 RoutesValidationException} error.
 
 Valid Values: \verb{[-180 to 180,-90 to 90]}}
 
-\item{DestinationPosition}{[required] The finish position for the route. Defined in \href{https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84}{World Geodetic System (WGS 84)}
-format: \verb{[longitude, latitude]}.
+\item{DestinationPosition}{[required] The finish position for the route. Defined in \href{https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84}{World Geodetic System (WGS 84)} format: \verb{[longitude, latitude]}.
 \itemize{
 \item For example, \verb{[-122.339, 47.615]}
 }
 
-If you specify a destination that's not located on a road, Amazon
-Location \href{https://docs.aws.amazon.com/location/latest/developerguide/}{moves the position to the nearest road}.
+If you specify a destination that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html}{moves the position to the nearest road}.
 
 Valid Values: \verb{[-180 to 180,-90 to 90]}}
 
-\item{WaypointPositions}{Specifies an ordered list of up to 23 intermediate positions to include
-along a route between the departure position and destination position.
+\item{WaypointPositions}{Specifies an ordered list of up to 23 intermediate positions to include along a route between the departure position and destination position.
 \itemize{
-\item For example, from the \code{DeparturePosition} \verb{[-123.115, 49.285]}, the
-route follows the order that the waypoint positions are given
-\verb{[[-122.757, 49.0021],[-122.349, 47.620]]}
+\item For example, from the \code{DeparturePosition} \verb{[-123.115, 49.285]}, the route follows the order that the waypoint positions are given \verb{[[-122.757, 49.0021],[-122.349, 47.620]]}
 }
 
-If you specify a waypoint position that's not located on a road, Amazon
-Location \href{https://docs.aws.amazon.com/location/latest/developerguide/}{moves the position to the nearest road}.
+If you specify a waypoint position that's not located on a road, Amazon Location \href{https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html}{moves the position to the nearest road}.
 
-Specifying more than 23 waypoints returns a \verb{400 ValidationException}
-error.
+Specifying more than 23 waypoints returns a \verb{400 ValidationException} error.
 
-If Esri is the provider for your route calculator, specifying a route
-that is longer than 400 km returns a \verb{400 RoutesValidationException}
-error.
+If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a \verb{400 RoutesValidationException} error.
 
 Valid Values: \verb{[-180 to 180,-90 to 90]}}
 
-\item{TravelMode}{Specifies the mode of transport when calculating a route. Used in
-estimating the speed of travel and road compatibility. You can choose
-\code{Car}, \code{Truck}, \code{Walking}, \code{Bicycle} or \code{Motorcycle} as options for the
-\code{TravelMode}.
+\item{TravelMode}{Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. You can choose \code{Car}, \code{Truck}, \code{Walking}, \code{Bicycle} or \code{Motorcycle} as options for the \code{TravelMode}.
 
-\code{Bicycle} and \code{Motorcycle} are only valid when using Grab as a data
-provider, and only within Southeast Asia.
+\code{Bicycle} and \code{Motorcycle} are only valid when using Grab as a data provider, and only within Southeast Asia.
 
 \code{Truck} is not available for Grab.
 
-For more details on the using Grab for routing, including areas of
-coverage, see
-\href{https://docs.aws.amazon.com/location/latest/developerguide/}{GrabMaps}
-in the \emph{Amazon Location Service Developer Guide}.
+For more details on the using Grab for routing, including areas of coverage, see \href{https://docs.aws.amazon.com/location/previous/developerguide/grab.html}{GrabMaps} in the \emph{Amazon Location Service Developer Guide}.
 
-The \code{TravelMode} you specify also determines how you specify route
-preferences:
+The \code{TravelMode} you specify also determines how you specify route preferences:
 \itemize{
 \item If traveling by \code{Car} use the \code{CarModeOptions} parameter.
 \item If traveling by \code{Truck} use the \code{TruckModeOptions} parameter.
@@ -94,18 +71,12 @@ preferences:
 
 Default Value: \code{Car}}
 
-\item{DepartureTime}{Specifies the desired time of departure. Uses the given time to
-calculate the route. Otherwise, the best time of day to travel with the
-best traffic conditions is used to calculate the route.
+\item{DepartureTime}{Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 \itemize{
-\item In \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601}
-format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. For example,
-\verb{2020–07-2T12:15:20.000Z+01:00}
+\item In \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. For example, \verb{2020–07-2T12:15:20.000Z+01:00}
 }}
 
-\item{DepartNow}{Sets the time of departure as the current time. Uses the current time to
-calculate a route. Otherwise, the best time of day to travel with the
-best traffic conditions is used to calculate the route.
+\item{DepartNow}{Sets the time of departure as the current time. Uses the current time to calculate a route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 
 Default Value: \code{false}
 
@@ -115,37 +86,30 @@ Valid Values: \code{false} | \code{true}}
 
 Default Value: \code{Kilometers}}
 
-\item{IncludeLegGeometry}{Set to include the geometry details in the result for each path between
-a pair of positions.
+\item{IncludeLegGeometry}{Set to include the geometry details in the result for each path between a pair of positions.
 
 Default Value: \code{false}
 
 Valid Values: \code{false} | \code{true}}
 
-\item{CarModeOptions}{Specifies route preferences when traveling by \code{Car}, such as avoiding
-routes that use ferries or tolls.
+\item{CarModeOptions}{Specifies route preferences when traveling by \code{Car}, such as avoiding routes that use ferries or tolls.
 
 Requirements: \code{TravelMode} must be specified as \code{Car}.}
 
-\item{TruckModeOptions}{Specifies route preferences when traveling by \code{Truck}, such as avoiding
-routes that use ferries or tolls, and truck specifications to consider
-when choosing an optimal road.
+\item{TruckModeOptions}{Specifies route preferences when traveling by \code{Truck}, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road.
 
 Requirements: \code{TravelMode} must be specified as \code{Truck}.}
 
-\item{ArrivalTime}{Specifies the desired time of arrival. Uses the given time to calculate
-the route. Otherwise, the best time of day to travel with the best
-traffic conditions is used to calculate the route.
+\item{ArrivalTime}{Specifies the desired time of arrival. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 
 ArrivalTime is not supported Esri.}
 
 \item{OptimizeFor}{Specifies the distance to optimize for when calculating a route.}
 
-\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
-to authorize the request.}
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html}{API key} to authorize the request.}
 }
 \description{
-\href{https://docs.aws.amazon.com/location/latest/developerguide/}{Calculates a route} given the following required parameters: \code{DeparturePosition} and \code{DestinationPosition}. Requires that you first \href{https://docs.aws.amazon.com/location/latest/APIReference/}{create a route calculator resource}.
+This operation is no longer current and may be deprecated in the future. We recommend you upgrade to \code{CalculateRoutes} or \code{CalculateIsolines} unless you require Grab data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_calculate_route/} for full documentation.
 }

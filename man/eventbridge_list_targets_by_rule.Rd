@@ -14,18 +14,13 @@ eventbridge_list_targets_by_rule(
 \arguments{
 \item{Rule}{[required] The name of the rule.}
 
-\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit
-this, the default event bus is used.}
+\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.}
 
-\item{NextToken}{The token returned by a previous call, which you can use to retrieve the
-next set of results.
+\item{NextToken}{The token returned by a previous call, which you can use to retrieve the next set of results.
 
-The value of \code{nextToken} is a unique pagination token for each page. To
-retrieve the next page of results, make the call again using the
-returned token. Keep all other arguments unchanged.
+The value of \code{nextToken} is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 
-Using an expired pagination token results in an \verb{HTTP 400 InvalidToken}
-error.}
+Using an expired pagination token results in an \verb{HTTP 400 InvalidToken} error.}
 
 \item{Limit}{The maximum number of results to return.}
 }

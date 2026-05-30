@@ -18,52 +18,32 @@ eventbridge_put_rule(
 \arguments{
 \item{Name}{[required] The name of the rule that you are creating or updating.}
 
-\item{ScheduleExpression}{The scheduling expression. For example, "cron(0 20 * * ? *)" or
-"rate(5 minutes)".}
+\item{ScheduleExpression}{The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".}
 
-\item{EventPattern}{The event pattern. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html}{Amazon EventBridge event patterns}
-in the \emph{Amazon EventBridge User Guide} .}
+\item{EventPattern}{The event pattern. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html}{Amazon EventBridge event patterns} in the \emph{Amazon EventBridge User Guide} .}
 
 \item{State}{The state of the rule.
 
 Valid values include:
 \itemize{
-\item \code{DISABLED}: The rule is disabled. EventBridge does not match any
-events against the rule.
-\item \code{ENABLED}: The rule is enabled. EventBridge matches events against
-the rule, \emph{except} for Amazon Web Services management events
-delivered through CloudTrail.
-\item \code{ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS}: The rule is enabled
-for all events, including Amazon Web Services management events
-delivered through CloudTrail.
+\item \code{DISABLED}: The rule is disabled. EventBridge does not match any events against the rule.
+\item \code{ENABLED}: The rule is enabled. EventBridge matches events against the rule, \emph{except} for Amazon Web Services management events delivered through CloudTrail.
+\item \code{ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS}: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail.
 
-Management events provide visibility into management operations that
-are performed on resources in your Amazon Web Services account.
-These are also known as control plane operations. For more
-information, see \href{https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events}{Logging management events}
-in the \emph{CloudTrail User Guide}, and \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-service-event-cloudtrail}{Filtering management events from Amazon Web Services services}
-in the \emph{Amazon EventBridge User Guide} .
+Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see \href{https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events}{Logging management events} in the \emph{CloudTrail User Guide}, and \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-service-event-cloudtrail}{Filtering management events from Amazon Web Services services} in the \emph{Amazon EventBridge User Guide} .
 
-This value is only valid for rules on the
-\href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses}{default}
-event bus or \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html}{custom event buses}.
-It does not apply to \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html}{partner event buses}.
+This value is only valid for rules on the \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses}{default} event bus or \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html}{custom event buses}. It does not apply to \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html}{partner event buses}.
 }}
 
 \item{Description}{A description of the rule.}
 
 \item{RoleArn}{The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 
-If you're setting an event bus in another account as the target and that
-account granted permission to your account through an organization
-instead of directly by the account ID, you must specify a \code{RoleArn} with
-proper permissions in the \code{Target} structure, instead of here in this
-parameter.}
+If you're setting an event bus in another account as the target and that account granted permission to your account through an organization instead of directly by the account ID, you must specify a \code{RoleArn} with proper permissions in the \code{Target} structure, instead of here in this parameter.}
 
 \item{Tags}{The list of key-value pairs to associate with the rule.}
 
-\item{EventBusName}{The name or ARN of the event bus to associate with this rule. If you
-omit this, the default event bus is used.}
+\item{EventBusName}{The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.}
 }
 \description{
 Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using \code{\link[=eventbridge_disable_rule]{disable_rule}}.

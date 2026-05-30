@@ -10,8 +10,7 @@ eventbridge_put_targets(Rule, EventBusName = NULL, Targets)
 \arguments{
 \item{Rule}{[required] The name of the rule.}
 
-\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit
-this, the default event bus is used.}
+\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.}
 
 \item{Targets}{[required] The targets to update or add to the rule.}
 }

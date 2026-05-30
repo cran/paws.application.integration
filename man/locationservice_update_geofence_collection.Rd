@@ -14,8 +14,7 @@ locationservice_update_geofence_collection(
 \arguments{
 \item{CollectionName}{[required] The name of the geofence collection to update.}
 
-\item{PricingPlan}{No longer used. If included, the only allowed value is
-\code{RequestBasedUsage}.}
+\item{PricingPlan}{No longer used. If included, the only allowed value is \code{RequestBasedUsage}.}
 
 \item{PricingPlanDataSource}{This parameter is no longer used.}
 

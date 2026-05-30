@@ -9,8 +9,7 @@ mwaa_publish_metrics(EnvironmentName, MetricData)
 \arguments{
 \item{EnvironmentName}{[required] \strong{Internal only}. The name of the environment.}
 
-\item{MetricData}{[required] \strong{Internal only}. Publishes metrics to Amazon CloudWatch. To learn more
-about the metrics published to Amazon CloudWatch, see \href{https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html}{Amazon MWAA performance metrics in Amazon CloudWatch}.}
+\item{MetricData}{[required] \strong{Internal only}. Publishes metrics to Amazon CloudWatch. To learn more about the metrics published to Amazon CloudWatch, see \href{https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html}{Amazon MWAA performance metrics in Amazon CloudWatch}.}
 }
 \description{
 \strong{Internal only}. Publishes environment health metrics to Amazon CloudWatch.

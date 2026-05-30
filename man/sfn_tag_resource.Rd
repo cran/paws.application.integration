@@ -7,13 +7,11 @@
 sfn_tag_resource(resourceArn, tags)
 }
 \arguments{
-\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or
-activity.}
+\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or activity.}
 
 \item{tags}{[required] The list of tags to add to a resource.
 
-Tags may only contain Unicode letters, digits, white space, or these
-symbols: \verb{_ . : / = + - @}.}
+Tags may only contain Unicode letters, digits, white space, or these symbols: \verb{_ . : / = + - @}.}
 }
 \description{
 Add a tag to a Step Functions resource.

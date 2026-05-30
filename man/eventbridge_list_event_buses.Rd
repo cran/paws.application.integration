@@ -8,22 +8,15 @@ bus, custom event buses, and partner event buses}
 eventbridge_list_event_buses(NamePrefix = NULL, NextToken = NULL, Limit = NULL)
 }
 \arguments{
-\item{NamePrefix}{Specifying this limits the results to only those event buses with names
-that start with the specified prefix.}
+\item{NamePrefix}{Specifying this limits the results to only those event buses with names that start with the specified prefix.}
 
-\item{NextToken}{The token returned by a previous call, which you can use to retrieve the
-next set of results.
+\item{NextToken}{The token returned by a previous call, which you can use to retrieve the next set of results.
 
-The value of \code{nextToken} is a unique pagination token for each page. To
-retrieve the next page of results, make the call again using the
-returned token. Keep all other arguments unchanged.
+The value of \code{nextToken} is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 
-Using an expired pagination token results in an \verb{HTTP 400 InvalidToken}
-error.}
+Using an expired pagination token results in an \verb{HTTP 400 InvalidToken} error.}
 
-\item{Limit}{Specifying this limits the number of results returned by this operation.
-The operation also returns a NextToken which you can use in a subsequent
-operation to retrieve the next set of results.}
+\item{Limit}{Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.}
 }
 \description{
 Lists all the event buses in your account, including the default event bus, custom event buses, and partner event buses.

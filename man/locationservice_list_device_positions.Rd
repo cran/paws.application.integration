@@ -18,8 +18,7 @@ locationservice_list_device_positions(
 
 Default value: \code{100}}
 
-\item{NextToken}{The pagination token specifying which page of results to return in the
-response. If no token is provided, the default page is the first page.
+\item{NextToken}{The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 
 Default value: \code{null}}
 

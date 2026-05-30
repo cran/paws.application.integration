@@ -13,11 +13,9 @@ locationservice_verify_device_position(
 )
 }
 \arguments{
-\item{TrackerName}{[required] The name of the tracker resource to be associated with verification
-request.}
+\item{TrackerName}{[required] The name of the tracker resource to be associated with verification request.}
 
-\item{DeviceState}{[required] The device's state, including position, IP address, cell signals and
-Wi-Fi access points.}
+\item{DeviceState}{[required] The device's state, including position, IP address, cell signals and Wi-Fi access points.}
 
 \item{DistanceUnit}{The distance unit for the verification request.
 

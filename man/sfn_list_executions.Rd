@@ -14,56 +14,35 @@ sfn_list_executions(
 )
 }
 \arguments{
-\item{stateMachineArn}{The Amazon Resource Name (ARN) of the state machine whose executions is
-listed.
+\item{stateMachineArn}{The Amazon Resource Name (ARN) of the state machine whose executions is listed.
 
-You can specify either a \code{mapRunArn} or a \code{stateMachineArn}, but not
-both.
+You can specify either a \code{mapRunArn} or a \code{stateMachineArn}, but not both.
 
-You can also return a list of executions associated with a specific
-\href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html}{alias}
-or
-\href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html}{version},
-by specifying an alias ARN or a version ARN in the \code{stateMachineArn}
-parameter.}
+You can also return a list of executions associated with a specific \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html}{alias} or \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html}{version}, by specifying an alias ARN or a version ARN in the \code{stateMachineArn} parameter.}
 
-\item{statusFilter}{If specified, only list the executions whose current execution status
-matches the given filter.}
+\item{statusFilter}{If specified, only list the executions whose current execution status matches the given filter.
 
-\item{maxResults}{The maximum number of results that are returned per call. You can use
-\code{nextToken} to obtain further pages of results. The default is 100 and
-the maximum allowed page size is 1000. A value of 0 uses the default.
+If you provide a \code{PENDING_REDRIVE} statusFilter, you must specify \code{mapRunArn}. For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior}{Child workflow execution redrive behaviour} in the \emph{Step Functions Developer Guide}.
 
-This is only an upper limit. The actual number of results returned per
-call might be fewer than the specified maximum.}
+If you provide a stateMachineArn and a \code{PENDING_REDRIVE} statusFilter, the API returns a validation exception.}
 
-\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value
-of \code{nextToken} is a unique pagination token for each page. Make the call
-again using the returned token to retrieve the next page. Keep all other
-arguments unchanged. Each pagination token expires after 24 hours. Using
-an expired pagination token will return an \emph{HTTP 400 InvalidToken}
-error.}
+\item{maxResults}{The maximum number of results that are returned per call. You can use \code{nextToken} to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 
-\item{mapRunArn}{The Amazon Resource Name (ARN) of the Map Run that started the child
-workflow executions. If the \code{mapRunArn} field is specified, a list of
-all of the child workflow executions started by a Map Run is returned.
-For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html}{Examining Map Run}
-in the \emph{Step Functions Developer Guide}.
+This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.}
 
-You can specify either a \code{mapRunArn} or a \code{stateMachineArn}, but not
-both.}
+\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value of \code{nextToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an \emph{HTTP 400 InvalidToken} error.}
 
-\item{redriveFilter}{Sets a filter to list executions based on whether or not they have been
-redriven.
+\item{mapRunArn}{The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions. If the \code{mapRunArn} field is specified, a list of all of the child workflow executions started by a Map Run is returned. For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html}{Examining Map Run} in the \emph{Step Functions Developer Guide}.
 
-For a Distributed Map, \code{redriveFilter} sets a filter to list child
-workflow executions based on whether or not they have been redriven.
+You can specify either a \code{mapRunArn} or a \code{stateMachineArn}, but not both.}
 
-If you do not provide a \code{redriveFilter}, Step Functions returns a list
-of both redriven and non-redriven executions.
+\item{redriveFilter}{Sets a filter to list executions based on whether or not they have been redriven.
 
-If you provide a state machine ARN in \code{redriveFilter}, the API returns a
-validation exception.}
+For a Distributed Map, \code{redriveFilter} sets a filter to list child workflow executions based on whether or not they have been redriven.
+
+If you do not provide a \code{redriveFilter}, Step Functions returns a list of both redriven and non-redriven executions.
+
+If you provide a state machine ARN in \code{redriveFilter}, the API returns a validation exception.}
 }
 \description{
 Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN. Using this API action, you can also list all \href{https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html}{redriven} executions.

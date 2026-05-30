@@ -20,204 +20,98 @@ sqs_receive_message(
 
 Queue URLs and names are case-sensitive.}
 
-\item{AttributeNames}{This parameter has been discontinued but will be supported for backward
-compatibility. To provide attribute names, you are encouraged to use
-\code{MessageSystemAttributeNames}.
+\item{AttributeNames}{This parameter has been discontinued but will be supported for backward compatibility. To provide attribute names, you are encouraged to use \code{MessageSystemAttributeNames}.
 
-A list of attributes that need to be returned along with each message.
-These attributes include:
+A list of attributes that need to be returned along with each message. These attributes include:
 \itemize{
 \item \code{All} – Returns all values.
-\item \code{ApproximateFirstReceiveTimestamp} – Returns the time the message
-was first received from the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
-\item \code{ApproximateReceiveCount} – Returns the number of times a message
-has been received across all queues but not deleted.
+\item \code{ApproximateFirstReceiveTimestamp} – Returns the time the message was first received from the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
+\item \code{ApproximateReceiveCount} – Returns the number of times a message has been received across all queues but not deleted.
 \item \code{AWSTraceHeader} – Returns the X-Ray trace header string.
 \item \code{SenderId}
 \itemize{
-\item For a user, returns the user ID, for example
-\code{ABCDEFGHI1JKLMNOPQ23R}.
-\item For an IAM role, returns the IAM role ID, for example
-\code{ABCDE1F2GH3I4JK5LMNOP:i-a123b456}.
+\item For a user, returns the user ID, for example \code{ABCDEFGHI1JKLMNOPQ23R}.
+\item For an IAM role, returns the IAM role ID, for example \code{ABCDE1F2GH3I4JK5LMNOP:i-a123b456}.
 }
-\item \code{SentTimestamp} – Returns the time the message was sent to the queue
-(\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in
-milliseconds).
-\item \code{SqsManagedSseEnabled} – Enables server-side queue encryption using
-SQS owned encryption keys. Only one server-side encryption option is
-supported per queue (for example,
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS}
-or
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
-\item \code{MessageDeduplicationId} – Returns the value provided by the
-producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
-\item \code{MessageGroupId} – Returns the value provided by the producer that
-calls the \code{\link[=sqs_send_message]{send_message}} action. Messages with
-the same \code{MessageGroupId} are returned in sequence.
+\item \code{SentTimestamp} – Returns the time the message was sent to the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
+\item \code{SqsManagedSseEnabled} – Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (for example, \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS} or \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
+\item \code{MessageDeduplicationId} – Returns the value provided by the producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
+\item \code{MessageGroupId} – Returns the value provided by the producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
 \item \code{SequenceNumber} – Returns the value provided by Amazon SQS.
 }}
 
-\item{MessageSystemAttributeNames}{A list of attributes that need to be returned along with each message.
-These attributes include:
+\item{MessageSystemAttributeNames}{A list of attributes that need to be returned along with each message. These attributes include:
 \itemize{
 \item \code{All} – Returns all values.
-\item \code{ApproximateFirstReceiveTimestamp} – Returns the time the message
-was first received from the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
-\item \code{ApproximateReceiveCount} – Returns the number of times a message
-has been received across all queues but not deleted.
+\item \code{ApproximateFirstReceiveTimestamp} – Returns the time the message was first received from the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
+\item \code{ApproximateReceiveCount} – Returns the number of times a message has been received across all queues but not deleted.
 \item \code{AWSTraceHeader} – Returns the X-Ray trace header string.
 \item \code{SenderId}
 \itemize{
-\item For a user, returns the user ID, for example
-\code{ABCDEFGHI1JKLMNOPQ23R}.
-\item For an IAM role, returns the IAM role ID, for example
-\code{ABCDE1F2GH3I4JK5LMNOP:i-a123b456}.
+\item For a user, returns the user ID, for example \code{ABCDEFGHI1JKLMNOPQ23R}.
+\item For an IAM role, returns the IAM role ID, for example \code{ABCDE1F2GH3I4JK5LMNOP:i-a123b456}.
 }
-\item \code{SentTimestamp} – Returns the time the message was sent to the queue
-(\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in
-milliseconds).
-\item \code{SqsManagedSseEnabled} – Enables server-side queue encryption using
-SQS owned encryption keys. Only one server-side encryption option is
-supported per queue (for example,
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS}
-or
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
-\item \code{MessageDeduplicationId} – Returns the value provided by the
-producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
-\item \code{MessageGroupId} – Returns the value provided by the producer that
-calls the \code{\link[=sqs_send_message]{send_message}} action. Messages with
-the same \code{MessageGroupId} are returned in sequence.
+\item \code{SentTimestamp} – Returns the time the message was sent to the queue (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time} in milliseconds).
+\item \code{SqsManagedSseEnabled} – Enables server-side queue encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (for example, \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS} or \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
+\item \code{MessageDeduplicationId} – Returns the value provided by the producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
+\item \code{MessageGroupId} – Returns the value provided by the producer that calls the \code{\link[=sqs_send_message]{send_message}} action.
 \item \code{SequenceNumber} – Returns the value provided by Amazon SQS.
 }}
 
 \item{MessageAttributeNames}{The name of the message attribute, where \emph{N} is the index.
 \itemize{
-\item The name can contain alphanumeric characters and the underscore
-(\verb{_}), hyphen (\code{-}), and period (\code{.}).
-\item The name is case-sensitive and must be unique among all attribute
-names for the message.
-\item The name must not start with AWS-reserved prefixes such as \code{AWS.} or
-\code{Amazon.} (or any casing variants).
-\item The name must not start or end with a period (\code{.}), and it should
-not have periods in succession (\code{..}).
+\item The name can contain alphanumeric characters and the underscore (\verb{_}), hyphen (\code{-}), and period (\code{.}).
+\item The name is case-sensitive and must be unique among all attribute names for the message.
+\item The name must not start with AWS-reserved prefixes such as \code{AWS.} or \code{Amazon.} (or any casing variants).
+\item The name must not start or end with a period (\code{.}), and it should not have periods in succession (\code{..}).
 \item The name can be up to 256 characters long.
 }
 
-When using \code{\link[=sqs_receive_message]{receive_message}}, you can send a list
-of attribute names to receive, or you can return all of the attributes
-by specifying \code{All} or \verb{.*} in your request. You can also use all
-message attributes starting with a prefix, for example \verb{bar.*}.}
+When using \code{\link[=sqs_receive_message]{receive_message}}, you can send a list of attribute names to receive, or you can return all of the attributes by specifying \code{All} or \verb{.*} in your request. You can also use all message attributes starting with a prefix, for example \verb{bar.*}.}
 
-\item{MaxNumberOfMessages}{The maximum number of messages to return. Amazon SQS never returns more
-messages than this value (however, fewer messages might be returned).
-Valid values: 1 to 10. Default: 1.}
+\item{MaxNumberOfMessages}{The maximum number of messages to return. Amazon SQS never returns more messages than this value (however, fewer messages might be returned). Valid values: 1 to 10. Default: 1.}
 
-\item{VisibilityTimeout}{The duration (in seconds) that the received messages are hidden from
-subsequent retrieve requests after being retrieved by a
-\code{\link[=sqs_receive_message]{receive_message}} request. If not specified, the
-default visibility timeout for the queue is used, which is 30 seconds.
+\item{VisibilityTimeout}{The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a \code{\link[=sqs_receive_message]{receive_message}} request. If not specified, the default visibility timeout for the queue is used, which is 30 seconds.
 
 Understanding \code{VisibilityTimeout}:
 \itemize{
-\item When a message is received from a queue, it becomes temporarily
-invisible to other consumers for the duration of the visibility
-timeout. This prevents multiple consumers from processing the same
-message simultaneously. If the message is not deleted or its
-visibility timeout is not extended before the timeout expires, it
-becomes visible again and can be retrieved by other consumers.
-\item Setting an appropriate visibility timeout is crucial. If it's too
-short, the message might become visible again before processing is
-complete, leading to duplicate processing. If it's too long, it
-delays the reprocessing of messages if the initial processing fails.
-\item You can adjust the visibility timeout using the
-\code{--visibility-timeout} parameter in the \code{receive-message} command to
-match the processing time required by your application.
-\item A message that isn't deleted or a message whose visibility isn't
-extended before the visibility timeout expires counts as a failed
-receive. Depending on the configuration of the queue, the message
-might be sent to the dead-letter queue.
+\item When a message is received from a queue, it becomes temporarily invisible to other consumers for the duration of the visibility timeout. This prevents multiple consumers from processing the same message simultaneously. If the message is not deleted or its visibility timeout is not extended before the timeout expires, it becomes visible again and can be retrieved by other consumers.
+\item Setting an appropriate visibility timeout is crucial. If it's too short, the message might become visible again before processing is complete, leading to duplicate processing. If it's too long, it delays the reprocessing of messages if the initial processing fails.
+\item You can adjust the visibility timeout using the \code{--visibility-timeout} parameter in the \code{receive-message} command to match the processing time required by your application.
+\item A message that isn't deleted or a message whose visibility isn't extended before the visibility timeout expires counts as a failed receive. Depending on the configuration of the queue, the message might be sent to the dead-letter queue.
 }
 
-For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout}
-in the \emph{Amazon SQS Developer Guide}.}
+For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout} in the \emph{Amazon SQS Developer Guide}.}
 
-\item{WaitTimeSeconds}{The duration (in seconds) for which the call waits for a message to
-arrive in the queue before returning. If a message is available, the
-call returns sooner than \code{WaitTimeSeconds}. If no messages are available
-and the wait time expires, the call does not return a message list. If
-you are using the Java SDK, it returns a \code{ReceiveMessageResponse}
-object, which has a empty list instead of a Null object.
+\item{WaitTimeSeconds}{The duration (in seconds) for which the call waits for a message to arrive in the queue before returning. If a message is available, the call returns sooner than \code{WaitTimeSeconds}. If no messages are available and the wait time expires, the call does not return a message list. If you are using the Java SDK, it returns a \code{ReceiveMessageResponse} object, which has a empty list instead of a Null object.
 
-To avoid HTTP errors, ensure that the HTTP response timeout for
-\code{\link[=sqs_receive_message]{receive_message}} requests is longer than the
-\code{WaitTimeSeconds} parameter. For example, with the Java SDK, you can set
-HTTP transport settings using the
-\href{https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html}{NettyNioAsyncHttpClient}
-for asynchronous clients, or the
-\href{https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html}{ApacheHttpClient}
-for synchronous clients.}
+To avoid HTTP errors, ensure that the HTTP response timeout for \code{\link[=sqs_receive_message]{receive_message}} requests is longer than the \code{WaitTimeSeconds} parameter. For example, with the Java SDK, you can set HTTP transport settings using the \href{https://docs.aws.amazon.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html}{NettyNioAsyncHttpClient} for asynchronous clients, or the \href{https://docs.aws.amazon.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html}{ApacheHttpClient} for synchronous clients.}
 
 \item{ReceiveRequestAttemptId}{This parameter applies only to FIFO (first-in-first-out) queues.
 
-The token used for deduplication of
-\code{\link[=sqs_receive_message]{receive_message}} calls. If a networking issue
-occurs after a \code{\link[=sqs_receive_message]{receive_message}} action, and
-instead of a response you receive a generic error, it is possible to
-retry the same action with an identical \code{ReceiveRequestAttemptId} to
-retrieve the same set of messages, even if their visibility timeout has
-not yet expired.
+The token used for deduplication of \code{\link[=sqs_receive_message]{receive_message}} calls. If a networking issue occurs after a \code{\link[=sqs_receive_message]{receive_message}} action, and instead of a response you receive a generic error, it is possible to retry the same action with an identical \code{ReceiveRequestAttemptId} to retrieve the same set of messages, even if their visibility timeout has not yet expired.
 \itemize{
-\item You can use \code{ReceiveRequestAttemptId} only for 5 minutes after a
-\code{\link[=sqs_receive_message]{receive_message}} action.
-\item When you set \code{FifoQueue}, a caller of the
-\code{\link[=sqs_receive_message]{receive_message}} action can provide a
-\code{ReceiveRequestAttemptId} explicitly.
-\item It is possible to retry the \code{\link[=sqs_receive_message]{receive_message}}
-action with the same \code{ReceiveRequestAttemptId} if none of the
-messages have been modified (deleted or had their visibility
-changes).
-\item During a visibility timeout, subsequent calls with the same
-\code{ReceiveRequestAttemptId} return the same messages and receipt
-handles. If a retry occurs within the deduplication interval, it
-resets the visibility timeout. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout}
-in the \emph{Amazon SQS Developer Guide}.
+\item You can use \code{ReceiveRequestAttemptId} only for 5 minutes after a \code{\link[=sqs_receive_message]{receive_message}} action.
+\item When you set \code{FifoQueue}, a caller of the \code{\link[=sqs_receive_message]{receive_message}} action can provide a \code{ReceiveRequestAttemptId} explicitly.
+\item It is possible to retry the \code{\link[=sqs_receive_message]{receive_message}} action with the same \code{ReceiveRequestAttemptId} if none of the messages have been modified (deleted or had their visibility changes).
+\item During a visibility timeout, subsequent calls with the same \code{ReceiveRequestAttemptId} return the same messages and receipt handles. If a retry occurs within the deduplication interval, it resets the visibility timeout. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout} in the \emph{Amazon SQS Developer Guide}.
 
-If a caller of the \code{\link[=sqs_receive_message]{receive_message}} action
-still processes messages when the visibility timeout expires and
-messages become visible, another worker consuming from the same
-queue can receive the same messages and therefore process
-duplicates. Also, if a consumer whose message processing time is
-longer than the visibility timeout tries to delete the processed
-messages, the action fails with an error.
+If a caller of the \code{\link[=sqs_receive_message]{receive_message}} action still processes messages when the visibility timeout expires and messages become visible, another worker consuming from the same queue can receive the same messages and therefore process duplicates. Also, if a consumer whose message processing time is longer than the visibility timeout tries to delete the processed messages, the action fails with an error.
 
-To mitigate this effect, ensure that your application observes a
-safe threshold before the visibility timeout expires and extend the
-visibility timeout as necessary.
-\item While messages with a particular \code{MessageGroupId} are invisible, no
-more messages belonging to the same \code{MessageGroupId} are returned
-until the visibility timeout expires. You can still receive messages
-with another \code{MessageGroupId} as long as it is also visible.
-\item If a caller of \code{\link[=sqs_receive_message]{receive_message}} can't track
-the \code{ReceiveRequestAttemptId}, no retries work until the original
-visibility timeout expires. As a result, delays might occur but the
-messages in the queue remain in a strict order.
+To mitigate this effect, ensure that your application observes a safe threshold before the visibility timeout expires and extend the visibility timeout as necessary.
+\item While messages with a particular \code{MessageGroupId} are invisible, no more messages belonging to the same \code{MessageGroupId} are returned until the visibility timeout expires. You can still receive messages with another \code{MessageGroupId} from your FIFO queue as long as they are visible.
+\item If a caller of \code{\link[=sqs_receive_message]{receive_message}} can't track the \code{ReceiveRequestAttemptId}, no retries work until the original visibility timeout expires. As a result, delays might occur but the messages in the queue remain in a strict order.
 }
 
-The maximum length of \code{ReceiveRequestAttemptId} is 128 characters.
-\code{ReceiveRequestAttemptId} can contain alphanumeric characters (\code{a-z},
-\code{A-Z}, \code{0-9}) and punctuation
-(\verb{!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~}).
+The maximum length of \code{ReceiveRequestAttemptId} is 128 characters. \code{ReceiveRequestAttemptId} can contain alphanumeric characters (\code{a-z}, \code{A-Z}, \code{0-9}) and punctuation (\verb{!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~}).
 
-For best practices of using \code{ReceiveRequestAttemptId}, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html}{Using the ReceiveRequestAttemptId Request Parameter}
-in the \emph{Amazon SQS Developer Guide}.
+For best practices of using \code{ReceiveRequestAttemptId}, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html}{Using the ReceiveRequestAttemptId Request Parameter} in the \emph{Amazon SQS Developer Guide}.
 
 []: R:\%5C
-[Using the
-ReceiveRequestAttemptId Request
-Parameter]: R:Using\%20the\%0AReceiveRequestAttemptId\%20Request\%0AParameter}
+[Using the ReceiveRequestAttemptId Request Parameter]: R:Using\%20the\%20ReceiveRequestAttemptId\%20Request\%20Parameter}
 }
 \description{
-Retrieves one or more messages (up to 10), from the specified queue. Using the \code{WaitTimeSeconds} parameter enables long-poll support. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html#sqs-long-polling}{Amazon SQS Long Polling} in the \emph{Amazon SQS Developer Guide}.
+Retrieves one or more messages (up to 10), from the specified queue. Using the \code{WaitTimeSeconds} parameter enables long-poll support. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html}{Amazon SQS Long Polling} in the \emph{Amazon SQS Developer Guide}.
 
 See \url{https://www.paws-r-sdk.com/docs/sqs_receive_message/} for full documentation.
 }

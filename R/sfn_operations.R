@@ -10,11 +10,7 @@ NULL
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_create_activity/](https://www.paws-r-sdk.com/docs/sfn_create_activity/) for full documentation.
 #'
-#' @param name &#91;required&#93; The name of the activity to create. This name must be unique for your
-#' Amazon Web Services account and region for 90 days. For more
-#' information, see [Limits Related to State Machine
-#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions)
-#' in the *Step Functions Developer Guide*.
+#' @param name &#91;required&#93; The name of the activity to create. This name must be unique for your Amazon Web Services account and region for 90 days. For more information, see [Limits Related to State Machine Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions) in the *Step Functions Developer Guide*.
 #' 
 #' A name must *not* contain:
 #' 
@@ -26,21 +22,18 @@ NULL
 #' 
 #' -   special characters `` \" # % \ ^ | ~ \` $ & , ; : / ``
 #' 
-#' -   control characters (`U+0000-001F`, `U+007F-009F`)
+#' -   control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
 #' 
-#' To enable logging with CloudWatch Logs, the name should only contain
-#' 0-9, A-Z, a-z, - and _.
+#' -   surrogates (`U+D800-DFFF`)
+#' 
+#' -   invalid characters (` U+10FFFF`)
+#' 
+#' To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 #' @param tags The list of tags to add to a resource.
 #' 
-#' An array of key-value pairs. For more information, see [Using Cost
-#' Allocation
-#' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-#' in the *Amazon Web Services Billing and Cost Management User Guide*, and
-#' [Controlling Access Using IAM
-#' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+#' An array of key-value pairs. For more information, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Amazon Web Services Billing and Cost Management User Guide*, and [Controlling Access Using IAM Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
-#' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @@`.
+#' Tags may only contain Unicode letters, digits, white space, or these symbols: `_ . : / = + - @@`.
 #' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
@@ -84,42 +77,27 @@ sfn_create_activity <- function(name, tags = NULL, encryptionConfiguration = NUL
 #' 
 #' -   special characters `` \" # % \ ^ | ~ \` $ & , ; : / ``
 #' 
-#' -   control characters (`U+0000-001F`, `U+007F-009F`)
+#' -   control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
 #' 
-#' To enable logging with CloudWatch Logs, the name should only contain
-#' 0-9, A-Z, a-z, - and _.
-#' @param definition &#91;required&#93; The Amazon States Language definition of the state machine. See [Amazon
-#' States
-#' Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
-#' @param roleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role to use for this state
-#' machine.
-#' @param type Determines whether a Standard or Express state machine is created. The
-#' default is `STANDARD`. You cannot update the `type` of a state machine
-#' once it has been created.
-#' @param loggingConfiguration Defines what execution history events are logged and where they are
-#' logged.
+#' -   surrogates (`U+D800-DFFF`)
 #' 
-#' By default, the `level` is set to `OFF`. For more information see [Log
-#' Levels](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html)
-#' in the Step Functions User Guide.
+#' -   invalid characters (` U+10FFFF`)
+#' 
+#' To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+#' @param definition &#91;required&#93; The Amazon States Language definition of the state machine. See [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+#' @param roleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
+#' @param type Determines whether a Standard or Express state machine is created. The default is `STANDARD`. You cannot update the `type` of a state machine once it has been created.
+#' @param loggingConfiguration Defines what execution history events are logged and where they are logged.
+#' 
+#' By default, the `level` is set to `OFF`. For more information see [Log Levels](https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html) in the Step Functions User Guide.
 #' @param tags Tags to be added when creating a state machine.
 #' 
-#' An array of key-value pairs. For more information, see [Using Cost
-#' Allocation
-#' Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-#' in the *Amazon Web Services Billing and Cost Management User Guide*, and
-#' [Controlling Access Using IAM
-#' Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
+#' An array of key-value pairs. For more information, see [Using Cost Allocation Tags](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html) in the *Amazon Web Services Billing and Cost Management User Guide*, and [Controlling Access Using IAM Tags](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html).
 #' 
-#' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @@`.
+#' Tags may only contain Unicode letters, digits, white space, or these symbols: `_ . : / = + - @@`.
 #' @param tracingConfiguration Selects whether X-Ray tracing is enabled.
-#' @param publish Set to `true` to publish the first version of the state machine during
-#' creation. The default is `false`.
-#' @param versionDescription Sets description about the state machine version. You can only set the
-#' description if the `publish` parameter is set to `true`. Otherwise, if
-#' you set `versionDescription`, but `publish` to `false`, this API action
-#' throws `ValidationException`.
+#' @param publish Set to `true` to publish the first version of the state machine during creation. The default is `false`.
+#' @param versionDescription Sets description about the state machine version. You can only set the description if the `publish` parameter is set to `true`. Otherwise, if you set `versionDescription`, but `publish` to `false`, this API action throws `ValidationException`.
 #' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
@@ -155,14 +133,8 @@ sfn_create_state_machine <- function(name, definition, roleArn, type = NULL, log
 #' @param description A description for the state machine alias.
 #' @param name &#91;required&#93; The name of the state machine alias.
 #' 
-#' To avoid conflict with version ARNs, don't use an integer in the name of
-#' the alias.
-#' @param routingConfiguration &#91;required&#93; The routing configuration of a state machine alias. The routing
-#' configuration shifts execution traffic between two state machine
-#' versions. `routingConfiguration` contains an array of `RoutingConfig`
-#' objects that specify up to two state machine versions. Step Functions
-#' then randomly choses which version to run an execution with based on the
-#' weight assigned to each `RoutingConfig`.
+#' To avoid conflict with version ARNs, don't use an integer in the name of the alias.
+#' @param routingConfiguration &#91;required&#93; The routing configuration of a state machine alias. The routing configuration shifts execution traffic between two state machine versions. `routingConfiguration` contains an array of `RoutingConfig` objects that specify up to two state machine versions. Step Functions then randomly choses which version to run an execution with based on the weight assigned to each `RoutingConfig`.
 #'
 #' @keywords internal
 #'
@@ -351,11 +323,7 @@ sfn_describe_activity <- function(activityArn) {
 #' See [https://www.paws-r-sdk.com/docs/sfn_describe_execution/](https://www.paws-r-sdk.com/docs/sfn_describe_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution to describe.
-#' @param includedData If your state machine definition is encrypted with a KMS key, callers
-#' must have `kms:Decrypt` permission to decrypt the definition.
-#' Alternatively, you can call DescribeStateMachine API with
-#' `includedData = METADATA_ONLY` to get a successful response without the
-#' encrypted definition.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition. Alternatively, you can call DescribeStateMachine API with `includedData = METADATA_ONLY` to get a successful response without the encrypted definition.
 #'
 #' @keywords internal
 #'
@@ -419,23 +387,12 @@ sfn_describe_map_run <- function(mapRunArn) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_describe_state_machine/](https://www.paws-r-sdk.com/docs/sfn_describe_state_machine/) for full documentation.
 #'
-#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine for which you want
-#' the information.
+#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine for which you want the information.
 #' 
-#' If you specify a state machine version ARN, this API returns details
-#' about that version. The version ARN is a combination of state machine
-#' ARN and the version number separated by a colon (:). For example,
-#' `stateMachineARN:1`.
-#' @param includedData If your state machine definition is encrypted with a KMS key, callers
-#' must have `kms:Decrypt` permission to decrypt the definition.
-#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
-#' to get a successful response without the encrypted definition.
+#' If you specify a state machine version ARN, this API returns details about that version. The version ARN is a combination of state machine ARN and the version number separated by a colon (:). For example, `stateMachineARN:1`.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition. Alternatively, you can call the API with `includedData = METADATA_ONLY` to get a successful response without the encrypted definition.
 #' 
-#' When calling a labelled ARN for an encrypted state machine, the
-#' `includedData = METADATA_ONLY` parameter will not apply because Step
-#' Functions needs to decrypt the entire state machine definition to get
-#' the Distributed Map state’s definition. In this case, the API caller
-#' needs to have `kms:Decrypt` permission.
+#' When calling a labelled ARN for an encrypted state machine, the `includedData = METADATA_ONLY` parameter will not apply because Step Functions needs to decrypt the entire state machine definition to get the Distributed Map state’s definition. In this case, the API caller needs to have `kms:Decrypt` permission.
 #'
 #' @keywords internal
 #'
@@ -498,12 +455,8 @@ sfn_describe_state_machine_alias <- function(stateMachineAliasArn) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_describe_state_machine_for_execution/](https://www.paws-r-sdk.com/docs/sfn_describe_state_machine_for_execution/) for full documentation.
 #'
-#' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution you want state machine
-#' information for.
-#' @param includedData If your state machine definition is encrypted with a KMS key, callers
-#' must have `kms:Decrypt` permission to decrypt the definition.
-#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
-#' to get a successful response without the encrypted definition.
+#' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution you want state machine information for.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition. Alternatively, you can call the API with `includedData = METADATA_ONLY` to get a successful response without the encrypted definition.
 #'
 #' @keywords internal
 #'
@@ -535,12 +488,8 @@ sfn_describe_state_machine_for_execution <- function(executionArn, includedData 
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_get_activity_task/](https://www.paws-r-sdk.com/docs/sfn_get_activity_task/) for full documentation.
 #'
-#' @param activityArn &#91;required&#93; The Amazon Resource Name (ARN) of the activity to retrieve tasks from
-#' (assigned when you create the task using
-#' [`create_activity`][sfn_create_activity].)
-#' @param workerName You can provide an arbitrary name in order to identify the worker that
-#' the task is assigned to. This name is used when it is logged in the
-#' execution history.
+#' @param activityArn &#91;required&#93; The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task using [`create_activity`][sfn_create_activity].)
+#' @param workerName You can provide an arbitrary name in order to identify the worker that the task is assigned to. This name is used when it is logged in the execution history.
 #'
 #' @keywords internal
 #'
@@ -572,21 +521,12 @@ sfn_get_activity_task <- function(activityArn, workerName = NULL) {
 #' See [https://www.paws-r-sdk.com/docs/sfn_get_execution_history/](https://www.paws-r-sdk.com/docs/sfn_get_execution_history/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution.
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
 #' @param reverseOrder Lists events in descending order of their `timeStamp`.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
-#' @param includeExecutionData You can select whether execution data (input or output of a history
-#' event) is returned. The default is `true`.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
+#' @param includeExecutionData You can select whether execution data (input or output of a history event) is returned. The default is `true`.
 #'
 #' @keywords internal
 #'
@@ -617,18 +557,10 @@ sfn_get_execution_history <- function(executionArn, maxResults = NULL, reverseOr
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_activities/](https://www.paws-r-sdk.com/docs/sfn_list_activities/) for full documentation.
 #'
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
 #'
 #' @keywords internal
 #'
@@ -659,52 +591,30 @@ sfn_list_activities <- function(maxResults = NULL, nextToken = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_executions/](https://www.paws-r-sdk.com/docs/sfn_list_executions/) for full documentation.
 #'
-#' @param stateMachineArn The Amazon Resource Name (ARN) of the state machine whose executions is
-#' listed.
+#' @param stateMachineArn The Amazon Resource Name (ARN) of the state machine whose executions is listed.
 #' 
-#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not
-#' both.
+#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not both.
 #' 
-#' You can also return a list of executions associated with a specific
-#' [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-#' or
-#' [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html),
-#' by specifying an alias ARN or a version ARN in the `stateMachineArn`
-#' parameter.
-#' @param statusFilter If specified, only list the executions whose current execution status
-#' matches the given filter.
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' You can also return a list of executions associated with a specific [alias](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html) or [version](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html), by specifying an alias ARN or a version ARN in the `stateMachineArn` parameter.
+#' @param statusFilter If specified, only list the executions whose current execution status matches the given filter.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
-#' @param mapRunArn The Amazon Resource Name (ARN) of the Map Run that started the child
-#' workflow executions. If the `mapRunArn` field is specified, a list of
-#' all of the child workflow executions started by a Map Run is returned.
-#' For more information, see [Examining Map
-#' Run](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
-#' in the *Step Functions Developer Guide*.
+#' If you provide a `PENDING_REDRIVE` statusFilter, you must specify `mapRunArn`. For more information, see [Child workflow execution redrive behaviour](https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html#redrive-child-workflow-behavior) in the *Step Functions Developer Guide*.
 #' 
-#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not
-#' both.
-#' @param redriveFilter Sets a filter to list executions based on whether or not they have been
-#' redriven.
+#' If you provide a stateMachineArn and a `PENDING_REDRIVE` statusFilter, the API returns a validation exception.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' For a Distributed Map, `redriveFilter` sets a filter to list child
-#' workflow executions based on whether or not they have been redriven.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
+#' @param mapRunArn The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions. If the `mapRunArn` field is specified, a list of all of the child workflow executions started by a Map Run is returned. For more information, see [Examining Map Run](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html) in the *Step Functions Developer Guide*.
 #' 
-#' If you do not provide a `redriveFilter`, Step Functions returns a list
-#' of both redriven and non-redriven executions.
+#' You can specify either a `mapRunArn` or a `stateMachineArn`, but not both.
+#' @param redriveFilter Sets a filter to list executions based on whether or not they have been redriven.
 #' 
-#' If you provide a state machine ARN in `redriveFilter`, the API returns a
-#' validation exception.
+#' For a Distributed Map, `redriveFilter` sets a filter to list child workflow executions based on whether or not they have been redriven.
+#' 
+#' If you do not provide a `redriveFilter`, Step Functions returns a list of both redriven and non-redriven executions.
+#' 
+#' If you provide a state machine ARN in `redriveFilter`, the API returns a validation exception.
 #'
 #' @keywords internal
 #'
@@ -735,20 +645,11 @@ sfn_list_executions <- function(stateMachineArn = NULL, statusFilter = NULL, max
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_map_runs/](https://www.paws-r-sdk.com/docs/sfn_list_map_runs/) for full documentation.
 #'
-#' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution for which the Map Runs
-#' must be listed.
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
 #'
 #' @keywords internal
 #'
@@ -779,23 +680,13 @@ sfn_list_map_runs <- function(executionArn, maxResults = NULL, nextToken = NULL)
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_state_machine_aliases/](https://www.paws-r-sdk.com/docs/sfn_list_state_machine_aliases/) for full documentation.
 #'
-#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine for which you want
-#' to list aliases.
+#' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.
 #' 
-#' If you specify a state machine version ARN, this API returns a list of
-#' aliases for that version.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' If you specify a state machine version ARN, this API returns a list of aliases for that version.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
 #'
 #' @keywords internal
 #'
@@ -828,18 +719,10 @@ sfn_list_state_machine_aliases <- function(stateMachineArn, nextToken = NULL, ma
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_state_machine_versions/](https://www.paws-r-sdk.com/docs/sfn_list_state_machine_versions/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
 #'
 #' @keywords internal
 #'
@@ -870,18 +753,10 @@ sfn_list_state_machine_versions <- function(stateMachineArn, nextToken = NULL, m
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_state_machines/](https://www.paws-r-sdk.com/docs/sfn_list_state_machines/) for full documentation.
 #'
-#' @param maxResults The maximum number of results that are returned per call. You can use
-#' `nextToken` to obtain further pages of results. The default is 100 and
-#' the maximum allowed page size is 1000. A value of 0 uses the default.
+#' @param maxResults The maximum number of results that are returned per call. You can use `nextToken` to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 #' 
-#' This is only an upper limit. The actual number of results returned per
-#' call might be fewer than the specified maximum.
-#' @param nextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an *HTTP 400 InvalidToken*
-#' error.
+#' This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.
+#' @param nextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an *HTTP 400 InvalidToken* error.
 #'
 #' @keywords internal
 #'
@@ -912,8 +787,7 @@ sfn_list_state_machines <- function(maxResults = NULL, nextToken = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/sfn_list_tags_for_resource/) for full documentation.
 #'
-#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
-#' activity.
+#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
 #'
 #' @keywords internal
 #'
@@ -945,19 +819,11 @@ sfn_list_tags_for_resource <- function(resourceArn) {
 #' See [https://www.paws-r-sdk.com/docs/sfn_publish_state_machine_version/](https://www.paws-r-sdk.com/docs/sfn_publish_state_machine_version/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine.
-#' @param revisionId Only publish the state machine version if the current state machine's
-#' revision ID matches the specified ID.
+#' @param revisionId Only publish the state machine version if the current state machine's revision ID matches the specified ID.
 #' 
-#' Use this option to avoid publishing a version if the state machine
-#' changed since you last updated it. If the specified revision ID doesn't
-#' match the state machine's current revision ID, the API returns
-#' `ConflictException`.
+#' Use this option to avoid publishing a version if the state machine changed since you last updated it. If the specified revision ID doesn't match the state machine's current revision ID, the API returns `ConflictException`.
 #' 
-#' To specify an initial revision ID for a state machine with no revision
-#' ID assigned, specify the string `INITIAL` for the `revisionId`
-#' parameter. For example, you can specify a `revisionID` of `INITIAL` when
-#' you create a state machine using the
-#' [`create_state_machine`][sfn_create_state_machine] API action.
+#' To specify an initial revision ID for a state machine with no revision ID assigned, specify the string `INITIAL` for the `revisionId` parameter. For example, you can specify a `revisionID` of `INITIAL` when you create a state machine using the [`create_state_machine`][sfn_create_state_machine] API action.
 #' @param description An optional description of the state machine version.
 #'
 #' @keywords internal
@@ -991,13 +857,7 @@ sfn_publish_state_machine_version <- function(stateMachineArn, revisionId = NULL
 #' See [https://www.paws-r-sdk.com/docs/sfn_redrive_execution/](https://www.paws-r-sdk.com/docs/sfn_redrive_execution/) for full documentation.
 #'
 #' @param executionArn &#91;required&#93; The Amazon Resource Name (ARN) of the execution to be redriven.
-#' @param clientToken A unique, case-sensitive identifier that you provide to ensure the
-#' idempotency of the request. If you don’t specify a client token, the
-#' Amazon Web Services SDK automatically generates a client token and uses
-#' it for the request to ensure idempotency. The API will return idempotent
-#' responses for the last 10 client tokens used to successfully redrive the
-#' execution. These client tokens are valid for up to 15 minutes after they
-#' are first used.
+#' @param clientToken A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don’t specify a client token, the Amazon Web Services SDK automatically generates a client token and uses it for the request to ensure idempotency. The API will return idempotent responses for the last 10 client tokens used to successfully redrive the execution. These client tokens are valid for up to 15 minutes after they are first used.
 #'
 #' @keywords internal
 #'
@@ -1030,11 +890,7 @@ sfn_redrive_execution <- function(executionArn, clientToken = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_send_task_failure/](https://www.paws-r-sdk.com/docs/sfn_send_task_failure/) for full documentation.
 #'
-#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
-#' Functions when tasks are assigned to a worker, or in the [context
-#' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
-#' when a workflow enters a task state. See
-#' GetActivityTaskOutput$taskToken.
+#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the [context object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html) when a workflow enters a task state. See GetActivityTaskOutput$taskToken.
 #' @param error The error code of the failure.
 #' @param cause A more detailed explanation of the cause of the failure.
 #'
@@ -1070,11 +926,7 @@ sfn_send_task_failure <- function(taskToken, error = NULL, cause = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_send_task_heartbeat/](https://www.paws-r-sdk.com/docs/sfn_send_task_heartbeat/) for full documentation.
 #'
-#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
-#' Functions when tasks are assigned to a worker, or in the [context
-#' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
-#' when a workflow enters a task state. See
-#' GetActivityTaskOutput$taskToken.
+#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the [context object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html) when a workflow enters a task state. See GetActivityTaskOutput$taskToken.
 #'
 #' @keywords internal
 #'
@@ -1107,13 +959,8 @@ sfn_send_task_heartbeat <- function(taskToken) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_send_task_success/](https://www.paws-r-sdk.com/docs/sfn_send_task_success/) for full documentation.
 #'
-#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step
-#' Functions when tasks are assigned to a worker, or in the [context
-#' object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html)
-#' when a workflow enters a task state. See
-#' GetActivityTaskOutput$taskToken.
-#' @param output &#91;required&#93; The JSON output of the task. Length constraints apply to the payload
-#' size, and are expressed as bytes in UTF-8 encoding.
+#' @param taskToken &#91;required&#93; The token that represents this task. Task tokens are generated by Step Functions when tasks are assigned to a worker, or in the [context object](https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html) when a workflow enters a task state. See GetActivityTaskOutput$taskToken.
+#' @param output &#91;required&#93; The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
 #'
 #' @keywords internal
 #'
@@ -1148,45 +995,26 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' The `stateMachineArn` parameter accepts one of the following inputs:
 #' 
-#' -   **An unqualified state machine ARN** – Refers to a state machine ARN
-#'     that isn't qualified with a version or alias ARN. The following is
-#'     an example of an unqualified state machine ARN.
+#' -   **An unqualified state machine ARN** – Refers to a state machine ARN that isn't qualified with a version or alias ARN. The following is an example of an unqualified state machine ARN.
 #' 
 #'     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>`
 #' 
-#'     Step Functions doesn't associate state machine executions that you
-#'     start with an unqualified ARN with a version. This is true even if
-#'     that version uses the same revision that the execution used.
+#'     Step Functions doesn't associate state machine executions that you start with an unqualified ARN with a version. This is true even if that version uses the same revision that the execution used.
 #' 
-#' -   **A state machine version ARN** – Refers to a version ARN, which is
-#'     a combination of state machine ARN and the version number separated
-#'     by a colon (:). The following is an example of the ARN for version
-#'     10.
+#' -   **A state machine version ARN** – Refers to a version ARN, which is a combination of state machine ARN and the version number separated by a colon (:). The following is an example of the ARN for version 10.
 #' 
 #'     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>:10`
 #' 
-#'     Step Functions doesn't associate executions that you start with a
-#'     version ARN with any aliases that point to that version.
+#'     Step Functions doesn't associate executions that you start with a version ARN with any aliases that point to that version.
 #' 
-#' -   **A state machine alias ARN** – Refers to an alias ARN, which is a
-#'     combination of state machine ARN and the alias name separated by a
-#'     colon (:). The following is an example of the ARN for an alias named
-#'     `PROD`.
+#' -   **A state machine alias ARN** – Refers to an alias ARN, which is a combination of state machine ARN and the alias name separated by a colon (:). The following is an example of the ARN for an alias named `PROD`.
 #' 
 #'     `arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>`
 #' 
-#'     Step Functions associates executions that you start with an alias
-#'     ARN with that alias and the state machine version used for that
-#'     execution.
-#' @param name Optional name of the execution. This name must be unique for your Amazon
-#' Web Services account, Region, and state machine for 90 days. For more
-#' information, see [Limits Related to State Machine
-#' Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions)
-#' in the *Step Functions Developer Guide*.
+#'     Step Functions associates executions that you start with an alias ARN with that alias and the state machine version used for that execution.
+#' @param name Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information, see [Limits Related to State Machine Executions](https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions) in the *Step Functions Developer Guide*.
 #' 
-#' If you don't provide a name for the execution, Step Functions
-#' automatically generates a universally unique identifier (UUID) as the
-#' execution name.
+#' If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.
 #' 
 #' A name must *not* contain:
 #' 
@@ -1198,22 +1026,23 @@ sfn_send_task_success <- function(taskToken, output) {
 #' 
 #' -   special characters `` \" # % \ ^ | ~ \` $ & , ; : / ``
 #' 
-#' -   control characters (`U+0000-001F`, `U+007F-009F`)
+#' -   control characters (`U+0000-001F`, `U+007F-009F`, `U+FFFE-FFFF`)
 #' 
-#' To enable logging with CloudWatch Logs, the name should only contain
-#' 0-9, A-Z, a-z, - and _.
-#' @param input The string that contains the JSON input data for the execution, for
-#' example:
+#' -   surrogates (`U+D800-DFFF`)
 #' 
-#' `"input": "{\"first_name\" : \"test\"}"`
+#' -   invalid characters (` U+10FFFF`)
 #' 
-#' If you don't include any JSON input data, you still must include the two
-#' braces, for example: `"input": "{}"`
+#' To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
+#' @param input The string that contains the JSON input data for the execution, for example:
 #' 
-#' Length constraints apply to the payload size, and are expressed as bytes
-#' in UTF-8 encoding.
-#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in
-#' the request payload.
+#' `"{\"first_name\" : \"Alejandro\"}"`
+#' 
+#' If you don't include any JSON input data, you still must include the two braces, for example: `"{}"`
+#' 
+#' Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in the request payload.
+#' 
+#' For X-Ray traces, all Amazon Web Services services use the `X-Amzn-Trace-Id` header from the HTTP request. Using the header is the preferred mechanism to identify a trace. [`start_execution`][sfn_start_execution] and [`start_sync_execution`][sfn_start_sync_execution] API operations can also use `traceHeader` from the body of the request payload. If **both** sources are provided, Step Functions will use the **header value** (preferred) over the value in the request body.
 #'
 #' @keywords internal
 #'
@@ -1246,22 +1075,17 @@ sfn_start_execution <- function(stateMachineArn, name = NULL, input = NULL, trac
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine to execute.
 #' @param name The name of the execution.
-#' @param input The string that contains the JSON input data for the execution, for
-#' example:
+#' @param input The string that contains the JSON input data for the execution, for example:
 #' 
-#' `"input": "{\"first_name\" : \"test\"}"`
+#' `"{\"first_name\" : \"Alejandro\"}"`
 #' 
-#' If you don't include any JSON input data, you still must include the two
-#' braces, for example: `"input": "{}"`
+#' If you don't include any JSON input data, you still must include the two braces, for example: `"{}"`
 #' 
-#' Length constraints apply to the payload size, and are expressed as bytes
-#' in UTF-8 encoding.
-#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in
-#' the request payload.
-#' @param includedData If your state machine definition is encrypted with a KMS key, callers
-#' must have `kms:Decrypt` permission to decrypt the definition.
-#' Alternatively, you can call the API with `includedData = METADATA_ONLY`
-#' to get a successful response without the encrypted definition.
+#' Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+#' @param traceHeader Passes the X-Ray trace header. The trace header can also be passed in the request payload.
+#' 
+#' For X-Ray traces, all Amazon Web Services services use the `X-Amzn-Trace-Id` header from the HTTP request. Using the header is the preferred mechanism to identify a trace. [`start_execution`][sfn_start_execution] and [`start_sync_execution`][sfn_start_sync_execution] API operations can also use `traceHeader` from the body of the request payload. If **both** sources are provided, Step Functions will use the **header value** (preferred) over the value in the request body.
+#' @param includedData If your state machine definition is encrypted with a KMS key, callers must have `kms:Decrypt` permission to decrypt the definition. Alternatively, you can call the API with `includedData = METADATA_ONLY` to get a successful response without the encrypted definition.
 #'
 #' @keywords internal
 #'
@@ -1325,12 +1149,10 @@ sfn_stop_execution <- function(executionArn, error = NULL, cause = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_tag_resource/](https://www.paws-r-sdk.com/docs/sfn_tag_resource/) for full documentation.
 #'
-#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
-#' activity.
+#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
 #' @param tags &#91;required&#93; The list of tags to add to a resource.
 #' 
-#' Tags may only contain Unicode letters, digits, white space, or these
-#' symbols: `_ . : / = + - @@`.
+#' Tags may only contain Unicode letters, digits, white space, or these symbols: `_ . : / = + - @@`.
 #'
 #' @keywords internal
 #'
@@ -1361,49 +1183,35 @@ sfn_tag_resource <- function(resourceArn, tags) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_test_state/](https://www.paws-r-sdk.com/docs/sfn_test_state/) for full documentation.
 #'
-#' @param definition &#91;required&#93; The [Amazon States
-#' Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-#' (ASL) definition of the state.
-#' @param roleArn The Amazon Resource Name (ARN) of the execution role with the required
-#' IAM permissions for the state.
+#' @param definition &#91;required&#93; The [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) (ASL) definition of the state or state machine.
+#' @param roleArn The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.
 #' @param input A string that contains the JSON input data for the state.
-#' @param inspectionLevel Determines the values to return when a state is tested. You can specify
-#' one of the following types:
+#' @param inspectionLevel Determines the values to return when a state is tested. You can specify one of the following types:
 #' 
-#' -   `INFO`: Shows the final state output. By default, Step Functions
-#'     sets `inspectionLevel` to `INFO` if you don't specify a level.
+#' -   `INFO`: Shows the final state output. By default, Step Functions sets `inspectionLevel` to `INFO` if you don't specify a level.
 #' 
-#' -   `DEBUG`: Shows the final state output along with the input and
-#'     output data processing result.
+#' -   `DEBUG`: Shows the final state output along with the input and output data processing result.
 #' 
-#' -   `TRACE`: Shows the HTTP request and response for an HTTP Task. This
-#'     level also shows the final state output along with the input and
-#'     output data processing result.
+#' -   `TRACE`: Shows the HTTP request and response for an HTTP Task. This level also shows the final state output along with the input and output data processing result.
 #' 
-#' Each of these levels also provide information about the status of the
-#' state execution and the next state to transition to.
-#' @param revealSecrets Specifies whether or not to include secret information in the test
-#' result. For HTTP Tasks, a secret includes the data that an EventBridge
-#' connection adds to modify the HTTP request headers, query parameters,
-#' and body. Step Functions doesn't omit any information included in the
-#' state definition or the HTTP response.
+#' Each of these levels also provide information about the status of the state execution and the next state to transition to.
+#' @param revealSecrets Specifies whether or not to include secret information in the test result. For HTTP Tasks, a secret includes the data that an EventBridge connection adds to modify the HTTP request headers, query parameters, and body. Step Functions doesn't omit any information included in the state definition or the HTTP response.
 #' 
-#' If you set `revealSecrets` to `true`, you must make sure that the IAM
-#' user that calls the [`test_state`][sfn_test_state] API has permission
-#' for the `states:RevealSecrets` action. For an example of IAM policy that
-#' sets the `states:RevealSecrets` permission, see [IAM permissions to test
-#' a
-#' state](https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions).
-#' Without this permission, Step Functions throws an access denied error.
+#' If you set `revealSecrets` to `true`, you must make sure that the IAM user that calls the [`test_state`][sfn_test_state] API has permission for the `states:RevealSecrets` action. For an example of IAM policy that sets the `states:RevealSecrets` permission, see [IAM permissions to test a state](https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions). Without this permission, Step Functions throws an access denied error.
 #' 
 #' By default, `revealSecrets` is set to `false`.
-#' @param variables JSON object literal that sets variables used in the state under test.
-#' Object keys are the variable names and values are the variable values.
+#' @param variables JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.
+#' @param stateName Denotes the particular state within a state machine definition to be tested. If this field is specified, the `definition` must contain a fully-formed state machine definition.
+#' @param mock Defines a mocked result or error for the state under test.
+#' 
+#' A mock can only be specified for Task, Map, or Parallel states. If it is specified for another state type, an exception will be thrown.
+#' @param context A JSON string representing a valid Context object for the state under test. This field may only be specified if a mock is specified in the same request.
+#' @param stateConfiguration Contains configurations for the state under test.
 #'
 #' @keywords internal
 #'
 #' @rdname sfn_test_state
-sfn_test_state <- function(definition, roleArn = NULL, input = NULL, inspectionLevel = NULL, revealSecrets = NULL, variables = NULL) {
+sfn_test_state <- function(definition, roleArn = NULL, input = NULL, inspectionLevel = NULL, revealSecrets = NULL, variables = NULL, stateName = NULL, mock = NULL, context = NULL, stateConfiguration = NULL) {
   op <- new_operation(
     name = "TestState",
     http_method = "POST",
@@ -1412,7 +1220,7 @@ sfn_test_state <- function(definition, roleArn = NULL, input = NULL, inspectionL
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .sfn$test_state_input(definition = definition, roleArn = roleArn, input = input, inspectionLevel = inspectionLevel, revealSecrets = revealSecrets, variables = variables)
+  input <- .sfn$test_state_input(definition = definition, roleArn = roleArn, input = input, inspectionLevel = inspectionLevel, revealSecrets = revealSecrets, variables = variables, stateName = stateName, mock = mock, context = context, stateConfiguration = stateConfiguration)
   output <- .sfn$test_state_output()
   config <- get_config()
   svc <- .sfn$service(config, op)
@@ -1429,8 +1237,7 @@ sfn_test_state <- function(definition, roleArn = NULL, input = NULL, inspectionL
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_untag_resource/](https://www.paws-r-sdk.com/docs/sfn_untag_resource/) for full documentation.
 #'
-#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or
-#' activity.
+#' @param resourceArn &#91;required&#93; The Amazon Resource Name (ARN) for the Step Functions state machine or activity.
 #' @param tagKeys &#91;required&#93; The list of tags to remove from the resource.
 #'
 #' @keywords internal
@@ -1464,8 +1271,7 @@ sfn_untag_resource <- function(resourceArn, tagKeys) {
 #' See [https://www.paws-r-sdk.com/docs/sfn_update_map_run/](https://www.paws-r-sdk.com/docs/sfn_update_map_run/) for full documentation.
 #'
 #' @param mapRunArn &#91;required&#93; The Amazon Resource Name (ARN) of a Map Run.
-#' @param maxConcurrency The maximum number of child workflow executions that can be specified to
-#' run in parallel for the Map Run at the same time.
+#' @param maxConcurrency The maximum number of child workflow executions that can be specified to run in parallel for the Map Run at the same time.
 #' @param toleratedFailurePercentage The maximum percentage of failed items before the Map Run fails.
 #' @param toleratedFailureCount The maximum number of failed items before the Map Run fails.
 #'
@@ -1500,19 +1306,14 @@ sfn_update_map_run <- function(mapRunArn, maxConcurrency = NULL, toleratedFailur
 #' See [https://www.paws-r-sdk.com/docs/sfn_update_state_machine/](https://www.paws-r-sdk.com/docs/sfn_update_state_machine/) for full documentation.
 #'
 #' @param stateMachineArn &#91;required&#93; The Amazon Resource Name (ARN) of the state machine.
-#' @param definition The Amazon States Language definition of the state machine. See [Amazon
-#' States
-#' Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+#' @param definition The Amazon States Language definition of the state machine. See [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
 #' @param roleArn The Amazon Resource Name (ARN) of the IAM role of the state machine.
 #' @param loggingConfiguration Use the `LoggingConfiguration` data type to set CloudWatch Logs options.
 #' @param tracingConfiguration Selects whether X-Ray tracing is enabled.
-#' @param publish Specifies whether the state machine version is published. The default is
-#' `false`. To publish a version after updating the state machine, set
-#' `publish` to `true`.
+#' @param publish Specifies whether the state machine version is published. The default is `false`. To publish a version after updating the state machine, set `publish` to `true`.
 #' @param versionDescription An optional description of the state machine version to publish.
 #' 
-#' You can only specify the `versionDescription` parameter if you've set
-#' `publish` to `true`.
+#' You can only specify the `versionDescription` parameter if you've set `publish` to `true`.
 #' @param encryptionConfiguration Settings to configure server-side encryption.
 #'
 #' @keywords internal
@@ -1549,8 +1350,7 @@ sfn_update_state_machine <- function(stateMachineArn, definition = NULL, roleArn
 #' @param description A description of the state machine alias.
 #' @param routingConfiguration The routing configuration of the state machine alias.
 #' 
-#' An array of `RoutingConfig` objects that specifies up to two state
-#' machine versions that the alias starts executions for.
+#' An array of `RoutingConfig` objects that specifies up to two state machine versions that the alias starts executions for.
 #'
 #' @keywords internal
 #'
@@ -1582,22 +1382,12 @@ sfn_update_state_machine_alias <- function(stateMachineAliasArn, description = N
 #'
 #' See [https://www.paws-r-sdk.com/docs/sfn_validate_state_machine_definition/](https://www.paws-r-sdk.com/docs/sfn_validate_state_machine_definition/) for full documentation.
 #'
-#' @param definition &#91;required&#93; The Amazon States Language definition of the state machine. For more
-#' information, see [Amazon States
-#' Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-#' (ASL).
-#' @param type The target type of state machine for this definition. The default is
-#' `STANDARD`.
-#' @param severity Minimum level of diagnostics to return. `ERROR` returns only `ERROR`
-#' diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR`
-#' diagnostics. The default is `ERROR`.
-#' @param maxResults The maximum number of diagnostics that are returned per call. The
-#' default and maximum value is 100. Setting the value to 0 will also use
-#' the default of 100.
+#' @param definition &#91;required&#93; The Amazon States Language definition of the state machine. For more information, see [Amazon States Language](https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html) (ASL).
+#' @param type The target type of state machine for this definition. The default is `STANDARD`.
+#' @param severity Minimum level of diagnostics to return. `ERROR` returns only `ERROR` diagnostics, whereas `WARNING` returns both `WARNING` and `ERROR` diagnostics. The default is `ERROR`.
+#' @param maxResults The maximum number of diagnostics that are returned per call. The default and maximum value is 100. Setting the value to 0 will also use the default of 100.
 #' 
-#' If the number of diagnostics returned in the response exceeds
-#' `maxResults`, the value of the `truncated` field in the response will be
-#' set to `true`.
+#' If the number of diagnostics returned in the response exceeds `maxResults`, the value of the `truncated` field in the response will be set to `true`.
 #'
 #' @keywords internal
 #'

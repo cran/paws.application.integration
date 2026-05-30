@@ -21,11 +21,9 @@ swf_signal_workflow_execution(
 
 \item{runId}{The runId of the workflow execution to signal.}
 
-\item{signalName}{[required] The name of the signal. This name must be meaningful to the target
-workflow.}
+\item{signalName}{[required] The name of the signal. This name must be meaningful to the target workflow.}
 
-\item{input}{Data to attach to the \code{WorkflowExecutionSignaled} event in the target
-workflow execution's history.}
+\item{input}{Data to attach to the \code{WorkflowExecutionSignaled} event in the target workflow execution's history.}
 }
 \description{
 Records a \code{WorkflowExecutionSignaled} event in the workflow execution history and creates a decision task for the workflow execution identified by the given domain, workflowId and runId. The event is recorded with the specified user defined signalName and input (if provided).

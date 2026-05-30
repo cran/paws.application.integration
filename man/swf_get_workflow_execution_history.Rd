@@ -17,22 +17,13 @@ swf_get_workflow_execution_history(
 
 \item{execution}{[required] Specifies the workflow execution for which to return the history.}
 
-\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The
-value of \code{NextPageToken} is a unique pagination token for each page.
-Make the call again using the returned token to retrieve the next page.
-Keep all other arguments unchanged. Each pagination token expires after
-24 hours. Using an expired pagination token will return a \code{400} error:
-"\verb{Specified token has exceeded its maximum lifetime}".
+\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The value of \code{NextPageToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a \code{400} error: "\verb{Specified token has exceeded its maximum lifetime}".
 
-The configured \code{maximumPageSize} determines how many results can be
-returned in a single call.}
+The configured \code{maximumPageSize} determines how many results can be returned in a single call.}
 
-\item{maximumPageSize}{The maximum number of results that are returned per call. Use
-\code{nextPageToken} to obtain further pages of results.}
+\item{maximumPageSize}{The maximum number of results that are returned per call. Use \code{nextPageToken} to obtain further pages of results.}
 
-\item{reverseOrder}{When set to \code{true}, returns the events in reverse order. By default the
-results are returned in ascending order of the \code{eventTimeStamp} of the
-events.}
+\item{reverseOrder}{When set to \code{true}, returns the events in reverse order. By default the results are returned in ascending order of the \code{eventTimeStamp} of the events.}
 }
 \description{
 Returns the history of the specified workflow execution. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the \code{nextPageToken} returned by the initial call.

@@ -11,30 +11,15 @@ sqs_add_permission(QueueUrl, Label, AWSAccountIds, Actions)
 
 Queue URLs and names are case-sensitive.}
 
-\item{Label}{[required] The unique identification of the permission you're setting (for example,
-\code{AliceSendMessage}). Maximum 80 characters. Allowed characters include
-alphanumeric characters, hyphens (\code{-}), and underscores (\verb{_}).}
+\item{Label}{[required] The unique identification of the permission you're setting (for example, \code{AliceSendMessage}). Maximum 80 characters. Allowed characters include alphanumeric characters, hyphens (\code{-}), and underscores (\verb{_}).}
 
-\item{AWSAccountIds}{[required] The Amazon Web Services account numbers of the
-\href{https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#P}{principals}
-who are to receive permission. For information about locating the Amazon
-Web Services account identification, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests-xml.html#sqs-api-request-authentication}{Your Amazon Web Services Identifiers}
-in the \emph{Amazon SQS Developer Guide}.}
+\item{AWSAccountIds}{[required] The Amazon Web Services account numbers of the \href{https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#P}{principals} who are to receive permission. For information about locating the Amazon Web Services account identification, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests-xml.html#sqs-api-request-authentication}{Your Amazon Web Services Identifiers} in the \emph{Amazon SQS Developer Guide}.}
 
-\item{Actions}{[required] The action the client wants to allow for the specified principal. Valid
-values: the name of any action or \code{*}.
+\item{Actions}{[required] The action the client wants to allow for the specified principal. Valid values: the name of any action or \code{*}.
 
-For more information about these actions, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html}{Overview of Managing Access Permissions to Your Amazon Simple Queue Service Resource}
-in the \emph{Amazon SQS Developer Guide}.
+For more information about these actions, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-overview-of-managing-access.html}{Overview of Managing Access Permissions to Your Amazon Simple Queue Service Resource} in the \emph{Amazon SQS Developer Guide}.
 
-Specifying \code{\link[=sqs_send_message]{send_message}},
-\code{\link[=sqs_delete_message]{delete_message}}, or
-\code{\link[=sqs_change_message_visibility]{change_message_visibility}} for
-\code{ActionName.n} also grants permissions for the corresponding batch
-versions of those actions:
-\code{\link[=sqs_send_message_batch]{send_message_batch}},
-\code{\link[=sqs_delete_message_batch]{delete_message_batch}}, and
-\code{\link[=sqs_change_message_visibility_batch]{change_message_visibility_batch}}.}
+Specifying \code{\link[=sqs_send_message]{send_message}}, \code{\link[=sqs_delete_message]{delete_message}}, or \code{\link[=sqs_change_message_visibility]{change_message_visibility}} for \code{ActionName.n} also grants permissions for the corresponding batch versions of those actions: \code{\link[=sqs_send_message_batch]{send_message_batch}}, \code{\link[=sqs_delete_message_batch]{delete_message_batch}}, and \code{\link[=sqs_change_message_visibility_batch]{change_message_visibility_batch}}.}
 }
 \description{
 Adds a permission to a queue for a specific \href{https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html#P}{principal}. This allows sharing access to the queue.

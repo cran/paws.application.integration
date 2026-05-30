@@ -11,25 +11,15 @@ sfn_list_state_machine_aliases(
 )
 }
 \arguments{
-\item{stateMachineArn}{[required] The Amazon Resource Name (ARN) of the state machine for which you want
-to list aliases.
+\item{stateMachineArn}{[required] The Amazon Resource Name (ARN) of the state machine for which you want to list aliases.
 
-If you specify a state machine version ARN, this API returns a list of
-aliases for that version.}
+If you specify a state machine version ARN, this API returns a list of aliases for that version.}
 
-\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value
-of \code{nextToken} is a unique pagination token for each page. Make the call
-again using the returned token to retrieve the next page. Keep all other
-arguments unchanged. Each pagination token expires after 24 hours. Using
-an expired pagination token will return an \emph{HTTP 400 InvalidToken}
-error.}
+\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value of \code{nextToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an \emph{HTTP 400 InvalidToken} error.}
 
-\item{maxResults}{The maximum number of results that are returned per call. You can use
-\code{nextToken} to obtain further pages of results. The default is 100 and
-the maximum allowed page size is 1000. A value of 0 uses the default.
+\item{maxResults}{The maximum number of results that are returned per call. You can use \code{nextToken} to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 
-This is only an upper limit. The actual number of results returned per
-call might be fewer than the specified maximum.}
+This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.}
 }
 \description{
 Lists \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html}{aliases} for a specified state machine ARN. Results are sorted by time, with the most recently created aliases listed first.

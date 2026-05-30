@@ -10,8 +10,7 @@ mwaa_list_environments(NextToken = NULL, MaxResults = NULL)
 \arguments{
 \item{NextToken}{Retrieves the next page of the results.}
 
-\item{MaxResults}{The maximum number of results to retrieve per page. For example, \code{5}
-environments per page.}
+\item{MaxResults}{The maximum number of results to retrieve per page. For example, \code{5} environments per page.}
 }
 \description{
 Lists the Amazon Managed Workflows for Apache Airflow (MWAA) environments.

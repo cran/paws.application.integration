@@ -12,12 +12,9 @@ sqs_change_message_visibility(QueueUrl, ReceiptHandle, VisibilityTimeout)
 
 Queue URLs and names are case-sensitive.}
 
-\item{ReceiptHandle}{[required] The receipt handle associated with the message, whose visibility timeout
-is changed. This parameter is returned by the
-\code{\link[=sqs_receive_message]{receive_message}} action.}
+\item{ReceiptHandle}{[required] The receipt handle associated with the message, whose visibility timeout is changed. This parameter is returned by the \code{\link[=sqs_receive_message]{receive_message}} action.}
 
-\item{VisibilityTimeout}{[required] The new value for the message's visibility timeout (in seconds). Values
-range: \code{0} to \code{43200}. Maximum: 12 hours.}
+\item{VisibilityTimeout}{[required] The new value for the message's visibility timeout (in seconds). Values range: \code{0} to \code{43200}. Maximum: 12 hours.}
 }
 \description{
 Changes the visibility timeout of a specified message in a queue to a new value. The default visibility timeout for a message is 30 seconds. The minimum is 0 seconds. The maximum is 12 hours. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout} in the \emph{Amazon SQS Developer Guide}.

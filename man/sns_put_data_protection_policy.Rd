@@ -8,11 +8,9 @@ specified Amazon SNS topic}
 sns_put_data_protection_policy(ResourceArn, DataProtectionPolicy)
 }
 \arguments{
-\item{ResourceArn}{[required] The ARN of the topic whose \code{DataProtectionPolicy} you want to add or
-update.
+\item{ResourceArn}{[required] The ARN of the topic whose \code{DataProtectionPolicy} you want to add or update.
 
-For more information about ARNs, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon Resource Names (ARNs)}
-in the Amazon Web Services General Reference.}
+For more information about ARNs, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon Resource Names (ARNs)} in the Amazon Web Services General Reference.}
 
 \item{DataProtectionPolicy}{[required] The JSON serialization of the topic's \code{DataProtectionPolicy}.
 

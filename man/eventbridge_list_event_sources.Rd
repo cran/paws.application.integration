@@ -12,22 +12,15 @@ eventbridge_list_event_sources(
 )
 }
 \arguments{
-\item{NamePrefix}{Specifying this limits the results to only those partner event sources
-with names that start with the specified prefix.}
+\item{NamePrefix}{Specifying this limits the results to only those partner event sources with names that start with the specified prefix.}
 
-\item{NextToken}{The token returned by a previous call, which you can use to retrieve the
-next set of results.
+\item{NextToken}{The token returned by a previous call, which you can use to retrieve the next set of results.
 
-The value of \code{nextToken} is a unique pagination token for each page. To
-retrieve the next page of results, make the call again using the
-returned token. Keep all other arguments unchanged.
+The value of \code{nextToken} is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 
-Using an expired pagination token results in an \verb{HTTP 400 InvalidToken}
-error.}
+Using an expired pagination token results in an \verb{HTTP 400 InvalidToken} error.}
 
-\item{Limit}{Specifying this limits the number of results returned by this operation.
-The operation also returns a NextToken which you can use in a subsequent
-operation to retrieve the next set of results.}
+\item{Limit}{Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.}
 }
 \description{
 You can use this to see all the partner event sources that have been shared with your Amazon Web Services account. For more information about partner event sources, see \code{\link[=eventbridge_create_event_bus]{create_event_bus}}.

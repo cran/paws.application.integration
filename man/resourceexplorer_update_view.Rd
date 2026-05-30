@@ -5,38 +5,23 @@
 \title{Modifies some of the details of a view}
 \usage{
 resourceexplorer_update_view(
-  Filters = NULL,
+  ViewArn,
   IncludedProperties = NULL,
-  ViewArn
+  Filters = NULL
 )
 }
 \arguments{
-\item{Filters}{An array of strings that specify which resources are included in the
-results of queries made using this view. When you use this view in a
-\code{\link[=resourceexplorer_search]{search}} operation, the filter string is
-combined with the search's \code{QueryString} parameter using a logical \code{AND}
-operator.
+\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)} of the view that you want to modify.}
 
-For information about the supported syntax, see \href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html}{Search query reference for Resource Explorer}
-in the \emph{Amazon Web Services Resource Explorer User Guide}.
+\item{IncludedProperties}{Specifies optional fields that you want included in search results from this view. It is a list of objects that each describe a field to include.
 
-This query string in the context of this operation supports only \href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters}{filter prefixes}
-with optional
-\href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators}{operators}.
-It doesn't support free-form text. For example, the string
-\code{region:us* service:ec2 -tag:stage=prod} includes all Amazon EC2
-resources in any Amazon Web Services Region that begins with the letters
-\code{us} and is \emph{not} tagged with a key \code{Stage} that has the value \code{prod}.}
+The default is an empty list, with no optional fields included in the results.}
 
-\item{IncludedProperties}{Specifies optional fields that you want included in search results from
-this view. It is a list of objects that each describe a field to
-include.
+\item{Filters}{An array of strings that specify which resources are included in the results of queries made using this view. When you use this view in a \code{\link[=resourceexplorer_search]{search}} operation, the filter string is combined with the search's \code{QueryString} parameter using a logical \code{AND} operator.
 
-The default is an empty list, with no optional fields included in the
-results.}
+For information about the supported syntax, see \href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html}{Search query reference for Resource Explorer} in the \emph{Amazon Web Services Resource Explorer User Guide}.
 
-\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)}
-of the view that you want to modify.}
+This query string in the context of this operation supports only \href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-filters}{filter prefixes} with optional \href{https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html#query-syntax-operators}{operators}. It doesn't support free-form text. For example, the string \code{region:us* service:ec2 -tag:stage=prod} includes all Amazon EC2 resources in any Amazon Web Services Region that begins with the letters \code{us} and is \emph{not} tagged with a key \code{Stage} that has the value \code{prod}.}
 }
 \description{
 Modifies some of the details of a view. You can change the filter string and the list of included properties. You can't change the name of the view.

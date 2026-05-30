@@ -16,25 +16,19 @@ swf_count_open_workflow_executions(
 \arguments{
 \item{domain}{[required] The name of the domain containing the workflow executions to count.}
 
-\item{startTimeFilter}{[required] Specifies the start time criteria that workflow executions must meet in
-order to be counted.}
+\item{startTimeFilter}{[required] Specifies the start time criteria that workflow executions must meet in order to be counted.}
 
 \item{typeFilter}{Specifies the type of the workflow executions to be counted.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{tagFilter}{If specified, only executions that have a tag that matches the filter
-are counted.
+\item{tagFilter}{If specified, only executions that have a tag that matches the filter are counted.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{executionFilter}{If specified, only workflow executions matching the \code{WorkflowId} in the
-filter are counted.
+\item{executionFilter}{If specified, only workflow executions matching the \code{WorkflowId} in the filter are counted.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 }
 \description{
 Returns the number of open workflow executions within the given domain that meet the specified filtering criteria.

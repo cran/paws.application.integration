@@ -7,8 +7,7 @@
 sfn_list_tags_for_resource(resourceArn)
 }
 \arguments{
-\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or
-activity.}
+\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or activity.}
 }
 \description{
 List tags for a given resource.

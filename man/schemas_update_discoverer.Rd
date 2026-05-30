@@ -15,8 +15,7 @@ schemas_update_discoverer(
 
 \item{DiscovererId}{[required] The ID of the discoverer.}
 
-\item{CrossAccount}{Support discovery of schemas in events sent to the bus from another
-account. (default: true)}
+\item{CrossAccount}{Support discovery of schemas in events sent to the bus from another account. (default: true)}
 }
 \description{
 Updates the discoverer

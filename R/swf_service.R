@@ -5,20 +5,11 @@ NULL
 #' Amazon Simple Workflow Service
 #'
 #' @description
-#' The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build
-#' applications that use Amazon's cloud to coordinate work across
-#' distributed components. In Amazon SWF, a *task* represents a logical
-#' unit of work that is performed by a component of your workflow.
-#' Coordinating tasks in a workflow involves managing intertask
-#' dependencies, scheduling, and concurrency in accordance with the logical
-#' flow of the application.
+#' The Amazon Simple Workflow Service (Amazon SWF) makes it easy to build applications that use Amazon's cloud to coordinate work across distributed components. In Amazon SWF, a *task* represents a logical unit of work that is performed by a component of your workflow. Coordinating tasks in a workflow involves managing intertask dependencies, scheduling, and concurrency in accordance with the logical flow of the application.
 #' 
-#' Amazon SWF gives you full control over implementing tasks and
-#' coordinating them without worrying about underlying complexities such as
-#' tracking their progress and maintaining their state.
+#' Amazon SWF gives you full control over implementing tasks and coordinating them without worrying about underlying complexities such as tracking their progress and maintaining their state.
 #' 
-#' This documentation serves as reference only. For a broader overview of
-#' the Amazon SWF programming model, see the *\href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/welcome.html}{Amazon SWF Developer Guide}* .
+#' This documentation serves as reference only. For a broader overview of the Amazon SWF programming model, see the *\href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/welcome.html}{Amazon SWF Developer Guide}* .
 #'
 #' @param
 #' config
@@ -173,7 +164,7 @@ swf <- function(config = list(), credentials = list(), endpoint = NULL, region =
 
 .swf$metadata <- list(
   service_name = "swf",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "swf.{region}.amazonaws.eu", global = FALSE)),
   service_id = "SWF",
   api_version = "2012-01-25",
   signing_name = "swf",

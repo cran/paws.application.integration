@@ -10,8 +10,7 @@ sns_get_data_protection_policy(ResourceArn)
 \arguments{
 \item{ResourceArn}{[required] The ARN of the topic whose \code{DataProtectionPolicy} you want to get.
 
-For more information about ARNs, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon Resource Names (ARNs)}
-in the Amazon Web Services General Reference.}
+For more information about ARNs, see \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon Resource Names (ARNs)} in the Amazon Web Services General Reference.}
 }
 \description{
 Retrieves the specified inline \code{DataProtectionPolicy} document that is stored in the specified Amazon SNS topic.

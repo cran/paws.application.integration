@@ -7,16 +7,13 @@
 sqs_list_queues(QueueNamePrefix = NULL, NextToken = NULL, MaxResults = NULL)
 }
 \arguments{
-\item{QueueNamePrefix}{A string to use for filtering the list results. Only those queues whose
-name begins with the specified string are returned.
+\item{QueueNamePrefix}{A string to use for filtering the list results. Only those queues whose name begins with the specified string are returned.
 
 Queue URLs and names are case-sensitive.}
 
 \item{NextToken}{Pagination token to request the next set of results.}
 
-\item{MaxResults}{Maximum number of results to include in the response. Value range is 1
-to 1000. You must set \code{MaxResults} to receive a value for \code{NextToken} in
-the response.}
+\item{MaxResults}{Maximum number of results to include in the response. Value range is 1 to 1000. You must set \code{MaxResults} to receive a value for \code{NextToken} in the response.}
 }
 \description{
 Returns a list of your queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional \code{QueueNamePrefix} parameter, only queues with a name that begins with the specified value are returned.

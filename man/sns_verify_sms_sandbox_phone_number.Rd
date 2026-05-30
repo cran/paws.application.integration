@@ -10,8 +10,7 @@ sns_verify_sms_sandbox_phone_number(PhoneNumber, OneTimePassword)
 \arguments{
 \item{PhoneNumber}{[required] The destination phone number to verify.}
 
-\item{OneTimePassword}{[required] The OTP sent to the destination number from the
-\code{CreateSMSSandBoxPhoneNumber} call.}
+\item{OneTimePassword}{[required] The OTP sent to the destination number from the \code{CreateSMSSandBoxPhoneNumber} call.}
 }
 \description{
 Verifies a destination phone number with a one-time password (OTP) for the calling Amazon Web Services account.

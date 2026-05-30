@@ -9,16 +9,9 @@ eventbridge_delete_rule(Name, EventBusName = NULL, Force = NULL)
 \arguments{
 \item{Name}{[required] The name of the rule.}
 
-\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit
-this, the default event bus is used.}
+\item{EventBusName}{The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.}
 
-\item{Force}{If this is a managed rule, created by an Amazon Web Services service on
-your behalf, you must specify \code{Force} as \code{True} to delete the rule. This
-parameter is ignored for rules that are not managed rules. You can check
-whether a rule is a managed rule by using
-\code{\link[=eventbridge_describe_rule]{describe_rule}} or
-\code{\link[=eventbridge_list_rules]{list_rules}} and checking the \code{ManagedBy}
-field of the response.}
+\item{Force}{If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify \code{Force} as \code{True} to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using \code{\link[=eventbridge_describe_rule]{describe_rule}} or \code{\link[=eventbridge_list_rules]{list_rules}} and checking the \code{ManagedBy} field of the response.}
 }
 \description{
 Deletes the specified rule.

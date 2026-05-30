@@ -11,15 +11,11 @@ eventbridgescheduler_list_schedule_groups(
 )
 }
 \arguments{
-\item{MaxResults}{If specified, limits the number of results returned by this operation.
-The operation also returns a \code{NextToken} which you can use in a
-subsequent operation to retrieve the next set of results.}
+\item{MaxResults}{If specified, limits the number of results returned by this operation. The operation also returns a \code{NextToken} which you can use in a subsequent operation to retrieve the next set of results.}
 
-\item{NamePrefix}{The name prefix that you can use to return a filtered list of your
-schedule groups.}
+\item{NamePrefix}{The name prefix that you can use to return a filtered list of your schedule groups.}
 
-\item{NextToken}{The token returned by a previous call to retrieve the next set of
-results.}
+\item{NextToken}{The token returned by a previous call to retrieve the next set of results.}
 }
 \description{
 Returns a paginated list of your schedule groups.

@@ -8,9 +8,7 @@ for Apache Airflow (MWAA) environment}
 mwaa_list_tags_for_resource(ResourceArn)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
-example,
-\code{arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment}.}
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, \code{arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment}.}
 }
 \description{
 Lists the key-value tag pairs associated to the Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, \code{"Environment": "Staging"}.

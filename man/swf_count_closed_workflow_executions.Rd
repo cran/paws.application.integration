@@ -18,42 +18,29 @@ swf_count_closed_workflow_executions(
 \arguments{
 \item{domain}{[required] The name of the domain containing the workflow executions to count.}
 
-\item{startTimeFilter}{If specified, only workflow executions that meet the start time criteria
-of the filter are counted.
+\item{startTimeFilter}{If specified, only workflow executions that meet the start time criteria of the filter are counted.
 
-\code{startTimeFilter} and \code{closeTimeFilter} are mutually exclusive. You must
-specify one of these in a request but not both.}
+\code{startTimeFilter} and \code{closeTimeFilter} are mutually exclusive. You must specify one of these in a request but not both.}
 
-\item{closeTimeFilter}{If specified, only workflow executions that meet the close time criteria
-of the filter are counted.
+\item{closeTimeFilter}{If specified, only workflow executions that meet the close time criteria of the filter are counted.
 
-\code{startTimeFilter} and \code{closeTimeFilter} are mutually exclusive. You must
-specify one of these in a request but not both.}
+\code{startTimeFilter} and \code{closeTimeFilter} are mutually exclusive. You must specify one of these in a request but not both.}
 
-\item{executionFilter}{If specified, only workflow executions matching the \code{WorkflowId} in the
-filter are counted.
+\item{executionFilter}{If specified, only workflow executions matching the \code{WorkflowId} in the filter are counted.
 
-\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are
-mutually exclusive. You can specify at most one of these in a request.}
+\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{typeFilter}{If specified, indicates the type of the workflow executions to be
-counted.
+\item{typeFilter}{If specified, indicates the type of the workflow executions to be counted.
 
-\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are
-mutually exclusive. You can specify at most one of these in a request.}
+\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{tagFilter}{If specified, only executions that have a tag that matches the filter
-are counted.
+\item{tagFilter}{If specified, only executions that have a tag that matches the filter are counted.
 
-\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are
-mutually exclusive. You can specify at most one of these in a request.}
+\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{closeStatusFilter}{If specified, only workflow executions that match this close status are
-counted. This filter has an affect only if \code{executionStatus} is
-specified as \code{CLOSED}.
+\item{closeStatusFilter}{If specified, only workflow executions that match this close status are counted. This filter has an affect only if \code{executionStatus} is specified as \code{CLOSED}.
 
-\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are
-mutually exclusive. You can specify at most one of these in a request.}
+\code{closeStatusFilter}, \code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 }
 \description{
 Returns the number of closed workflow executions within the given domain that meet the specified filtering criteria.

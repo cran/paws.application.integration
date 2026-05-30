@@ -15,8 +15,7 @@ sfn_update_map_run(
 \arguments{
 \item{mapRunArn}{[required] The Amazon Resource Name (ARN) of a Map Run.}
 
-\item{maxConcurrency}{The maximum number of child workflow executions that can be specified to
-run in parallel for the Map Run at the same time.}
+\item{maxConcurrency}{The maximum number of child workflow executions that can be specified to run in parallel for the Map Run at the same time.}
 
 \item{toleratedFailurePercentage}{The maximum percentage of failed items before the Map Run fails.}
 

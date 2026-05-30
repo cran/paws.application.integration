@@ -8,13 +8,9 @@ rules}
 eventbridge_put_events(Entries, EndpointId = NULL)
 }
 \arguments{
-\item{Entries}{[required] The entry that defines an event in your system. You can specify several
-parameters for the entry such as the source and type of the event,
-resources associated with the event, and so on.}
+\item{Entries}{[required] The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.}
 
-\item{EndpointId}{The URL subdomain of the endpoint. For example, if the URL for Endpoint
-is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId
-is \code{abcde.veo}.
+\item{EndpointId}{The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is \code{abcde.veo}.
 
 When using Java, you must include \code{auth-crt} on the class path.}
 }

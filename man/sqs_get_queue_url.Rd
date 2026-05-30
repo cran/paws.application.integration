@@ -7,14 +7,9 @@
 sqs_get_queue_url(QueueName, QueueOwnerAWSAccountId = NULL)
 }
 \arguments{
-\item{QueueName}{[required] (Required) The name of the queue for which you want to fetch the URL.
-The name can be up to 80 characters long and can include alphanumeric
-characters, hyphens (-), and underscores (_). Queue URLs and names are
-case-sensitive.}
+\item{QueueName}{[required] (Required) The name of the queue for which you want to fetch the URL. The name can be up to 80 characters long and can include alphanumeric characters, hyphens (-), and underscores (_). Queue URLs and names are case-sensitive.}
 
-\item{QueueOwnerAWSAccountId}{(Optional) The Amazon Web Services account ID of the account that
-created the queue. This is only required when you are attempting to
-access a queue owned by another Amazon Web Services account.}
+\item{QueueOwnerAWSAccountId}{(Optional) The Amazon Web Services account ID of the account that created the queue. This is only required when you are attempting to access a queue owned by another Amazon Web Services account.}
 }
 \description{
 The \code{\link[=sqs_get_queue_url]{get_queue_url}} API returns the URL of an existing Amazon SQS queue. This is useful when you know the queue's name but need to retrieve its URL for further operations.

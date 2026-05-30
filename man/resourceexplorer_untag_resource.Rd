@@ -8,11 +8,9 @@ Resource Explorer view or index}
 resourceexplorer_untag_resource(resourceArn, tagKeys)
 }
 \arguments{
-\item{resourceArn}{[required] The Amazon Resource Name (ARN) of the view or index that you want to
-remove tags from.}
+\item{resourceArn}{[required] The Amazon Resource Name (ARN) of the view or index that you want to remove tags from.}
 
-\item{tagKeys}{[required] A list of the keys for the tags that you want to remove from the
-specified view or index.}
+\item{tagKeys}{[required] A list of the keys for the tags that you want to remove from the specified view or index.}
 }
 \description{
 Removes one or more tag key and value pairs from an Amazon Web Services Resource Explorer view or index.

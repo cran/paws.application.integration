@@ -8,11 +8,9 @@ geofence collection}
 locationservice_batch_evaluate_geofences(CollectionName, DevicePositionUpdates)
 }
 \arguments{
-\item{CollectionName}{[required] The geofence collection used in evaluating the position of devices
-against its geofences.}
+\item{CollectionName}{[required] The geofence collection used in evaluating the position of devices against its geofences.}
 
-\item{DevicePositionUpdates}{[required] Contains device details for each device to be evaluated against the
-given geofence collection.}
+\item{DevicePositionUpdates}{[required] Contains device details for each device to be evaluated against the given geofence collection.}
 }
 \description{
 Evaluates device positions against the geofence geometries from a given geofence collection.

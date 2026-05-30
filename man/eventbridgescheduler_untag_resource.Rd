@@ -8,8 +8,7 @@ schedule group}
 eventbridgescheduler_untag_resource(ResourceArn, TagKeys)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the schedule group from which you are
-removing tags.}
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the schedule group from which you are removing tags.}
 
 \item{TagKeys}{[required] The list of tag keys to remove from the resource.}
 }

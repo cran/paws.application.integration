@@ -9,8 +9,7 @@ mq_promote(BrokerId, Mode)
 \arguments{
 \item{BrokerId}{[required] The unique ID that Amazon MQ generates for the broker.}
 
-\item{Mode}{[required] The Promote mode requested. Note: Valid values for the parameter are
-SWITCHOVER, FAILOVER.}
+\item{Mode}{[required] The Promote mode requested. Note: Valid values for the parameter are SWITCHOVER, FAILOVER.}
 }
 \description{
 Promotes a data replication replica broker to the primary broker role.

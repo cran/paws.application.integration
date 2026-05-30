@@ -20,24 +20,15 @@ NULL
 #' @param Target &#91;required&#93; The ARN of the target resource.
 #' @param TargetParameters The parameters required to set up a target for your pipe.
 #' 
-#' For more information about pipe target parameters, including how to use
-#' dynamic path parameters, see [Target
-#' parameters](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-#' in the *Amazon EventBridge User Guide*.
+#' For more information about pipe target parameters, including how to use dynamic path parameters, see [Target parameters](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html) in the *Amazon EventBridge User Guide*.
 #' @param RoleArn &#91;required&#93; The ARN of the role that allows the pipe to send data to the target.
 #' @param Tags The list of key-value pairs to associate with the pipe.
 #' @param LogConfiguration The logging configuration settings for the pipe.
-#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
-#' if you choose to use a customer managed key to encrypt pipe data. The
-#' identifier can be the key Amazon Resource Name (ARN), KeyId, key alias,
-#' or key alias ARN.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 #' 
-#' If you do not specify a customer managed key identifier, EventBridge
-#' uses an Amazon Web Services owned key to encrypt pipe data.
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt pipe data.
 #' 
-#' For more information, see [Managing
-#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
-#' *Key Management Service Developer Guide*.
+#' For more information, see [Managing keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'
@@ -130,18 +121,12 @@ eventbridgepipes_describe_pipe <- function(Name) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridgepipes_list_pipes/](https://www.paws-r-sdk.com/docs/eventbridgepipes_list_pipes/) for full documentation.
 #'
-#' @param NamePrefix A value that will return a subset of the pipes associated with this
-#' account. For example, `"NamePrefix": "ABC"` will return all endpoints
-#' with "ABC" in the name.
+#' @param NamePrefix A value that will return a subset of the pipes associated with this account. For example, `"NamePrefix": "ABC"` will return all endpoints with "ABC" in the name.
 #' @param DesiredState The state the pipe should be in.
 #' @param CurrentState The state the pipe is in.
 #' @param SourcePrefix The prefix matching the pipe source.
 #' @param TargetPrefix The prefix matching the pipe target.
-#' @param NextToken If `nextToken` is returned, there are more results available. The value
-#' of `nextToken` is a unique pagination token for each page. Make the call
-#' again using the returned token to retrieve the next page. Keep all other
-#' arguments unchanged. Each pagination token expires after 24 hours. Using
-#' an expired pagination token will return an HTTP 400 InvalidToken error.
+#' @param NextToken If `nextToken` is returned, there are more results available. The value of `nextToken` is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
 #' @param Limit The maximum number of pipes to include in the response.
 #'
 #' @keywords internal
@@ -339,28 +324,16 @@ eventbridgepipes_untag_resource <- function(resourceArn, tagKeys) {
 #' @param Target The ARN of the target resource.
 #' @param TargetParameters The parameters required to set up a target for your pipe.
 #' 
-#' For more information about pipe target parameters, including how to use
-#' dynamic path parameters, see [Target
-#' parameters](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-#' in the *Amazon EventBridge User Guide*.
+#' For more information about pipe target parameters, including how to use dynamic path parameters, see [Target parameters](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html) in the *Amazon EventBridge User Guide*.
 #' @param RoleArn &#91;required&#93; The ARN of the role that allows the pipe to send data to the target.
 #' @param LogConfiguration The logging configuration settings for the pipe.
-#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
-#' if you choose to use a customer managed key to encrypt pipe data. The
-#' identifier can be the key Amazon Resource Name (ARN), KeyId, key alias,
-#' or key alias ARN.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt pipe data. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 #' 
-#' To update a pipe that is using the default Amazon Web Services owned key
-#' to use a customer managed key instead, or update a pipe that is using a
-#' customer managed key to use a different customer managed key, specify a
-#' customer managed key identifier.
+#' To update a pipe that is using the default Amazon Web Services owned key to use a customer managed key instead, or update a pipe that is using a customer managed key to use a different customer managed key, specify a customer managed key identifier.
 #' 
-#' To update a pipe that is using a customer managed key to use the default
-#' Amazon Web Services owned key, specify an empty string.
+#' To update a pipe that is using a customer managed key to use the default Amazon Web Services owned key, specify an empty string.
 #' 
-#' For more information, see [Managing
-#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
-#' *Key Management Service Developer Guide*.
+#' For more information, see [Managing keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'

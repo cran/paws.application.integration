@@ -11,14 +11,10 @@ NULL
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_associate_tracker_consumer/](https://www.paws-r-sdk.com/docs/locationservice_associate_tracker_consumer/) for full documentation.
 #'
-#' @param TrackerName &#91;required&#93; The name of the tracker resource to be associated with a geofence
-#' collection.
-#' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be
-#' associated to tracker resource. Used when you need to specify a resource
-#' across all Amazon Web Services.
+#' @param TrackerName &#91;required&#93; The name of the tracker resource to be associated with a geofence collection.
+#' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all Amazon Web Services.
 #' 
-#' -   Format example:
-#'     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+#' -   Format example: `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
 #'
 #' @keywords internal
 #'
@@ -50,8 +46,7 @@ locationservice_associate_tracker_consumer <- function(TrackerName, ConsumerArn)
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_batch_delete_device_position_history/](https://www.paws-r-sdk.com/docs/locationservice_batch_delete_device_position_history/) for full documentation.
 #'
-#' @param TrackerName &#91;required&#93; The name of the tracker resource to delete the device position history
-#' from.
+#' @param TrackerName &#91;required&#93; The name of the tracker resource to delete the device position history from.
 #' @param DeviceIds &#91;required&#93; Devices whose position history you want to delete.
 #' 
 #' -   For example, for two devices: `“DeviceIds” : [DeviceId1,DeviceId2]`
@@ -118,10 +113,8 @@ locationservice_batch_delete_geofence <- function(CollectionName, GeofenceIds) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_batch_evaluate_geofences/](https://www.paws-r-sdk.com/docs/locationservice_batch_evaluate_geofences/) for full documentation.
 #'
-#' @param CollectionName &#91;required&#93; The geofence collection used in evaluating the position of devices
-#' against its geofences.
-#' @param DevicePositionUpdates &#91;required&#93; Contains device details for each device to be evaluated against the
-#' given geofence collection.
+#' @param CollectionName &#91;required&#93; The geofence collection used in evaluating the position of devices against its geofences.
+#' @param DevicePositionUpdates &#91;required&#93; Contains device details for each device to be evaluated against the given geofence collection.
 #'
 #' @keywords internal
 #'
@@ -155,8 +148,7 @@ locationservice_batch_evaluate_geofences <- function(CollectionName, DevicePosit
 #' @param TrackerName &#91;required&#93; The tracker resource retrieving the device position.
 #' @param DeviceIds &#91;required&#93; Devices whose position you want to retrieve.
 #' 
-#' -   For example, for two devices:
-#'     `device-ids=DeviceId1&device-ids=DeviceId2`
+#' -   For example, for two devices: `device-ids=DeviceId1&device-ids=DeviceId2`
 #'
 #' @keywords internal
 #'
@@ -247,93 +239,58 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 }
 .locationservice$operations$batch_update_device_position <- locationservice_batch_update_device_position
 
-#' Calculates a route given the following required parameters:
-#' DeparturePosition and DestinationPosition
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' [Calculates a route](https://docs.aws.amazon.com/location/latest/developerguide/) given the following required parameters: `DeparturePosition` and `DestinationPosition`. Requires that you first [create a route calculator resource](https://docs.aws.amazon.com/location/latest/APIReference/).
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to `CalculateRoutes` or `CalculateIsolines` unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_calculate_route/](https://www.paws-r-sdk.com/docs/locationservice_calculate_route/) for full documentation.
 #'
-#' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to
-#' calculate the route.
-#' @param DeparturePosition &#91;required&#93; The start position for the route. Defined in [World Geodetic System (WGS
-#' 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84)
-#' format: `[longitude, latitude]`.
+#' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to calculate the route.
+#' @param DeparturePosition &#91;required&#93; The start position for the route. Defined in [World Geodetic System (WGS 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format: `[longitude, latitude]`.
 #' 
 #' -   For example, `[-123.115, 49.285]`
 #' 
-#' If you specify a departure that's not located on a road, Amazon Location
-#' [moves the position to the nearest
-#' road](https://docs.aws.amazon.com/location/latest/developerguide/). If
-#' Esri is the provider for your route calculator, specifying a route that
-#' is longer than 400 km returns a `400 RoutesValidationException` error.
+#' If you specify a departure that's not located on a road, Amazon Location [moves the position to the nearest road](https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html). If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a `400 RoutesValidationException` error.
 #' 
 #' Valid Values: `[-180 to 180,-90 to 90]`
-#' @param DestinationPosition &#91;required&#93; The finish position for the route. Defined in [World Geodetic System
-#' (WGS 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84)
-#' format: `[longitude, latitude]`.
+#' @param DestinationPosition &#91;required&#93; The finish position for the route. Defined in [World Geodetic System (WGS 84)](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format: `[longitude, latitude]`.
 #' 
 #' -   For example, `[-122.339, 47.615]`
 #' 
-#' If you specify a destination that's not located on a road, Amazon
-#' Location [moves the position to the nearest
-#' road](https://docs.aws.amazon.com/location/latest/developerguide/).
+#' If you specify a destination that's not located on a road, Amazon Location [moves the position to the nearest road](https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html).
 #' 
 #' Valid Values: `[-180 to 180,-90 to 90]`
-#' @param WaypointPositions Specifies an ordered list of up to 23 intermediate positions to include
-#' along a route between the departure position and destination position.
+#' @param WaypointPositions Specifies an ordered list of up to 23 intermediate positions to include along a route between the departure position and destination position.
 #' 
-#' -   For example, from the `DeparturePosition` `[-123.115, 49.285]`, the
-#'     route follows the order that the waypoint positions are given
-#'     `[[-122.757, 49.0021],[-122.349, 47.620]]`
+#' -   For example, from the `DeparturePosition` `[-123.115, 49.285]`, the route follows the order that the waypoint positions are given `[[-122.757, 49.0021],[-122.349, 47.620]]`
 #' 
-#' If you specify a waypoint position that's not located on a road, Amazon
-#' Location [moves the position to the nearest
-#' road](https://docs.aws.amazon.com/location/latest/developerguide/).
+#' If you specify a waypoint position that's not located on a road, Amazon Location [moves the position to the nearest road](https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html).
 #' 
-#' Specifying more than 23 waypoints returns a `400 ValidationException`
-#' error.
+#' Specifying more than 23 waypoints returns a `400 ValidationException` error.
 #' 
-#' If Esri is the provider for your route calculator, specifying a route
-#' that is longer than 400 km returns a `400 RoutesValidationException`
-#' error.
+#' If Esri is the provider for your route calculator, specifying a route that is longer than 400 km returns a `400 RoutesValidationException` error.
 #' 
 #' Valid Values: `[-180 to 180,-90 to 90]`
-#' @param TravelMode Specifies the mode of transport when calculating a route. Used in
-#' estimating the speed of travel and road compatibility. You can choose
-#' `Car`, `Truck`, `Walking`, `Bicycle` or `Motorcycle` as options for the
-#' `TravelMode`.
+#' @param TravelMode Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility. You can choose `Car`, `Truck`, `Walking`, `Bicycle` or `Motorcycle` as options for the `TravelMode`.
 #' 
-#' `Bicycle` and `Motorcycle` are only valid when using Grab as a data
-#' provider, and only within Southeast Asia.
+#' `Bicycle` and `Motorcycle` are only valid when using Grab as a data provider, and only within Southeast Asia.
 #' 
 #' `Truck` is not available for Grab.
 #' 
-#' For more details on the using Grab for routing, including areas of
-#' coverage, see
-#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' in the *Amazon Location Service Developer Guide*.
+#' For more details on the using Grab for routing, including areas of coverage, see [GrabMaps](https://docs.aws.amazon.com/location/previous/developerguide/grab.html) in the *Amazon Location Service Developer Guide*.
 #' 
-#' The `TravelMode` you specify also determines how you specify route
-#' preferences:
+#' The `TravelMode` you specify also determines how you specify route preferences:
 #' 
 #' -   If traveling by `Car` use the `CarModeOptions` parameter.
 #' 
 #' -   If traveling by `Truck` use the `TruckModeOptions` parameter.
 #' 
 #' Default Value: `Car`
-#' @param DepartureTime Specifies the desired time of departure. Uses the given time to
-#' calculate the route. Otherwise, the best time of day to travel with the
-#' best traffic conditions is used to calculate the route.
+#' @param DepartureTime Specifies the desired time of departure. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 #' 
-#' -   In [ISO
-#'     8601](https://www.iso.org/iso-8601-date-and-time-format.html)
-#'     format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-#'     `2020–07-2T12:15:20.000Z+01:00`
-#' @param DepartNow Sets the time of departure as the current time. Uses the current time to
-#' calculate a route. Otherwise, the best time of day to travel with the
-#' best traffic conditions is used to calculate the route.
+#' -   In [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example, `2020–07-2T12:15:20.000Z+01:00`
+#' @param DepartNow Sets the time of departure as the current time. Uses the current time to calculate a route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 #' 
 #' Default Value: `false`
 #' 
@@ -341,30 +298,22 @@ locationservice_batch_update_device_position <- function(TrackerName, Updates) {
 #' @param DistanceUnit Set the unit system to specify the distance.
 #' 
 #' Default Value: `Kilometers`
-#' @param IncludeLegGeometry Set to include the geometry details in the result for each path between
-#' a pair of positions.
+#' @param IncludeLegGeometry Set to include the geometry details in the result for each path between a pair of positions.
 #' 
 #' Default Value: `false`
 #' 
 #' Valid Values: `false` | `true`
-#' @param CarModeOptions Specifies route preferences when traveling by `Car`, such as avoiding
-#' routes that use ferries or tolls.
+#' @param CarModeOptions Specifies route preferences when traveling by `Car`, such as avoiding routes that use ferries or tolls.
 #' 
 #' Requirements: `TravelMode` must be specified as `Car`.
-#' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding
-#' routes that use ferries or tolls, and truck specifications to consider
-#' when choosing an optimal road.
+#' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road.
 #' 
 #' Requirements: `TravelMode` must be specified as `Truck`.
-#' @param ArrivalTime Specifies the desired time of arrival. Uses the given time to calculate
-#' the route. Otherwise, the best time of day to travel with the best
-#' traffic conditions is used to calculate the route.
+#' @param ArrivalTime Specifies the desired time of arrival. Uses the given time to calculate the route. Otherwise, the best time of day to travel with the best traffic conditions is used to calculate the route.
 #' 
 #' ArrivalTime is not supported Esri.
 #' @param OptimizeFor Specifies the distance to optimize for when calculating a route.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -388,89 +337,49 @@ locationservice_calculate_route <- function(CalculatorName, DeparturePosition, D
 }
 .locationservice$operations$calculate_route <- locationservice_calculate_route
 
-#' Calculates a route matrix given the following required parameters:
-#' DeparturePositions and DestinationPositions
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' [Calculates a route matrix](https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html) given the following required parameters: `DeparturePositions` and `DestinationPositions`. [`calculate_route_matrix`][locationservice_calculate_route_matrix] calculates routes and returns the travel time and travel distance from each departure position to each destination position in the request. For example, given departure positions A and B, and destination positions X and Y, [`calculate_route_matrix`][locationservice_calculate_route_matrix] will return time and distance for routes from A to X, A to Y, B to X, and B to Y (in that order). The number of results returned (and routes calculated) will be the number of `DeparturePositions` times the number of `DestinationPositions`.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the V2 `calculate_route_matrix` unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_calculate_route_matrix/](https://www.paws-r-sdk.com/docs/locationservice_calculate_route_matrix/) for full documentation.
 #'
-#' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to
-#' calculate the route matrix.
-#' @param DeparturePositions &#91;required&#93; The list of departure (origin) positions for the route matrix. An array
-#' of points, each of which is itself a 2-value array defined in [WGS
-#' 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
-#' `[longitude, latitude]`. For example, `[-123.115, 49.285]`.
+#' @param CalculatorName &#91;required&#93; The name of the route calculator resource that you want to use to calculate the route matrix.
+#' @param DeparturePositions &#91;required&#93; The list of departure (origin) positions for the route matrix. An array of points, each of which is itself a 2-value array defined in [WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format: `[longitude, latitude]`. For example, `[-123.115, 49.285]`.
 #' 
-#' Depending on the data provider selected in the route calculator resource
-#' there may be additional restrictions on the inputs you can choose. See
-#' [Position
-#' restrictions](https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
-#' in the *Amazon Location Service Developer Guide*.
+#' Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See [Position restrictions](https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits) in the *Amazon Location Service Developer Guide*.
 #' 
-#' For route calculators that use Esri as the data provider, if you specify
-#' a departure that's not located on a road, Amazon Location [moves the
-#' position to the nearest
-#' road](https://docs.aws.amazon.com/location/latest/developerguide/). The
-#' snapped value is available in the result in `SnappedDeparturePositions`.
+#' For route calculators that use Esri as the data provider, if you specify a departure that's not located on a road, Amazon Location [moves the position to the nearest road](https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html). The snapped value is available in the result in `SnappedDeparturePositions`.
 #' 
 #' Valid Values: `[-180 to 180,-90 to 90]`
-#' @param DestinationPositions &#91;required&#93; The list of destination positions for the route matrix. An array of
-#' points, each of which is itself a 2-value array defined in [WGS
-#' 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format:
-#' `[longitude, latitude]`. For example, `[-122.339, 47.615]`
+#' @param DestinationPositions &#91;required&#93; The list of destination positions for the route matrix. An array of points, each of which is itself a 2-value array defined in [WGS 84](https://earth-info.nga.mil/index.php?dir=wgs84&action=wgs84) format: `[longitude, latitude]`. For example, `[-122.339, 47.615]`
 #' 
-#' Depending on the data provider selected in the route calculator resource
-#' there may be additional restrictions on the inputs you can choose. See
-#' [Position
-#' restrictions](https://docs.aws.amazon.com/location/latest/developerguide/calculate-route-matrix.html#matrix-routing-position-limits)
-#' in the *Amazon Location Service Developer Guide*.
+#' Depending on the data provider selected in the route calculator resource there may be additional restrictions on the inputs you can choose. See [Position restrictions](https://docs.aws.amazon.com/location/previous/developerguide/calculate-route-matrix.html#matrix-routing-position-limits) in the *Amazon Location Service Developer Guide*.
 #' 
-#' For route calculators that use Esri as the data provider, if you specify
-#' a destination that's not located on a road, Amazon Location [moves the
-#' position to the nearest
-#' road](https://docs.aws.amazon.com/location/latest/developerguide/). The
-#' snapped value is available in the result in
-#' `SnappedDestinationPositions`.
+#' For route calculators that use Esri as the data provider, if you specify a destination that's not located on a road, Amazon Location [moves the position to the nearest road](https://docs.aws.amazon.com/location/previous/developerguide/snap-to-nearby-road.html). The snapped value is available in the result in `SnappedDestinationPositions`.
 #' 
 #' Valid Values: `[-180 to 180,-90 to 90]`
-#' @param TravelMode Specifies the mode of transport when calculating a route. Used in
-#' estimating the speed of travel and road compatibility.
+#' @param TravelMode Specifies the mode of transport when calculating a route. Used in estimating the speed of travel and road compatibility.
 #' 
-#' The `TravelMode` you specify also determines how you specify route
-#' preferences:
+#' The `TravelMode` you specify also determines how you specify route preferences:
 #' 
 #' -   If traveling by `Car` use the `CarModeOptions` parameter.
 #' 
 #' -   If traveling by `Truck` use the `TruckModeOptions` parameter.
 #' 
-#' `Bicycle` or `Motorcycle` are only valid when using `Grab` as a data
-#' provider, and only within Southeast Asia.
+#' `Bicycle` or `Motorcycle` are only valid when using `Grab` as a data provider, and only within Southeast Asia.
 #' 
 #' `Truck` is not available for Grab.
 #' 
-#' For more information about using Grab as a data provider, see
-#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' in the *Amazon Location Service Developer Guide*.
+#' For more information about using Grab as a data provider, see [GrabMaps](https://docs.aws.amazon.com/location/previous/developerguide/grab.html) in the *Amazon Location Service Developer Guide*.
 #' 
 #' Default Value: `Car`
-#' @param DepartureTime Specifies the desired time of departure. Uses the given time to
-#' calculate the route matrix. You can't set both `DepartureTime` and
-#' `DepartNow`. If neither is set, the best time of day to travel with the
-#' best traffic conditions is used to calculate the route matrix.
+#' @param DepartureTime Specifies the desired time of departure. Uses the given time to calculate the route matrix. You can't set both `DepartureTime` and `DepartNow`. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix.
 #' 
-#' Setting a departure time in the past returns a `400 ValidationException`
-#' error.
+#' Setting a departure time in the past returns a `400 ValidationException` error.
 #' 
-#' -   In [ISO
-#'     8601](https://www.iso.org/iso-8601-date-and-time-format.html)
-#'     format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example,
-#'     `2020–07-2T12:15:20.000Z+01:00`
-#' @param DepartNow Sets the time of departure as the current time. Uses the current time to
-#' calculate the route matrix. You can't set both `DepartureTime` and
-#' `DepartNow`. If neither is set, the best time of day to travel with the
-#' best traffic conditions is used to calculate the route matrix.
+#' -   In [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`. For example, `2020–07-2T12:15:20.000Z+01:00`
+#' @param DepartNow Sets the time of departure as the current time. Uses the current time to calculate the route matrix. You can't set both `DepartureTime` and `DepartNow`. If neither is set, the best time of day to travel with the best traffic conditions is used to calculate the route matrix.
 #' 
 #' Default Value: `false`
 #' 
@@ -478,18 +387,13 @@ locationservice_calculate_route <- function(CalculatorName, DeparturePosition, D
 #' @param DistanceUnit Set the unit system to specify the distance.
 #' 
 #' Default Value: `Kilometers`
-#' @param CarModeOptions Specifies route preferences when traveling by `Car`, such as avoiding
-#' routes that use ferries or tolls.
+#' @param CarModeOptions Specifies route preferences when traveling by `Car`, such as avoiding routes that use ferries or tolls.
 #' 
 #' Requirements: `TravelMode` must be specified as `Car`.
-#' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding
-#' routes that use ferries or tolls, and truck specifications to consider
-#' when choosing an optimal road.
+#' @param TruckModeOptions Specifies route preferences when traveling by `Truck`, such as avoiding routes that use ferries or tolls, and truck specifications to consider when choosing an optimal road.
 #' 
 #' Requirements: `TravelMode` must be specified as `Truck`.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -513,6 +417,37 @@ locationservice_calculate_route_matrix <- function(CalculatorName, DeparturePosi
 }
 .locationservice$operations$calculate_route_matrix <- locationservice_calculate_route_matrix
 
+#' CancelJob cancels a job that is currently running or pending
+#'
+#' @description
+#' [`cancel_job`][locationservice_cancel_job] cancels a job that is currently running or pending. If the job is already in a terminal state (`Completed`, `Failed`, or `Cancelled`), the operation returns successfully with the current status.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_cancel_job/](https://www.paws-r-sdk.com/docs/locationservice_cancel_job/) for full documentation.
+#'
+#' @param JobId &#91;required&#93; The unique identifier of the job to cancel.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_cancel_job
+locationservice_cancel_job <- function(JobId) {
+  op <- new_operation(
+    name = "CancelJob",
+    http_method = "POST",
+    http_path = "/metadata/v0/jobs/cancel-job",
+    host_prefix = "metadata.",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .locationservice$cancel_job_input(JobId = JobId)
+  output <- .locationservice$cancel_job_output()
+  config <- get_config()
+  svc <- .locationservice$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$cancel_job <- locationservice_cancel_job
+
 #' Creates a geofence collection, which manages and stores geofences
 #'
 #' @description
@@ -524,19 +459,15 @@ locationservice_calculate_route_matrix <- function(CalculatorName, DeparturePosi
 #' 
 #' Requirements:
 #' 
-#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-#'     periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique geofence collection name.
 #' 
 #' -   No spaces allowed. For example, `ExampleGeofenceCollection`.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param PricingPlanDataSource This parameter is no longer used.
 #' @param Description An optional description for the geofence collection.
-#' @param Tags Applies one or more tags to the geofence collection. A tag is a
-#' key-value pair helps manage, identify, search, and filter your resources
-#' by labelling them.
+#' @param Tags Applies one or more tags to the geofence collection. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -550,13 +481,10 @@ locationservice_calculate_route_matrix <- function(CalculatorName, DeparturePosi
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@.
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
-#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed
-#' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-#' Enter a key ID, key ARN, alias name, or alias ARN.
+#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter a key ID, key ARN, alias name, or alias ARN.
 #'
 #' @keywords internal
 #'
@@ -593,23 +521,16 @@ locationservice_create_geofence_collection <- function(CollectionName, PricingPl
 #' 
 #' Requirements:
 #' 
-#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-#'     periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique API key name.
 #' 
 #' -   No spaces allowed. For example, `ExampleAPIKey`.
 #' @param Restrictions &#91;required&#93; The API key restrictions for the API key resource.
 #' @param Description An optional description for the API key resource.
-#' @param ExpireTime The optional timestamp for when the API key resource will expire in [ISO
-#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
-#' `YYYY-MM-DDThh:mm:ss.sssZ`. One of `NoExpiry` or `ExpireTime` must be
-#' set.
-#' @param NoExpiry Optionally set to `true` to set no expiration time for the API key. One
-#' of `NoExpiry` or `ExpireTime` must be set.
-#' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair
-#' that helps manage, identify, search, and filter your resources by
-#' labelling them.
+#' @param ExpireTime The optional timestamp for when the API key resource will expire in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`. One of `NoExpiry` or `ExpireTime` must be set.
+#' @param NoExpiry Optionally set to `true` to set no expiration time for the API key. One of `NoExpiry` or `ExpireTime` must be set.
+#' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair that helps manage, identify, search, and filter your resources by labelling them.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -623,8 +544,7 @@ locationservice_create_geofence_collection <- function(CollectionName, PricingPl
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@.
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #'
@@ -650,12 +570,10 @@ locationservice_create_key <- function(KeyName, Restrictions, Description = NULL
 }
 .locationservice$operations$create_key <- locationservice_create_key
 
-#' Creates a map resource in your Amazon Web Services account, which
-#' provides map tiles of different styles sourced from global location data
-#' providers
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_create_map/](https://www.paws-r-sdk.com/docs/locationservice_create_map/) for full documentation.
 #'
@@ -663,21 +581,15 @@ locationservice_create_key <- function(KeyName, Restrictions, Description = NULL
 #' 
 #' Requirements:
 #' 
-#' -   Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
-#'     (-), periods (.), and underscores (_).
+#' -   Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique map resource name.
 #' 
 #' -   No spaces allowed. For example, `ExampleMap`.
-#' @param Configuration &#91;required&#93; Specifies the `MapConfiguration`, including the map style, for the map
-#' resource that you create. The map style defines the look of maps and the
-#' data provider for your map resource.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param Configuration &#91;required&#93; Specifies the `MapConfiguration`, including the map style, for the map resource that you create. The map style defines the look of maps and the data provider for your map resource.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description An optional description for the map resource.
-#' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair
-#' helps manage, identify, search, and filter your resources by labelling
-#' them.
+#' @param Tags Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -691,8 +603,7 @@ locationservice_create_key <- function(KeyName, Restrictions, Description = NULL
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@.
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #'
@@ -718,10 +629,10 @@ locationservice_create_map <- function(MapName, Configuration, PricingPlan = NUL
 }
 .locationservice$operations$create_map <- locationservice_create_map
 
-#' Creates a place index resource in your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Creates a place index resource in your Amazon Web Services account. Use a place index resource to geocode addresses and other text queries by using the [`search_place_index_for_text`][locationservice_search_place_index_for_text] operation, and reverse geocode coordinates by using the [`search_place_index_for_position`][locationservice_search_place_index_for_position] operation, and enable autosuggestions by using the [`search_place_index_for_suggestions`][locationservice_search_place_index_for_suggestions] operation.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_create_place_index/](https://www.paws-r-sdk.com/docs/locationservice_create_place_index/) for full documentation.
 #'
@@ -729,52 +640,30 @@ locationservice_create_map <- function(MapName, Configuration, PricingPlan = NUL
 #' 
 #' Requirements:
 #' 
-#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-#'     periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique place index resource name.
 #' 
 #' -   No spaces allowed. For example, `ExamplePlaceIndex`.
 #' @param DataSource &#91;required&#93; Specifies the geospatial data provider for the new place index.
 #' 
-#' This field is case-sensitive. Enter the valid values as shown. For
-#' example, entering `HERE` returns an error.
+#' This field is case-sensitive. Enter the valid values as shown. For example, entering `HERE` returns an error.
 #' 
 #' Valid values include:
 #' 
-#' -   `Esri` – For additional information about
-#'     [Esri](https://docs.aws.amazon.com/location/latest/developerguide/)'s
-#'     coverage in your region of interest, see [Esri details on geocoding
-#'     coverage](https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
+#' -   `Esri` – For additional information about [Esri](https://docs.aws.amazon.com/location/previous/developerguide/esri.html)'s coverage in your region of interest, see [Esri details on geocoding coverage](https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
 #' 
-#' -   `Grab` – Grab provides place index functionality for Southeast Asia.
-#'     For additional information about
-#'     [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/)'
-#'     coverage, see [GrabMaps countries and areas
-#'     covered](https://docs.aws.amazon.com/location/latest/developerguide/#grab-coverage-area).
+#' -   `Grab` – Grab provides place index functionality for Southeast Asia. For additional information about [GrabMaps](https://docs.aws.amazon.com/location/previous/developerguide/grab.html)' coverage, see [GrabMaps countries and areas covered](https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area).
 #' 
-#' -   `Here` – For additional information about [HERE
-#'     Technologies](https://docs.aws.amazon.com/location/latest/developerguide/)'
-#'     coverage in your region of interest, see [HERE details on goecoding
-#'     coverage](https://www.here.com/docs/).
+#' -   `Here` – For additional information about [HERE Technologies](https://docs.aws.amazon.com/location/previous/developerguide/HERE.html)' coverage in your region of interest, see [HERE details on goecoding coverage](https://docs.here.com/).
 #' 
-#'     If you specify HERE Technologies (`Here`) as the data provider, you
-#'     may not [store
-#'     results](https://docs.aws.amazon.com/location/latest/APIReference/)
-#'     for locations in Japan. For more information, see the [Amazon Web
-#'     Services Service Terms](https://aws.amazon.com/service-terms/) for
-#'     Amazon Location Service.
+#'     If you specify HERE Technologies (`Here`) as the data provider, you may not [store results](https://docs.aws.amazon.com/location/latest/APIReference/) for locations in Japan. For more information, see the [Amazon Web Services service terms](https://aws.amazon.com/service-terms/) for Amazon Location Service.
 #' 
-#' For additional information , see [Data
-#' providers](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' on the *Amazon Location Service Developer Guide*.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' For additional information , see [Data providers](https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html) on the *Amazon Location Service developer guide*.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description The optional description for the place index resource.
 #' @param DataSourceConfiguration Specifies the data storage option requesting Places.
-#' @param Tags Applies one or more tags to the place index resource. A tag is a
-#' key-value pair that helps you manage, identify, search, and filter your
-#' resources.
+#' @param Tags Applies one or more tags to the place index resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -782,15 +671,13 @@ locationservice_create_map <- function(MapName, Configuration, PricingPlan = NUL
 #' 
 #' -   Maximum 50 tags per resource.
 #' 
-#' -   Each tag key must be unique and must have exactly one associated
-#'     value.
+#' -   Each tag key must be unique and must have exactly one associated value.
 #' 
 #' -   Maximum key length: 128 Unicode characters in UTF-8.
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8.
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #'
@@ -816,10 +703,10 @@ locationservice_create_place_index <- function(IndexName, DataSource, PricingPla
 }
 .locationservice$operations$create_place_index <- locationservice_create_place_index
 
-#' Creates a route calculator resource in your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Creates a route calculator resource in your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Routes API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_create_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_create_route_calculator/) for full documentation.
 #'
@@ -827,49 +714,29 @@ locationservice_create_place_index <- function(IndexName, DataSource, PricingPla
 #' 
 #' Requirements:
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9) , hyphens (-),
-#'     periods (.), and underscores (_).
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9) , hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique Route calculator resource name.
 #' 
 #' -   No spaces allowed. For example, `ExampleRouteCalculator`.
 #' @param DataSource &#91;required&#93; Specifies the data provider of traffic and road network data.
 #' 
-#' This field is case-sensitive. Enter the valid values as shown. For
-#' example, entering `HERE` returns an error.
+#' This field is case-sensitive. Enter the valid values as shown. For example, entering `HERE` returns an error.
 #' 
 #' Valid values include:
 #' 
-#' -   `Esri` – For additional information about
-#'     [Esri](https://docs.aws.amazon.com/location/latest/developerguide/)'s
-#'     coverage in your region of interest, see [Esri details on street
-#'     networks and traffic
-#'     coverage](https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
+#' -   `Esri` – For additional information about [Esri](https://docs.aws.amazon.com/location/previous/developerguide/esri.html)'s coverage in your region of interest, see [Esri details on street networks and traffic coverage](https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
 #' 
-#'     Route calculators that use Esri as a data source only calculate
-#'     routes that are shorter than 400 km.
+#'     Route calculators that use Esri as a data source only calculate routes that are shorter than 400 km.
 #' 
-#' -   `Grab` – Grab provides routing functionality for Southeast Asia. For
-#'     additional information about
-#'     [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/)'
-#'     coverage, see [GrabMaps countries and areas
-#'     covered](https://docs.aws.amazon.com/location/latest/developerguide/#grab-coverage-area).
+#' -   `Grab` – Grab provides routing functionality for Southeast Asia. For additional information about [GrabMaps](https://docs.aws.amazon.com/location/previous/developerguide/grab.html)' coverage, see [GrabMaps countries and areas covered](https://docs.aws.amazon.com/location/previous/developerguide/grab.html#grab-coverage-area).
 #' 
-#' -   `Here` – For additional information about [HERE
-#'     Technologies](https://docs.aws.amazon.com/location/latest/developerguide/)'
-#'     coverage in your region of interest, see [HERE car routing
-#'     coverage](https://www.here.com/docs/) and [HERE truck routing
-#'     coverage](https://www.here.com/docs/).
+#' -   `Here` – For additional information about [HERE Technologies](https://docs.aws.amazon.com/location/previous/developerguide/HERE.html)' coverage in your region of interest, see [HERE car routing coverage](https://docs.here.com/) and [HERE truck routing coverage](https://docs.here.com/).
 #' 
-#' For additional information , see [Data
-#' providers](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' on the *Amazon Location Service Developer Guide*.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' For additional information , see [Data providers](https://docs.aws.amazon.com/location/previous/developerguide/what-is-data-provider.html) on the *Amazon Location Service Developer Guide*.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description The optional description for the route calculator resource.
-#' @param Tags Applies one or more tags to the route calculator resource. A tag is a
-#' key-value pair helps manage, identify, search, and filter your resources
-#' by labelling them.
+#' @param Tags Applies one or more tags to the route calculator resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.
 #' 
 #' -   For example: \{ `"tag1" : "value1"`, `"tag2" : "value2"`\}
 #' 
@@ -885,8 +752,7 @@ locationservice_create_place_index <- function(IndexName, DataSource, PricingPla
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@.
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #'
@@ -924,22 +790,16 @@ locationservice_create_route_calculator <- function(CalculatorName, DataSource, 
 #' 
 #' Requirements:
 #' 
-#' -   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-),
-#'     periods (.), and underscores (_).
+#' -   Contain only alphanumeric characters (A-Z, a-z, 0-9) , hyphens (-), periods (.), and underscores (_).
 #' 
 #' -   Must be a unique tracker resource name.
 #' 
 #' -   No spaces allowed. For example, `ExampleTracker`.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
-#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed
-#' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
-#' Enter a key ID, key ARN, alias name, or alias ARN.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
+#' @param KmsKeyId A key identifier for an [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html). Enter a key ID, key ARN, alias name, or alias ARN.
 #' @param PricingPlanDataSource This parameter is no longer used.
 #' @param Description An optional description for the tracker resource.
-#' @param Tags Applies one or more tags to the tracker resource. A tag is a key-value
-#' pair helps manage, identify, search, and filter your resources by
-#' labelling them.
+#' @param Tags Applies one or more tags to the tracker resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -953,61 +813,30 @@ locationservice_create_route_calculator <- function(CalculatorName, DataSource, 
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@.
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@.
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #' @param PositionFiltering Specifies the position filtering for the tracker resource.
 #' 
 #' Valid values:
 #' 
-#' -   `TimeBased` - Location updates are evaluated against linked geofence
-#'     collections, but not every location update is stored. If your update
-#'     frequency is more often than 30 seconds, only one update per 30
-#'     seconds is stored for each unique device ID.
+#' -   `TimeBased` - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.
 #' 
-#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
-#'     location updates are ignored. Location updates within this area are
-#'     neither evaluated against linked geofence collections, nor stored.
-#'     This helps control costs by reducing the number of geofence
-#'     evaluations and historical device positions to paginate through.
-#'     Distance-based filtering can also reduce the effects of GPS noise
-#'     when displaying device trajectories on a map.
+#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this area are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.
 #' 
-#' -   `AccuracyBased` - If the device has moved less than the measured
-#'     accuracy, location updates are ignored. For example, if two
-#'     consecutive updates from a device have a horizontal accuracy of 5 m
-#'     and 10 m, the second update is ignored if the device has moved less
-#'     than 15 m. Ignored location updates are neither evaluated against
-#'     linked geofence collections, nor stored. This can reduce the effects
-#'     of GPS noise when displaying device trajectories on a map, and can
-#'     help control your costs by reducing the number of geofence
-#'     evaluations.
+#' -   `AccuracyBased` - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This can reduce the effects of GPS noise when displaying device trajectories on a map, and can help control your costs by reducing the number of geofence evaluations.
 #' 
-#' This field is optional. If not specified, the default value is
-#' `TimeBased`.
-#' @param EventBridgeEnabled Whether to enable position `UPDATE` events from this tracker to be sent
-#' to EventBridge.
+#' This field is optional. If not specified, the default value is `TimeBased`.
+#' @param EventBridgeEnabled Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
 #' 
-#' You do not need enable this feature to get `ENTER` and `EXIT` events for
-#' geofences with this tracker. Those events are always sent to
-#' EventBridge.
-#' @param KmsKeyEnableGeospatialQueries Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
-#' Services KMS customer managed
-#' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+#' You do not need enable this feature to get `ENTER` and `EXIT` events for geofences with this tracker. Those events are always sent to EventBridge.
+#' @param KmsKeyEnableGeospatialQueries Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
 #' 
 #' This parameter is only used if you are using a KMS customer managed key.
 #' 
-#' If you wish to encrypt your data using your own KMS customer managed
-#' key, then the Bounding Polygon Queries feature will be disabled by
-#' default. This is because by using this feature, a representation of your
-#' device positions will not be encrypted using the your KMS managed key.
-#' The exact device position, however; is still encrypted using your
-#' managed key.
+#' If you wish to encrypt your data using your own KMS customer managed key, then the Bounding Polygon Queries feature will be disabled by default. This is because by using this feature, a representation of your device positions will not be encrypted using the your KMS managed key. The exact device position, however; is still encrypted using your managed key.
 #' 
-#' You can choose to opt-in to the Bounding Polygon Quseries feature. This
-#' is done by setting the `KmsKeyEnableGeospatialQueries` parameter to true
-#' when creating or updating a Tracker.
+#' You can choose to opt-in to the Bounding Polygon Quseries feature. This is done by setting the `KmsKeyEnableGeospatialQueries` parameter to true when creating or updating a Tracker.
 #'
 #' @keywords internal
 #'
@@ -1070,16 +899,13 @@ locationservice_delete_geofence_collection <- function(CollectionName) {
 #' See [https://www.paws-r-sdk.com/docs/locationservice_delete_key/](https://www.paws-r-sdk.com/docs/locationservice_delete_key/) for full documentation.
 #'
 #' @param KeyName &#91;required&#93; The name of the API key to delete.
-#' @param ForceDelete ForceDelete bypasses an API key's expiry conditions and deletes the key.
-#' Set the parameter `true` to delete the key or to `false` to not
-#' preemptively delete the API key.
+#' @param ForceDelete ForceDelete bypasses an API key's expiry conditions and deletes the key. Set the parameter `true` to delete the key or to `false` to not preemptively delete the API key.
 #' 
 #' Valid values: `true`, or `false`.
 #' 
 #' Required: No
 #' 
-#' This action is irreversible. Only use ForceDelete if you are certain the
-#' key is no longer in use.
+#' This action is irreversible. Only use ForceDelete if you are certain the key is no longer in use.
 #'
 #' @keywords internal
 #'
@@ -1103,10 +929,10 @@ locationservice_delete_key <- function(KeyName, ForceDelete = NULL) {
 }
 .locationservice$operations$delete_key <- locationservice_delete_key
 
-#' Deletes a map resource from your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Deletes a map resource from your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_delete_map/](https://www.paws-r-sdk.com/docs/locationservice_delete_map/) for full documentation.
 #'
@@ -1134,10 +960,10 @@ locationservice_delete_map <- function(MapName) {
 }
 .locationservice$operations$delete_map <- locationservice_delete_map
 
-#' Deletes a place index resource from your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Deletes a place index resource from your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_delete_place_index/](https://www.paws-r-sdk.com/docs/locationservice_delete_place_index/) for full documentation.
 #'
@@ -1165,11 +991,10 @@ locationservice_delete_place_index <- function(IndexName) {
 }
 .locationservice$operations$delete_place_index <- locationservice_delete_place_index
 
-#' Deletes a route calculator resource from your Amazon Web Services
-#' account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Deletes a route calculator resource from your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Routes API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_delete_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_delete_route_calculator/) for full documentation.
 #'
@@ -1290,10 +1115,10 @@ locationservice_describe_key <- function(KeyName) {
 }
 .locationservice$operations$describe_key <- locationservice_describe_key
 
-#' Retrieves the map resource details
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves the map resource details.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_describe_map/](https://www.paws-r-sdk.com/docs/locationservice_describe_map/) for full documentation.
 #'
@@ -1321,10 +1146,10 @@ locationservice_describe_map <- function(MapName) {
 }
 .locationservice$operations$describe_map <- locationservice_describe_map
 
-#' Retrieves the place index resource details
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves the place index resource details.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_describe_place_index/](https://www.paws-r-sdk.com/docs/locationservice_describe_place_index/) for full documentation.
 #'
@@ -1352,10 +1177,10 @@ locationservice_describe_place_index <- function(IndexName) {
 }
 .locationservice$operations$describe_place_index <- locationservice_describe_place_index
 
-#' Retrieves the route calculator resource details
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves the route calculator resource details.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Routes API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_describe_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_describe_route_calculator/) for full documentation.
 #'
@@ -1423,12 +1248,9 @@ locationservice_describe_tracker <- function(TrackerName) {
 #' See [https://www.paws-r-sdk.com/docs/locationservice_disassociate_tracker_consumer/](https://www.paws-r-sdk.com/docs/locationservice_disassociate_tracker_consumer/) for full documentation.
 #'
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to be dissociated from the consumer.
-#' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be
-#' disassociated from the tracker resource. Used when you need to specify a
-#' resource across all Amazon Web Services.
+#' @param ConsumerArn &#91;required&#93; The Amazon Resource Name (ARN) for the geofence collection to be disassociated from the tracker resource. Used when you need to specify a resource across all Amazon Web Services.
 #' 
-#' -   Format example:
-#'     `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
+#' -   Format example: `arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer`
 #'
 #' @keywords internal
 #'
@@ -1452,31 +1274,25 @@ locationservice_disassociate_tracker_consumer <- function(TrackerName, ConsumerA
 }
 .locationservice$operations$disassociate_tracker_consumer <- locationservice_disassociate_tracker_consumer
 
-#' Evaluates device positions against geofence geometries from a given
-#' geofence collection
+#' This action forecasts future geofence events that are likely to occur
+#' within a specified time horizon if a device continues moving at its
+#' current speed
 #'
 #' @description
-#' Evaluates device positions against geofence geometries from a given geofence collection. The event forecasts three states for which a device can be in relative to a geofence:
+#' This action forecasts future geofence events that are likely to occur within a specified time horizon if a device continues moving at its current speed. Each forecasted event is associated with a geofence from a provided geofence collection. A forecast event can have one of the following states:
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_forecast_geofence_events/](https://www.paws-r-sdk.com/docs/locationservice_forecast_geofence_events/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection.
-#' @param DeviceState &#91;required&#93; The device's state, including current position and speed.
-#' @param TimeHorizonMinutes Specifies the time horizon in minutes for the forecasted events.
-#' @param DistanceUnit The distance unit used for the `NearestDistance` property returned in a
-#' forecasted event. The measurement system must match for `DistanceUnit`
-#' and `SpeedUnit`; if `Kilometers` is specified for `DistanceUnit`, then
-#' `SpeedUnit` must be `KilometersPerHour`.
+#' @param DeviceState &#91;required&#93; Represents the device's state, including its current position and speed. When speed is omitted, this API performs a *containment check*. The *containment check* operation returns `IDLE` events for geofences where the device is currently inside of, but no other events.
+#' @param TimeHorizonMinutes The forward-looking time window for forecasting, specified in minutes. The API only returns events that are predicted to occur within this time horizon. When no value is specified, this API performs a *containment check*. The *containment check* operation returns `IDLE` events for geofences where the device is currently inside of, but no other events.
+#' @param DistanceUnit The distance unit used for the `NearestDistance` property returned in a forecasted event. The measurement system must match for `DistanceUnit` and `SpeedUnit`; if `Kilometers` is specified for `DistanceUnit`, then `SpeedUnit` must be `KilometersPerHour`.
 #' 
 #' Default Value: `Kilometers`
-#' @param SpeedUnit The speed unit for the device captured by the device state. The
-#' measurement system must match for `DistanceUnit` and `SpeedUnit`; if
-#' `Kilometers` is specified for `DistanceUnit`, then `SpeedUnit` must be
-#' `KilometersPerHour`.
+#' @param SpeedUnit The speed unit for the device captured by the device state. The measurement system must match for `DistanceUnit` and `SpeedUnit`; if `Kilometers` is specified for `DistanceUnit`, then `SpeedUnit` must be `KilometersPerHour`.
 #' 
 #' Default Value: `KilometersPerHour`.
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
@@ -1545,33 +1361,22 @@ locationservice_get_device_position <- function(TrackerName, DeviceId) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_device_position_history/](https://www.paws-r-sdk.com/docs/locationservice_get_device_position_history/) for full documentation.
 #'
-#' @param TrackerName &#91;required&#93; The tracker resource receiving the request for the device position
-#' history.
+#' @param TrackerName &#91;required&#93; The tracker resource receiving the request for the device position history.
 #' @param DeviceId &#91;required&#93; The device whose position history you want to retrieve.
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
-#' @param StartTimeInclusive Specify the start time for the position history in [ISO
-#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
-#' `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be 24 hours prior
-#' to the time that the request is made.
+#' @param StartTimeInclusive Specify the start time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be 24 hours prior to the time that the request is made.
 #' 
 #' Requirement:
 #' 
-#' -   The time specified for `StartTimeInclusive` must be before
-#'     `EndTimeExclusive`.
-#' @param EndTimeExclusive Specify the end time for the position history in [ISO
-#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
-#' `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be the time that
-#' the request is made.
+#' -   The time specified for `StartTimeInclusive` must be before `EndTimeExclusive`.
+#' @param EndTimeExclusive Specify the end time for the position history in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`. By default, the value will be the time that the request is made.
 #' 
 #' Requirement:
 #' 
-#' -   The time specified for `EndTimeExclusive` must be after the time for
-#'     `StartTimeInclusive`.
-#' @param MaxResults An optional limit for the number of device positions returned in a
-#' single call.
+#' -   The time specified for `EndTimeExclusive` must be after the time for `StartTimeInclusive`.
+#' @param MaxResults An optional limit for the number of device positions returned in a single call.
 #' 
 #' Default value: `100`
 #'
@@ -1629,83 +1434,78 @@ locationservice_get_geofence <- function(CollectionName, GeofenceId) {
 }
 .locationservice$operations$get_geofence <- locationservice_get_geofence
 
-#' Retrieves glyphs used to display labels on a map
+#' GetJob retrieves detailed information about a specific job, including
+#' its current status, configuration, and error information if the job
+#' failed
 #'
 #' @description
-#' Retrieves glyphs used to display labels on a map.
+#' [`get_job`][locationservice_get_job] retrieves detailed information about a specific job, including its current status, configuration, and error information if the job failed.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_get_job/](https://www.paws-r-sdk.com/docs/locationservice_get_job/) for full documentation.
+#'
+#' @param JobId &#91;required&#93; The unique identifier of the job to retrieve.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_get_job
+locationservice_get_job <- function(JobId) {
+  op <- new_operation(
+    name = "GetJob",
+    http_method = "GET",
+    http_path = "/metadata/v0/jobs/{JobId}",
+    host_prefix = "metadata.",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .locationservice$get_job_input(JobId = JobId)
+  output <- .locationservice$get_job_output()
+  config <- get_config()
+  svc <- .locationservice$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$get_job <- locationservice_get_job
+
+#' This operation is no longer current and may be deprecated in the future
+#'
+#' @description
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to [`GetGlyphs`](https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetGlyphs.html) unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/](https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The map resource associated with the glyph file.
-#' @param FontStack &#91;required&#93; A comma-separated list of fonts to load glyphs from in order of
-#' preference. For example, `Noto Sans Regular, Arial Unicode`.
+#' @param FontStack &#91;required&#93; A comma-separated list of fonts to load glyphs from in order of preference. For example, `Noto Sans Regular, Arial Unicode`.
 #' 
-#' Valid font stacks for
-#' [Esri](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' styles:
+#' Valid font stacks for [Esri](https://docs.aws.amazon.com/location/previous/developerguide/esri.html) styles:
 #' 
-#' -   VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` | `Ubuntu Medium`
-#'     | `Ubuntu Italic` | `Ubuntu Regular` | `Ubuntu Bold`
+#' -   VectorEsriDarkGrayCanvas – `Ubuntu Medium Italic` | `Ubuntu Medium` | `Ubuntu Italic` | `Ubuntu Regular` | `Ubuntu Bold`
 #' 
-#' -   VectorEsriLightGrayCanvas – `Ubuntu Italic` | `Ubuntu Regular` |
-#'     `Ubuntu Light` | `Ubuntu Bold`
+#' -   VectorEsriLightGrayCanvas – `Ubuntu Italic` | `Ubuntu Regular` | `Ubuntu Light` | `Ubuntu Bold`
 #' 
-#' -   VectorEsriTopographic – `Noto Sans Italic` | `Noto Sans Regular` |
-#'     `Noto Sans Bold` | `Noto Serif Regular` |
-#'     `Roboto Condensed Light Italic`
+#' -   VectorEsriTopographic – `Noto Sans Italic` | `Noto Sans Regular` | `Noto Sans Bold` | `Noto Serif Regular` | `Roboto Condensed Light Italic`
 #' 
 #' -   VectorEsriStreets – `Arial Regular` | `Arial Italic` | `Arial Bold`
 #' 
-#' -   VectorEsriNavigation – `Arial Regular` | `Arial Italic` |
-#'     `Arial Bold`
+#' -   VectorEsriNavigation – `Arial Regular` | `Arial Italic` | `Arial Bold`
 #' 
-#' Valid font stacks for [HERE
-#' Technologies](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' styles:
+#' Valid font stacks for [HERE Technologies](https://docs.aws.amazon.com/location/previous/developerguide/HERE.html) styles:
 #' 
 #' -   VectorHereContrast – `Fira GO Regular` | `Fira GO Bold`
 #' 
-#' -   VectorHereExplore, VectorHereExploreTruck,
-#'     HybridHereExploreSatellite – `Fira GO Italic` | `Fira GO Map` |
-#'     `Fira GO Map Bold` | `Noto Sans CJK JP Bold` |
-#'     `Noto Sans CJK JP Light` | `Noto Sans CJK JP Regular`
+#' -   VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – `Fira GO Italic` | `Fira GO Map` | `Fira GO Map Bold` | `Noto Sans CJK JP Bold` | `Noto Sans CJK JP Light` | `Noto Sans CJK JP Regular`
 #' 
-#' Valid font stacks for
-#' [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' styles:
+#' Valid font stacks for [GrabMaps](https://docs.aws.amazon.com/location/previous/developerguide/grab.html) styles:
 #' 
-#' -   VectorGrabStandardLight, VectorGrabStandardDark –
-#'     `Noto Sans Regular` | `Noto Sans Medium` | `Noto Sans Bold`
+#' -   VectorGrabStandardLight, VectorGrabStandardDark – `Noto Sans Regular` | `Noto Sans Medium` | `Noto Sans Bold`
 #' 
-#' Valid font stacks for [Open
-#' Data](https://docs.aws.amazon.com/location/latest/developerguide/)
-#' styles:
+#' Valid font stacks for [Open Data](https://docs.aws.amazon.com/location/previous/developerguide/open-data.html) styles:
 #' 
-#' -   VectorOpenDataStandardLight, VectorOpenDataStandardDark,
-#'     VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark –
-#'     `Amazon Ember Regular,Noto Sans Regular` |
-#'     `Amazon Ember Bold,Noto Sans Bold` |
-#'     `Amazon Ember Medium,Noto Sans Medium` |
-#'     `Amazon Ember Regular Italic,Noto Sans Italic` |
-#'     `Amazon Ember Condensed RC Regular,Noto Sans Regular` |
-#'     `Amazon Ember Condensed RC Bold,Noto Sans Bold` |
-#'     `Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular` |
-#'     `Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold`
-#'     | `Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold` |
-#'     `Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular`
-#'     |
-#'     `Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular`
-#'     | `Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium`
+#' -   VectorOpenDataStandardLight, VectorOpenDataStandardDark, VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – `Amazon Ember Regular,Noto Sans Regular` | `Amazon Ember Bold,Noto Sans Bold` | `Amazon Ember Medium,Noto Sans Medium` | `Amazon Ember Regular Italic,Noto Sans Italic` | `Amazon Ember Condensed RC Regular,Noto Sans Regular` | `Amazon Ember Condensed RC Bold,Noto Sans Bold` | `Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular` | `Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold` | `Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold` | `Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular` | `Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular` | `Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium`
 #' 
-#' The fonts used by the Open Data map styles are combined fonts that use
-#' `Amazon Ember` for most glyphs but `Noto Sans` for glyphs unsupported by
-#' `Amazon Ember`.
-#' @param FontUnicodeRange &#91;required&#93; A Unicode range of characters to download glyphs for. Each response will
-#' contain 256 characters. For example, 0–255 includes all characters from
-#' range `U+0000` to `00FF`. Must be aligned to multiples of 256.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' The fonts used by the Open Data map styles are combined fonts that use `Amazon Ember` for most glyphs but `Noto Sans` for glyphs unsupported by `Amazon Ember`.
+#' @param FontUnicodeRange &#91;required&#93; A Unicode range of characters to download glyphs for. Each response will contain 256 characters. For example, 0–255 includes all characters from range `U+0000` to `00FF`. Must be aligned to multiples of 256.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -1729,30 +1529,26 @@ locationservice_get_map_glyphs <- function(MapName, FontStack, FontUnicodeRange,
 }
 .locationservice$operations$get_map_glyphs <- locationservice_get_map_glyphs
 
-#' Retrieves the sprite sheet corresponding to a map resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves the sprite sheet corresponding to a map resource. The sprite sheet is a PNG image paired with a JSON document describing the offsets of individual icons that will be displayed on a rendered map.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to [`GetSprites`](https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetSprites.html) unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_sprites/](https://www.paws-r-sdk.com/docs/locationservice_get_map_sprites/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The map resource associated with the sprite file.
-#' @param FileName &#91;required&#93; The name of the sprite file. Use the following file names for the sprite
-#' sheet:
+#' @param FileName &#91;required&#93; The name of the sprite file. Use the following file names for the sprite sheet:
 #' 
 #' -   `sprites.png`
 #' 
 #' -   `sprites@@2x.png` for high pixel density displays
 #' 
-#' For the JSON document containing image offsets. Use the following file
-#' names:
+#' For the JSON document containing image offsets. Use the following file names:
 #' 
 #' -   `sprites.json`
 #' 
 #' -   `sprites@@2x.json` for high pixel density displays
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -1776,17 +1572,15 @@ locationservice_get_map_sprites <- function(MapName, FileName, Key = NULL) {
 }
 .locationservice$operations$get_map_sprites <- locationservice_get_map_sprites
 
-#' Retrieves the map style descriptor from a map resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves the map style descriptor from a map resource.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to [`GetStyleDescriptor`](https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetStyleDescriptor.html) unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_style_descriptor/](https://www.paws-r-sdk.com/docs/locationservice_get_map_style_descriptor/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The map resource to retrieve the style descriptor from.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -1810,10 +1604,10 @@ locationservice_get_map_style_descriptor <- function(MapName, Key = NULL) {
 }
 .locationservice$operations$get_map_style_descriptor <- locationservice_get_map_style_descriptor
 
-#' Retrieves a vector data tile from the map resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Retrieves a vector data tile from the map resource. Map tiles are used by clients to render a map. they're addressed using a grid arrangement with an X coordinate, Y coordinate, and Z (zoom) level.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to [`GetTile`](https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetTile.html) unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_map_tile/](https://www.paws-r-sdk.com/docs/locationservice_get_map_tile/) for full documentation.
 #'
@@ -1821,9 +1615,7 @@ locationservice_get_map_style_descriptor <- function(MapName, Key = NULL) {
 #' @param Z &#91;required&#93; The zoom value for the map tile.
 #' @param X &#91;required&#93; The X axis value for the map tile.
 #' @param Y &#91;required&#93; The Y axis value for the map tile.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -1847,36 +1639,25 @@ locationservice_get_map_tile <- function(MapName, Z, X, Y, Key = NULL) {
 }
 .locationservice$operations$get_map_tile <- locationservice_get_map_tile
 
-#' Finds a place by its unique ID
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Finds a place by its unique ID. A `PlaceId` is returned by other search operations.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the V2 `get_place` operation unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_get_place/](https://www.paws-r-sdk.com/docs/locationservice_get_place/) for full documentation.
 #'
-#' @param IndexName &#91;required&#93; The name of the place index resource that you want to use for the
-#' search.
+#' @param IndexName &#91;required&#93; The name of the place index resource that you want to use for the search.
 #' @param PlaceId &#91;required&#93; The identifier of the place to find.
-#' @param Language The preferred language used to return results. The value must be a valid
-#' BCP 47 language tag, for example, `en` for English.
+#' @param Language The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, `en` for English.
 #' 
-#' This setting affects the languages used in the results, but not the
-#' results themselves. If no language is specified, or not supported for a
-#' particular result, the partner automatically chooses a language for the
-#' result.
+#' This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 #' 
-#' For an example, we'll use the Greek language. You search for a location
-#' around Athens, Greece, with the `language` parameter set to `en`. The
-#' `city` in the results will most likely be returned as `Athens`.
+#' For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the `language` parameter set to `en`. The `city` in the results will most likely be returned as `Athens`.
 #' 
-#' If you set the `language` parameter to `el`, for Greek, then the `city`
-#' in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+#' If you set the `language` parameter to `el`, for Greek, then the `city` in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
 #' 
-#' If the data provider does not have a value for Greek, the result will be
-#' in a language that the provider does support.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -1911,8 +1692,7 @@ locationservice_get_place <- function(IndexName, PlaceId, Language = NULL, Key =
 #' @param MaxResults An optional limit for the number of entries returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #' @param FilterGeometry The geometry used to filter device positions.
@@ -1949,8 +1729,7 @@ locationservice_list_device_positions <- function(TrackerName, MaxResults = NULL
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #'
@@ -1984,8 +1763,7 @@ locationservice_list_geofence_collections <- function(MaxResults = NULL, NextTok
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_geofences/](https://www.paws-r-sdk.com/docs/locationservice_list_geofences/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection storing the list of geofences.
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #' @param MaxResults An optional limit for the number of geofences returned in a single call.
@@ -2014,6 +1792,40 @@ locationservice_list_geofences <- function(CollectionName, NextToken = NULL, Max
 }
 .locationservice$operations$list_geofences <- locationservice_list_geofences
 
+#' ListJobs retrieves a list of jobs with optional filtering and pagination
+#' support
+#'
+#' @description
+#' [`list_jobs`][locationservice_list_jobs] retrieves a list of jobs with optional filtering and pagination support.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_list_jobs/](https://www.paws-r-sdk.com/docs/locationservice_list_jobs/) for full documentation.
+#'
+#' @param Filter An optional structure containing criteria by which to filter job results.
+#' @param MaxResults Maximum number of jobs to return.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_list_jobs
+locationservice_list_jobs <- function(Filter = NULL, MaxResults = NULL, NextToken = NULL) {
+  op <- new_operation(
+    name = "ListJobs",
+    http_method = "POST",
+    http_path = "/metadata/v0/jobs/list-jobs",
+    host_prefix = "metadata.",
+    paginator = list(input_token = "NextToken", output_token = "NextToken", limit_key = "MaxResults", result_key = "Entries"),
+    stream_api = FALSE
+  )
+  input <- .locationservice$list_jobs_input(Filter = Filter, MaxResults = MaxResults, NextToken = NextToken)
+  output <- .locationservice$list_jobs_output()
+  config <- get_config()
+  svc <- .locationservice$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$list_jobs <- locationservice_list_jobs
+
 #' Lists API key resources in your Amazon Web Services account
 #'
 #' @description
@@ -2024,8 +1836,7 @@ locationservice_list_geofences <- function(CollectionName, NextToken = NULL, Max
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #' @param Filter Optionally filter the list to only `Active` or `Expired` API keys.
@@ -2052,18 +1863,17 @@ locationservice_list_keys <- function(MaxResults = NULL, NextToken = NULL, Filte
 }
 .locationservice$operations$list_keys <- locationservice_list_keys
 
-#' Lists map resources in your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Lists map resources in your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_maps/](https://www.paws-r-sdk.com/docs/locationservice_list_maps/) for full documentation.
 #'
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #'
@@ -2089,19 +1899,17 @@ locationservice_list_maps <- function(MaxResults = NULL, NextToken = NULL) {
 }
 .locationservice$operations$list_maps <- locationservice_list_maps
 
-#' Lists place index resources in your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Lists place index resources in your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_place_indexes/](https://www.paws-r-sdk.com/docs/locationservice_list_place_indexes/) for full documentation.
 #'
-#' @param MaxResults An optional limit for the maximum number of results returned in a single
-#' call.
+#' @param MaxResults An optional limit for the maximum number of results returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #'
@@ -2127,18 +1935,17 @@ locationservice_list_place_indexes <- function(MaxResults = NULL, NextToken = NU
 }
 .locationservice$operations$list_place_indexes <- locationservice_list_place_indexes
 
-#' Lists route calculator resources in your Amazon Web Services account
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Lists route calculator resources in your Amazon Web Services account.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Routes API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_route_calculators/](https://www.paws-r-sdk.com/docs/locationservice_list_route_calculators/) for full documentation.
 #'
 #' @param MaxResults An optional maximum number of results returned in a single call.
 #' 
 #' Default Value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default Value: `null`
 #'
@@ -2172,11 +1979,9 @@ locationservice_list_route_calculators <- function(MaxResults = NULL, NextToken 
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_tags_for_resource/](https://www.paws-r-sdk.com/docs/locationservice_list_tags_for_resource/) for full documentation.
 #'
-#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
-#' retrieve.
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
 #' 
-#' -   Format example:
-#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' -   Format example: `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
 #'
 #' @keywords internal
 #'
@@ -2208,13 +2013,11 @@ locationservice_list_tags_for_resource <- function(ResourceArn) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_list_tracker_consumers/](https://www.paws-r-sdk.com/docs/locationservice_list_tracker_consumers/) for full documentation.
 #'
-#' @param TrackerName &#91;required&#93; The tracker resource whose associated geofence collections you want to
-#' list.
+#' @param TrackerName &#91;required&#93; The tracker resource whose associated geofence collections you want to list.
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #'
@@ -2250,8 +2053,7 @@ locationservice_list_tracker_consumers <- function(TrackerName, MaxResults = NUL
 #' @param MaxResults An optional limit for the number of resources returned in a single call.
 #' 
 #' Default value: `100`
-#' @param NextToken The pagination token specifying which page of results to return in the
-#' response. If no token is provided, the default page is the first page.
+#' @param NextToken The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 #' 
 #' Default value: `null`
 #'
@@ -2288,18 +2090,10 @@ locationservice_list_trackers <- function(MaxResults = NULL, NextToken = NULL) {
 #'
 #' @param CollectionName &#91;required&#93; The geofence collection to store the geofence in.
 #' @param GeofenceId &#91;required&#93; An identifier for the geofence. For example, `ExampleGeofence-1`.
-#' @param Geometry &#91;required&#93; Contains the details to specify the position of the geofence. Can be a
-#' polygon, a circle or a polygon encoded in Geobuf format. Including
-#' multiple selections will return a validation error.
+#' @param Geometry &#91;required&#93; Contains the details to specify the position of the geofence. Can be a circle, a polygon, or a multipolygon. `Polygon` and `MultiPolygon` geometries can be defined using their respective parameters, or encoded in Geobuf format using the `Geobuf` parameter. Including multiple geometry types in the same request will return a validation error.
 #' 
-#' The [geofence
-#' polygon](https://docs.aws.amazon.com/location/latest/APIReference/)
-#' format supports a maximum of 1,000 vertices. The [Geofence
-#' Geobuf](https://docs.aws.amazon.com/location/latest/APIReference/)
-#' format supports a maximum of 100,000 vertices.
-#' @param GeofenceProperties Associates one of more properties with the geofence. A property is a
-#' key-value pair stored with the geofence and added to any geofence event
-#' triggered with that geofence.
+#' The geofence `Polygon` and `MultiPolygon` formats support a maximum of 1,000 total vertices. The `Geobuf` format supports a maximum of 100,000 vertices.
+#' @param GeofenceProperties Associates one of more properties with the geofence. A property is a key-value pair stored with the geofence and added to any geofence event triggered with that geofence.
 #' 
 #' Format: `"key" : "value"`
 #'
@@ -2325,46 +2119,32 @@ locationservice_put_geofence <- function(CollectionName, GeofenceId, Geometry, G
 }
 .locationservice$operations$put_geofence <- locationservice_put_geofence
 
-#' Reverse geocodes a given coordinate and returns a legible address
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Reverse geocodes a given coordinate and returns a legible address. Allows you to search for Places or points of interest near a given position.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to `ReverseGeocode` or `SearchNearby` unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_position/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_position/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
 #' @param Position &#91;required&#93; Specifies the longitude and latitude of the position to query.
 #' 
-#' This parameter must contain a pair of numbers. The first number
-#' represents the X coordinate, or longitude; the second number represents
-#' the Y coordinate, or latitude.
+#' This parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude.
 #' 
-#' For example, `[-123.1174, 49.2847]` represents a position with longitude
-#' `-123.1174` and latitude `49.2847`.
-#' @param MaxResults An optional parameter. The maximum number of results returned per
-#' request.
+#' For example, `[-123.1174, 49.2847]` represents a position with longitude `-123.1174` and latitude `49.2847`.
+#' @param MaxResults An optional parameter. The maximum number of results returned per request.
 #' 
 #' Default value: `50`
-#' @param Language The preferred language used to return results. The value must be a valid
-#' BCP 47 language tag, for example, `en` for English.
+#' @param Language The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, `en` for English.
 #' 
-#' This setting affects the languages used in the results, but not the
-#' results themselves. If no language is specified, or not supported for a
-#' particular result, the partner automatically chooses a language for the
-#' result.
+#' This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 #' 
-#' For an example, we'll use the Greek language. You search for a location
-#' around Athens, Greece, with the `language` parameter set to `en`. The
-#' `city` in the results will most likely be returned as `Athens`.
+#' For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the `language` parameter set to `en`. The `city` in the results will most likely be returned as `Athens`.
 #' 
-#' If you set the `language` parameter to `el`, for Greek, then the `city`
-#' in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+#' If you set the `language` parameter to `el`, for Greek, then the `city` in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
 #' 
-#' If the data provider does not have a value for Greek, the result will be
-#' in a language that the provider does support.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -2388,84 +2168,48 @@ locationservice_search_place_index_for_position <- function(IndexName, Position,
 }
 .locationservice$operations$search_place_index_for_position <- locationservice_search_place_index_for_position
 
-#' Generates suggestions for addresses and points of interest based on
-#' partial or misspelled free-form text
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to `Suggest` or `Autocomplete` unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
-#' @param Text &#91;required&#93; The free-form partial text to use to generate place suggestions. For
-#' example, `eiffel tow`.
-#' @param BiasPosition An optional parameter that indicates a preference for place suggestions
-#' that are closer to a specified position.
+#' @param Text &#91;required&#93; The free-form partial text to use to generate place suggestions. For example, `eiffel tow`.
+#' @param BiasPosition An optional parameter that indicates a preference for place suggestions that are closer to a specified position.
 #' 
-#' If provided, this parameter must contain a pair of numbers. The first
-#' number represents the X coordinate, or longitude; the second number
-#' represents the Y coordinate, or latitude.
+#' If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude.
 #' 
-#' For example, `[-123.1174, 49.2847]` represents the position with
-#' longitude `-123.1174` and latitude `49.2847`.
+#' For example, `[-123.1174, 49.2847]` represents the position with longitude `-123.1174` and latitude `49.2847`.
 #' 
-#' `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying both
-#' options results in an error.
-#' @param FilterBBox An optional parameter that limits the search results by returning only
-#' suggestions within a specified bounding box.
+#' `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying both options results in an error.
+#' @param FilterBBox An optional parameter that limits the search results by returning only suggestions within a specified bounding box.
 #' 
-#' If provided, this parameter must contain a total of four consecutive
-#' numbers in two pairs. The first pair of numbers represents the X and Y
-#' coordinates (longitude and latitude, respectively) of the southwest
-#' corner of the bounding box; the second pair of numbers represents the X
-#' and Y coordinates (longitude and latitude, respectively) of the
-#' northeast corner of the bounding box.
+#' If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box.
 #' 
-#' For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
-#' bounding box where the southwest corner has longitude `-12.7935` and
-#' latitude `-37.4835`, and the northeast corner has longitude `-12.0684`
-#' and latitude `-36.9542`.
+#' For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a bounding box where the southwest corner has longitude `-12.7935` and latitude `-37.4835`, and the northeast corner has longitude `-12.0684` and latitude `-36.9542`.
 #' 
-#' `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying both
-#' options results in an error.
-#' @param FilterCountries An optional parameter that limits the search results by returning only
-#' suggestions within the provided list of countries.
+#' `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying both options results in an error.
+#' @param FilterCountries An optional parameter that limits the search results by returning only suggestions within the provided list of countries.
 #' 
-#' -   Use the [ISO 3166](https://www.iso.org/iso-3166-country-codes.html)
-#'     3-digit country code. For example, Australia uses three upper-case
-#'     characters: `AUS`.
-#' @param MaxResults An optional parameter. The maximum number of results returned per
-#' request.
+#' -   Use the [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) 3-digit country code. For example, Australia uses three upper-case characters: `AUS`.
+#' @param MaxResults An optional parameter. The maximum number of results returned per request.
 #' 
 #' The default: `5`
-#' @param Language The preferred language used to return results. The value must be a valid
-#' BCP 47 language tag, for example, `en` for English.
+#' @param Language The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, `en` for English.
 #' 
-#' This setting affects the languages used in the results. If no language
-#' is specified, or not supported for a particular result, the partner
-#' automatically chooses a language for the result.
+#' This setting affects the languages used in the results. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 #' 
-#' For an example, we'll use the Greek language. You search for
-#' `Athens, Gr` to get suggestions with the `language` parameter set to
-#' `en`. The results found will most likely be returned as
-#' `Athens, Greece`.
+#' For an example, we'll use the Greek language. You search for `Athens, Gr` to get suggestions with the `language` parameter set to `en`. The results found will most likely be returned as `Athens, Greece`.
 #' 
-#' If you set the `language` parameter to `el`, for Greek, then the result
-#' found will more likely be returned as \eqn{A\Theta\eta\nu\sigma, E\lambda\lambda\alpha\delta}.
+#' If you set the `language` parameter to `el`, for Greek, then the result found will more likely be returned as \eqn{A\Theta\eta\nu\sigma, E\lambda\lambda\alpha\delta}.
 #' 
-#' If the data provider does not have a value for Greek, the result will be
-#' in a language that the provider does support.
-#' @param FilterCategories A list of one or more Amazon Location categories to filter the returned
-#' places. If you include more than one category, the results will include
-#' results that match *any* of the categories listed.
+#' If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+#' @param FilterCategories A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match *any* of the categories listed.
 #' 
-#' For more information about using categories, including a list of Amazon
-#' Location categories, see [Categories and
-#' filtering](https://docs.aws.amazon.com/location/latest/developerguide/),
-#' in the *Amazon Location Service Developer Guide*.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' For more information about using categories, including a list of Amazon Location categories, see [Categories and filtering](https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html), in the *Amazon Location Service developer guide*.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -2489,85 +2233,48 @@ locationservice_search_place_index_for_suggestions <- function(IndexName, Text, 
 }
 .locationservice$operations$search_place_index_for_suggestions <- locationservice_search_place_index_for_suggestions
 
-#' Geocodes free-form text, such as an address, name, city, or region to
-#' allow you to search for Places or points of interest
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Geocodes free-form text, such as an address, name, city, or region to allow you to search for Places or points of interest.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to `Geocode` or `SearchText` unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_text/](https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_text/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource you want to use for the search.
-#' @param Text &#91;required&#93; The address, name, city, or region to be used in the search in free-form
-#' text format. For example, `123 Any Street`.
-#' @param BiasPosition An optional parameter that indicates a preference for places that are
-#' closer to a specified position.
+#' @param Text &#91;required&#93; The address, name, city, or region to be used in the search in free-form text format. For example, `123 Any Street`.
+#' @param BiasPosition An optional parameter that indicates a preference for places that are closer to a specified position.
 #' 
-#' If provided, this parameter must contain a pair of numbers. The first
-#' number represents the X coordinate, or longitude; the second number
-#' represents the Y coordinate, or latitude.
+#' If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude.
 #' 
-#' For example, `[-123.1174, 49.2847]` represents the position with
-#' longitude `-123.1174` and latitude `49.2847`.
+#' For example, `[-123.1174, 49.2847]` represents the position with longitude `-123.1174` and latitude `49.2847`.
 #' 
-#' `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying both
-#' options results in an error.
-#' @param FilterBBox An optional parameter that limits the search results by returning only
-#' places that are within the provided bounding box.
+#' `BiasPosition` and `FilterBBox` are mutually exclusive. Specifying both options results in an error.
+#' @param FilterBBox An optional parameter that limits the search results by returning only places that are within the provided bounding box.
 #' 
-#' If provided, this parameter must contain a total of four consecutive
-#' numbers in two pairs. The first pair of numbers represents the X and Y
-#' coordinates (longitude and latitude, respectively) of the southwest
-#' corner of the bounding box; the second pair of numbers represents the X
-#' and Y coordinates (longitude and latitude, respectively) of the
-#' northeast corner of the bounding box.
+#' If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box.
 #' 
-#' For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a
-#' bounding box where the southwest corner has longitude `-12.7935` and
-#' latitude `-37.4835`, and the northeast corner has longitude `-12.0684`
-#' and latitude `-36.9542`.
+#' For example, `[-12.7935, -37.4835, -12.0684, -36.9542]` represents a bounding box where the southwest corner has longitude `-12.7935` and latitude `-37.4835`, and the northeast corner has longitude `-12.0684` and latitude `-36.9542`.
 #' 
-#' `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying both
-#' options results in an error.
-#' @param FilterCountries An optional parameter that limits the search results by returning only
-#' places that are in a specified list of countries.
+#' `FilterBBox` and `BiasPosition` are mutually exclusive. Specifying both options results in an error.
+#' @param FilterCountries An optional parameter that limits the search results by returning only places that are in a specified list of countries.
 #' 
-#' -   Valid values include [ISO
-#'     3166](https://www.iso.org/iso-3166-country-codes.html) 3-digit
-#'     country codes. For example, Australia uses three upper-case
-#'     characters: `AUS`.
-#' @param MaxResults An optional parameter. The maximum number of results returned per
-#' request.
+#' -   Valid values include [ISO 3166](https://www.iso.org/iso-3166-country-codes.html) 3-digit country codes. For example, Australia uses three upper-case characters: `AUS`.
+#' @param MaxResults An optional parameter. The maximum number of results returned per request.
 #' 
 #' The default: `50`
-#' @param Language The preferred language used to return results. The value must be a valid
-#' BCP 47 language tag, for example, `en` for English.
+#' @param Language The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, `en` for English.
 #' 
-#' This setting affects the languages used in the results, but not the
-#' results themselves. If no language is specified, or not supported for a
-#' particular result, the partner automatically chooses a language for the
-#' result.
+#' This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 #' 
-#' For an example, we'll use the Greek language. You search for
-#' `Athens, Greece`, with the `language` parameter set to `en`. The result
-#' found will most likely be returned as `Athens`.
+#' For an example, we'll use the Greek language. You search for `Athens, Greece`, with the `language` parameter set to `en`. The result found will most likely be returned as `Athens`.
 #' 
-#' If you set the `language` parameter to `el`, for Greek, then the result
-#' found will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+#' If you set the `language` parameter to `el`, for Greek, then the result found will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
 #' 
-#' If the data provider does not have a value for Greek, the result will be
-#' in a language that the provider does support.
-#' @param FilterCategories A list of one or more Amazon Location categories to filter the returned
-#' places. If you include more than one category, the results will include
-#' results that match *any* of the categories listed.
+#' If the data provider does not have a value for Greek, the result will be in a language that the provider does support.
+#' @param FilterCategories A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match *any* of the categories listed.
 #' 
-#' For more information about using categories, including a list of Amazon
-#' Location categories, see [Categories and
-#' filtering](https://docs.aws.amazon.com/location/latest/developerguide/),
-#' in the *Amazon Location Service Developer Guide*.
-#' @param Key The optional [API
-#' key](https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-#' to authorize the request.
+#' For more information about using categories, including a list of Amazon Location categories, see [Categories and filtering](https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html), in the *Amazon Location Service developer guide*.
+#' @param Key The optional [API key](https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html) to authorize the request.
 #'
 #' @keywords internal
 #'
@@ -2591,6 +2298,50 @@ locationservice_search_place_index_for_text <- function(IndexName, Text, BiasPos
 }
 .locationservice$operations$search_place_index_for_text <- locationservice_search_place_index_for_text
 
+#' StartJob starts a new asynchronous bulk processing job
+#'
+#' @description
+#' [`start_job`][locationservice_start_job] starts a new asynchronous bulk processing job. You specify the input data location in Amazon S3, the action to perform, and the output location where results are written.
+#'
+#' See [https://www.paws-r-sdk.com/docs/locationservice_start_job/](https://www.paws-r-sdk.com/docs/locationservice_start_job/) for full documentation.
+#'
+#' @param ClientToken A unique identifier for this request to ensure idempotency.
+#' @param Action &#91;required&#93; The action to perform on the input data.
+#' @param ActionOptions Additional parameters that can be requested for each result.
+#' @param ExecutionRoleArn &#91;required&#93; The Amazon Resource Name (ARN) of the IAM role that Amazon Location Service assumes during job processing. Amazon Location Service uses this role to access the input and output locations specified for the job.
+#' 
+#' The IAM role must be created in the same Amazon Web Services account where you plan to run your job.
+#' 
+#' For more information about configuring IAM roles for Amazon Location jobs, see [Configure IAM permissions](https://docs.aws.amazon.com/location/latest/developerguide/configure-iam-role-policy-credentials.html) in the *Amazon Location Service Developer Guide*.
+#' @param InputOptions &#91;required&#93; Configuration for input data location and format.
+#' 
+#' Input files have a limitation of 10gb per file, and 1gb per Parquet row-group within the file.
+#' @param Name An optional name for the job resource.
+#' @param OutputOptions &#91;required&#93; Configuration for output data location and format.
+#' @param Tags Tags and corresponding values to be associated with the job.
+#'
+#' @keywords internal
+#'
+#' @rdname locationservice_start_job
+locationservice_start_job <- function(ClientToken = NULL, Action, ActionOptions = NULL, ExecutionRoleArn, InputOptions, Name = NULL, OutputOptions, Tags = NULL) {
+  op <- new_operation(
+    name = "StartJob",
+    http_method = "POST",
+    http_path = "/metadata/v0/jobs",
+    host_prefix = "metadata.",
+    paginator = list(),
+    stream_api = FALSE
+  )
+  input <- .locationservice$start_job_input(ClientToken = ClientToken, Action = Action, ActionOptions = ActionOptions, ExecutionRoleArn = ExecutionRoleArn, InputOptions = InputOptions, Name = Name, OutputOptions = OutputOptions, Tags = Tags)
+  output <- .locationservice$start_job_output()
+  config <- get_config()
+  svc <- .locationservice$service(config, op)
+  request <- new_request(svc, op, input, output)
+  response <- send_request(request)
+  return(response)
+}
+.locationservice$operations$start_job <- locationservice_start_job
+
 #' Assigns one or more tags (key-value pairs) to the specified Amazon
 #' Location Service resource
 #'
@@ -2599,13 +2350,10 @@ locationservice_search_place_index_for_text <- function(IndexName, Text, BiasPos
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_tag_resource/](https://www.paws-r-sdk.com/docs/locationservice_tag_resource/) for full documentation.
 #'
-#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to
-#' update.
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource whose tags you want to update.
 #' 
-#' -   Format example:
-#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
-#' @param Tags &#91;required&#93; Applies one or more tags to specific resource. A tag is a key-value pair
-#' that helps you manage, identify, search, and filter your resources.
+#' -   Format example: `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' @param Tags &#91;required&#93; Applies one or more tags to specific resource. A tag is a key-value pair that helps you manage, identify, search, and filter your resources.
 #' 
 #' Format: `"key" : "value"`
 #' 
@@ -2613,15 +2361,13 @@ locationservice_search_place_index_for_text <- function(IndexName, Text, BiasPos
 #' 
 #' -   Maximum 50 tags per resource.
 #' 
-#' -   Each tag key must be unique and must have exactly one associated
-#'     value.
+#' -   Each tag key must be unique and must have exactly one associated value.
 #' 
 #' -   Maximum key length: 128 Unicode characters in UTF-8.
 #' 
 #' -   Maximum value length: 256 Unicode characters in UTF-8.
 #' 
-#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-#'     characters: + - = . _ : / @@
+#' -   Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @@
 #' 
 #' -   Cannot use "aws:" as a prefix for a key.
 #'
@@ -2654,11 +2400,9 @@ locationservice_tag_resource <- function(ResourceArn, Tags) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_untag_resource/](https://www.paws-r-sdk.com/docs/locationservice_untag_resource/) for full documentation.
 #'
-#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource from which you want to
-#' remove tags.
+#' @param ResourceArn &#91;required&#93; The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
 #' 
-#' -   Format example:
-#'     `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
+#' -   Format example: `arn:aws:geo:region:account-id:resourcetype/ExampleResource`
 #' @param TagKeys &#91;required&#93; The list of tag keys to remove from the specified resource.
 #'
 #' @keywords internal
@@ -2691,8 +2435,7 @@ locationservice_untag_resource <- function(ResourceArn, TagKeys) {
 #' See [https://www.paws-r-sdk.com/docs/locationservice_update_geofence_collection/](https://www.paws-r-sdk.com/docs/locationservice_update_geofence_collection/) for full documentation.
 #'
 #' @param CollectionName &#91;required&#93; The name of the geofence collection to update.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param PricingPlanDataSource This parameter is no longer used.
 #' @param Description Updates the description for the geofence collection.
 #'
@@ -2727,16 +2470,11 @@ locationservice_update_geofence_collection <- function(CollectionName, PricingPl
 #'
 #' @param KeyName &#91;required&#93; The name of the API key resource to update.
 #' @param Description Updates the description for the API key resource.
-#' @param ExpireTime Updates the timestamp for when the API key resource will expire in [ISO
-#' 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format:
-#' `YYYY-MM-DDThh:mm:ss.sssZ`.
-#' @param NoExpiry Whether the API key should expire. Set to `true` to set the API key to
-#' have no expiration time.
-#' @param ForceUpdate The boolean flag to be included for updating `ExpireTime` or
-#' `Restrictions` details.
+#' @param ExpireTime Updates the timestamp for when the API key resource will expire in [ISO 8601](https://www.iso.org/iso-8601-date-and-time-format.html) format: `YYYY-MM-DDThh:mm:ss.sssZ`.
+#' @param NoExpiry Whether the API key should expire. Set to `true` to set the API key to have no expiration time.
+#' @param ForceUpdate The boolean flag to be included for updating `ExpireTime` or `Restrictions` details.
 #' 
-#' Must be set to `true` to update an API key resource that has been used
-#' in the past 7 days.
+#' Must be set to `true` to update an API key resource that has been used in the past 7 days.
 #' 
 #' `False` if force update is not preferred
 #' 
@@ -2765,19 +2503,17 @@ locationservice_update_key <- function(KeyName, Description = NULL, ExpireTime =
 }
 .locationservice$operations$update_key <- locationservice_update_key
 
-#' Updates the specified properties of a given map resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Updates the specified properties of a given map resource.
+#' This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require `Grab` data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_update_map/](https://www.paws-r-sdk.com/docs/locationservice_update_map/) for full documentation.
 #'
 #' @param MapName &#91;required&#93; The name of the map resource to update.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description Updates the description for the map resource.
-#' @param ConfigurationUpdate Updates the parts of the map configuration that can be updated,
-#' including the political view.
+#' @param ConfigurationUpdate Updates the parts of the map configuration that can be updated, including the political view.
 #'
 #' @keywords internal
 #'
@@ -2801,16 +2537,15 @@ locationservice_update_map <- function(MapName, PricingPlan = NULL, Description 
 }
 .locationservice$operations$update_map <- locationservice_update_map
 
-#' Updates the specified properties of a given place index resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Updates the specified properties of a given place index resource.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Places API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_update_place_index/](https://www.paws-r-sdk.com/docs/locationservice_update_place_index/) for full documentation.
 #'
 #' @param IndexName &#91;required&#93; The name of the place index resource to update.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description Updates the description for the place index resource.
 #' @param DataSourceConfiguration Updates the data storage option for the place index resource.
 #'
@@ -2836,16 +2571,15 @@ locationservice_update_place_index <- function(IndexName, PricingPlan = NULL, De
 }
 .locationservice$operations$update_place_index <- locationservice_update_place_index
 
-#' Updates the specified properties for a given route calculator resource
+#' This operation is no longer current and may be deprecated in the future
 #'
 #' @description
-#' Updates the specified properties for a given route calculator resource.
+#' This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the Routes API V2 unless you require Grab data.
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_update_route_calculator/](https://www.paws-r-sdk.com/docs/locationservice_update_route_calculator/) for full documentation.
 #'
 #' @param CalculatorName &#91;required&#93; The name of the route calculator resource to update.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param Description Updates the description for the route calculator resource.
 #'
 #' @keywords internal
@@ -2878,45 +2612,22 @@ locationservice_update_route_calculator <- function(CalculatorName, PricingPlan 
 #' See [https://www.paws-r-sdk.com/docs/locationservice_update_tracker/](https://www.paws-r-sdk.com/docs/locationservice_update_tracker/) for full documentation.
 #'
 #' @param TrackerName &#91;required&#93; The name of the tracker resource to update.
-#' @param PricingPlan No longer used. If included, the only allowed value is
-#' `RequestBasedUsage`.
+#' @param PricingPlan No longer used. If included, the only allowed value is `RequestBasedUsage`.
 #' @param PricingPlanDataSource This parameter is no longer used.
 #' @param Description Updates the description for the tracker resource.
 #' @param PositionFiltering Updates the position filtering for the tracker resource.
 #' 
 #' Valid values:
 #' 
-#' -   `TimeBased` - Location updates are evaluated against linked geofence
-#'     collections, but not every location update is stored. If your update
-#'     frequency is more often than 30 seconds, only one update per 30
-#'     seconds is stored for each unique device ID.
+#' -   `TimeBased` - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.
 #' 
-#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft),
-#'     location updates are ignored. Location updates within this distance
-#'     are neither evaluated against linked geofence collections, nor
-#'     stored. This helps control costs by reducing the number of geofence
-#'     evaluations and historical device positions to paginate through.
-#'     Distance-based filtering can also reduce the effects of GPS noise
-#'     when displaying device trajectories on a map.
+#' -   `DistanceBased` - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.
 #' 
-#' -   `AccuracyBased` - If the device has moved less than the measured
-#'     accuracy, location updates are ignored. For example, if two
-#'     consecutive updates from a device have a horizontal accuracy of 5 m
-#'     and 10 m, the second update is ignored if the device has moved less
-#'     than 15 m. Ignored location updates are neither evaluated against
-#'     linked geofence collections, nor stored. This helps educe the
-#'     effects of GPS noise when displaying device trajectories on a map,
-#'     and can help control costs by reducing the number of geofence
-#'     evaluations.
-#' @param EventBridgeEnabled Whether to enable position `UPDATE` events from this tracker to be sent
-#' to EventBridge.
+#' -   `AccuracyBased` - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations.
+#' @param EventBridgeEnabled Whether to enable position `UPDATE` events from this tracker to be sent to EventBridge.
 #' 
-#' You do not need enable this feature to get `ENTER` and `EXIT` events for
-#' geofences with this tracker. Those events are always sent to
-#' EventBridge.
-#' @param KmsKeyEnableGeospatialQueries Enables `GeospatialQueries` for a tracker that uses a [Amazon Web
-#' Services KMS customer managed
-#' key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
+#' You do not need enable this feature to get `ENTER` and `EXIT` events for geofences with this tracker. Those events are always sent to EventBridge.
+#' @param KmsKeyEnableGeospatialQueries Enables `GeospatialQueries` for a tracker that uses a [Amazon Web Services KMS customer managed key](https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html).
 #' 
 #' This parameter is only used if you are using a KMS customer managed key.
 #'
@@ -2951,10 +2662,8 @@ locationservice_update_tracker <- function(TrackerName, PricingPlan = NULL, Pric
 #'
 #' See [https://www.paws-r-sdk.com/docs/locationservice_verify_device_position/](https://www.paws-r-sdk.com/docs/locationservice_verify_device_position/) for full documentation.
 #'
-#' @param TrackerName &#91;required&#93; The name of the tracker resource to be associated with verification
-#' request.
-#' @param DeviceState &#91;required&#93; The device's state, including position, IP address, cell signals and
-#' Wi-Fi access points.
+#' @param TrackerName &#91;required&#93; The name of the tracker resource to be associated with verification request.
+#' @param DeviceState &#91;required&#93; The device's state, including position, IP address, cell signals and Wi-Fi access points.
 #' @param DistanceUnit The distance unit for the verification request.
 #' 
 #' Default Value: `Kilometers`

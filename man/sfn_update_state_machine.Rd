@@ -27,14 +27,11 @@ sfn_update_state_machine(
 
 \item{tracingConfiguration}{Selects whether X-Ray tracing is enabled.}
 
-\item{publish}{Specifies whether the state machine version is published. The default is
-\code{false}. To publish a version after updating the state machine, set
-\code{publish} to \code{true}.}
+\item{publish}{Specifies whether the state machine version is published. The default is \code{false}. To publish a version after updating the state machine, set \code{publish} to \code{true}.}
 
 \item{versionDescription}{An optional description of the state machine version to publish.
 
-You can only specify the \code{versionDescription} parameter if you've set
-\code{publish} to \code{true}.}
+You can only specify the \code{versionDescription} parameter if you've set \code{publish} to \code{true}.}
 
 \item{encryptionConfiguration}{Settings to configure server-side encryption.}
 }

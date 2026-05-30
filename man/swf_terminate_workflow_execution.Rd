@@ -25,26 +25,16 @@ swf_terminate_workflow_execution(
 
 \item{details}{Details for terminating the workflow execution.}
 
-\item{childPolicy}{If set, specifies the policy to use for the child workflow executions of
-the workflow execution being terminated. This policy overrides the child
-policy specified for the workflow execution at registration time or when
-starting the execution.
+\item{childPolicy}{If set, specifies the policy to use for the child workflow executions of the workflow execution being terminated. This policy overrides the child policy specified for the workflow execution at registration time or when starting the execution.
 
 The supported child policies are:
 \itemize{
 \item \code{TERMINATE} – The child executions are terminated.
-\item \code{REQUEST_CANCEL} – A request to cancel is attempted for each child
-execution by recording a \code{WorkflowExecutionCancelRequested} event in
-its history. It is up to the decider to take appropriate actions
-when it receives an execution history with this event.
-\item \code{ABANDON} – No action is taken. The child executions continue to
-run.
+\item \code{REQUEST_CANCEL} – A request to cancel is attempted for each child execution by recording a \code{WorkflowExecutionCancelRequested} event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+\item \code{ABANDON} – No action is taken. The child executions continue to run.
 }
 
-A child policy for this workflow execution must be specified either as a
-default for the workflow type or through this parameter. If neither this
-parameter is set nor a default child policy was specified at
-registration time then a fault is returned.}
+A child policy for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default child policy was specified at registration time then a fault is returned.}
 }
 \description{
 Records a \code{WorkflowExecutionTerminated} event and forces closure of the workflow execution identified by the given domain, runId, and workflowId. The child policy, registered with the workflow type or specified when starting this execution, is applied to any open child workflow executions of this workflow execution.

@@ -2,9 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_create_map}
 \alias{locationservice_create_map}
-\title{Creates a map resource in your Amazon Web Services account, which
-provides map tiles of different styles sourced from global location data
-providers}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_create_map(
   MapName,
@@ -19,24 +17,18 @@ locationservice_create_map(
 
 Requirements:
 \itemize{
-\item Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens
-(-), periods (.), and underscores (_).
+\item Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 \item Must be a unique map resource name.
 \item No spaces allowed. For example, \code{ExampleMap}.
 }}
 
-\item{Configuration}{[required] Specifies the \code{MapConfiguration}, including the map style, for the map
-resource that you create. The map style defines the look of maps and the
-data provider for your map resource.}
+\item{Configuration}{[required] Specifies the \code{MapConfiguration}, including the map style, for the map resource that you create. The map style defines the look of maps and the data provider for your map resource.}
 
-\item{PricingPlan}{No longer used. If included, the only allowed value is
-\code{RequestBasedUsage}.}
+\item{PricingPlan}{No longer used. If included, the only allowed value is \code{RequestBasedUsage}.}
 
 \item{Description}{An optional description for the map resource.}
 
-\item{Tags}{Applies one or more tags to the map resource. A tag is a key-value pair
-helps manage, identify, search, and filter your resources by labelling
-them.
+\item{Tags}{Applies one or more tags to the map resource. A tag is a key-value pair helps manage, identify, search, and filter your resources by labelling them.
 
 Format: \code{"key" : "value"}
 
@@ -46,13 +38,12 @@ Restrictions:
 \item Each resource tag must be unique with a maximum of one value.
 \item Maximum key length: 128 Unicode characters in UTF-8
 \item Maximum value length: 256 Unicode characters in UTF-8
-\item Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-characters: + - = . _ : / @.
+\item Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.
 \item Cannot use "aws:" as a prefix for a key.
 }}
 }
 \description{
-Creates a map resource in your Amazon Web Services account, which provides map tiles of different styles sourced from global location data providers.
+This operation is no longer current and may be deprecated in the future. We recommend upgrading to the Maps API V2 unless you require \code{Grab} data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_create_map/} for full documentation.
 }

@@ -13,19 +13,11 @@ sfn_publish_state_machine_version(
 \arguments{
 \item{stateMachineArn}{[required] The Amazon Resource Name (ARN) of the state machine.}
 
-\item{revisionId}{Only publish the state machine version if the current state machine's
-revision ID matches the specified ID.
+\item{revisionId}{Only publish the state machine version if the current state machine's revision ID matches the specified ID.
 
-Use this option to avoid publishing a version if the state machine
-changed since you last updated it. If the specified revision ID doesn't
-match the state machine's current revision ID, the API returns
-\code{ConflictException}.
+Use this option to avoid publishing a version if the state machine changed since you last updated it. If the specified revision ID doesn't match the state machine's current revision ID, the API returns \code{ConflictException}.
 
-To specify an initial revision ID for a state machine with no revision
-ID assigned, specify the string \code{INITIAL} for the \code{revisionId}
-parameter. For example, you can specify a \code{revisionID} of \code{INITIAL} when
-you create a state machine using the
-\code{\link[=sfn_create_state_machine]{create_state_machine}} API action.}
+To specify an initial revision ID for a state machine with no revision ID assigned, specify the string \code{INITIAL} for the \code{revisionId} parameter. For example, you can specify a \code{revisionID} of \code{INITIAL} when you create a state machine using the \code{\link[=sfn_create_state_machine]{create_state_machine}} API action.}
 
 \item{description}{An optional description of the state machine version.}
 }

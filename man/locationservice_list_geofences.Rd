@@ -13,8 +13,7 @@ locationservice_list_geofences(
 \arguments{
 \item{CollectionName}{[required] The name of the geofence collection storing the list of geofences.}
 
-\item{NextToken}{The pagination token specifying which page of results to return in the
-response. If no token is provided, the default page is the first page.
+\item{NextToken}{The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 
 Default value: \code{null}}
 

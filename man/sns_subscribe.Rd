@@ -23,108 +23,65 @@ sns_subscribe(
 \item \code{email-json} – delivery of JSON-encoded message via SMTP
 \item \code{sms} – delivery of message via SMS
 \item \code{sqs} – delivery of JSON-encoded message to an Amazon SQS queue
-\item \code{application} – delivery of JSON-encoded message to an EndpointArn
-for a mobile app and device
+\item \code{application} – delivery of JSON-encoded message to an EndpointArn for a mobile app and device
 \item \code{lambda} – delivery of JSON-encoded message to an Lambda function
-\item \code{firehose} – delivery of JSON-encoded message to an Amazon Kinesis
-Data Firehose delivery stream.
+\item \code{firehose} – delivery of JSON-encoded message to an Amazon Data Firehose delivery stream.
 }}
 
-\item{Endpoint}{The endpoint that you want to receive notifications. Endpoints vary by
-protocol:
+\item{Endpoint}{The endpoint that you want to receive notifications. Endpoints vary by protocol:
 \itemize{
-\item For the \code{http} protocol, the (public) endpoint is a URL beginning
-with \verb{http://}.
-\item For the \code{https} protocol, the (public) endpoint is a URL beginning
-with \verb{https://}.
+\item For the \code{http} protocol, the (public) endpoint is a URL beginning with \verb{http://}.
+\item For the \code{https} protocol, the (public) endpoint is a URL beginning with \verb{https://}.
 \item For the \code{email} protocol, the endpoint is an email address.
 \item For the \code{email-json} protocol, the endpoint is an email address.
-\item For the \code{sms} protocol, the endpoint is a phone number of an
-SMS-enabled device.
-\item For the \code{sqs} protocol, the endpoint is the ARN of an Amazon SQS
-queue.
-\item For the \code{application} protocol, the endpoint is the EndpointArn of a
-mobile app and device.
-\item For the \code{lambda} protocol, the endpoint is the ARN of an Lambda
-function.
-\item For the \code{firehose} protocol, the endpoint is the ARN of an Amazon
-Kinesis Data Firehose delivery stream.
+\item For the \code{sms} protocol, the endpoint is a phone number of an SMS-enabled device.
+\item For the \code{sqs} protocol, the endpoint is the ARN of an Amazon SQS queue.
+\item For the \code{application} protocol, the endpoint is the EndpointArn of a mobile app and device.
+\item For the \code{lambda} protocol, the endpoint is the ARN of an Lambda function.
+\item For the \code{firehose} protocol, the endpoint is the ARN of an Amazon Data Firehose delivery stream.
 }}
 
 \item{Attributes}{A map of attributes with their corresponding values.
 
-The following lists the names, descriptions, and values of the special
-request parameters that the \code{\link[=sns_subscribe]{subscribe}} action uses:
+The following lists the names, descriptions, and values of the special request parameters that the \code{\link[=sns_subscribe]{subscribe}} action uses:
 \itemize{
-\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries
-failed deliveries to HTTP/S endpoints.
-\item \code{FilterPolicy} – The simple JSON object that lets your subscriber
-receive only a subset of messages, rather than receiving every
-message published to the topic.
-\item \code{FilterPolicyScope} – This attribute lets you choose the filtering
-scope by using one of the following string value types:
+\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.
+\item \code{FilterPolicy} – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.
+\item \code{FilterPolicyScope} – This attribute lets you choose the filtering scope by using one of the following string value types:
 \itemize{
-\item \code{MessageAttributes} (default) – The filter is applied on the
-message attributes.
+\item \code{MessageAttributes} (default) – The filter is applied on the message attributes.
 \item \code{MessageBody} – The filter is applied on the message body.
 }
-\item \code{RawMessageDelivery} – When set to \code{true}, enables raw message
-delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
-for the endpoints to process JSON formatting, which is otherwise
-created for Amazon SNS metadata.
-\item \code{RedrivePolicy} – When specified, sends undeliverable messages to
-the specified Amazon SQS dead-letter queue. Messages that can't be
-delivered due to client errors (for example, when the subscribed
-endpoint is unreachable) or server errors (for example, when the
-service that powers the subscribed endpoint becomes unavailable) are
-held in the dead-letter queue for further analysis or reprocessing.
+\item \code{RawMessageDelivery} – When set to \code{true}, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
+\item \code{RedrivePolicy} – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing.
 }
 
-The following attribute applies only to Amazon Data Firehose delivery
-stream subscriptions:
+The following attribute applies only to Amazon Data Firehose delivery stream subscriptions:
 \itemize{
-\item \code{SubscriptionRoleArn} – The ARN of the IAM role that has the
-following:
+\item \code{SubscriptionRoleArn} – The ARN of the IAM role that has the following:
 \itemize{
 \item Permission to write to the Firehose delivery stream
 \item Amazon SNS listed as a trusted entity
 }
 
-Specifying a valid ARN for this attribute is required for Firehose
-delivery stream subscriptions. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html}{Fanout to Firehose delivery streams}
-in the \emph{Amazon SNS Developer Guide}.
+Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html}{Fanout to Firehose delivery streams} in the \emph{Amazon SNS Developer Guide}.
 }
 
 The following attributes apply only to \href{https://docs.aws.amazon.com/sns/latest/dg/sns-fifo-topics.html}{FIFO topics}:
 \itemize{
-\item \code{ReplayPolicy} – Adds or updates an inline policy document for a
-subscription to replay messages stored in the specified Amazon SNS
-topic.
-\item \code{ReplayStatus} – Retrieves the status of the subscription message
-replay, which can be one of the following:
+\item \code{ReplayPolicy} – Adds or updates an inline policy document for a subscription to replay messages stored in the specified Amazon SNS topic.
+\item \code{ReplayStatus} – Retrieves the status of the subscription message replay, which can be one of the following:
 \itemize{
-\item \code{Completed} – The replay has successfully redelivered all
-messages, and is now delivering newly published messages. If an
-ending point was specified in the \code{ReplayPolicy} then the
-subscription will no longer receive newly published messages.
-\item \verb{In progress} – The replay is currently replaying the selected
-messages.
+\item \code{Completed} – The replay has successfully redelivered all messages, and is now delivering newly published messages. If an ending point was specified in the \code{ReplayPolicy} then the subscription will no longer receive newly published messages.
+\item \verb{In progress} – The replay is currently replaying the selected messages.
 \item \code{Failed} – The replay was unable to complete.
 \item \code{Pending} – The default state while the replay initiates.
 }
 }}
 
-\item{ReturnSubscriptionArn}{Sets whether the response from the \code{\link[=sns_subscribe]{subscribe}} request
-includes the subscription ARN, even if the subscription is not yet
-confirmed.
+\item{ReturnSubscriptionArn}{Sets whether the response from the \code{\link[=sns_subscribe]{subscribe}} request includes the subscription ARN, even if the subscription is not yet confirmed.
 
-If you set this parameter to \code{true}, the response includes the ARN in
-all cases, even if the subscription is not yet confirmed. In addition to
-the ARN for confirmed subscriptions, the response also includes the
-\verb{pending subscription} ARN value for subscriptions that aren't yet
-confirmed. A subscription becomes confirmed when the subscriber calls
-the \code{\link[=sns_confirm_subscription]{confirm_subscription}} action with a
-confirmation token.
+If you set this parameter to \code{true}, the response includes the ARN in all cases, even if the subscription is not yet confirmed. In addition to the ARN for confirmed subscriptions, the response also includes the \verb{pending subscription} ARN value for subscriptions that aren't yet confirmed. A subscription becomes confirmed when the subscriber calls the \code{\link[=sns_confirm_subscription]{confirm_subscription}} action with a confirmation token.
 
 The default value is \code{false}.}
 }

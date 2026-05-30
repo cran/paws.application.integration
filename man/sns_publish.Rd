@@ -21,145 +21,83 @@ sns_publish(
 \arguments{
 \item{TopicArn}{The topic you want to publish to.
 
-If you don't specify a value for the \code{TopicArn} parameter, you must
-specify a value for the \code{PhoneNumber} or \code{TargetArn} parameters.}
+If you don't specify a value for the \code{TopicArn} parameter, you must specify a value for the \code{PhoneNumber} or \code{TargetArn} parameters.}
 
-\item{TargetArn}{If you don't specify a value for the \code{TargetArn} parameter, you must
-specify a value for the \code{PhoneNumber} or \code{TopicArn} parameters.}
+\item{TargetArn}{If you don't specify a value for the \code{TargetArn} parameter, you must specify a value for the \code{PhoneNumber} or \code{TopicArn} parameters.}
 
-\item{PhoneNumber}{The phone number to which you want to deliver an SMS message. Use E.164
-format.
+\item{PhoneNumber}{The phone number to which you want to deliver an SMS message. Use E.164 format.
 
-If you don't specify a value for the \code{PhoneNumber} parameter, you must
-specify a value for the \code{TargetArn} or \code{TopicArn} parameters.}
+If you don't specify a value for the \code{PhoneNumber} parameter, you must specify a value for the \code{TargetArn} or \code{TopicArn} parameters.}
 
 \item{Message}{[required] The message you want to send.
 
-If you are publishing to a topic and you want to send the same message
-to all transport protocols, include the text of the message as a String
-value. If you want to send different messages for each transport
-protocol, set the value of the \code{MessageStructure} parameter to \code{json}
-and use a JSON object for the \code{Message} parameter.
+If you are publishing to a topic and you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the \code{MessageStructure} parameter to \code{json} and use a JSON object for the \code{Message} parameter.
 
 Constraints:
 \itemize{
-\item With the exception of SMS, messages must be UTF-8 encoded strings
-and at most 256 KB in size (262,144 bytes, not 262,144 characters).
-\item For SMS, each message can contain up to 140 characters. This
-character limit depends on the encoding schema. For example, an SMS
-message can contain 160 GSM characters, 140 ASCII characters, or 70
-UCS-2 characters.
+\item With the exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size (262,144 bytes, not 262,144 characters).
+\item For SMS, each message can contain up to 140 characters. This character limit depends on the encoding schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters.
 
-If you publish a message that exceeds this size limit, Amazon SNS
-sends the message as multiple messages, each fitting within the size
-limit. Messages aren't truncated mid-word but are cut off at
-whole-word boundaries.
+If you publish a message that exceeds this size limit, Amazon SNS sends the message as multiple messages, each fitting within the size limit. Messages aren't truncated mid-word but are cut off at whole-word boundaries.
 
-The total size limit for a single SMS \code{\link[=sns_publish]{publish}}
-action is 1,600 characters.
+The total size limit for a single SMS \code{\link[=sns_publish]{publish}} action is 1,600 characters.
 }
 
 JSON-specific constraints:
 \itemize{
-\item Keys in the JSON object that correspond to supported transport
-protocols must have simple JSON string values.
-\item The values will be parsed (unescaped) before they are used in
-outgoing messages.
-\item Outbound notifications are JSON encoded (meaning that the characters
-will be reescaped for sending).
-\item Values have a minimum length of 0 (the empty string, "", is
-allowed).
-\item Values have a maximum length bounded by the overall message size
-(so, including multiple protocols may limit message sizes).
+\item Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.
+\item The values will be parsed (unescaped) before they are used in outgoing messages.
+\item Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).
+\item Values have a minimum length of 0 (the empty string, "", is allowed).
+\item Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).
 \item Non-string values will cause the key to be ignored.
-\item Keys that do not correspond to supported transport protocols are
-ignored.
+\item Keys that do not correspond to supported transport protocols are ignored.
 \item Duplicate keys are not allowed.
-\item Failure to parse or validate any key or value in the message will
-cause the \code{\link[=sns_publish]{publish}} call to return an error (no
-partial delivery).
+\item Failure to parse or validate any key or value in the message will cause the \code{\link[=sns_publish]{publish}} call to return an error (no partial delivery).
 }}
 
-\item{Subject}{Optional parameter to be used as the "Subject" line when the message is
-delivered to email endpoints. This field will also be included, if
-present, in the standard JSON messages delivered to other endpoints.
+\item{Subject}{Optional parameter to be used as the "Subject" line when the message is delivered to email endpoints. This field will also be included, if present, in the standard JSON messages delivered to other endpoints.
 
-Constraints: Subjects must be UTF-8 text with no line breaks or control
-characters, and less than 100 characters long.}
+Constraints: Subjects must be UTF-8 text with no line breaks or control characters, and less than 100 characters long.}
 
-\item{MessageStructure}{Set \code{MessageStructure} to \code{json} if you want to send a different message
-for each protocol. For example, using one publish action, you can send a
-short message to your SMS subscribers and a longer message to your email
-subscribers. If you set \code{MessageStructure} to \code{json}, the value of the
-\code{Message} parameter must:
+\item{MessageStructure}{Set \code{MessageStructure} to \code{json} if you want to send a different message for each protocol. For example, using one publish action, you can send a short message to your SMS subscribers and a longer message to your email subscribers. If you set \code{MessageStructure} to \code{json}, the value of the \code{Message} parameter must:
 \itemize{
 \item be a syntactically valid JSON object; and
-\item contain at least a top-level JSON key of "default" with a value that
-is a string.
+\item contain at least a top-level JSON key of "default" with a value that is a string.
 }
 
-You can define other top-level keys that define the message you want to
-send to a specific transport protocol (e.g., "http").
+You can define other top-level keys that define the message you want to send to a specific transport protocol (e.g., "http").
 
 Valid value: \code{json}}
 
 \item{MessageAttributes}{Message attributes for Publish action.}
 
 \item{MessageDeduplicationId}{\itemize{
-\item This parameter applies only to FIFO (first-in-first-out) topics. The
-\code{MessageDeduplicationId} can contain up to 128 alphanumeric
-characters \verb{(a-z, A-Z, 0-9)} and punctuation
-\verb{(!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~)}.
-\item Every message must have a unique \code{MessageDeduplicationId}, which is
-a token used for deduplication of sent messages within the 5 minute
-minimum deduplication interval.
-\item The scope of deduplication depends on the \code{FifoThroughputScope}
-attribute, when set to \code{Topic} the message deduplication scope is
-across the entire topic, when set to \code{MessageGroup} the message
-deduplication scope is within each individual message group.
-\item If a message with a particular \code{MessageDeduplicationId} is sent
-successfully, subsequent messages within the deduplication scope and
-interval, with the same \code{MessageDeduplicationId}, are accepted
-successfully but aren't delivered.
+\item This parameter applies only to FIFO (first-in-first-out) topics. The \code{MessageDeduplicationId} can contain up to 128 alphanumeric characters \verb{(a-z, A-Z, 0-9)} and punctuation \verb{(!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~)}.
+\item Every message must have a unique \code{MessageDeduplicationId}, which is a token used for deduplication of sent messages within the 5 minute minimum deduplication interval.
+\item The scope of deduplication depends on the \code{FifoThroughputScope} attribute, when set to \code{Topic} the message deduplication scope is across the entire topic, when set to \code{MessageGroup} the message deduplication scope is within each individual message group.
+\item If a message with a particular \code{MessageDeduplicationId} is sent successfully, subsequent messages within the deduplication scope and interval, with the same \code{MessageDeduplicationId}, are accepted successfully but aren't delivered.
 \item Every message must have a unique \code{MessageDeduplicationId}:
 \itemize{
 \item You may provide a \code{MessageDeduplicationId} explicitly.
-\item If you aren't able to provide a \code{MessageDeduplicationId} and you
-enable \code{ContentBasedDeduplication} for your topic, Amazon SNS
-uses a SHA-256 hash to generate the \code{MessageDeduplicationId}
-using the body of the message (but not the attributes of the
-message).
-\item If you don't provide a \code{MessageDeduplicationId} and the topic
-doesn't have \code{ContentBasedDeduplication} set, the action fails
-with an error.
-\item If the topic has a \code{ContentBasedDeduplication} set, your
-\code{MessageDeduplicationId} overrides the generated one.
+\item If you aren't able to provide a \code{MessageDeduplicationId} and you enable \code{ContentBasedDeduplication} for your topic, Amazon SNS uses a SHA-256 hash to generate the \code{MessageDeduplicationId} using the body of the message (but not the attributes of the message).
+\item If you don't provide a \code{MessageDeduplicationId} and the topic doesn't have \code{ContentBasedDeduplication} set, the action fails with an error.
+\item If the topic has a \code{ContentBasedDeduplication} set, your \code{MessageDeduplicationId} overrides the generated one.
 }
-\item When \code{ContentBasedDeduplication} is in effect, messages with
-identical content sent within the deduplication scope and interval
-are treated as duplicates and only one copy of the message is
-delivered.
-\item If you send one message with \code{ContentBasedDeduplication} enabled,
-and then another message with a \code{MessageDeduplicationId} that is the
-same as the one generated for the first \code{MessageDeduplicationId},
-the two messages are treated as duplicates, within the deduplication
-scope and interval, and only one copy of the message is delivered.
+\item When \code{ContentBasedDeduplication} is in effect, messages with identical content sent within the deduplication scope and interval are treated as duplicates and only one copy of the message is delivered.
+\item If you send one message with \code{ContentBasedDeduplication} enabled, and then another message with a \code{MessageDeduplicationId} that is the same as the one generated for the first \code{MessageDeduplicationId}, the two messages are treated as duplicates, within the deduplication scope and interval, and only one copy of the message is delivered.
 }
 
 []: R:\%5C}
 
-\item{MessageGroupId}{This parameter applies only to FIFO (first-in-first-out) topics. The
-\code{MessageGroupId} can contain up to 128 alphanumeric characters
-\verb{(a-z, A-Z, 0-9)} and punctuation
-\verb{(!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~)}.
+\item{MessageGroupId}{The \code{MessageGroupId} can contain up to 128 alphanumeric characters \verb{(a-z, A-Z, 0-9)} and punctuation \verb{(!\\"#$\%&\\'()*+,-./:;<=>?@[\]^_\\`\{|\}~)}.
 
-The \code{MessageGroupId} is a tag that specifies that a message belongs to a
-specific message group. Messages that belong to the same message group
-are processed in a FIFO manner (however, messages in different message
-groups might be processed out of order). Every message must include a
-\code{MessageGroupId}.
+For FIFO topics: The \code{MessageGroupId} is a tag that specifies that a message belongs to a specific message group. Messages that belong to the same message group are processed in a FIFO manner (however, messages in different message groups might be processed out of order). Every message must include a \code{MessageGroupId}.
 
-[]: R:\%5C}
+For standard topics: The \code{MessageGroupId} is optional and is forwarded only to Amazon SQS standard subscriptions to activate \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fair-queues.html}{fair queues}. The \code{MessageGroupId} is not used for, or sent to, any other endpoint types. When provided, the same validation rules apply as for FIFO topics.
+
+[]: R:\%5C
+[fair queues]: R:fair\%20queues}
 }
 \description{
 Sends a message to an Amazon SNS topic, a text message (SMS message) directly to a phone number, or a message to a mobile platform endpoint (when you specify the \code{TargetArn}).

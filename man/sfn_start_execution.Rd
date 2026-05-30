@@ -16,44 +16,26 @@ sfn_start_execution(
 
 The \code{stateMachineArn} parameter accepts one of the following inputs:
 \itemize{
-\item \strong{An unqualified state machine ARN} – Refers to a state machine ARN
-that isn't qualified with a version or alias ARN. The following is
-an example of an unqualified state machine ARN.
+\item \strong{An unqualified state machine ARN} – Refers to a state machine ARN that isn't qualified with a version or alias ARN. The following is an example of an unqualified state machine ARN.
 
 \verb{arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>}
 
-Step Functions doesn't associate state machine executions that you
-start with an unqualified ARN with a version. This is true even if
-that version uses the same revision that the execution used.
-\item \strong{A state machine version ARN} – Refers to a version ARN, which is
-a combination of state machine ARN and the version number separated
-by a colon (:). The following is an example of the ARN for version
-10.
+Step Functions doesn't associate state machine executions that you start with an unqualified ARN with a version. This is true even if that version uses the same revision that the execution used.
+\item \strong{A state machine version ARN} – Refers to a version ARN, which is a combination of state machine ARN and the version number separated by a colon (:). The following is an example of the ARN for version 10.
 
 \verb{arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine>:10}
 
-Step Functions doesn't associate executions that you start with a
-version ARN with any aliases that point to that version.
-\item \strong{A state machine alias ARN} – Refers to an alias ARN, which is a
-combination of state machine ARN and the alias name separated by a
-colon (:). The following is an example of the ARN for an alias named
-\code{PROD}.
+Step Functions doesn't associate executions that you start with a version ARN with any aliases that point to that version.
+\item \strong{A state machine alias ARN} – Refers to an alias ARN, which is a combination of state machine ARN and the alias name separated by a colon (:). The following is an example of the ARN for an alias named \code{PROD}.
 
 \verb{arn:<partition>:states:<region>:<account-id>:stateMachine:<myStateMachine:PROD>}
 
-Step Functions associates executions that you start with an alias
-ARN with that alias and the state machine version used for that
-execution.
+Step Functions associates executions that you start with an alias ARN with that alias and the state machine version used for that execution.
 }}
 
-\item{name}{Optional name of the execution. This name must be unique for your Amazon
-Web Services account, Region, and state machine for 90 days. For more
-information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions}{Limits Related to State Machine Executions}
-in the \emph{Step Functions Developer Guide}.
+\item{name}{Optional name of the execution. This name must be unique for your Amazon Web Services account, Region, and state machine for 90 days. For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/service-quotas.html#service-limits-state-machine-executions}{Limits Related to State Machine Executions} in the \emph{Step Functions Developer Guide}.
 
-If you don't provide a name for the execution, Step Functions
-automatically generates a universally unique identifier (UUID) as the
-execution name.
+If you don't provide a name for the execution, Step Functions automatically generates a universally unique identifier (UUID) as the execution name.
 
 A name must \emph{not} contain:
 \itemize{
@@ -61,27 +43,26 @@ A name must \emph{not} contain:
 \item brackets \verb{< > \{ \} [ ]}
 \item wildcard characters \verb{? *}
 \item special characters \verb{\\" # \% \\ ^ | ~ \\` $ & , ; : /}
-\item control characters (\verb{U+0000-001F}, \verb{U+007F-009F})
+\item control characters (\verb{U+0000-001F}, \verb{U+007F-009F}, \code{U+FFFE-FFFF})
+\item surrogates (\code{U+D800-DFFF})
+\item invalid characters (\verb{ U+10FFFF})
 }
 
-To enable logging with CloudWatch Logs, the name should only contain
-0-9, A-Z, a-z, - and _.
+To enable logging with CloudWatch Logs, the name should only contain 0-9, A-Z, a-z, - and _.
 
 [ ]: R:\%20}
 
-\item{input}{The string that contains the JSON input data for the execution, for
-example:
+\item{input}{The string that contains the JSON input data for the execution, for example:
 
-\verb{"input": "\{\\"first_name\\" : \\"test\\"\}"}
+\verb{"\{\\"first_name\\" : \\"Alejandro\\"\}"}
 
-If you don't include any JSON input data, you still must include the two
-braces, for example: \code{"input": "{}"}
+If you don't include any JSON input data, you still must include the two braces, for example: \code{"{}"}
 
-Length constraints apply to the payload size, and are expressed as bytes
-in UTF-8 encoding.}
+Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.}
 
-\item{traceHeader}{Passes the X-Ray trace header. The trace header can also be passed in
-the request payload.}
+\item{traceHeader}{Passes the X-Ray trace header. The trace header can also be passed in the request payload.
+
+For X-Ray traces, all Amazon Web Services services use the \code{X-Amzn-Trace-Id} header from the HTTP request. Using the header is the preferred mechanism to identify a trace. \code{\link[=sfn_start_execution]{start_execution}} and \code{\link[=sfn_start_sync_execution]{start_sync_execution}} API operations can also use \code{traceHeader} from the body of the request payload. If \strong{both} sources are provided, Step Functions will use the \strong{header value} (preferred) over the value in the request body.}
 }
 \description{
 Starts a state machine execution.

@@ -7,8 +7,7 @@
 sfn_untag_resource(resourceArn, tagKeys)
 }
 \arguments{
-\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or
-activity.}
+\item{resourceArn}{[required] The Amazon Resource Name (ARN) for the Step Functions state machine or activity.}
 
 \item{tagKeys}{[required] The list of tags to remove from the resource.}
 }

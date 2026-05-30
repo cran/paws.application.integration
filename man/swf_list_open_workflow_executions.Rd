@@ -19,42 +19,27 @@ swf_list_open_workflow_executions(
 \arguments{
 \item{domain}{[required] The name of the domain that contains the workflow executions to list.}
 
-\item{startTimeFilter}{[required] Workflow executions are included in the returned results based on
-whether their start times are within the range specified by this filter.}
+\item{startTimeFilter}{[required] Workflow executions are included in the returned results based on whether their start times are within the range specified by this filter.}
 
-\item{typeFilter}{If specified, only executions of the type specified in the filter are
-returned.
+\item{typeFilter}{If specified, only executions of the type specified in the filter are returned.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
 \item{tagFilter}{If specified, only executions that have the matching tag are listed.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 
-\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The
-value of \code{NextPageToken} is a unique pagination token for each page.
-Make the call again using the returned token to retrieve the next page.
-Keep all other arguments unchanged. Each pagination token expires after
-24 hours. Using an expired pagination token will return a \code{400} error:
-"\verb{Specified token has exceeded its maximum lifetime}".
+\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The value of \code{NextPageToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a \code{400} error: "\verb{Specified token has exceeded its maximum lifetime}".
 
-The configured \code{maximumPageSize} determines how many results can be
-returned in a single call.}
+The configured \code{maximumPageSize} determines how many results can be returned in a single call.}
 
-\item{maximumPageSize}{The maximum number of results that are returned per call. Use
-\code{nextPageToken} to obtain further pages of results.}
+\item{maximumPageSize}{The maximum number of results that are returned per call. Use \code{nextPageToken} to obtain further pages of results.}
 
-\item{reverseOrder}{When set to \code{true}, returns the results in reverse order. By default the
-results are returned in descending order of the start time of the
-executions.}
+\item{reverseOrder}{When set to \code{true}, returns the results in reverse order. By default the results are returned in descending order of the start time of the executions.}
 
-\item{executionFilter}{If specified, only workflow executions matching the workflow ID
-specified in the filter are returned.
+\item{executionFilter}{If specified, only workflow executions matching the workflow ID specified in the filter are returned.
 
-\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive.
-You can specify at most one of these in a request.}
+\code{executionFilter}, \code{typeFilter} and \code{tagFilter} are mutually exclusive. You can specify at most one of these in a request.}
 }
 \description{
 Returns a list of open workflow executions in the specified domain that meet the filtering criteria. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.

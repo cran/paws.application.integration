@@ -15,24 +15,15 @@ sfn_get_execution_history(
 \arguments{
 \item{executionArn}{[required] The Amazon Resource Name (ARN) of the execution.}
 
-\item{maxResults}{The maximum number of results that are returned per call. You can use
-\code{nextToken} to obtain further pages of results. The default is 100 and
-the maximum allowed page size is 1000. A value of 0 uses the default.
+\item{maxResults}{The maximum number of results that are returned per call. You can use \code{nextToken} to obtain further pages of results. The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.
 
-This is only an upper limit. The actual number of results returned per
-call might be fewer than the specified maximum.}
+This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.}
 
 \item{reverseOrder}{Lists events in descending order of their \code{timeStamp}.}
 
-\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value
-of \code{nextToken} is a unique pagination token for each page. Make the call
-again using the returned token to retrieve the next page. Keep all other
-arguments unchanged. Each pagination token expires after 24 hours. Using
-an expired pagination token will return an \emph{HTTP 400 InvalidToken}
-error.}
+\item{nextToken}{If \code{nextToken} is returned, there are more results available. The value of \code{nextToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an \emph{HTTP 400 InvalidToken} error.}
 
-\item{includeExecutionData}{You can select whether execution data (input or output of a history
-event) is returned. The default is \code{true}.}
+\item{includeExecutionData}{You can select whether execution data (input or output of a history event) is returned. The default is \code{true}.}
 }
 \description{
 Returns the history of the specified execution as a list of events. By default, the results are returned in ascending order of the \code{timeStamp} of the events. Use the \code{reverseOrder} parameter to get the latest events first.

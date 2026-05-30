@@ -18,9 +18,7 @@ Queue URLs and names are case-sensitive.}
 
 \item{NextToken}{Pagination token to request the next set of results.}
 
-\item{MaxResults}{Maximum number of results to include in the response. Value range is 1
-to 1000. You must set \code{MaxResults} to receive a value for \code{NextToken} in
-the response.}
+\item{MaxResults}{Maximum number of results to include in the response. Value range is 1 to 1000. You must set \code{MaxResults} to receive a value for \code{NextToken} in the response.}
 }
 \description{
 Returns a list of your queues that have the \code{RedrivePolicy} queue attribute configured with a dead-letter queue.

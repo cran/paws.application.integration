@@ -2,7 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_get_map_glyphs}
 \alias{locationservice_get_map_glyphs}
-\title{Retrieves glyphs used to display labels on a map}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_get_map_glyphs(
   MapName,
@@ -14,76 +14,41 @@ locationservice_get_map_glyphs(
 \arguments{
 \item{MapName}{[required] The map resource associated with the glyph file.}
 
-\item{FontStack}{[required] A comma-separated list of fonts to load glyphs from in order of
-preference. For example, \verb{Noto Sans Regular, Arial Unicode}.
+\item{FontStack}{[required] A comma-separated list of fonts to load glyphs from in order of preference. For example, \verb{Noto Sans Regular, Arial Unicode}.
 
-Valid font stacks for
-\href{https://docs.aws.amazon.com/location/latest/developerguide/}{Esri}
-styles:
+Valid font stacks for \href{https://docs.aws.amazon.com/location/previous/developerguide/esri.html}{Esri} styles:
 \itemize{
-\item VectorEsriDarkGrayCanvas – \verb{Ubuntu Medium Italic} | \verb{Ubuntu Medium}
-| \verb{Ubuntu Italic} | \verb{Ubuntu Regular} | \verb{Ubuntu Bold}
-\item VectorEsriLightGrayCanvas – \verb{Ubuntu Italic} | \verb{Ubuntu Regular} |
-\verb{Ubuntu Light} | \verb{Ubuntu Bold}
-\item VectorEsriTopographic – \verb{Noto Sans Italic} | \verb{Noto Sans Regular} |
-\verb{Noto Sans Bold} | \verb{Noto Serif Regular} |
-\verb{Roboto Condensed Light Italic}
+\item VectorEsriDarkGrayCanvas – \verb{Ubuntu Medium Italic} | \verb{Ubuntu Medium} | \verb{Ubuntu Italic} | \verb{Ubuntu Regular} | \verb{Ubuntu Bold}
+\item VectorEsriLightGrayCanvas – \verb{Ubuntu Italic} | \verb{Ubuntu Regular} | \verb{Ubuntu Light} | \verb{Ubuntu Bold}
+\item VectorEsriTopographic – \verb{Noto Sans Italic} | \verb{Noto Sans Regular} | \verb{Noto Sans Bold} | \verb{Noto Serif Regular} | \verb{Roboto Condensed Light Italic}
 \item VectorEsriStreets – \verb{Arial Regular} | \verb{Arial Italic} | \verb{Arial Bold}
-\item VectorEsriNavigation – \verb{Arial Regular} | \verb{Arial Italic} |
-\verb{Arial Bold}
+\item VectorEsriNavigation – \verb{Arial Regular} | \verb{Arial Italic} | \verb{Arial Bold}
 }
 
-Valid font stacks for \href{https://docs.aws.amazon.com/location/latest/developerguide/}{HERE Technologies}
-styles:
+Valid font stacks for \href{https://docs.aws.amazon.com/location/previous/developerguide/HERE.html}{HERE Technologies} styles:
 \itemize{
 \item VectorHereContrast – \verb{Fira GO Regular} | \verb{Fira GO Bold}
-\item VectorHereExplore, VectorHereExploreTruck,
-HybridHereExploreSatellite – \verb{Fira GO Italic} | \verb{Fira GO Map} |
-\verb{Fira GO Map Bold} | \verb{Noto Sans CJK JP Bold} |
-\verb{Noto Sans CJK JP Light} | \verb{Noto Sans CJK JP Regular}
+\item VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \verb{Fira GO Italic} | \verb{Fira GO Map} | \verb{Fira GO Map Bold} | \verb{Noto Sans CJK JP Bold} | \verb{Noto Sans CJK JP Light} | \verb{Noto Sans CJK JP Regular}
 }
 
-Valid font stacks for
-\href{https://docs.aws.amazon.com/location/latest/developerguide/}{GrabMaps}
-styles:
+Valid font stacks for \href{https://docs.aws.amazon.com/location/previous/developerguide/grab.html}{GrabMaps} styles:
 \itemize{
-\item VectorGrabStandardLight, VectorGrabStandardDark –
-\verb{Noto Sans Regular} | \verb{Noto Sans Medium} | \verb{Noto Sans Bold}
+\item VectorGrabStandardLight, VectorGrabStandardDark – \verb{Noto Sans Regular} | \verb{Noto Sans Medium} | \verb{Noto Sans Bold}
 }
 
-Valid font stacks for \href{https://docs.aws.amazon.com/location/latest/developerguide/}{Open Data}
-styles:
+Valid font stacks for \href{https://docs.aws.amazon.com/location/previous/developerguide/open-data.html}{Open Data} styles:
 \itemize{
-\item VectorOpenDataStandardLight, VectorOpenDataStandardDark,
-VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark –
-\verb{Amazon Ember Regular,Noto Sans Regular} |
-\verb{Amazon Ember Bold,Noto Sans Bold} |
-\verb{Amazon Ember Medium,Noto Sans Medium} |
-\verb{Amazon Ember Regular Italic,Noto Sans Italic} |
-\verb{Amazon Ember Condensed RC Regular,Noto Sans Regular} |
-\verb{Amazon Ember Condensed RC Bold,Noto Sans Bold} |
-\verb{Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular} |
-\verb{Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold}
-| \verb{Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold} |
-\verb{Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular}
-|
-\verb{Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular}
-| \verb{Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium}
+\item VectorOpenDataStandardLight, VectorOpenDataStandardDark, VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – \verb{Amazon Ember Regular,Noto Sans Regular} | \verb{Amazon Ember Bold,Noto Sans Bold} | \verb{Amazon Ember Medium,Noto Sans Medium} | \verb{Amazon Ember Regular Italic,Noto Sans Italic} | \verb{Amazon Ember Condensed RC Regular,Noto Sans Regular} | \verb{Amazon Ember Condensed RC Bold,Noto Sans Bold} | \verb{Amazon Ember Regular,Noto Sans Regular,Noto Sans Arabic Regular} | \verb{Amazon Ember Condensed RC Bold,Noto Sans Bold,Noto Sans Arabic Condensed Bold} | \verb{Amazon Ember Bold,Noto Sans Bold,Noto Sans Arabic Bold} | \verb{Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular} | \verb{Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed Regular} | \verb{Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium}
 }
 
-The fonts used by the Open Data map styles are combined fonts that use
-\verb{Amazon Ember} for most glyphs but \verb{Noto Sans} for glyphs unsupported by
-\verb{Amazon Ember}.}
+The fonts used by the Open Data map styles are combined fonts that use \verb{Amazon Ember} for most glyphs but \verb{Noto Sans} for glyphs unsupported by \verb{Amazon Ember}.}
 
-\item{FontUnicodeRange}{[required] A Unicode range of characters to download glyphs for. Each response will
-contain 256 characters. For example, 0–255 includes all characters from
-range \code{U+0000} to \verb{00FF}. Must be aligned to multiples of 256.}
+\item{FontUnicodeRange}{[required] A Unicode range of characters to download glyphs for. Each response will contain 256 characters. For example, 0–255 includes all characters from range \code{U+0000} to \verb{00FF}. Must be aligned to multiples of 256.}
 
-\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
-to authorize the request.}
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html}{API key} to authorize the request.}
 }
 \description{
-Retrieves glyphs used to display labels on a map.
+This operation is no longer current and may be deprecated in the future. We recommend upgrading to \href{https://docs.aws.amazon.com/location/latest/APIReference/API_geomaps_GetGlyphs.html}{\code{GetGlyphs}} unless you require \code{Grab} data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_get_map_glyphs/} for full documentation.
 }

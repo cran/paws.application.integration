@@ -7,8 +7,7 @@
 mwaa_create_web_login_token(Name)
 }
 \arguments{
-\item{Name}{[required] The name of the Amazon MWAA environment. For example,
-\code{MyMWAAEnvironment}.}
+\item{Name}{[required] The name of the Amazon MWAA environment. For example, \code{MyMWAAEnvironment}.}
 }
 \description{
 Creates a web login token for the Airflow Web UI. To learn more, see \href{https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-web.html}{Creating an Apache Airflow web login token}.

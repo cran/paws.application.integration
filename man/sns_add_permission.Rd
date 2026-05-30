@@ -12,14 +12,11 @@ sns_add_permission(TopicArn, Label, AWSAccountId, ActionName)
 
 \item{Label}{[required] A unique identifier for the new policy statement.}
 
-\item{AWSAccountId}{[required] The Amazon Web Services account IDs of the users (principals) who will
-be given access to the specified actions. The users must have Amazon Web
-Services account, but do not need to be signed up for this service.}
+\item{AWSAccountId}{[required] The Amazon Web Services account IDs of the users (principals) who will be given access to the specified actions. The users must have Amazon Web Services account, but do not need to be signed up for this service.}
 
 \item{ActionName}{[required] The action you want to allow for the specified principal(s).
 
-Valid values: Any Amazon SNS action name, for example
-\code{\link[=sns_publish]{publish}}.}
+Valid values: Any Amazon SNS action name, for example \code{\link[=sns_publish]{publish}}.}
 }
 \description{
 Adds a statement to a topic's access control policy, granting access for the specified Amazon Web Services accounts to the specified actions.

@@ -11,10 +11,7 @@ eventbridgescheduler_create_schedule_group(
 )
 }
 \arguments{
-\item{ClientToken}{Unique, case-sensitive identifier you provide to ensure the idempotency
-of the request. If you do not specify a client token, EventBridge
-Scheduler uses a randomly generated token for the request to ensure
-idempotency.}
+\item{ClientToken}{Unique, case-sensitive identifier you provide to ensure the idempotency of the request. If you do not specify a client token, EventBridge Scheduler uses a randomly generated token for the request to ensure idempotency.}
 
 \item{Name}{[required] The name of the schedule group that you are creating.}
 

@@ -12,24 +12,15 @@ swf_list_domains(
 )
 }
 \arguments{
-\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The
-value of \code{NextPageToken} is a unique pagination token for each page.
-Make the call again using the returned token to retrieve the next page.
-Keep all other arguments unchanged. Each pagination token expires after
-24 hours. Using an expired pagination token will return a \code{400} error:
-"\verb{Specified token has exceeded its maximum lifetime}".
+\item{nextPageToken}{If \code{NextPageToken} is returned there are more results available. The value of \code{NextPageToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return a \code{400} error: "\verb{Specified token has exceeded its maximum lifetime}".
 
-The configured \code{maximumPageSize} determines how many results can be
-returned in a single call.}
+The configured \code{maximumPageSize} determines how many results can be returned in a single call.}
 
 \item{registrationStatus}{[required] Specifies the registration status of the domains to list.}
 
-\item{maximumPageSize}{The maximum number of results that are returned per call. Use
-\code{nextPageToken} to obtain further pages of results.}
+\item{maximumPageSize}{The maximum number of results that are returned per call. Use \code{nextPageToken} to obtain further pages of results.}
 
-\item{reverseOrder}{When set to \code{true}, returns the results in reverse order. By default,
-the results are returned in ascending alphabetical order by \code{name} of
-the domains.}
+\item{reverseOrder}{When set to \code{true}, returns the results in reverse order. By default, the results are returned in ascending alphabetical order by \code{name} of the domains.}
 }
 \description{
 Returns the list of domains registered in the account. The results may be split into multiple pages. To retrieve subsequent pages, make the call again using the nextPageToken returned by the initial call.

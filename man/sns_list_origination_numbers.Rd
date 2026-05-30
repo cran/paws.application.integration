@@ -8,9 +8,7 @@ numbers and their metadata}
 sns_list_origination_numbers(NextToken = NULL, MaxResults = NULL)
 }
 \arguments{
-\item{NextToken}{Token that the previous
-\code{\link[=sns_list_origination_numbers]{list_origination_numbers}} request
-returns.}
+\item{NextToken}{Token that the previous \code{\link[=sns_list_origination_numbers]{list_origination_numbers}} request returns.}
 
 \item{MaxResults}{The maximum number of origination numbers to return.}
 }

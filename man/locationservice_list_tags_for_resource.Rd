@@ -8,11 +8,9 @@ resource}
 locationservice_list_tags_for_resource(ResourceArn)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the resource whose tags you want to
-retrieve.
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
 \itemize{
-\item Format example:
-\code{arn:aws:geo:region:account-id:resourcetype/ExampleResource}
+\item Format example: \code{arn:aws:geo:region:account-id:resourcetype/ExampleResource}
 }}
 }
 \description{

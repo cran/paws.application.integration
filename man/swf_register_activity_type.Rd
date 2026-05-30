@@ -23,69 +23,37 @@ swf_register_activity_type(
 
 \item{name}{[required] The name of the activity type within the domain.
 
-The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
-(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
-\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{version}{[required] The version of the activity type.
 
-The activity type consists of the name and version, the combination of
-which must be unique within the domain.
+The activity type consists of the name and version, the combination of which must be unique within the domain.
 
-The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
-(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
-\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{description}{A textual description of the activity type.}
 
-\item{defaultTaskStartToCloseTimeout}{If set, specifies the default maximum duration that a worker can take to
-process tasks of this activity type. This default can be overridden when
-scheduling an activity task using the \code{ScheduleActivityTask} Decision.
+\item{defaultTaskStartToCloseTimeout}{If set, specifies the default maximum duration that a worker can take to process tasks of this activity type. This default can be overridden when scheduling an activity task using the \code{ScheduleActivityTask} Decision.
 
-The duration is specified in seconds, an integer greater than or equal
-to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+The duration is specified in seconds, an integer greater than or equal to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 
-\item{defaultTaskHeartbeatTimeout}{If set, specifies the default maximum time before which a worker
-processing a task of this type must report progress by calling
-\code{\link[=swf_record_activity_task_heartbeat]{record_activity_task_heartbeat}}.
-If the timeout is exceeded, the activity task is automatically timed
-out. This default can be overridden when scheduling an activity task
-using the \code{ScheduleActivityTask} Decision. If the activity worker
-subsequently attempts to record a heartbeat or returns a result, the
-activity worker receives an \code{UnknownResource} fault. In this case,
-Amazon SWF no longer considers the activity task to be valid; the
-activity worker should clean up the activity task.
+\item{defaultTaskHeartbeatTimeout}{If set, specifies the default maximum time before which a worker processing a task of this type must report progress by calling \code{\link[=swf_record_activity_task_heartbeat]{record_activity_task_heartbeat}}. If the timeout is exceeded, the activity task is automatically timed out. This default can be overridden when scheduling an activity task using the \code{ScheduleActivityTask} Decision. If the activity worker subsequently attempts to record a heartbeat or returns a result, the activity worker receives an \code{UnknownResource} fault. In this case, Amazon SWF no longer considers the activity task to be valid; the activity worker should clean up the activity task.
 
-The duration is specified in seconds, an integer greater than or equal
-to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+The duration is specified in seconds, an integer greater than or equal to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 
-\item{defaultTaskList}{If set, specifies the default task list to use for scheduling tasks of
-this activity type. This default task list is used if a task list isn't
-provided when a task is scheduled through the \code{ScheduleActivityTask}
-Decision.}
+\item{defaultTaskList}{If set, specifies the default task list to use for scheduling tasks of this activity type. This default task list is used if a task list isn't provided when a task is scheduled through the \code{ScheduleActivityTask} Decision.}
 
-\item{defaultTaskPriority}{The default task priority to assign to the activity type. If not
-assigned, then \code{0} is used. Valid values are integers that range from
-Java's \code{Integer.MIN_VALUE} (-2147483648) to \code{Integer.MAX_VALUE}
-(2147483647). Higher numbers indicate higher priority.
+\item{defaultTaskPriority}{The default task priority to assign to the activity type. If not assigned, then \code{0} is used. Valid values are integers that range from Java's \code{Integer.MIN_VALUE} (-2147483648) to \code{Integer.MAX_VALUE} (2147483647). Higher numbers indicate higher priority.
 
-For more information about setting task priority, see \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html}{Setting Task Priority}
-in the \emph{in the Amazon SWF Developer Guide.}.}
+For more information about setting task priority, see \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html}{Setting Task Priority} in the \emph{in the Amazon SWF Developer Guide.}.}
 
-\item{defaultTaskScheduleToStartTimeout}{If set, specifies the default maximum duration that a task of this
-activity type can wait before being assigned to a worker. This default
-can be overridden when scheduling an activity task using the
-\code{ScheduleActivityTask} Decision.
+\item{defaultTaskScheduleToStartTimeout}{If set, specifies the default maximum duration that a task of this activity type can wait before being assigned to a worker. This default can be overridden when scheduling an activity task using the \code{ScheduleActivityTask} Decision.
 
-The duration is specified in seconds, an integer greater than or equal
-to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+The duration is specified in seconds, an integer greater than or equal to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 
-\item{defaultTaskScheduleToCloseTimeout}{If set, specifies the default maximum duration for a task of this
-activity type. This default can be overridden when scheduling an
-activity task using the \code{ScheduleActivityTask} Decision.
+\item{defaultTaskScheduleToCloseTimeout}{If set, specifies the default maximum duration for a task of this activity type. This default can be overridden when scheduling an activity task using the \code{ScheduleActivityTask} Decision.
 
-The duration is specified in seconds, an integer greater than or equal
-to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+The duration is specified in seconds, an integer greater than or equal to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 }
 \description{
 Registers a new \emph{activity type} along with its configuration settings in the specified domain.

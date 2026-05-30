@@ -23,86 +23,42 @@ swf_register_workflow_type(
 
 \item{name}{[required] The name of the workflow type.
 
-The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
-(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
-\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{version}{[required] The version of the workflow type.
 
-The workflow type consists of the name and version, the combination of
-which must be unique within the domain. To get a list of all currently
-registered workflow types, use the
-\code{\link[=swf_list_workflow_types]{list_workflow_types}} action.
+The workflow type consists of the name and version, the combination of which must be unique within the domain. To get a list of all currently registered workflow types, use the \code{\link[=swf_list_workflow_types]{list_workflow_types}} action.
 
-The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|}
-(vertical bar), or any control characters (\verb{U+0000`-`U+001f} |
-\verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
+The specified string must not contain a \code{:} (colon), \code{/} (slash), \code{|} (vertical bar), or any control characters (\verb{U+0000`-`U+001f} | \verb{U+007f`-`U+009f}). Also, it must \emph{not} be the literal string \code{arn}.}
 
 \item{description}{Textual description of the workflow type.}
 
-\item{defaultTaskStartToCloseTimeout}{If set, specifies the default maximum duration of decision tasks for
-this workflow type. This default can be overridden when starting a
-workflow execution using the
-\code{\link[=swf_start_workflow_execution]{start_workflow_execution}} action or the
-\code{StartChildWorkflowExecution} Decision.
+\item{defaultTaskStartToCloseTimeout}{If set, specifies the default maximum duration of decision tasks for this workflow type. This default can be overridden when starting a workflow execution using the \code{\link[=swf_start_workflow_execution]{start_workflow_execution}} action or the \code{StartChildWorkflowExecution} Decision.
 
-The duration is specified in seconds, an integer greater than or equal
-to \code{0}. You can use \code{NONE} to specify unlimited duration.}
+The duration is specified in seconds, an integer greater than or equal to \code{0}. You can use \code{NONE} to specify unlimited duration.}
 
-\item{defaultExecutionStartToCloseTimeout}{If set, specifies the default maximum duration for executions of this
-workflow type. You can override this default when starting an execution
-through the \code{\link[=swf_start_workflow_execution]{start_workflow_execution}}
-Action or \code{StartChildWorkflowExecution} Decision.
+\item{defaultExecutionStartToCloseTimeout}{If set, specifies the default maximum duration for executions of this workflow type. You can override this default when starting an execution through the \code{\link[=swf_start_workflow_execution]{start_workflow_execution}} Action or \code{StartChildWorkflowExecution} Decision.
 
-The duration is specified in seconds; an integer greater than or equal
-to 0. Unlike some of the other timeout parameters in Amazon SWF, you
-cannot specify a value of "NONE" for
-\code{defaultExecutionStartToCloseTimeout}; there is a one-year max limit on
-the time that a workflow execution can run. Exceeding this limit always
-causes the workflow execution to time out.}
+The duration is specified in seconds; an integer greater than or equal to 0. Unlike some of the other timeout parameters in Amazon SWF, you cannot specify a value of "NONE" for \code{defaultExecutionStartToCloseTimeout}; there is a one-year max limit on the time that a workflow execution can run. Exceeding this limit always causes the workflow execution to time out.}
 
-\item{defaultTaskList}{If set, specifies the default task list to use for scheduling decision
-tasks for executions of this workflow type. This default is used only if
-a task list isn't provided when starting the execution through the
-\code{\link[=swf_start_workflow_execution]{start_workflow_execution}} Action or
-\code{StartChildWorkflowExecution} Decision.}
+\item{defaultTaskList}{If set, specifies the default task list to use for scheduling decision tasks for executions of this workflow type. This default is used only if a task list isn't provided when starting the execution through the \code{\link[=swf_start_workflow_execution]{start_workflow_execution}} Action or \code{StartChildWorkflowExecution} Decision.}
 
-\item{defaultTaskPriority}{The default task priority to assign to the workflow type. If not
-assigned, then \code{0} is used. Valid values are integers that range from
-Java's \code{Integer.MIN_VALUE} (-2147483648) to \code{Integer.MAX_VALUE}
-(2147483647). Higher numbers indicate higher priority.
+\item{defaultTaskPriority}{The default task priority to assign to the workflow type. If not assigned, then \code{0} is used. Valid values are integers that range from Java's \code{Integer.MIN_VALUE} (-2147483648) to \code{Integer.MAX_VALUE} (2147483647). Higher numbers indicate higher priority.
 
-For more information about setting task priority, see \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html}{Setting Task Priority}
-in the \emph{Amazon SWF Developer Guide}.}
+For more information about setting task priority, see \href{https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html}{Setting Task Priority} in the \emph{Amazon SWF Developer Guide}.}
 
-\item{defaultChildPolicy}{If set, specifies the default policy to use for the child workflow
-executions when a workflow execution of this type is terminated, by
-calling the
-\code{\link[=swf_terminate_workflow_execution]{terminate_workflow_execution}}
-action explicitly or due to an expired timeout. This default can be
-overridden when starting a workflow execution using the
-\code{\link[=swf_start_workflow_execution]{start_workflow_execution}} action or the
-\code{StartChildWorkflowExecution} Decision.
+\item{defaultChildPolicy}{If set, specifies the default policy to use for the child workflow executions when a workflow execution of this type is terminated, by calling the \code{\link[=swf_terminate_workflow_execution]{terminate_workflow_execution}} action explicitly or due to an expired timeout. This default can be overridden when starting a workflow execution using the \code{\link[=swf_start_workflow_execution]{start_workflow_execution}} action or the \code{StartChildWorkflowExecution} Decision.
 
 The supported child policies are:
 \itemize{
 \item \code{TERMINATE} – The child executions are terminated.
-\item \code{REQUEST_CANCEL} – A request to cancel is attempted for each child
-execution by recording a \code{WorkflowExecutionCancelRequested} event in
-its history. It is up to the decider to take appropriate actions
-when it receives an execution history with this event.
-\item \code{ABANDON} – No action is taken. The child executions continue to
-run.
+\item \code{REQUEST_CANCEL} – A request to cancel is attempted for each child execution by recording a \code{WorkflowExecutionCancelRequested} event in its history. It is up to the decider to take appropriate actions when it receives an execution history with this event.
+\item \code{ABANDON} – No action is taken. The child executions continue to run.
 }}
 
 \item{defaultLambdaRole}{The default IAM role attached to this workflow type.
 
-Executions of this workflow type need IAM roles to invoke Lambda
-functions. If you don't specify an IAM role when you start this workflow
-type, the default Lambda role is attached to the execution. For more
-information, see
-\url{https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html}
-in the \emph{Amazon SWF Developer Guide}.}
+Executions of this workflow type need IAM roles to invoke Lambda functions. If you don't specify an IAM role when you start this workflow type, the default Lambda role is attached to the execution. For more information, see \url{https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html} in the \emph{Amazon SWF Developer Guide}.}
 }
 \description{
 Registers a new \emph{workflow type} and its configuration settings in the specified domain.

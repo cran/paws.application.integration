@@ -8,15 +8,11 @@ resource}
 locationservice_associate_tracker_consumer(TrackerName, ConsumerArn)
 }
 \arguments{
-\item{TrackerName}{[required] The name of the tracker resource to be associated with a geofence
-collection.}
+\item{TrackerName}{[required] The name of the tracker resource to be associated with a geofence collection.}
 
-\item{ConsumerArn}{[required] The Amazon Resource Name (ARN) for the geofence collection to be
-associated to tracker resource. Used when you need to specify a resource
-across all Amazon Web Services.
+\item{ConsumerArn}{[required] The Amazon Resource Name (ARN) for the geofence collection to be associated to tracker resource. Used when you need to specify a resource across all Amazon Web Services.
 \itemize{
-\item Format example:
-\code{arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer}
+\item Format example: \code{arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer}
 }}
 }
 \description{

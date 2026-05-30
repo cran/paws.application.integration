@@ -10,49 +10,46 @@ sfn_test_state(
   input = NULL,
   inspectionLevel = NULL,
   revealSecrets = NULL,
-  variables = NULL
+  variables = NULL,
+  stateName = NULL,
+  mock = NULL,
+  context = NULL,
+  stateConfiguration = NULL
 )
 }
 \arguments{
-\item{definition}{[required] The \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language}
-(ASL) definition of the state.}
+\item{definition}{[required] The \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language} (ASL) definition of the state or state machine.}
 
-\item{roleArn}{The Amazon Resource Name (ARN) of the execution role with the required
-IAM permissions for the state.}
+\item{roleArn}{The Amazon Resource Name (ARN) of the execution role with the required IAM permissions for the state.}
 
 \item{input}{A string that contains the JSON input data for the state.}
 
-\item{inspectionLevel}{Determines the values to return when a state is tested. You can specify
-one of the following types:
+\item{inspectionLevel}{Determines the values to return when a state is tested. You can specify one of the following types:
 \itemize{
-\item \code{INFO}: Shows the final state output. By default, Step Functions
-sets \code{inspectionLevel} to \code{INFO} if you don't specify a level.
-\item \code{DEBUG}: Shows the final state output along with the input and
-output data processing result.
-\item \code{TRACE}: Shows the HTTP request and response for an HTTP Task. This
-level also shows the final state output along with the input and
-output data processing result.
+\item \code{INFO}: Shows the final state output. By default, Step Functions sets \code{inspectionLevel} to \code{INFO} if you don't specify a level.
+\item \code{DEBUG}: Shows the final state output along with the input and output data processing result.
+\item \code{TRACE}: Shows the HTTP request and response for an HTTP Task. This level also shows the final state output along with the input and output data processing result.
 }
 
-Each of these levels also provide information about the status of the
-state execution and the next state to transition to.}
+Each of these levels also provide information about the status of the state execution and the next state to transition to.}
 
-\item{revealSecrets}{Specifies whether or not to include secret information in the test
-result. For HTTP Tasks, a secret includes the data that an EventBridge
-connection adds to modify the HTTP request headers, query parameters,
-and body. Step Functions doesn't omit any information included in the
-state definition or the HTTP response.
+\item{revealSecrets}{Specifies whether or not to include secret information in the test result. For HTTP Tasks, a secret includes the data that an EventBridge connection adds to modify the HTTP request headers, query parameters, and body. Step Functions doesn't omit any information included in the state definition or the HTTP response.
 
-If you set \code{revealSecrets} to \code{true}, you must make sure that the IAM
-user that calls the \code{\link[=sfn_test_state]{test_state}} API has permission
-for the \code{states:RevealSecrets} action. For an example of IAM policy that
-sets the \code{states:RevealSecrets} permission, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions}{IAM permissions to test a state}.
-Without this permission, Step Functions throws an access denied error.
+If you set \code{revealSecrets} to \code{true}, you must make sure that the IAM user that calls the \code{\link[=sfn_test_state]{test_state}} API has permission for the \code{states:RevealSecrets} action. For an example of IAM policy that sets the \code{states:RevealSecrets} permission, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/test-state-isolation.html#test-state-permissions}{IAM permissions to test a state}. Without this permission, Step Functions throws an access denied error.
 
 By default, \code{revealSecrets} is set to \code{false}.}
 
-\item{variables}{JSON object literal that sets variables used in the state under test.
-Object keys are the variable names and values are the variable values.}
+\item{variables}{JSON object literal that sets variables used in the state under test. Object keys are the variable names and values are the variable values.}
+
+\item{stateName}{Denotes the particular state within a state machine definition to be tested. If this field is specified, the \code{definition} must contain a fully-formed state machine definition.}
+
+\item{mock}{Defines a mocked result or error for the state under test.
+
+A mock can only be specified for Task, Map, or Parallel states. If it is specified for another state type, an exception will be thrown.}
+
+\item{context}{A JSON string representing a valid Context object for the state under test. This field may only be specified if a mock is specified in the same request.}
+
+\item{stateConfiguration}{Contains configurations for the state under test.}
 }
 \description{
 Accepts the definition of a single state and executes it. You can test a state without creating a state machine or updating an existing state machine. Using this API, you can test the following:

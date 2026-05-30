@@ -7,156 +7,75 @@
 sqs_get_queue_attributes(QueueUrl, AttributeNames = NULL)
 }
 \arguments{
-\item{QueueUrl}{[required] The URL of the Amazon SQS queue whose attribute information is
-retrieved.
+\item{QueueUrl}{[required] The URL of the Amazon SQS queue whose attribute information is retrieved.
 
 Queue URLs and names are case-sensitive.}
 
 \item{AttributeNames}{A list of attributes for which to retrieve information.
 
-The \code{AttributeNames} parameter is optional, but if you don't specify
-values for this parameter, the request returns empty results.
+The \code{AttributeNames} parameter is optional, but if you don't specify values for this parameter, the request returns empty results.
 
-In the future, new attributes might be added. If you write code that
-calls this action, we recommend that you structure your code so that it
-can handle new attributes gracefully.
+In the future, new attributes might be added. If you write code that calls this action, we recommend that you structure your code so that it can handle new attributes gracefully.
 
 The following attributes are supported:
 
-The \code{ApproximateNumberOfMessagesDelayed},
-\code{ApproximateNumberOfMessagesNotVisible}, and
-\code{ApproximateNumberOfMessages} metrics may not achieve consistency until
-at least 1 minute after the producers stop sending messages. This period
-is required for the queue metadata to reach eventual consistency.
+The \code{ApproximateNumberOfMessagesDelayed}, \code{ApproximateNumberOfMessagesNotVisible}, and \code{ApproximateNumberOfMessages} metrics may not achieve consistency until at least 1 minute after the producers stop sending messages. This period is required for the queue metadata to reach eventual consistency.
 \itemize{
 \item \code{All} – Returns all values.
-\item \code{ApproximateNumberOfMessages} – Returns the approximate number of
-messages available for retrieval from the queue.
-\item \code{ApproximateNumberOfMessagesDelayed} – Returns the approximate
-number of messages in the queue that are delayed and not available
-for reading immediately. This can happen when the queue is
-configured as a delay queue or when a message has been sent with a
-delay parameter.
-\item \code{ApproximateNumberOfMessagesNotVisible} – Returns the approximate
-number of messages that are in flight. Messages are considered to be
-\emph{in flight} if they have been sent to a client but have not yet been
-deleted or have not yet reached the end of their visibility window.
-\item \code{CreatedTimestamp} – Returns the time when the queue was created in
-seconds (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time}).
+\item \code{ApproximateNumberOfMessages} – Returns the approximate number of messages available for retrieval from the queue.
+\item \code{ApproximateNumberOfMessagesDelayed} – Returns the approximate number of messages in the queue that are delayed and not available for reading immediately. This can happen when the queue is configured as a delay queue or when a message has been sent with a delay parameter.
+\item \code{ApproximateNumberOfMessagesNotVisible} – Returns the approximate number of messages that are in flight. Messages are considered to be \emph{in flight} if they have been sent to a client but have not yet been deleted or have not yet reached the end of their visibility window.
+\item \code{CreatedTimestamp} – Returns the time when the queue was created in seconds (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time}).
 \item \code{DelaySeconds} – Returns the default delay on the queue in seconds.
-\item \code{LastModifiedTimestamp} – Returns the time when the queue was last
-changed in seconds (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time}).
-\item \code{MaximumMessageSize} – Returns the limit of how many bytes a message
-can contain before Amazon SQS rejects it.
-\item \code{MessageRetentionPeriod} – Returns the length of time, in seconds,
-for which Amazon SQS retains a message. When you change a queue's
-attributes, the change can take up to 60 seconds for most of the
-attributes to propagate throughout the Amazon SQS system. Changes
-made to the \code{MessageRetentionPeriod} attribute can take up to 15
-minutes and will impact existing messages in the queue potentially
-causing them to be expired and deleted if the
-\code{MessageRetentionPeriod} is reduced below the age of existing
-messages.
+\item \code{LastModifiedTimestamp} – Returns the time when the queue was last changed in seconds (\href{https://en.wikipedia.org/wiki/Unix_time}{epoch time}).
+\item \code{MaximumMessageSize} – Returns the limit of how many bytes a message can contain before Amazon SQS rejects it.
+\item \code{MessageRetentionPeriod} – Returns the length of time, in seconds, for which Amazon SQS retains a message. When you change a queue's attributes, the change can take up to 60 seconds for most of the attributes to propagate throughout the Amazon SQS system. Changes made to the \code{MessageRetentionPeriod} attribute can take up to 15 minutes and will impact existing messages in the queue potentially causing them to be expired and deleted if the \code{MessageRetentionPeriod} is reduced below the age of existing messages.
 \item \code{Policy} – Returns the policy of the queue.
 \item \code{QueueArn} – Returns the Amazon resource name (ARN) of the queue.
-\item \code{ReceiveMessageWaitTimeSeconds} – Returns the length of time, in
-seconds, for which the \code{\link[=sqs_receive_message]{receive_message}}
-action waits for a message to arrive.
-\item \code{VisibilityTimeout} – Returns the visibility timeout for the queue.
-For more information about the visibility timeout, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout}
-in the \emph{Amazon SQS Developer Guide}.
+\item \code{ReceiveMessageWaitTimeSeconds} – Returns the length of time, in seconds, for which the \code{\link[=sqs_receive_message]{receive_message}} action waits for a message to arrive.
+\item \code{VisibilityTimeout} – Returns the visibility timeout for the queue. For more information about the visibility timeout, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html}{Visibility Timeout} in the \emph{Amazon SQS Developer Guide}.
 }
 
 The following attributes apply only to \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html}{dead-letter queues:}
 \itemize{
-\item \code{RedrivePolicy} – The string that includes the parameters for the
-dead-letter queue functionality of the source queue as a JSON
-object. The parameters are as follows:
+\item \code{RedrivePolicy} – The string that includes the parameters for the dead-letter queue functionality of the source queue as a JSON object. The parameters are as follows:
 \itemize{
-\item \code{deadLetterTargetArn} – The Amazon Resource Name (ARN) of the
-dead-letter queue to which Amazon SQS moves messages after the
-value of \code{maxReceiveCount} is exceeded.
-\item \code{maxReceiveCount} – The number of times a message is delivered
-to the source queue before being moved to the dead-letter queue.
-Default: 10. When the \code{ReceiveCount} for a message exceeds the
-\code{maxReceiveCount} for a queue, Amazon SQS moves the message to
-the dead-letter-queue.
+\item \code{deadLetterTargetArn} – The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of \code{maxReceiveCount} is exceeded.
+\item \code{maxReceiveCount} – The number of times a message is delivered to the source queue before being moved to the dead-letter queue. Default: 10. When the \code{ReceiveCount} for a message exceeds the \code{maxReceiveCount} for a queue, Amazon SQS moves the message to the dead-letter-queue.
 }
-\item \code{RedriveAllowPolicy} – The string that includes the parameters for
-the permissions for the dead-letter queue redrive permission and
-which source queues can specify dead-letter queues as a JSON object.
-The parameters are as follows:
+\item \code{RedriveAllowPolicy} – The string that includes the parameters for the permissions for the dead-letter queue redrive permission and which source queues can specify dead-letter queues as a JSON object. The parameters are as follows:
 \itemize{
-\item \code{redrivePermission} – The permission type that defines which
-source queues can specify the current queue as the dead-letter
-queue. Valid values are:
+\item \code{redrivePermission} – The permission type that defines which source queues can specify the current queue as the dead-letter queue. Valid values are:
 \itemize{
-\item \code{allowAll} – (Default) Any source queues in this Amazon Web
-Services account in the same Region can specify this queue
-as the dead-letter queue.
-\item \code{denyAll} – No source queues can specify this queue as the
-dead-letter queue.
-\item \code{byQueue} – Only queues specified by the \code{sourceQueueArns}
-parameter can specify this queue as the dead-letter queue.
+\item \code{allowAll} – (Default) Any source queues in this Amazon Web Services account in the same Region can specify this queue as the dead-letter queue.
+\item \code{denyAll} – No source queues can specify this queue as the dead-letter queue.
+\item \code{byQueue} – Only queues specified by the \code{sourceQueueArns} parameter can specify this queue as the dead-letter queue.
 }
-\item \code{sourceQueueArns} – The Amazon Resource Names (ARN)s of the
-source queues that can specify this queue as the dead-letter
-queue and redrive messages. You can specify this parameter only
-when the \code{redrivePermission} parameter is set to \code{byQueue}. You
-can specify up to 10 source queue ARNs. To allow more than 10
-source queues to specify dead-letter queues, set the
-\code{redrivePermission} parameter to \code{allowAll}.
+\item \code{sourceQueueArns} – The Amazon Resource Names (ARN)s of the source queues that can specify this queue as the dead-letter queue and redrive messages. You can specify this parameter only when the \code{redrivePermission} parameter is set to \code{byQueue}. You can specify up to 10 source queue ARNs. To allow more than 10 source queues to specify dead-letter queues, set the \code{redrivePermission} parameter to \code{allowAll}.
 }
 }
 
-The dead-letter queue of a FIFO queue must also be a FIFO queue.
-Similarly, the dead-letter queue of a standard queue must also be a
-standard queue.
+The dead-letter queue of a FIFO queue must also be a FIFO queue. Similarly, the dead-letter queue of a standard queue must also be a standard queue.
 
-The following attributes apply only to
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html}{server-side-encryption}:
+The following attributes apply only to \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html}{server-side-encryption}:
 \itemize{
-\item \code{KmsMasterKeyId} – Returns the ID of an Amazon Web Services managed
-customer master key (CMK) for Amazon SQS or a custom CMK. For more
-information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms}{Key Terms}.
-\item \code{KmsDataKeyReusePeriodSeconds} – Returns the length of time, in
-seconds, for which Amazon SQS can reuse a data key to encrypt or
-decrypt messages before calling KMS again. For more information, see
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work}{How Does the Data Key Reuse Period Work?}.
-\item \code{SqsManagedSseEnabled} – Returns information about whether the queue
-is using SSE-SQS encryption using SQS owned encryption keys. Only
-one server-side encryption option is supported per queue (for
-example,
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS}
-or
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
+\item \code{KmsMasterKeyId} – Returns the ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom CMK. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-sse-key-terms}{Key Terms}.
+\item \code{KmsDataKeyReusePeriodSeconds} – Returns the length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling KMS again. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html#sqs-how-does-the-data-key-reuse-period-work}{How Does the Data Key Reuse Period Work?}.
+\item \code{SqsManagedSseEnabled} – Returns information about whether the queue is using SSE-SQS encryption using SQS owned encryption keys. Only one server-side encryption option is supported per queue (for example, \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sse-existing-queue.html}{SSE-KMS} or \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-configure-sqs-sse-queue.html}{SSE-SQS}).
 }
 
 The following attributes apply only to \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/}{FIFO (first-in-first-out) queues}:
 \itemize{
-\item \code{FifoQueue} – Returns information about whether the queue is FIFO.
-For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html}{FIFO queue logic}
-in the \emph{Amazon SQS Developer Guide}.
+\item \code{FifoQueue} – Returns information about whether the queue is FIFO. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-understanding-logic.html}{FIFO queue logic} in the \emph{Amazon SQS Developer Guide}.
 
-To determine whether a queue is
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/}{FIFO},
-you can check whether \code{QueueName} ends with the \code{.fifo} suffix.
-\item \code{ContentBasedDeduplication} – Returns whether content-based
-deduplication is enabled for the queue. For more information, see
-\href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html}{Exactly-once processing}
-in the \emph{Amazon SQS Developer Guide}.
+To determine whether a queue is \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/}{FIFO}, you can check whether \code{QueueName} ends with the \code{.fifo} suffix.
+\item \code{ContentBasedDeduplication} – Returns whether content-based deduplication is enabled for the queue. For more information, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html}{Exactly-once processing} in the \emph{Amazon SQS Developer Guide}.
 }
 
 The following attributes apply only to \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html}{high throughput for FIFO queues}:
 \itemize{
-\item \code{DeduplicationScope} – Specifies whether message deduplication
-occurs at the message group or queue level. Valid values are
-\code{messageGroup} and \code{queue}.
-\item \code{FifoThroughputLimit} – Specifies whether the FIFO queue throughput
-quota applies to the entire queue or per message group. Valid values
-are \code{perQueue} and \code{perMessageGroupId}. The \code{perMessageGroupId}
-value is allowed only when the value for \code{DeduplicationScope} is
-\code{messageGroup}.
+\item \code{DeduplicationScope} – Specifies whether message deduplication occurs at the message group or queue level. Valid values are \code{messageGroup} and \code{queue}.
+\item \code{FifoThroughputLimit} – Specifies whether the FIFO queue throughput quota applies to the entire queue or per message group. Valid values are \code{perQueue} and \code{perMessageGroupId}. The \code{perMessageGroupId} value is allowed only when the value for \code{DeduplicationScope} is \code{messageGroup}.
 }
 
 To enable high throughput for FIFO queues, do the following:
@@ -165,12 +84,9 @@ To enable high throughput for FIFO queues, do the following:
 \item Set \code{FifoThroughputLimit} to \code{perMessageGroupId}.
 }
 
-If you set these attributes to anything other than the values shown for
-enabling high throughput, normal throughput is in effect and
-deduplication occurs as specified.
+If you set these attributes to anything other than the values shown for enabling high throughput, normal throughput is in effect and deduplication occurs as specified.
 
-For information on throughput quotas, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html}{Quotas related to messages}
-in the \emph{Amazon SQS Developer Guide}.}
+For information on throughput quotas, see \href{https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html}{Quotas related to messages} in the \emph{Amazon SQS Developer Guide}.}
 }
 \description{
 Gets attributes for the specified queue.

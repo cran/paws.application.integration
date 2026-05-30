@@ -9,17 +9,11 @@ to which devices and mobile apps may register}
 sns_create_platform_application(Name, Platform, Attributes)
 }
 \arguments{
-\item{Name}{[required] Application names must be made up of only uppercase and lowercase ASCII
-letters, numbers, underscores, hyphens, and periods, and must be between
-1 and 256 characters long.}
+\item{Name}{[required] Application names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, hyphens, and periods, and must be between 1 and 256 characters long.}
 
-\item{Platform}{[required] The following platforms are supported: ADM (Amazon Device Messaging),
-APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase
-Cloud Messaging).}
+\item{Platform}{[required] The following platforms are supported: ADM (Amazon Device Messaging), APNS (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase Cloud Messaging).}
 
-\item{Attributes}{[required] For a list of attributes, see
-\href{https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html}{\code{set_platform_application_attributes}}
-.}
+\item{Attributes}{[required] For a list of attributes, see \href{https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html}{\code{set_platform_application_attributes}} .}
 }
 \description{
 Creates a platform application object for one of the supported push notification services, such as APNS and GCM (Firebase Cloud Messaging), to which devices and mobile apps may register. You must specify \code{PlatformPrincipal} and \code{PlatformCredential} attributes when using the \code{\link[=sns_create_platform_application]{create_platform_application}} action.

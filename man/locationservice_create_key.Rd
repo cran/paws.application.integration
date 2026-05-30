@@ -20,8 +20,7 @@ locationservice_create_key(
 
 Requirements:
 \itemize{
-\item Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
-periods (.), and underscores (_).
+\item Contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-), periods (.), and underscores (_).
 \item Must be a unique API key name.
 \item No spaces allowed. For example, \code{ExampleAPIKey}.
 }}
@@ -30,16 +29,11 @@ periods (.), and underscores (_).
 
 \item{Description}{An optional description for the API key resource.}
 
-\item{ExpireTime}{The optional timestamp for when the API key resource will expire in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format:
-\code{YYYY-MM-DDThh:mm:ss.sssZ}. One of \code{NoExpiry} or \code{ExpireTime} must be
-set.}
+\item{ExpireTime}{The optional timestamp for when the API key resource will expire in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. One of \code{NoExpiry} or \code{ExpireTime} must be set.}
 
-\item{NoExpiry}{Optionally set to \code{true} to set no expiration time for the API key. One
-of \code{NoExpiry} or \code{ExpireTime} must be set.}
+\item{NoExpiry}{Optionally set to \code{true} to set no expiration time for the API key. One of \code{NoExpiry} or \code{ExpireTime} must be set.}
 
-\item{Tags}{Applies one or more tags to the map resource. A tag is a key-value pair
-that helps manage, identify, search, and filter your resources by
-labelling them.
+\item{Tags}{Applies one or more tags to the map resource. A tag is a key-value pair that helps manage, identify, search, and filter your resources by labelling them.
 
 Format: \code{"key" : "value"}
 
@@ -49,8 +43,7 @@ Restrictions:
 \item Each resource tag must be unique with a maximum of one value.
 \item Maximum key length: 128 Unicode characters in UTF-8
 \item Maximum value length: 256 Unicode characters in UTF-8
-\item Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
-characters: + - = . _ : / @.
+\item Can use alphanumeric characters (A–Z, a–z, 0–9), and the following characters: + - = . _ : / @.
 \item Cannot use "aws:" as a prefix for a key.
 }}
 }

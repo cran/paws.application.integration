@@ -8,8 +8,7 @@ environment}
 mwaa_get_environment(Name)
 }
 \arguments{
-\item{Name}{[required] The name of the Amazon MWAA environment. For example,
-\code{MyMWAAEnvironment}.}
+\item{Name}{[required] The name of the Amazon MWAA environment. For example, \code{MyMWAAEnvironment}.}
 }
 \description{
 Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.

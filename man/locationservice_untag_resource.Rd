@@ -7,11 +7,9 @@
 locationservice_untag_resource(ResourceArn, TagKeys)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the resource from which you want to
-remove tags.
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
 \itemize{
-\item Format example:
-\code{arn:aws:geo:region:account-id:resourcetype/ExampleResource}
+\item Format example: \code{arn:aws:geo:region:account-id:resourcetype/ExampleResource}
 }}
 
 \item{TagKeys}{[required] The list of tag keys to remove from the specified resource.}

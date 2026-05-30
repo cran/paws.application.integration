@@ -7,9 +7,7 @@
 eventbridgescheduler_get_schedule(GroupName = NULL, Name)
 }
 \arguments{
-\item{GroupName}{The name of the schedule group associated with this schedule. If you
-omit this, EventBridge Scheduler assumes that the schedule is associated
-with the default group.}
+\item{GroupName}{The name of the schedule group associated with this schedule. If you omit this, EventBridge Scheduler assumes that the schedule is associated with the default group.}
 
 \item{Name}{[required] The name of the schedule to retrieve.}
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_search_place_index_for_suggestions}
 \alias{locationservice_search_place_index_for_suggestions}
-\title{Generates suggestions for addresses and points of interest based on
-partial or misspelled free-form text}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_search_place_index_for_suggestions(
   IndexName,
@@ -20,84 +19,51 @@ locationservice_search_place_index_for_suggestions(
 \arguments{
 \item{IndexName}{[required] The name of the place index resource you want to use for the search.}
 
-\item{Text}{[required] The free-form partial text to use to generate place suggestions. For
-example, \verb{eiffel tow}.}
+\item{Text}{[required] The free-form partial text to use to generate place suggestions. For example, \verb{eiffel tow}.}
 
-\item{BiasPosition}{An optional parameter that indicates a preference for place suggestions
-that are closer to a specified position.
+\item{BiasPosition}{An optional parameter that indicates a preference for place suggestions that are closer to a specified position.
 
-If provided, this parameter must contain a pair of numbers. The first
-number represents the X coordinate, or longitude; the second number
-represents the Y coordinate, or latitude.
+If provided, this parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude.
 
-For example, \verb{[-123.1174, 49.2847]} represents the position with
-longitude \code{-123.1174} and latitude \code{49.2847}.
+For example, \verb{[-123.1174, 49.2847]} represents the position with longitude \code{-123.1174} and latitude \code{49.2847}.
 
-\code{BiasPosition} and \code{FilterBBox} are mutually exclusive. Specifying both
-options results in an error.}
+\code{BiasPosition} and \code{FilterBBox} are mutually exclusive. Specifying both options results in an error.}
 
-\item{FilterBBox}{An optional parameter that limits the search results by returning only
-suggestions within a specified bounding box.
+\item{FilterBBox}{An optional parameter that limits the search results by returning only suggestions within a specified bounding box.
 
-If provided, this parameter must contain a total of four consecutive
-numbers in two pairs. The first pair of numbers represents the X and Y
-coordinates (longitude and latitude, respectively) of the southwest
-corner of the bounding box; the second pair of numbers represents the X
-and Y coordinates (longitude and latitude, respectively) of the
-northeast corner of the bounding box.
+If provided, this parameter must contain a total of four consecutive numbers in two pairs. The first pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the southwest corner of the bounding box; the second pair of numbers represents the X and Y coordinates (longitude and latitude, respectively) of the northeast corner of the bounding box.
 
-For example, \verb{[-12.7935, -37.4835, -12.0684, -36.9542]} represents a
-bounding box where the southwest corner has longitude \code{-12.7935} and
-latitude \code{-37.4835}, and the northeast corner has longitude \code{-12.0684}
-and latitude \code{-36.9542}.
+For example, \verb{[-12.7935, -37.4835, -12.0684, -36.9542]} represents a bounding box where the southwest corner has longitude \code{-12.7935} and latitude \code{-37.4835}, and the northeast corner has longitude \code{-12.0684} and latitude \code{-36.9542}.
 
-\code{FilterBBox} and \code{BiasPosition} are mutually exclusive. Specifying both
-options results in an error.}
+\code{FilterBBox} and \code{BiasPosition} are mutually exclusive. Specifying both options results in an error.}
 
-\item{FilterCountries}{An optional parameter that limits the search results by returning only
-suggestions within the provided list of countries.
+\item{FilterCountries}{An optional parameter that limits the search results by returning only suggestions within the provided list of countries.
 \itemize{
-\item Use the \href{https://www.iso.org/iso-3166-country-codes.html}{ISO 3166}
-3-digit country code. For example, Australia uses three upper-case
-characters: \code{AUS}.
+\item Use the \href{https://www.iso.org/iso-3166-country-codes.html}{ISO 3166} 3-digit country code. For example, Australia uses three upper-case characters: \code{AUS}.
 }}
 
-\item{MaxResults}{An optional parameter. The maximum number of results returned per
-request.
+\item{MaxResults}{An optional parameter. The maximum number of results returned per request.
 
 The default: \code{5}}
 
-\item{Language}{The preferred language used to return results. The value must be a valid
-BCP 47 language tag, for example, \code{en} for English.
+\item{Language}{The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, \code{en} for English.
 
-This setting affects the languages used in the results. If no language
-is specified, or not supported for a particular result, the partner
-automatically chooses a language for the result.
+This setting affects the languages used in the results. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 
-For an example, we'll use the Greek language. You search for
-\verb{Athens, Gr} to get suggestions with the \code{language} parameter set to
-\code{en}. The results found will most likely be returned as
-\verb{Athens, Greece}.
+For an example, we'll use the Greek language. You search for \verb{Athens, Gr} to get suggestions with the \code{language} parameter set to \code{en}. The results found will most likely be returned as \verb{Athens, Greece}.
 
-If you set the \code{language} parameter to \code{el}, for Greek, then the result
-found will more likely be returned as \eqn{A\Theta\eta\nu\sigma, E\lambda\lambda\alpha\delta}.
+If you set the \code{language} parameter to \code{el}, for Greek, then the result found will more likely be returned as \eqn{A\Theta\eta\nu\sigma, E\lambda\lambda\alpha\delta}.
 
-If the data provider does not have a value for Greek, the result will be
-in a language that the provider does support.}
+If the data provider does not have a value for Greek, the result will be in a language that the provider does support.}
 
-\item{FilterCategories}{A list of one or more Amazon Location categories to filter the returned
-places. If you include more than one category, the results will include
-results that match \emph{any} of the categories listed.
+\item{FilterCategories}{A list of one or more Amazon Location categories to filter the returned places. If you include more than one category, the results will include results that match \emph{any} of the categories listed.
 
-For more information about using categories, including a list of Amazon
-Location categories, see \href{https://docs.aws.amazon.com/location/latest/developerguide/}{Categories and filtering},
-in the \emph{Amazon Location Service Developer Guide}.}
+For more information about using categories, including a list of Amazon Location categories, see \href{https://docs.aws.amazon.com/location/previous/developerguide/category-filtering.html}{Categories and filtering}, in the \emph{Amazon Location Service developer guide}.}
 
-\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
-to authorize the request.}
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html}{API key} to authorize the request.}
 }
 \description{
-Generates suggestions for addresses and points of interest based on partial or misspelled free-form text. This operation is also known as autocomplete, autosuggest, or fuzzy matching.
+This operation is no longer current and may be deprecated in the future. We recommend you upgrade to \code{Suggest} or \code{Autocomplete} unless you require Grab data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_suggestions/} for full documentation.
 }

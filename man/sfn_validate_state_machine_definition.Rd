@@ -13,24 +13,15 @@ sfn_validate_state_machine_definition(
 )
 }
 \arguments{
-\item{definition}{[required] The Amazon States Language definition of the state machine. For more
-information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language}
-(ASL).}
+\item{definition}{[required] The Amazon States Language definition of the state machine. For more information, see \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language} (ASL).}
 
-\item{type}{The target type of state machine for this definition. The default is
-\code{STANDARD}.}
+\item{type}{The target type of state machine for this definition. The default is \code{STANDARD}.}
 
-\item{severity}{Minimum level of diagnostics to return. \code{ERROR} returns only \code{ERROR}
-diagnostics, whereas \code{WARNING} returns both \code{WARNING} and \code{ERROR}
-diagnostics. The default is \code{ERROR}.}
+\item{severity}{Minimum level of diagnostics to return. \code{ERROR} returns only \code{ERROR} diagnostics, whereas \code{WARNING} returns both \code{WARNING} and \code{ERROR} diagnostics. The default is \code{ERROR}.}
 
-\item{maxResults}{The maximum number of diagnostics that are returned per call. The
-default and maximum value is 100. Setting the value to 0 will also use
-the default of 100.
+\item{maxResults}{The maximum number of diagnostics that are returned per call. The default and maximum value is 100. Setting the value to 0 will also use the default of 100.
 
-If the number of diagnostics returned in the response exceeds
-\code{maxResults}, the value of the \code{truncated} field in the response will be
-set to \code{true}.}
+If the number of diagnostics returned in the response exceeds \code{maxResults}, the value of the \code{truncated} field in the response will be set to \code{true}.}
 }
 \description{
 Validates the syntax of a state machine definition specified in \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html}{Amazon States Language} (ASL), a JSON-based, structured language.

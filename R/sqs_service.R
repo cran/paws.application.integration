@@ -7,20 +7,11 @@ NULL
 #' @description
 #' Welcome to the *Amazon SQS API Reference*.
 #' 
-#' Amazon SQS is a reliable, highly-scalable hosted queue for storing
-#' messages as they travel between applications or microservices. Amazon
-#' SQS moves data between distributed application components and helps you
-#' decouple these components.
+#' Amazon SQS is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.
 #' 
-#' For information on the permissions you need to use this API, see
-#' [Identity and access
-#' management](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html)
-#' in the *Amazon SQS Developer Guide.*
+#' For information on the permissions you need to use this API, see [Identity and access management](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/) in the *Amazon SQS Developer Guide.*
 #' 
-#' You can use [Amazon Web Services
-#' SDKs](https://aws.amazon.com/developer/tools/#sdk) to access Amazon SQS
-#' using your favorite programming language. The SDKs perform tasks such as
-#' the following automatically:
+#' You can use [Amazon Web Services SDKs](https://builder.aws.com/build/tools#sdk) to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:
 #' 
 #' -   Cryptographically sign your service requests
 #' 
@@ -34,22 +25,17 @@ NULL
 #' 
 #' -   *Amazon SQS Developer Guide*
 #' 
-#'     -   [Making API
-#'         Requests](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests-xml.html)
+#'     -   [Making API Requests](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests-xml.html)
 #' 
-#'     -   [Amazon SQS Message
-#'         Attributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
+#'     -   [Amazon SQS Message Attributes](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes)
 #' 
-#'     -   [Amazon SQS Dead-Letter
-#'         Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
+#'     -   [Amazon SQS Dead-Letter Queues](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 #' 
-#' -   [Amazon SQS in the *Command Line
-#'     Interface*](https://docs.aws.amazon.com/cli/latest/reference/sqs/)
+#' -   [Amazon SQS in the Command Line Interface](https://docs.aws.amazon.com/cli/latest/reference/sqs/)
 #' 
 #' -   *Amazon Web Services General Reference*
 #' 
-#'     -   [Regions and
-#'         Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region)
+#'     -   [Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region)
 #'
 #' @param
 #' config
@@ -188,7 +174,7 @@ sqs <- function(config = list(), credentials = list(), endpoint = NULL, region =
 
 .sqs$metadata <- list(
   service_name = "sqs",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "sqs.{region}.amazonaws.eu", global = FALSE)),
   service_id = "SQS",
   api_version = "2012-11-05",
   signing_name = "sqs",

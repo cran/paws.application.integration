@@ -2,39 +2,29 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_get_place}
 \alias{locationservice_get_place}
-\title{Finds a place by its unique ID}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_get_place(IndexName, PlaceId, Language = NULL, Key = NULL)
 }
 \arguments{
-\item{IndexName}{[required] The name of the place index resource that you want to use for the
-search.}
+\item{IndexName}{[required] The name of the place index resource that you want to use for the search.}
 
 \item{PlaceId}{[required] The identifier of the place to find.}
 
-\item{Language}{The preferred language used to return results. The value must be a valid
-BCP 47 language tag, for example, \code{en} for English.
+\item{Language}{The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, \code{en} for English.
 
-This setting affects the languages used in the results, but not the
-results themselves. If no language is specified, or not supported for a
-particular result, the partner automatically chooses a language for the
-result.
+This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 
-For an example, we'll use the Greek language. You search for a location
-around Athens, Greece, with the \code{language} parameter set to \code{en}. The
-\code{city} in the results will most likely be returned as \code{Athens}.
+For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the \code{language} parameter set to \code{en}. The \code{city} in the results will most likely be returned as \code{Athens}.
 
-If you set the \code{language} parameter to \code{el}, for Greek, then the \code{city}
-in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+If you set the \code{language} parameter to \code{el}, for Greek, then the \code{city} in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
 
-If the data provider does not have a value for Greek, the result will be
-in a language that the provider does support.}
+If the data provider does not have a value for Greek, the result will be in a language that the provider does support.}
 
-\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
-to authorize the request.}
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html}{API key} to authorize the request.}
 }
 \description{
-Finds a place by its unique ID. A \code{PlaceId} is returned by other search operations.
+This operation is no longer current and may be deprecated in the future. We recommend you upgrade to the V2 \code{get_place} operation unless you require Grab data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_get_place/} for full documentation.
 }

@@ -2,8 +2,9 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_forecast_geofence_events}
 \alias{locationservice_forecast_geofence_events}
-\title{Evaluates device positions against geofence geometries from a given
-geofence collection}
+\title{This action forecasts future geofence events that are likely to occur
+within a specified time horizon if a device continues moving at its
+current speed}
 \usage{
 locationservice_forecast_geofence_events(
   CollectionName,
@@ -18,26 +19,19 @@ locationservice_forecast_geofence_events(
 \arguments{
 \item{CollectionName}{[required] The name of the geofence collection.}
 
-\item{DeviceState}{[required] The device's state, including current position and speed.}
+\item{DeviceState}{[required] Represents the device's state, including its current position and speed. When speed is omitted, this API performs a \emph{containment check}. The \emph{containment check} operation returns \code{IDLE} events for geofences where the device is currently inside of, but no other events.}
 
-\item{TimeHorizonMinutes}{Specifies the time horizon in minutes for the forecasted events.}
+\item{TimeHorizonMinutes}{The forward-looking time window for forecasting, specified in minutes. The API only returns events that are predicted to occur within this time horizon. When no value is specified, this API performs a \emph{containment check}. The \emph{containment check} operation returns \code{IDLE} events for geofences where the device is currently inside of, but no other events.}
 
-\item{DistanceUnit}{The distance unit used for the \code{NearestDistance} property returned in a
-forecasted event. The measurement system must match for \code{DistanceUnit}
-and \code{SpeedUnit}; if \code{Kilometers} is specified for \code{DistanceUnit}, then
-\code{SpeedUnit} must be \code{KilometersPerHour}.
+\item{DistanceUnit}{The distance unit used for the \code{NearestDistance} property returned in a forecasted event. The measurement system must match for \code{DistanceUnit} and \code{SpeedUnit}; if \code{Kilometers} is specified for \code{DistanceUnit}, then \code{SpeedUnit} must be \code{KilometersPerHour}.
 
 Default Value: \code{Kilometers}}
 
-\item{SpeedUnit}{The speed unit for the device captured by the device state. The
-measurement system must match for \code{DistanceUnit} and \code{SpeedUnit}; if
-\code{Kilometers} is specified for \code{DistanceUnit}, then \code{SpeedUnit} must be
-\code{KilometersPerHour}.
+\item{SpeedUnit}{The speed unit for the device captured by the device state. The measurement system must match for \code{DistanceUnit} and \code{SpeedUnit}; if \code{Kilometers} is specified for \code{DistanceUnit}, then \code{SpeedUnit} must be \code{KilometersPerHour}.
 
 Default Value: \code{KilometersPerHour}.}
 
-\item{NextToken}{The pagination token specifying which page of results to return in the
-response. If no token is provided, the default page is the first page.
+\item{NextToken}{The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 
 Default value: \code{null}}
 
@@ -46,7 +40,7 @@ Default value: \code{null}}
 Default value: \code{20}}
 }
 \description{
-Evaluates device positions against geofence geometries from a given geofence collection. The event forecasts three states for which a device can be in relative to a geofence:
+This action forecasts future geofence events that are likely to occur within a specified time horizon if a device continues moving at its current speed. Each forecasted event is associated with a geofence from a provided geofence collection. A forecast event can have one of the following states:
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_forecast_geofence_events/} for full documentation.
 }

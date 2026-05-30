@@ -16,8 +16,7 @@ schemas_create_discoverer(
 
 \item{SourceArn}{[required] The ARN of the event bus.}
 
-\item{CrossAccount}{Support discovery of schemas in events sent to the bus from another
-account. (default: true).}
+\item{CrossAccount}{Support discovery of schemas in events sent to the bus from another account. (default: true).}
 
 \item{Tags}{Tags associated with the resource.}
 }

@@ -10,9 +10,7 @@ sqs_list_message_move_tasks(SourceArn, MaxResults = NULL)
 \arguments{
 \item{SourceArn}{[required] The ARN of the queue whose message movement tasks are to be listed.}
 
-\item{MaxResults}{The maximum number of results to include in the response. The default is
-1, which provides the most recent message movement task. The upper limit
-is 10.}
+\item{MaxResults}{The maximum number of results to include in the response. The default is 1, which provides the most recent message movement task. The upper limit is 10.}
 }
 \description{
 Gets the most recent message movement tasks (up to 10) under a specific source queue.

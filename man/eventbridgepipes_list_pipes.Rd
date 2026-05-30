@@ -15,9 +15,7 @@ eventbridgepipes_list_pipes(
 )
 }
 \arguments{
-\item{NamePrefix}{A value that will return a subset of the pipes associated with this
-account. For example, \code{"NamePrefix": "ABC"} will return all endpoints
-with "ABC" in the name.}
+\item{NamePrefix}{A value that will return a subset of the pipes associated with this account. For example, \code{"NamePrefix": "ABC"} will return all endpoints with "ABC" in the name.}
 
 \item{DesiredState}{The state the pipe should be in.}
 
@@ -27,11 +25,7 @@ with "ABC" in the name.}
 
 \item{TargetPrefix}{The prefix matching the pipe target.}
 
-\item{NextToken}{If \code{nextToken} is returned, there are more results available. The value
-of \code{nextToken} is a unique pagination token for each page. Make the call
-again using the returned token to retrieve the next page. Keep all other
-arguments unchanged. Each pagination token expires after 24 hours. Using
-an expired pagination token will return an HTTP 400 InvalidToken error.}
+\item{NextToken}{If \code{nextToken} is returned, there are more results available. The value of \code{nextToken} is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.}
 
 \item{Limit}{The maximum number of pipes to include in the response.}
 }

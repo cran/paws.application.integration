@@ -7,8 +7,7 @@
 eventbridge_delete_endpoint(Name)
 }
 \arguments{
-\item{Name}{[required] The name of the endpoint you want to delete. For example,
-\code{"Name":"us-east-2-custom_bus_A-endpoint"}..}
+\item{Name}{[required] The name of the endpoint you want to delete. For example, \code{"Name":"us-east-2-custom_bus_A-endpoint"}..}
 }
 \description{
 Delete an existing global endpoint. For more information about global endpoints, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-global-endpoints.html}{Making applications Regional-fault tolerant with global endpoints and event replication} in the \emph{Amazon EventBridge User Guide} .

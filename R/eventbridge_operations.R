@@ -75,13 +75,10 @@ eventbridge_cancel_replay <- function(ReplayName) {
 #'
 #' @param Name &#91;required&#93; The name for the API destination to create.
 #' @param Description A description for the API destination to create.
-#' @param ConnectionArn &#91;required&#93; The ARN of the connection to use for the API destination. The
-#' destination endpoint must support the authorization type specified for
-#' the connection.
+#' @param ConnectionArn &#91;required&#93; The ARN of the connection to use for the API destination. The destination endpoint must support the authorization type specified for the connection.
 #' @param InvocationEndpoint &#91;required&#93; The URL to the HTTP invocation endpoint for the API destination.
 #' @param HttpMethod &#91;required&#93; The method to use for the request to the HTTP invocation endpoint.
-#' @param InvocationRateLimitPerSecond The maximum number of requests per second to send to the HTTP invocation
-#' endpoint.
+#' @param InvocationRateLimitPerSecond The maximum number of requests per second to send to the HTTP invocation endpoint.
 #'
 #' @keywords internal
 #'
@@ -116,13 +113,21 @@ eventbridge_create_api_destination <- function(Name, Description = NULL, Connect
 #' @param EventSourceArn &#91;required&#93; The ARN of the event bus that sends events to the archive.
 #' @param Description A description for the archive.
 #' @param EventPattern An event pattern to use to filter events sent to the archive.
-#' @param RetentionDays The number of days to retain events for. Default value is 0. If set to
-#' 0, events are retained indefinitely
+#' @param RetentionDays The number of days to retain events for. Default value is 0. If set to 0, events are retained indefinitely
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+#' 
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt the archive.
+#' 
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
+#' 
+#' If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a customer managed key for any archives for the event bus as well.
+#' 
+#' For more information, see [Encrypting archives](https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html) in the *Amazon EventBridge User Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_create_archive
-eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description = NULL, EventPattern = NULL, RetentionDays = NULL) {
+eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description = NULL, EventPattern = NULL, RetentionDays = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "CreateArchive",
     http_method = "POST",
@@ -131,7 +136,7 @@ eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description 
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$create_archive_input(ArchiveName = ArchiveName, EventSourceArn = EventSourceArn, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays)
+  input <- .eventbridge$create_archive_input(ArchiveName = ArchiveName, EventSourceArn = EventSourceArn, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridge$create_archive_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)
@@ -155,19 +160,20 @@ eventbridge_create_archive <- function(ArchiveName, EventSourceArn, Description 
 #' OAUTH tokens are refreshed when a 401 or 407 response is returned.
 #' @param AuthParameters &#91;required&#93; The authorization parameters to use to authorize with the endpoint.
 #' 
-#' You must include only authorization parameters for the
-#' `AuthorizationType` you specify.
-#' @param InvocationConnectivityParameters For connections to private resource endpoints, the parameters to use for
-#' invoking the resource endpoint.
+#' You must include only authorization parameters for the `AuthorizationType` you specify.
+#' @param InvocationConnectivityParameters For connections to private APIs, the parameters to use for invoking the API.
 #' 
-#' For more information, see [Connecting to private
-#' resources](https://docs.aws.amazon.com/eventbridge/latest/userguide/) in
-#' the *Amazon EventBridge User Guide* .
+#' For more information, see [Connecting to private APIs](https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html) in the *Amazon EventBridge User Guide* .
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+#' 
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt the connection.
+#' 
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_create_connection
-eventbridge_create_connection <- function(Name, Description = NULL, AuthorizationType, AuthParameters, InvocationConnectivityParameters = NULL) {
+eventbridge_create_connection <- function(Name, Description = NULL, AuthorizationType, AuthParameters, InvocationConnectivityParameters = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "CreateConnection",
     http_method = "POST",
@@ -176,7 +182,7 @@ eventbridge_create_connection <- function(Name, Description = NULL, Authorizatio
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$create_connection_input(Name = Name, Description = Description, AuthorizationType = AuthorizationType, AuthParameters = AuthParameters, InvocationConnectivityParameters = InvocationConnectivityParameters)
+  input <- .eventbridge$create_connection_input(Name = Name, Description = Description, AuthorizationType = AuthorizationType, AuthParameters = AuthParameters, InvocationConnectivityParameters = InvocationConnectivityParameters, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridge$create_connection_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)
@@ -193,15 +199,10 @@ eventbridge_create_connection <- function(Name, Description = NULL, Authorizatio
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_create_endpoint/](https://www.paws-r-sdk.com/docs/eventbridge_create_endpoint/) for full documentation.
 #'
-#' @param Name &#91;required&#93; The name of the global endpoint. For example,
-#' `"Name":"us-east-2-custom_bus_A-endpoint"`.
+#' @param Name &#91;required&#93; The name of the global endpoint. For example, `"Name":"us-east-2-custom_bus_A-endpoint"`.
 #' @param Description A description of the global endpoint.
-#' @param RoutingConfig &#91;required&#93; Configure the routing policy, including the health check and secondary
-#' Region..
-#' @param ReplicationConfig Enable or disable event replication. The default state is `ENABLED`
-#' which means you must supply a `RoleArn`. If you don't have a `RoleArn`
-#' or you don't want event replication enabled, set the state to
-#' `DISABLED`.
+#' @param RoutingConfig &#91;required&#93; Configure the routing policy, including the health check and secondary Region..
+#' @param ReplicationConfig Enable or disable event replication. The default state is `ENABLED` which means you must supply a `RoleArn`. If you don't have a `RoleArn` or you don't want event replication enabled, set the state to `DISABLED`.
 #' @param EventBuses &#91;required&#93; Define the event buses used.
 #' 
 #' The names of the event buses must be identical in each Region.
@@ -238,53 +239,40 @@ eventbridge_create_endpoint <- function(Name, Description = NULL, RoutingConfig,
 #'
 #' @param Name &#91;required&#93; The name of the new event bus.
 #' 
-#' Custom event bus names can't contain the `/` character, but you can use
-#' the `/` character in partner event bus names. In addition, for partner
-#' event buses, the name must exactly match the name of the partner event
-#' source that this event bus is matched to.
+#' Custom event bus names can't contain the `/` character, but you can use the `/` character in partner event bus names. In addition, for partner event buses, the name must exactly match the name of the partner event source that this event bus is matched to.
 #' 
-#' You can't use the name `default` for a custom event bus, as this name is
-#' already used for your account's default event bus.
-#' @param EventSourceName If you are creating a partner event bus, this specifies the partner
-#' event source that the new event bus will be matched with.
+#' You can't use the name `default` for a custom event bus, as this name is already used for your account's default event bus.
+#' @param EventSourceName If you are creating a partner event bus, this specifies the partner event source that the new event bus will be matched with.
 #' @param Description The event bus description.
-#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
-#' if you choose to use a customer managed key to encrypt events on this
-#' event bus. The identifier can be the key Amazon Resource Name (ARN),
-#' KeyId, key alias, or key alias ARN.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 #' 
-#' If you do not specify a customer managed key identifier, EventBridge
-#' uses an Amazon Web Services owned key to encrypt events on the event
-#' bus.
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt events on the event bus.
 #' 
-#' For more information, see [Managing
-#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
-#' *Key Management Service Developer Guide*.
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
 #' 
-#' Archives and schema discovery are not supported for event buses
-#' encrypted using a customer managed key. EventBridge returns an error if:
+#' Schema discovery is not supported for event buses encrypted using a customer managed key. EventBridge returns an error if:
 #' 
-#' -   You call [`create_archive`][eventbridge_create_archive] on an event
-#'     bus set to use a customer managed key for encryption.
+#' -   You call ` CreateDiscoverer ` on an event bus set to use a customer managed key for encryption.
 #' 
-#' -   You call ` CreateDiscoverer ` on an event bus set to use a customer
-#'     managed key for encryption.
+#' -   You call ` UpdatedEventBus ` to set a customer managed key on an event bus with schema discovery enabled.
 #' 
-#' -   You call ` UpdatedEventBus ` to set a customer managed key on an
-#'     event bus with an archives or schema discovery enabled.
+#' To enable schema discovery on an event bus, choose to use an Amazon Web Services owned key. For more information, see [Encrypting events](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html) in the *Amazon EventBridge User Guide*.
 #' 
-#' To enable archives or schema discovery on an event bus, choose to use an
-#' Amazon Web Services owned key. For more information, see [Data
-#' encryption in
-#' EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/)
-#' in the *Amazon EventBridge User Guide*.
-#' @param DeadLetterConfig 
+#' If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a customer managed key for any archives for the event bus as well.
+#' 
+#' For more information, see [Encrypting archives](https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html) in the *Amazon EventBridge User Guide*.
+#' @param DeadLetterConfig Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ).
+#' 
+#' For more information, see [Using dead-letter queues to process undelivered events](https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-rule-dlq) in the *EventBridge User Guide*.
+#' @param LogConfig The logging configuration settings for the event bus.
+#' 
+#' For more information, see Configuring logs for event buses in the *EventBridge User Guide*.
 #' @param Tags Tags to associate with the event bus.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_create_event_bus
-eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Description = NULL, KmsKeyIdentifier = NULL, DeadLetterConfig = NULL, Tags = NULL) {
+eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Description = NULL, KmsKeyIdentifier = NULL, DeadLetterConfig = NULL, LogConfig = NULL, Tags = NULL) {
   op <- new_operation(
     name = "CreateEventBus",
     http_method = "POST",
@@ -293,7 +281,7 @@ eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Descripti
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$create_event_bus_input(Name = Name, EventSourceName = EventSourceName, Description = Description, KmsKeyIdentifier = KmsKeyIdentifier, DeadLetterConfig = DeadLetterConfig, Tags = Tags)
+  input <- .eventbridge$create_event_bus_input(Name = Name, EventSourceName = EventSourceName, Description = Description, KmsKeyIdentifier = KmsKeyIdentifier, DeadLetterConfig = DeadLetterConfig, LogConfig = LogConfig, Tags = Tags)
   output <- .eventbridge$create_event_bus_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)
@@ -310,13 +298,8 @@ eventbridge_create_event_bus <- function(Name, EventSourceName = NULL, Descripti
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_create_partner_event_source/](https://www.paws-r-sdk.com/docs/eventbridge_create_partner_event_source/) for full documentation.
 #'
-#' @param Name &#91;required&#93; The name of the partner event source. This name must be unique and must
-#' be in the format ` partner_name/event_namespace/event_name `. The Amazon
-#' Web Services account that wants to use this partner event source must
-#' create a partner event bus with a name that matches the name of the
-#' partner event source.
-#' @param Account &#91;required&#93; The Amazon Web Services account ID that is permitted to create a
-#' matching partner event bus for this partner event source.
+#' @param Name &#91;required&#93; The name of the partner event source. This name must be unique and must be in the format ` partner_name/event_namespace/event_name `. The Amazon Web Services account that wants to use this partner event source must create a partner event bus with a name that matches the name of the partner event source.
+#' @param Account &#91;required&#93; The Amazon Web Services account ID that is permitted to create a matching partner event bus for this partner event source.
 #'
 #' @keywords internal
 #'
@@ -503,8 +486,7 @@ eventbridge_delete_connection <- function(Name) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_delete_endpoint/](https://www.paws-r-sdk.com/docs/eventbridge_delete_endpoint/) for full documentation.
 #'
-#' @param Name &#91;required&#93; The name of the endpoint you want to delete. For example,
-#' `"Name":"us-east-2-custom_bus_A-endpoint"`..
+#' @param Name &#91;required&#93; The name of the endpoint you want to delete. For example, `"Name":"us-east-2-custom_bus_A-endpoint"`..
 #'
 #' @keywords internal
 #'
@@ -567,8 +549,7 @@ eventbridge_delete_event_bus <- function(Name) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_delete_partner_event_source/](https://www.paws-r-sdk.com/docs/eventbridge_delete_partner_event_source/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the event source to delete.
-#' @param Account &#91;required&#93; The Amazon Web Services account ID of the Amazon Web Services customer
-#' that the event source was created for.
+#' @param Account &#91;required&#93; The Amazon Web Services account ID of the Amazon Web Services customer that the event source was created for.
 #'
 #' @keywords internal
 #'
@@ -600,15 +581,8 @@ eventbridge_delete_partner_event_source <- function(Name, Account) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_delete_rule/](https://www.paws-r-sdk.com/docs/eventbridge_delete_rule/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
-#' @param Force If this is a managed rule, created by an Amazon Web Services service on
-#' your behalf, you must specify `Force` as `True` to delete the rule. This
-#' parameter is ignored for rules that are not managed rules. You can check
-#' whether a rule is a managed rule by using
-#' [`describe_rule`][eventbridge_describe_rule] or
-#' [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy`
-#' field of the response.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
+#' @param Force If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify `Force` as `True` to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using [`describe_rule`][eventbridge_describe_rule] or [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy` field of the response.
 #'
 #' @keywords internal
 #'
@@ -732,10 +706,8 @@ eventbridge_describe_connection <- function(Name) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_describe_endpoint/](https://www.paws-r-sdk.com/docs/eventbridge_describe_endpoint/) for full documentation.
 #'
-#' @param Name &#91;required&#93; The name of the endpoint you want to get information about. For example,
-#' `"Name":"us-east-2-custom_bus_A-endpoint"`.
-#' @param HomeRegion The primary Region of the endpoint you want to get information about.
-#' For example `"HomeRegion": "us-east-1"`.
+#' @param Name &#91;required&#93; The name of the endpoint you want to get information about. For example, `"Name":"us-east-2-custom_bus_A-endpoint"`.
+#' @param HomeRegion The primary Region of the endpoint you want to get information about. For example `"HomeRegion": "us-east-1"`.
 #'
 #' @keywords internal
 #'
@@ -766,8 +738,7 @@ eventbridge_describe_endpoint <- function(Name, HomeRegion = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_describe_event_bus/](https://www.paws-r-sdk.com/docs/eventbridge_describe_event_bus/) for full documentation.
 #'
-#' @param Name The name or ARN of the event bus to show details for. If you omit this,
-#' the default event bus is displayed.
+#' @param Name The name or ARN of the event bus to show details for. If you omit this, the default event bus is displayed.
 #'
 #' @keywords internal
 #'
@@ -894,8 +865,7 @@ eventbridge_describe_replay <- function(ReplayName) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_describe_rule/](https://www.paws-r-sdk.com/docs/eventbridge_describe_rule/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
 #'
 #' @keywords internal
 #'
@@ -927,8 +897,7 @@ eventbridge_describe_rule <- function(Name, EventBusName = NULL) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_disable_rule/](https://www.paws-r-sdk.com/docs/eventbridge_disable_rule/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
 #'
 #' @keywords internal
 #'
@@ -960,8 +929,7 @@ eventbridge_disable_rule <- function(Name, EventBusName = NULL) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_enable_rule/](https://www.paws-r-sdk.com/docs/eventbridge_enable_rule/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
 #'
 #' @keywords internal
 #'
@@ -992,18 +960,13 @@ eventbridge_enable_rule <- function(Name, EventBusName = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_api_destinations/](https://www.paws-r-sdk.com/docs/eventbridge_list_api_destinations/) for full documentation.
 #'
-#' @param NamePrefix A name prefix to filter results returned. Only API destinations with a
-#' name that starts with the prefix are returned.
+#' @param NamePrefix A name prefix to filter results returned. Only API destinations with a name that starts with the prefix are returned.
 #' @param ConnectionArn The ARN of the connection specified for the API destination.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of API destinations to include in the response.
 #'
 #' @keywords internal
@@ -1035,19 +998,14 @@ eventbridge_list_api_destinations <- function(NamePrefix = NULL, ConnectionArn =
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_archives/](https://www.paws-r-sdk.com/docs/eventbridge_list_archives/) for full documentation.
 #'
-#' @param NamePrefix A name prefix to filter the archives returned. Only archives with name
-#' that match the prefix are returned.
+#' @param NamePrefix A name prefix to filter the archives returned. Only archives with name that match the prefix are returned.
 #' @param EventSourceArn The ARN of the event source associated with the archive.
 #' @param State The state of the archive.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of results to return.
 #'
 #' @keywords internal
@@ -1079,18 +1037,13 @@ eventbridge_list_archives <- function(NamePrefix = NULL, EventSourceArn = NULL, 
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_connections/](https://www.paws-r-sdk.com/docs/eventbridge_list_connections/) for full documentation.
 #'
-#' @param NamePrefix A name prefix to filter results returned. Only connections with a name
-#' that starts with the prefix are returned.
+#' @param NamePrefix A name prefix to filter results returned. Only connections with a name that starts with the prefix are returned.
 #' @param ConnectionState The state of the connection.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of connections to return.
 #'
 #' @keywords internal
@@ -1122,20 +1075,13 @@ eventbridge_list_connections <- function(NamePrefix = NULL, ConnectionState = NU
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_endpoints/](https://www.paws-r-sdk.com/docs/eventbridge_list_endpoints/) for full documentation.
 #'
-#' @param NamePrefix A value that will return a subset of the endpoints associated with this
-#' account. For example, `"NamePrefix": "ABC"` will return all endpoints
-#' with "ABC" in the name.
-#' @param HomeRegion The primary Region of the endpoints associated with this account. For
-#' example `"HomeRegion": "us-east-1"`.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NamePrefix A value that will return a subset of the endpoints associated with this account. For example, `"NamePrefix": "ABC"` will return all endpoints with "ABC" in the name.
+#' @param HomeRegion The primary Region of the endpoints associated with this account. For example `"HomeRegion": "us-east-1"`.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param MaxResults The maximum number of results returned by the call.
 #'
 #' @keywords internal
@@ -1168,20 +1114,13 @@ eventbridge_list_endpoints <- function(NamePrefix = NULL, HomeRegion = NULL, Nex
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_event_buses/](https://www.paws-r-sdk.com/docs/eventbridge_list_event_buses/) for full documentation.
 #'
-#' @param NamePrefix Specifying this limits the results to only those event buses with names
-#' that start with the specified prefix.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NamePrefix Specifying this limits the results to only those event buses with names that start with the specified prefix.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
-#' @param Limit Specifying this limits the number of results returned by this operation.
-#' The operation also returns a NextToken which you can use in a subsequent
-#' operation to retrieve the next set of results.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
+#' @param Limit Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
 #'
 #' @keywords internal
 #'
@@ -1213,20 +1152,13 @@ eventbridge_list_event_buses <- function(NamePrefix = NULL, NextToken = NULL, Li
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_event_sources/](https://www.paws-r-sdk.com/docs/eventbridge_list_event_sources/) for full documentation.
 #'
-#' @param NamePrefix Specifying this limits the results to only those partner event sources
-#' with names that start with the specified prefix.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NamePrefix Specifying this limits the results to only those partner event sources with names that start with the specified prefix.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
-#' @param Limit Specifying this limits the number of results returned by this operation.
-#' The operation also returns a NextToken which you can use in a subsequent
-#' operation to retrieve the next set of results.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
+#' @param Limit Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
 #'
 #' @keywords internal
 #'
@@ -1259,20 +1191,13 @@ eventbridge_list_event_sources <- function(NamePrefix = NULL, NextToken = NULL, 
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_partner_event_source_accounts/](https://www.paws-r-sdk.com/docs/eventbridge_list_partner_event_source_accounts/) for full documentation.
 #'
-#' @param EventSourceName &#91;required&#93; The name of the partner event source to display account information
-#' about.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param EventSourceName &#91;required&#93; The name of the partner event source to display account information about.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
-#' @param Limit Specifying this limits the number of results returned by this operation.
-#' The operation also returns a NextToken which you can use in a subsequent
-#' operation to retrieve the next set of results.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
+#' @param Limit Specifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
 #'
 #' @keywords internal
 #'
@@ -1304,20 +1229,13 @@ eventbridge_list_partner_event_source_accounts <- function(EventSourceName, Next
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_partner_event_sources/](https://www.paws-r-sdk.com/docs/eventbridge_list_partner_event_sources/) for full documentation.
 #'
-#' @param NamePrefix &#91;required&#93; If you specify this, the results are limited to only those partner event
-#' sources that start with the string you specify.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NamePrefix &#91;required&#93; If you specify this, the results are limited to only those partner event sources that start with the string you specify.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
-#' @param Limit pecifying this limits the number of results returned by this operation.
-#' The operation also returns a NextToken which you can use in a subsequent
-#' operation to retrieve the next set of results.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
+#' @param Limit pecifying this limits the number of results returned by this operation. The operation also returns a NextToken which you can use in a subsequent operation to retrieve the next set of results.
 #'
 #' @keywords internal
 #'
@@ -1348,19 +1266,14 @@ eventbridge_list_partner_event_sources <- function(NamePrefix, NextToken = NULL,
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_replays/](https://www.paws-r-sdk.com/docs/eventbridge_list_replays/) for full documentation.
 #'
-#' @param NamePrefix A name prefix to filter the replays returned. Only replays with name
-#' that match the prefix are returned.
+#' @param NamePrefix A name prefix to filter the replays returned. Only replays with name that match the prefix are returned.
 #' @param State The state of the replay.
 #' @param EventSourceArn The ARN of the archive from which the events are replayed.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of replays to retrieve.
 #'
 #' @keywords internal
@@ -1393,17 +1306,12 @@ eventbridge_list_replays <- function(NamePrefix = NULL, State = NULL, EventSourc
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_rule_names_by_target/](https://www.paws-r-sdk.com/docs/eventbridge_list_rule_names_by_target/) for full documentation.
 #'
 #' @param TargetArn &#91;required&#93; The Amazon Resource Name (ARN) of the target resource.
-#' @param EventBusName The name or ARN of the event bus to list rules for. If you omit this,
-#' the default event bus is used.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param EventBusName The name or ARN of the event bus to list rules for. If you omit this, the default event bus is used.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of results to return.
 #'
 #' @keywords internal
@@ -1436,17 +1344,12 @@ eventbridge_list_rule_names_by_target <- function(TargetArn, EventBusName = NULL
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_rules/](https://www.paws-r-sdk.com/docs/eventbridge_list_rules/) for full documentation.
 #'
 #' @param NamePrefix The prefix matching the rule name.
-#' @param EventBusName The name or ARN of the event bus to list the rules for. If you omit
-#' this, the default event bus is used.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param EventBusName The name or ARN of the event bus to list the rules for. If you omit this, the default event bus is used.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of results to return.
 #'
 #' @keywords internal
@@ -1510,17 +1413,12 @@ eventbridge_list_tags_for_resource <- function(ResourceARN) {
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_list_targets_by_rule/](https://www.paws-r-sdk.com/docs/eventbridge_list_targets_by_rule/) for full documentation.
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
-#' @param NextToken The token returned by a previous call, which you can use to retrieve the
-#' next set of results.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
+#' @param NextToken The token returned by a previous call, which you can use to retrieve the next set of results.
 #' 
-#' The value of `nextToken` is a unique pagination token for each page. To
-#' retrieve the next page of results, make the call again using the
-#' returned token. Keep all other arguments unchanged.
+#' The value of `nextToken` is a unique pagination token for each page. To retrieve the next page of results, make the call again using the returned token. Keep all other arguments unchanged.
 #' 
-#' Using an expired pagination token results in an `HTTP 400 InvalidToken`
-#' error.
+#' Using an expired pagination token results in an `HTTP 400 InvalidToken` error.
 #' @param Limit The maximum number of results to return.
 #'
 #' @keywords internal
@@ -1553,12 +1451,8 @@ eventbridge_list_targets_by_rule <- function(Rule, EventBusName = NULL, NextToke
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_put_events/](https://www.paws-r-sdk.com/docs/eventbridge_put_events/) for full documentation.
 #'
-#' @param Entries &#91;required&#93; The entry that defines an event in your system. You can specify several
-#' parameters for the entry such as the source and type of the event,
-#' resources associated with the event, and so on.
-#' @param EndpointId The URL subdomain of the endpoint. For example, if the URL for Endpoint
-#' is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId
-#' is `abcde.veo`.
+#' @param Entries &#91;required&#93; The entry that defines an event in your system. You can specify several parameters for the entry such as the source and type of the event, resources associated with the event, and so on.
+#' @param EndpointId The URL subdomain of the endpoint. For example, if the URL for Endpoint is https://abcde.veo.endpoints.event.amazonaws.com, then the EndpointId is `abcde.veo`.
 #' 
 #' When using Java, you must include `auth-crt` on the class path.
 #'
@@ -1625,40 +1519,20 @@ eventbridge_put_partner_events <- function(Entries) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_put_permission/](https://www.paws-r-sdk.com/docs/eventbridge_put_permission/) for full documentation.
 #'
-#' @param EventBusName The name of the event bus associated with the rule. If you omit this,
-#' the default event bus is used.
+#' @param EventBusName The name of the event bus associated with the rule. If you omit this, the default event bus is used.
 #' @param Action The action that you are enabling the other account to perform.
-#' @param Principal The 12-digit Amazon Web Services account ID that you are permitting to
-#' put events to your default event bus. Specify "*" to permit any account
-#' to put events to your default event bus.
+#' @param Principal The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus.
 #' 
-#' If you specify "*" without specifying `Condition`, avoid creating rules
-#' that may match undesirable events. To create more secure rules, make
-#' sure that the event pattern for each rule contains an `account` field
-#' with a specific account ID from which to receive events. Rules with an
-#' account field do not match any events sent from other accounts.
-#' @param StatementId An identifier string for the external account that you are granting
-#' permissions to. If you later want to revoke the permission for this
-#' external account, specify this `StatementId` when you run
-#' [`remove_permission`][eventbridge_remove_permission].
+#' If you specify "*" without specifying `Condition`, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an `account` field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.
+#' @param StatementId An identifier string for the external account that you are granting permissions to. If you later want to revoke the permission for this external account, specify this `StatementId` when you run [`remove_permission`][eventbridge_remove_permission].
 #' 
 #' Each `StatementId` must be unique.
-#' @param Condition This parameter enables you to limit the permission to accounts that
-#' fulfill a certain condition, such as being a member of a certain Amazon
-#' Web Services organization. For more information about Amazon Web
-#' Services Organizations, see [What Is Amazon Web Services
-#' Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html)
-#' in the *Amazon Web Services Organizations User Guide*.
+#' @param Condition This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain Amazon Web Services organization. For more information about Amazon Web Services Organizations, see [What Is Amazon Web Services Organizations](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html) in the *Amazon Web Services Organizations User Guide*.
 #' 
-#' If you specify `Condition` with an Amazon Web Services organization ID,
-#' and specify "*" as the value for `Principal`, you grant permission to
-#' all the accounts in the named organization.
+#' If you specify `Condition` with an Amazon Web Services organization ID, and specify "*" as the value for `Principal`, you grant permission to all the accounts in the named organization.
 #' 
-#' The `Condition` is a JSON string which must contain `Type`, `Key`, and
-#' `Value` fields.
-#' @param Policy A JSON string that describes the permission policy statement. You can
-#' include a `Policy` parameter in the request instead of using the
-#' `StatementId`, `Action`, `Principal`, or `Condition` parameters.
+#' The `Condition` is a JSON string which must contain `Type`, `Key`, and `Value` fields.
+#' @param Policy A JSON string that describes the permission policy statement. You can include a `Policy` parameter in the request instead of using the `StatementId`, `Action`, `Principal`, or `Condition` parameters.
 #'
 #' @keywords internal
 #'
@@ -1690,53 +1564,27 @@ eventbridge_put_permission <- function(EventBusName = NULL, Action = NULL, Princ
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_put_rule/](https://www.paws-r-sdk.com/docs/eventbridge_put_rule/) for full documentation.
 #'
 #' @param Name &#91;required&#93; The name of the rule that you are creating or updating.
-#' @param ScheduleExpression The scheduling expression. For example, "cron(0 20 * * ? *)" or
-#' "rate(5 minutes)".
-#' @param EventPattern The event pattern. For more information, see [Amazon EventBridge event
-#' patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html)
-#' in the *Amazon EventBridge User Guide* .
+#' @param ScheduleExpression The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5 minutes)".
+#' @param EventPattern The event pattern. For more information, see [Amazon EventBridge event patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html) in the *Amazon EventBridge User Guide* .
 #' @param State The state of the rule.
 #' 
 #' Valid values include:
 #' 
-#' -   `DISABLED`: The rule is disabled. EventBridge does not match any
-#'     events against the rule.
+#' -   `DISABLED`: The rule is disabled. EventBridge does not match any events against the rule.
 #' 
-#' -   `ENABLED`: The rule is enabled. EventBridge matches events against
-#'     the rule, *except* for Amazon Web Services management events
-#'     delivered through CloudTrail.
+#' -   `ENABLED`: The rule is enabled. EventBridge matches events against the rule, *except* for Amazon Web Services management events delivered through CloudTrail.
 #' 
-#' -   `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is enabled
-#'     for all events, including Amazon Web Services management events
-#'     delivered through CloudTrail.
+#' -   `ENABLED_WITH_ALL_CLOUDTRAIL_MANAGEMENT_EVENTS`: The rule is enabled for all events, including Amazon Web Services management events delivered through CloudTrail.
 #' 
-#'     Management events provide visibility into management operations that
-#'     are performed on resources in your Amazon Web Services account.
-#'     These are also known as control plane operations. For more
-#'     information, see [Logging management
-#'     events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events)
-#'     in the *CloudTrail User Guide*, and [Filtering management events
-#'     from Amazon Web Services
-#'     services](https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-service-event-cloudtrail)
-#'     in the *Amazon EventBridge User Guide* .
+#'     Management events provide visibility into management operations that are performed on resources in your Amazon Web Services account. These are also known as control plane operations. For more information, see [Logging management events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html#logging-management-events) in the *CloudTrail User Guide*, and [Filtering management events from Amazon Web Services services](https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-service-event-cloudtrail) in the *Amazon EventBridge User Guide* .
 #' 
-#'     This value is only valid for rules on the
-#'     [default](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses)
-#'     event bus or [custom event
-#'     buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html).
-#'     It does not apply to [partner event
-#'     buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html).
+#'     This value is only valid for rules on the [default](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is-how-it-works-concepts.html#eb-bus-concepts-buses) event bus or [custom event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-event-bus.html). It does not apply to [partner event buses](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-saas.html).
 #' @param Description A description of the rule.
 #' @param RoleArn The Amazon Resource Name (ARN) of the IAM role associated with the rule.
 #' 
-#' If you're setting an event bus in another account as the target and that
-#' account granted permission to your account through an organization
-#' instead of directly by the account ID, you must specify a `RoleArn` with
-#' proper permissions in the `Target` structure, instead of here in this
-#' parameter.
+#' If you're setting an event bus in another account as the target and that account granted permission to your account through an organization instead of directly by the account ID, you must specify a `RoleArn` with proper permissions in the `Target` structure, instead of here in this parameter.
 #' @param Tags The list of key-value pairs to associate with the rule.
-#' @param EventBusName The name or ARN of the event bus to associate with this rule. If you
-#' omit this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus to associate with this rule. If you omit this, the default event bus is used.
 #'
 #' @keywords internal
 #'
@@ -1769,8 +1617,7 @@ eventbridge_put_rule <- function(Name, ScheduleExpression = NULL, EventPattern =
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_put_targets/](https://www.paws-r-sdk.com/docs/eventbridge_put_targets/) for full documentation.
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
 #' @param Targets &#91;required&#93; The targets to update or add to the rule.
 #'
 #' @keywords internal
@@ -1803,11 +1650,9 @@ eventbridge_put_targets <- function(Rule, EventBusName = NULL, Targets) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_remove_permission/](https://www.paws-r-sdk.com/docs/eventbridge_remove_permission/) for full documentation.
 #'
-#' @param StatementId The statement ID corresponding to the account that is no longer allowed
-#' to put events to the default event bus.
+#' @param StatementId The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.
 #' @param RemoveAllPermissions Specifies whether to remove all permissions.
-#' @param EventBusName The name of the event bus to revoke permissions for. If you omit this,
-#' the default event bus is used.
+#' @param EventBusName The name of the event bus to revoke permissions for. If you omit this, the default event bus is used.
 #'
 #' @keywords internal
 #'
@@ -1839,16 +1684,9 @@ eventbridge_remove_permission <- function(StatementId = NULL, RemoveAllPermissio
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_remove_targets/](https://www.paws-r-sdk.com/docs/eventbridge_remove_targets/) for full documentation.
 #'
 #' @param Rule &#91;required&#93; The name of the rule.
-#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit
-#' this, the default event bus is used.
+#' @param EventBusName The name or ARN of the event bus associated with the rule. If you omit this, the default event bus is used.
 #' @param Ids &#91;required&#93; The IDs of the targets to remove from the rule.
-#' @param Force If this is a managed rule, created by an Amazon Web Services service on
-#' your behalf, you must specify `Force` as `True` to remove targets. This
-#' parameter is ignored for rules that are not managed rules. You can check
-#' whether a rule is a managed rule by using
-#' [`describe_rule`][eventbridge_describe_rule] or
-#' [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy`
-#' field of the response.
+#' @param Force If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify `Force` as `True` to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using [`describe_rule`][eventbridge_describe_rule] or [`list_rules`][eventbridge_list_rules] and checking the `ManagedBy` field of the response.
 #'
 #' @keywords internal
 #'
@@ -1882,12 +1720,9 @@ eventbridge_remove_targets <- function(Rule, EventBusName = NULL, Ids, Force = N
 #' @param ReplayName &#91;required&#93; The name of the replay to start.
 #' @param Description A description for the replay to start.
 #' @param EventSourceArn &#91;required&#93; The ARN of the archive to replay events from.
-#' @param EventStartTime &#91;required&#93; A time stamp for the time to start replaying events. Only events that
-#' occurred between the `EventStartTime` and `EventEndTime` are replayed.
-#' @param EventEndTime &#91;required&#93; A time stamp for the time to stop replaying events. Only events that
-#' occurred between the `EventStartTime` and `EventEndTime` are replayed.
-#' @param Destination &#91;required&#93; A `ReplayDestination` object that includes details about the destination
-#' for the replay.
+#' @param EventStartTime &#91;required&#93; A time stamp for the time to start replaying events. Only events that occurred between the `EventStartTime` and `EventEndTime` are replayed.
+#' @param EventEndTime &#91;required&#93; A time stamp for the time to stop replaying events. Only events that occurred between the `EventStartTime` and `EventEndTime` are replayed.
+#' @param Destination &#91;required&#93; A `ReplayDestination` object that includes details about the destination for the replay.
 #'
 #' @keywords internal
 #'
@@ -1951,13 +1786,8 @@ eventbridge_tag_resource <- function(ResourceARN, Tags) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_test_event_pattern/](https://www.paws-r-sdk.com/docs/eventbridge_test_event_pattern/) for full documentation.
 #'
-#' @param EventPattern &#91;required&#93; The event pattern. For more information, see [Events and Event
-#' Patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html)
-#' in the *Amazon EventBridge User Guide* .
-#' @param Event &#91;required&#93; The event, in JSON format, to test against the event pattern. The JSON
-#' must follow the format specified in [Amazon Web Services
-#' Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html),
-#' and the following fields are mandatory:
+#' @param EventPattern &#91;required&#93; The event pattern. For more information, see [Events and Event Patterns](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html) in the *Amazon EventBridge User Guide* .
+#' @param Event &#91;required&#93; The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in [Amazon Web Services Events](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-events.html), and the following fields are mandatory:
 #' 
 #' -   `id`
 #' 
@@ -2039,8 +1869,7 @@ eventbridge_untag_resource <- function(ResourceARN, TagKeys) {
 #' @param ConnectionArn The ARN of the connection to use for the API destination.
 #' @param InvocationEndpoint The URL to the endpoint to use for the API destination.
 #' @param HttpMethod The method to use for the API destination.
-#' @param InvocationRateLimitPerSecond The maximum number of invocations per second to send to the API
-#' destination.
+#' @param InvocationRateLimitPerSecond The maximum number of invocations per second to send to the API destination.
 #'
 #' @keywords internal
 #'
@@ -2075,11 +1904,20 @@ eventbridge_update_api_destination <- function(Name, Description = NULL, Connect
 #' @param Description The description for the archive.
 #' @param EventPattern The event pattern to use to filter events sent to the archive.
 #' @param RetentionDays The number of days to retain events in the archive.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this archive. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+#' 
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt the archive.
+#' 
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
+#' 
+#' If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a customer managed key for any archives for the event bus as well.
+#' 
+#' For more information, see [Encrypting archives](https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html) in the *Amazon EventBridge User Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_update_archive
-eventbridge_update_archive <- function(ArchiveName, Description = NULL, EventPattern = NULL, RetentionDays = NULL) {
+eventbridge_update_archive <- function(ArchiveName, Description = NULL, EventPattern = NULL, RetentionDays = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "UpdateArchive",
     http_method = "POST",
@@ -2088,7 +1926,7 @@ eventbridge_update_archive <- function(ArchiveName, Description = NULL, EventPat
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$update_archive_input(ArchiveName = ArchiveName, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays)
+  input <- .eventbridge$update_archive_input(ArchiveName = ArchiveName, Description = Description, EventPattern = EventPattern, RetentionDays = RetentionDays, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridge$update_archive_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)
@@ -2109,17 +1947,19 @@ eventbridge_update_archive <- function(ArchiveName, Description = NULL, EventPat
 #' @param Description A description for the connection.
 #' @param AuthorizationType The type of authorization to use for the connection.
 #' @param AuthParameters The authorization parameters to use for the connection.
-#' @param InvocationConnectivityParameters For connections to private resource endpoints, the parameters to use for
-#' invoking the resource endpoint.
+#' @param InvocationConnectivityParameters For connections to private APIs, the parameters to use for invoking the API.
 #' 
-#' For more information, see [Connecting to private
-#' resources](https://docs.aws.amazon.com/eventbridge/latest/userguide/) in
-#' the *Amazon EventBridge User Guide* .
+#' For more information, see [Connecting to private APIs](https://docs.aws.amazon.com/eventbridge/latest/userguide/connection-private.html) in the *Amazon EventBridge User Guide* .
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt this connection. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
+#' 
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt the connection.
+#' 
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_update_connection
-eventbridge_update_connection <- function(Name, Description = NULL, AuthorizationType = NULL, AuthParameters = NULL, InvocationConnectivityParameters = NULL) {
+eventbridge_update_connection <- function(Name, Description = NULL, AuthorizationType = NULL, AuthParameters = NULL, InvocationConnectivityParameters = NULL, KmsKeyIdentifier = NULL) {
   op <- new_operation(
     name = "UpdateConnection",
     http_method = "POST",
@@ -2128,7 +1968,7 @@ eventbridge_update_connection <- function(Name, Description = NULL, Authorizatio
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$update_connection_input(Name = Name, Description = Description, AuthorizationType = AuthorizationType, AuthParameters = AuthParameters, InvocationConnectivityParameters = InvocationConnectivityParameters)
+  input <- .eventbridge$update_connection_input(Name = Name, Description = Description, AuthorizationType = AuthorizationType, AuthParameters = AuthParameters, InvocationConnectivityParameters = InvocationConnectivityParameters, KmsKeyIdentifier = KmsKeyIdentifier)
   output <- .eventbridge$update_connection_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)
@@ -2147,8 +1987,7 @@ eventbridge_update_connection <- function(Name, Description = NULL, Authorizatio
 #'
 #' @param Name &#91;required&#93; The name of the endpoint you want to update.
 #' @param Description A description for the endpoint.
-#' @param RoutingConfig Configure the routing policy, including the health check and secondary
-#' Region.
+#' @param RoutingConfig Configure the routing policy, including the health check and secondary Region.
 #' @param ReplicationConfig Whether event replication was enabled or disabled by this request.
 #' @param EventBuses Define event buses used for replication.
 #' @param RoleArn The ARN of the role used by event replication for this request.
@@ -2183,43 +2022,35 @@ eventbridge_update_endpoint <- function(Name, Description = NULL, RoutingConfig 
 #' See [https://www.paws-r-sdk.com/docs/eventbridge_update_event_bus/](https://www.paws-r-sdk.com/docs/eventbridge_update_event_bus/) for full documentation.
 #'
 #' @param Name The name of the event bus.
-#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use,
-#' if you choose to use a customer managed key to encrypt events on this
-#' event bus. The identifier can be the key Amazon Resource Name (ARN),
-#' KeyId, key alias, or key alias ARN.
+#' @param KmsKeyIdentifier The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 #' 
-#' If you do not specify a customer managed key identifier, EventBridge
-#' uses an Amazon Web Services owned key to encrypt events on the event
-#' bus.
+#' If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt events on the event bus.
 #' 
-#' For more information, see [Managing
-#' keys](https://docs.aws.amazon.com/kms/latest/developerguide/) in the
-#' *Key Management Service Developer Guide*.
+#' For more information, see [Identify and view keys](https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html) in the *Key Management Service Developer Guide*.
 #' 
-#' Archives and schema discovery are not supported for event buses
-#' encrypted using a customer managed key. EventBridge returns an error if:
+#' Schema discovery is not supported for event buses encrypted using a customer managed key. EventBridge returns an error if:
 #' 
-#' -   You call [`create_archive`][eventbridge_create_archive] on an event
-#'     bus set to use a customer managed key for encryption.
+#' -   You call ` CreateDiscoverer ` on an event bus set to use a customer managed key for encryption.
 #' 
-#' -   You call ` CreateDiscoverer ` on an event bus set to use a customer
-#'     managed key for encryption.
+#' -   You call ` UpdatedEventBus ` to set a customer managed key on an event bus with schema discovery enabled.
 #' 
-#' -   You call ` UpdatedEventBus ` to set a customer managed key on an
-#'     event bus with an archives or schema discovery enabled.
+#' To enable schema discovery on an event bus, choose to use an Amazon Web Services owned key. For more information, see [Encrypting events](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html) in the *Amazon EventBridge User Guide*.
 #' 
-#' To enable archives or schema discovery on an event bus, choose to use an
-#' Amazon Web Services owned key. For more information, see [Data
-#' encryption in
-#' EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/)
-#' in the *Amazon EventBridge User Guide*.
+#' If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a customer managed key for any archives for the event bus as well.
+#' 
+#' For more information, see [Encrypting archives](https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html) in the *Amazon EventBridge User Guide*.
 #' @param Description The event bus description.
-#' @param DeadLetterConfig 
+#' @param DeadLetterConfig Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ).
+#' 
+#' For more information, see [Using dead-letter queues to process undelivered events](https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-rule-dlq) in the *EventBridge User Guide*.
+#' @param LogConfig The logging configuration settings for the event bus.
+#' 
+#' For more information, see Configuring logs for event buses in the *EventBridge User Guide*.
 #'
 #' @keywords internal
 #'
 #' @rdname eventbridge_update_event_bus
-eventbridge_update_event_bus <- function(Name = NULL, KmsKeyIdentifier = NULL, Description = NULL, DeadLetterConfig = NULL) {
+eventbridge_update_event_bus <- function(Name = NULL, KmsKeyIdentifier = NULL, Description = NULL, DeadLetterConfig = NULL, LogConfig = NULL) {
   op <- new_operation(
     name = "UpdateEventBus",
     http_method = "POST",
@@ -2228,7 +2059,7 @@ eventbridge_update_event_bus <- function(Name = NULL, KmsKeyIdentifier = NULL, D
     paginator = list(),
     stream_api = FALSE
   )
-  input <- .eventbridge$update_event_bus_input(Name = Name, KmsKeyIdentifier = KmsKeyIdentifier, Description = Description, DeadLetterConfig = DeadLetterConfig)
+  input <- .eventbridge$update_event_bus_input(Name = Name, KmsKeyIdentifier = KmsKeyIdentifier, Description = Description, DeadLetterConfig = DeadLetterConfig, LogConfig = LogConfig)
   output <- .eventbridge$update_event_bus_output()
   config <- get_config()
   svc <- .eventbridge$service(config, op)

@@ -15,38 +15,29 @@ locationservice_get_device_position_history(
 )
 }
 \arguments{
-\item{TrackerName}{[required] The tracker resource receiving the request for the device position
-history.}
+\item{TrackerName}{[required] The tracker resource receiving the request for the device position history.}
 
 \item{DeviceId}{[required] The device whose position history you want to retrieve.}
 
-\item{NextToken}{The pagination token specifying which page of results to return in the
-response. If no token is provided, the default page is the first page.
+\item{NextToken}{The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page.
 
 Default value: \code{null}}
 
-\item{StartTimeInclusive}{Specify the start time for the position history in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format:
-\code{YYYY-MM-DDThh:mm:ss.sssZ}. By default, the value will be 24 hours prior
-to the time that the request is made.
+\item{StartTimeInclusive}{Specify the start time for the position history in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. By default, the value will be 24 hours prior to the time that the request is made.
 
 Requirement:
 \itemize{
-\item The time specified for \code{StartTimeInclusive} must be before
-\code{EndTimeExclusive}.
+\item The time specified for \code{StartTimeInclusive} must be before \code{EndTimeExclusive}.
 }}
 
-\item{EndTimeExclusive}{Specify the end time for the position history in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format:
-\code{YYYY-MM-DDThh:mm:ss.sssZ}. By default, the value will be the time that
-the request is made.
+\item{EndTimeExclusive}{Specify the end time for the position history in \href{https://www.iso.org/iso-8601-date-and-time-format.html}{ISO 8601} format: \code{YYYY-MM-DDThh:mm:ss.sssZ}. By default, the value will be the time that the request is made.
 
 Requirement:
 \itemize{
-\item The time specified for \code{EndTimeExclusive} must be after the time for
-\code{StartTimeInclusive}.
+\item The time specified for \code{EndTimeExclusive} must be after the time for \code{StartTimeInclusive}.
 }}
 
-\item{MaxResults}{An optional limit for the number of device positions returned in a
-single call.
+\item{MaxResults}{An optional limit for the number of device positions returned in a single call.
 
 Default value: \code{100}}
 }

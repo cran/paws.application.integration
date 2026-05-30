@@ -12,13 +12,11 @@ eventbridge_remove_permission(
 )
 }
 \arguments{
-\item{StatementId}{The statement ID corresponding to the account that is no longer allowed
-to put events to the default event bus.}
+\item{StatementId}{The statement ID corresponding to the account that is no longer allowed to put events to the default event bus.}
 
 \item{RemoveAllPermissions}{Specifies whether to remove all permissions.}
 
-\item{EventBusName}{The name of the event bus to revoke permissions for. If you omit this,
-the default event bus is used.}
+\item{EventBusName}{The name of the event bus to revoke permissions for. If you omit this, the default event bus is used.}
 }
 \description{
 Revokes the permission of another Amazon Web Services account to be able to put events to the specified event bus. Specify the account to revoke by the \code{StatementId} value that you associated with the account when you granted it permission with \code{\link[=eventbridge_put_permission]{put_permission}}. You can find the \code{StatementId} by using \code{\link[=eventbridge_describe_event_bus]{describe_event_bus}}.

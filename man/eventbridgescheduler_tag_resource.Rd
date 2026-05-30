@@ -8,8 +8,7 @@ Scheduler resource}
 eventbridgescheduler_tag_resource(ResourceArn, Tags)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the schedule group that you are adding
-tags to.}
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the schedule group that you are adding tags to.}
 
 \item{Tags}{[required] The list of tags to associate with the schedule group.}
 }

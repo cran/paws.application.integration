@@ -8,42 +8,40 @@ eventbridge_update_event_bus(
   Name = NULL,
   KmsKeyIdentifier = NULL,
   Description = NULL,
-  DeadLetterConfig = NULL
+  DeadLetterConfig = NULL,
+  LogConfig = NULL
 )
 }
 \arguments{
 \item{Name}{The name of the event bus.}
 
-\item{KmsKeyIdentifier}{The identifier of the KMS customer managed key for EventBridge to use,
-if you choose to use a customer managed key to encrypt events on this
-event bus. The identifier can be the key Amazon Resource Name (ARN),
-KeyId, key alias, or key alias ARN.
+\item{KmsKeyIdentifier}{The identifier of the KMS customer managed key for EventBridge to use, if you choose to use a customer managed key to encrypt events on this event bus. The identifier can be the key Amazon Resource Name (ARN), KeyId, key alias, or key alias ARN.
 
-If you do not specify a customer managed key identifier, EventBridge
-uses an Amazon Web Services owned key to encrypt events on the event
-bus.
+If you do not specify a customer managed key identifier, EventBridge uses an Amazon Web Services owned key to encrypt events on the event bus.
 
-For more information, see \href{https://docs.aws.amazon.com/kms/latest/developerguide/}{Managing keys} in the
-\emph{Key Management Service Developer Guide}.
+For more information, see \href{https://docs.aws.amazon.com/kms/latest/developerguide/viewing-keys.html}{Identify and view keys} in the \emph{Key Management Service Developer Guide}.
 
-Archives and schema discovery are not supported for event buses
-encrypted using a customer managed key. EventBridge returns an error if:
+Schema discovery is not supported for event buses encrypted using a customer managed key. EventBridge returns an error if:
 \itemize{
-\item You call \code{\link[=eventbridge_create_archive]{create_archive}} on an event
-bus set to use a customer managed key for encryption.
-\item You call \code{CreateDiscoverer} on an event bus set to use a customer
-managed key for encryption.
-\item You call \code{UpdatedEventBus} to set a customer managed key on an
-event bus with an archives or schema discovery enabled.
+\item You call \code{CreateDiscoverer} on an event bus set to use a customer managed key for encryption.
+\item You call \code{UpdatedEventBus} to set a customer managed key on an event bus with schema discovery enabled.
 }
 
-To enable archives or schema discovery on an event bus, choose to use an
-Amazon Web Services owned key. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/}{Data encryption in EventBridge}
-in the \emph{Amazon EventBridge User Guide}.}
+To enable schema discovery on an event bus, choose to use an Amazon Web Services owned key. For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption-event-bus-cmkey.html}{Encrypting events} in the \emph{Amazon EventBridge User Guide}.
+
+If you have specified that EventBridge use a customer managed key for encrypting the source event bus, we strongly recommend you also specify a customer managed key for any archives for the event bus as well.
+
+For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/encryption-archives.html}{Encrypting archives} in the \emph{Amazon EventBridge User Guide}.}
 
 \item{Description}{The event bus description.}
 
-\item{DeadLetterConfig}{}
+\item{DeadLetterConfig}{Configuration details of the Amazon SQS queue for EventBridge to use as a dead-letter queue (DLQ).
+
+For more information, see \href{https://docs.aws.amazon.com/eventbridge/latest/userguide/#eb-rule-dlq}{Using dead-letter queues to process undelivered events} in the \emph{EventBridge User Guide}.}
+
+\item{LogConfig}{The logging configuration settings for the event bus.
+
+For more information, see Configuring logs for event buses in the \emph{EventBridge User Guide}.}
 }
 \description{
 Updates the specified event bus.

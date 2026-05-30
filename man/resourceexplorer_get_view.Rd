@@ -7,8 +7,7 @@
 resourceexplorer_get_view(ViewArn)
 }
 \arguments{
-\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)}
-of the view that you want information about.}
+\item{ViewArn}{[required] The \href{https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html}{Amazon resource name (ARN)} of the view that you want information about.}
 }
 \description{
 Retrieves details of the specified view.

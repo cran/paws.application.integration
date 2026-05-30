@@ -14,18 +14,13 @@ eventbridge_create_endpoint(
 )
 }
 \arguments{
-\item{Name}{[required] The name of the global endpoint. For example,
-\code{"Name":"us-east-2-custom_bus_A-endpoint"}.}
+\item{Name}{[required] The name of the global endpoint. For example, \code{"Name":"us-east-2-custom_bus_A-endpoint"}.}
 
 \item{Description}{A description of the global endpoint.}
 
-\item{RoutingConfig}{[required] Configure the routing policy, including the health check and secondary
-Region..}
+\item{RoutingConfig}{[required] Configure the routing policy, including the health check and secondary Region..}
 
-\item{ReplicationConfig}{Enable or disable event replication. The default state is \code{ENABLED}
-which means you must supply a \code{RoleArn}. If you don't have a \code{RoleArn}
-or you don't want event replication enabled, set the state to
-\code{DISABLED}.}
+\item{ReplicationConfig}{Enable or disable event replication. The default state is \code{ENABLED} which means you must supply a \code{RoleArn}. If you don't have a \code{RoleArn} or you don't want event replication enabled, set the state to \code{DISABLED}.}
 
 \item{EventBuses}{[required] Define the event buses used.
 

@@ -12,16 +12,11 @@ schemas_list_schemas(
 )
 }
 \arguments{
-\item{Limit}{}
-
-\item{NextToken}{The token that specifies the next page of results to return. To request
-the first page, leave NextToken empty. The token will expire in 24
-hours, and cannot be shared with other accounts.}
+\item{NextToken}{The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.}
 
 \item{RegistryName}{[required] The name of the registry.}
 
-\item{SchemaNamePrefix}{Specifying this limits the results to only those schema names that start
-with the specified prefix.}
+\item{SchemaNamePrefix}{Specifying this limits the results to only those schema names that start with the specified prefix.}
 }
 \description{
 List the schemas.

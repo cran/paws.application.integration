@@ -16,46 +16,28 @@ sns_set_subscription_attributes(
 
 \item{AttributeName}{[required] A map of attributes with their corresponding values.
 
-The following lists the names, descriptions, and values of the special
-request parameters that this action uses:
+The following lists the names, descriptions, and values of the special request parameters that this action uses:
 \itemize{
-\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries
-failed deliveries to HTTP/S endpoints.
-\item \code{FilterPolicy} – The simple JSON object that lets your subscriber
-receive only a subset of messages, rather than receiving every
-message published to the topic.
-\item \code{FilterPolicyScope} – This attribute lets you choose the filtering
-scope by using one of the following string value types:
+\item \code{DeliveryPolicy} – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.
+\item \code{FilterPolicy} – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.
+\item \code{FilterPolicyScope} – This attribute lets you choose the filtering scope by using one of the following string value types:
 \itemize{
-\item \code{MessageAttributes} (default) – The filter is applied on the
-message attributes.
+\item \code{MessageAttributes} (default) – The filter is applied on the message attributes.
 \item \code{MessageBody} – The filter is applied on the message body.
 }
-\item \code{RawMessageDelivery} – When set to \code{true}, enables raw message
-delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need
-for the endpoints to process JSON formatting, which is otherwise
-created for Amazon SNS metadata.
-\item \code{RedrivePolicy} – When specified, sends undeliverable messages to
-the specified Amazon SQS dead-letter queue. Messages that can't be
-delivered due to client errors (for example, when the subscribed
-endpoint is unreachable) or server errors (for example, when the
-service that powers the subscribed endpoint becomes unavailable) are
-held in the dead-letter queue for further analysis or reprocessing.
+\item \code{RawMessageDelivery} – When set to \code{true}, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.
+\item \code{RedrivePolicy} – When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. Messages that can't be delivered due to client errors (for example, when the subscribed endpoint is unreachable) or server errors (for example, when the service that powers the subscribed endpoint becomes unavailable) are held in the dead-letter queue for further analysis or reprocessing.
 }
 
-The following attribute applies only to Amazon Data Firehose delivery
-stream subscriptions:
+The following attribute applies only to Amazon Data Firehose delivery stream subscriptions:
 \itemize{
-\item \code{SubscriptionRoleArn} – The ARN of the IAM role that has the
-following:
+\item \code{SubscriptionRoleArn} – The ARN of the IAM role that has the following:
 \itemize{
 \item Permission to write to the Firehose delivery stream
 \item Amazon SNS listed as a trusted entity
 }
 
-Specifying a valid ARN for this attribute is required for Firehose
-delivery stream subscriptions. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html}{Fanout to Firehose delivery streams}
-in the \emph{Amazon SNS Developer Guide}.
+Specifying a valid ARN for this attribute is required for Firehose delivery stream subscriptions. For more information, see \href{https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html}{Fanout to Firehose delivery streams} in the \emph{Amazon SNS Developer Guide}.
 }}
 
 \item{AttributeValue}{The new value for the attribute in JSON format.}

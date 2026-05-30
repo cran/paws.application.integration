@@ -9,8 +9,7 @@ eventbridge_delete_partner_event_source(Name, Account)
 \arguments{
 \item{Name}{[required] The name of the event source to delete.}
 
-\item{Account}{[required] The Amazon Web Services account ID of the Amazon Web Services customer
-that the event source was created for.}
+\item{Account}{[required] The Amazon Web Services account ID of the Amazon Web Services customer that the event source was created for.}
 }
 \description{
 This operation is used by SaaS partners to delete a partner event source. This operation is not used by Amazon Web Services customers.

@@ -17,8 +17,7 @@ locationservice_update_tracker(
 \arguments{
 \item{TrackerName}{[required] The name of the tracker resource to update.}
 
-\item{PricingPlan}{No longer used. If included, the only allowed value is
-\code{RequestBasedUsage}.}
+\item{PricingPlan}{No longer used. If included, the only allowed value is \code{RequestBasedUsage}.}
 
 \item{PricingPlanDataSource}{This parameter is no longer used.}
 
@@ -28,34 +27,14 @@ locationservice_update_tracker(
 
 Valid values:
 \itemize{
-\item \code{TimeBased} - Location updates are evaluated against linked geofence
-collections, but not every location update is stored. If your update
-frequency is more often than 30 seconds, only one update per 30
-seconds is stored for each unique device ID.
-\item \code{DistanceBased} - If the device has moved less than 30 m (98.4 ft),
-location updates are ignored. Location updates within this distance
-are neither evaluated against linked geofence collections, nor
-stored. This helps control costs by reducing the number of geofence
-evaluations and historical device positions to paginate through.
-Distance-based filtering can also reduce the effects of GPS noise
-when displaying device trajectories on a map.
-\item \code{AccuracyBased} - If the device has moved less than the measured
-accuracy, location updates are ignored. For example, if two
-consecutive updates from a device have a horizontal accuracy of 5 m
-and 10 m, the second update is ignored if the device has moved less
-than 15 m. Ignored location updates are neither evaluated against
-linked geofence collections, nor stored. This helps educe the
-effects of GPS noise when displaying device trajectories on a map,
-and can help control costs by reducing the number of geofence
-evaluations.
+\item \code{TimeBased} - Location updates are evaluated against linked geofence collections, but not every location update is stored. If your update frequency is more often than 30 seconds, only one update per 30 seconds is stored for each unique device ID.
+\item \code{DistanceBased} - If the device has moved less than 30 m (98.4 ft), location updates are ignored. Location updates within this distance are neither evaluated against linked geofence collections, nor stored. This helps control costs by reducing the number of geofence evaluations and historical device positions to paginate through. Distance-based filtering can also reduce the effects of GPS noise when displaying device trajectories on a map.
+\item \code{AccuracyBased} - If the device has moved less than the measured accuracy, location updates are ignored. For example, if two consecutive updates from a device have a horizontal accuracy of 5 m and 10 m, the second update is ignored if the device has moved less than 15 m. Ignored location updates are neither evaluated against linked geofence collections, nor stored. This helps educe the effects of GPS noise when displaying device trajectories on a map, and can help control costs by reducing the number of geofence evaluations.
 }}
 
-\item{EventBridgeEnabled}{Whether to enable position \code{UPDATE} events from this tracker to be sent
-to EventBridge.
+\item{EventBridgeEnabled}{Whether to enable position \code{UPDATE} events from this tracker to be sent to EventBridge.
 
-You do not need enable this feature to get \code{ENTER} and \code{EXIT} events for
-geofences with this tracker. Those events are always sent to
-EventBridge.}
+You do not need enable this feature to get \code{ENTER} and \code{EXIT} events for geofences with this tracker. Those events are always sent to EventBridge.}
 
 \item{KmsKeyEnableGeospatialQueries}{Enables \code{GeospatialQueries} for a tracker that uses a \href{https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html}{Amazon Web Services KMS customer managed key}.
 

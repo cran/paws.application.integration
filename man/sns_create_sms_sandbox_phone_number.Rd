@@ -8,9 +8,7 @@ SMS sandbox and sends a one-time password (OTP) to that phone number}
 sns_create_sms_sandbox_phone_number(PhoneNumber, LanguageCode = NULL)
 }
 \arguments{
-\item{PhoneNumber}{[required] The destination phone number to verify. On verification, Amazon SNS adds
-this phone number to the list of verified phone numbers that you can
-send SMS messages to.}
+\item{PhoneNumber}{[required] The destination phone number to verify. On verification, Amazon SNS adds this phone number to the list of verified phone numbers that you can send SMS messages to.}
 
 \item{LanguageCode}{The language to use for sending the OTP. The default value is \code{en-US}.}
 }

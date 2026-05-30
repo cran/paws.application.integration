@@ -5,27 +5,15 @@ NULL
 #' Amazon EventBridge
 #'
 #' @description
-#' Amazon EventBridge helps you to respond to state changes in your Amazon
-#' Web Services resources. When your resources change state, they
-#' automatically send events to an event stream. You can create rules that
-#' match selected events in the stream and route them to targets to take
-#' action. You can also use rules to take action on a predetermined
-#' schedule. For example, you can configure rules to:
+#' Amazon EventBridge helps you to respond to state changes in your Amazon Web Services resources. When your resources change state, they automatically send events to an event stream. You can create rules that match selected events in the stream and route them to targets to take action. You can also use rules to take action on a predetermined schedule. For example, you can configure rules to:
 #' 
-#' -   Automatically invoke an Lambda function to update DNS entries when
-#'     an event notifies you that Amazon EC2 instance enters the running
-#'     state.
+#' -   Automatically invoke an Lambda function to update DNS entries when an event notifies you that Amazon EC2 instance enters the running state.
 #' 
-#' -   Direct specific API records from CloudTrail to an Amazon Kinesis
-#'     data stream for detailed analysis of potential security or
-#'     availability risks.
+#' -   Direct specific API records from CloudTrail to an Amazon Kinesis data stream for detailed analysis of potential security or availability risks.
 #' 
-#' -   Periodically invoke a built-in target to create a snapshot of an
-#'     Amazon EBS volume.
+#' -   Periodically invoke a built-in target to create a snapshot of an Amazon EBS volume.
 #' 
-#' For more information about the features of Amazon EventBridge, see the
-#' [Amazon EventBridge User
-#' Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/).
+#' For more information about the features of Amazon EventBridge, see the [Amazon EventBridge User Guide](https://docs.aws.amazon.com/eventbridge/latest/userguide/).
 #'
 #' @param
 #' config
@@ -198,7 +186,7 @@ eventbridge <- function(config = list(), credentials = list(), endpoint = NULL, 
 
 .eventbridge$metadata <- list(
   service_name = "eventbridge",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "events.{region}.amazonaws.eu", global = FALSE)),
   service_id = "EventBridge",
   api_version = "2015-10-07",
   signing_name = "events",

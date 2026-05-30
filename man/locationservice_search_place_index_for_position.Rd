@@ -2,7 +2,7 @@
 % Please edit documentation in R/locationservice_operations.R
 \name{locationservice_search_place_index_for_position}
 \alias{locationservice_search_place_index_for_position}
-\title{Reverse geocodes a given coordinate and returns a legible address}
+\title{This operation is no longer current and may be deprecated in the future}
 \usage{
 locationservice_search_place_index_for_position(
   IndexName,
@@ -17,41 +17,28 @@ locationservice_search_place_index_for_position(
 
 \item{Position}{[required] Specifies the longitude and latitude of the position to query.
 
-This parameter must contain a pair of numbers. The first number
-represents the X coordinate, or longitude; the second number represents
-the Y coordinate, or latitude.
+This parameter must contain a pair of numbers. The first number represents the X coordinate, or longitude; the second number represents the Y coordinate, or latitude.
 
-For example, \verb{[-123.1174, 49.2847]} represents a position with longitude
-\code{-123.1174} and latitude \code{49.2847}.}
+For example, \verb{[-123.1174, 49.2847]} represents a position with longitude \code{-123.1174} and latitude \code{49.2847}.}
 
-\item{MaxResults}{An optional parameter. The maximum number of results returned per
-request.
+\item{MaxResults}{An optional parameter. The maximum number of results returned per request.
 
 Default value: \code{50}}
 
-\item{Language}{The preferred language used to return results. The value must be a valid
-BCP 47 language tag, for example, \code{en} for English.
+\item{Language}{The preferred language used to return results. The value must be a valid BCP 47 language tag, for example, \code{en} for English.
 
-This setting affects the languages used in the results, but not the
-results themselves. If no language is specified, or not supported for a
-particular result, the partner automatically chooses a language for the
-result.
+This setting affects the languages used in the results, but not the results themselves. If no language is specified, or not supported for a particular result, the partner automatically chooses a language for the result.
 
-For an example, we'll use the Greek language. You search for a location
-around Athens, Greece, with the \code{language} parameter set to \code{en}. The
-\code{city} in the results will most likely be returned as \code{Athens}.
+For an example, we'll use the Greek language. You search for a location around Athens, Greece, with the \code{language} parameter set to \code{en}. The \code{city} in the results will most likely be returned as \code{Athens}.
 
-If you set the \code{language} parameter to \code{el}, for Greek, then the \code{city}
-in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
+If you set the \code{language} parameter to \code{el}, for Greek, then the \code{city} in the results will more likely be returned as \eqn{A\Theta\eta\nu\alpha}.
 
-If the data provider does not have a value for Greek, the result will be
-in a language that the provider does support.}
+If the data provider does not have a value for Greek, the result will be in a language that the provider does support.}
 
-\item{Key}{The optional \href{https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html}{API key}
-to authorize the request.}
+\item{Key}{The optional \href{https://docs.aws.amazon.com/location/previous/developerguide/using-apikeys.html}{API key} to authorize the request.}
 }
 \description{
-Reverse geocodes a given coordinate and returns a legible address. Allows you to search for Places or points of interest near a given position.
+This operation is no longer current and may be deprecated in the future. We recommend you upgrade to \code{ReverseGeocode} or \code{SearchNearby} unless you require Grab data.
 
 See \url{https://www.paws-r-sdk.com/docs/locationservice_search_place_index_for_position/} for full documentation.
 }

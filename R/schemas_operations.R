@@ -12,8 +12,7 @@ NULL
 #'
 #' @param Description A description for the discoverer.
 #' @param SourceArn &#91;required&#93; The ARN of the event bus.
-#' @param CrossAccount Support discovery of schemas in events sent to the bus from another
-#' account. (default: true).
+#' @param CrossAccount Support discovery of schemas in events sent to the bus from another account. (default: true).
 #' @param Tags Tags associated with the resource.
 #'
 #' @keywords internal
@@ -469,9 +468,7 @@ schemas_get_code_binding_source <- function(Language, RegistryName, SchemaName, 
 #'
 #' See [https://www.paws-r-sdk.com/docs/schemas_get_discovered_schema/](https://www.paws-r-sdk.com/docs/schemas_get_discovered_schema/) for full documentation.
 #'
-#' @param Events &#91;required&#93; An array of strings where each string is a JSON event. These are the
-#' events that were used to generate the schema. The array includes a
-#' single type of event and has a maximum size of 10 events.
+#' @param Events &#91;required&#93; An array of strings where each string is a JSON event. These are the events that were used to generate the schema. The array includes a single type of event and has a maximum size of 10 events.
 #' @param Type &#91;required&#93; The type of event.
 #'
 #' @keywords internal
@@ -534,14 +531,10 @@ schemas_get_resource_policy <- function(RegistryName = NULL) {
 #'
 #' See [https://www.paws-r-sdk.com/docs/schemas_list_discoverers/](https://www.paws-r-sdk.com/docs/schemas_list_discoverers/) for full documentation.
 #'
-#' @param DiscovererIdPrefix Specifying this limits the results to only those discoverer IDs that
-#' start with the specified prefix.
+#' @param DiscovererIdPrefix Specifying this limits the results to only those discoverer IDs that start with the specified prefix.
 #' @param Limit 
-#' @param NextToken The token that specifies the next page of results to return. To request
-#' the first page, leave NextToken empty. The token will expire in 24
-#' hours, and cannot be shared with other accounts.
-#' @param SourceArnPrefix Specifying this limits the results to only those ARNs that start with
-#' the specified prefix.
+#' @param NextToken The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+#' @param SourceArnPrefix Specifying this limits the results to only those ARNs that start with the specified prefix.
 #'
 #' @keywords internal
 #'
@@ -573,13 +566,9 @@ schemas_list_discoverers <- function(DiscovererIdPrefix = NULL, Limit = NULL, Ne
 #' See [https://www.paws-r-sdk.com/docs/schemas_list_registries/](https://www.paws-r-sdk.com/docs/schemas_list_registries/) for full documentation.
 #'
 #' @param Limit 
-#' @param NextToken The token that specifies the next page of results to return. To request
-#' the first page, leave NextToken empty. The token will expire in 24
-#' hours, and cannot be shared with other accounts.
-#' @param RegistryNamePrefix Specifying this limits the results to only those registry names that
-#' start with the specified prefix.
-#' @param Scope Can be set to Local or AWS to limit responses to your custom registries,
-#' or the ones provided by AWS.
+#' @param NextToken The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
+#' @param RegistryNamePrefix Specifying this limits the results to only those registry names that start with the specified prefix.
+#' @param Scope Can be set to Local or AWS to limit responses to your custom registries, or the ones provided by AWS.
 #'
 #' @keywords internal
 #'
@@ -611,9 +600,7 @@ schemas_list_registries <- function(Limit = NULL, NextToken = NULL, RegistryName
 #' See [https://www.paws-r-sdk.com/docs/schemas_list_schema_versions/](https://www.paws-r-sdk.com/docs/schemas_list_schema_versions/) for full documentation.
 #'
 #' @param Limit 
-#' @param NextToken The token that specifies the next page of results to return. To request
-#' the first page, leave NextToken empty. The token will expire in 24
-#' hours, and cannot be shared with other accounts.
+#' @param NextToken The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
 #' @param RegistryName &#91;required&#93; The name of the registry.
 #' @param SchemaName &#91;required&#93; The name of the schema.
 #'
@@ -647,12 +634,9 @@ schemas_list_schema_versions <- function(Limit = NULL, NextToken = NULL, Registr
 #' See [https://www.paws-r-sdk.com/docs/schemas_list_schemas/](https://www.paws-r-sdk.com/docs/schemas_list_schemas/) for full documentation.
 #'
 #' @param Limit 
-#' @param NextToken The token that specifies the next page of results to return. To request
-#' the first page, leave NextToken empty. The token will expire in 24
-#' hours, and cannot be shared with other accounts.
+#' @param NextToken The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
 #' @param RegistryName &#91;required&#93; The name of the registry.
-#' @param SchemaNamePrefix Specifying this limits the results to only those schema names that start
-#' with the specified prefix.
+#' @param SchemaNamePrefix Specifying this limits the results to only those schema names that start with the specified prefix.
 #'
 #' @keywords internal
 #'
@@ -781,12 +765,9 @@ schemas_put_resource_policy <- function(Policy, RegistryName = NULL, RevisionId 
 #'
 #' See [https://www.paws-r-sdk.com/docs/schemas_search_schemas/](https://www.paws-r-sdk.com/docs/schemas_search_schemas/) for full documentation.
 #'
-#' @param Keywords &#91;required&#93; Specifying this limits the results to only schemas that include the
-#' provided keywords.
+#' @param Keywords &#91;required&#93; Specifying this limits the results to only schemas that include the provided keywords.
 #' @param Limit 
-#' @param NextToken The token that specifies the next page of results to return. To request
-#' the first page, leave NextToken empty. The token will expire in 24
-#' hours, and cannot be shared with other accounts.
+#' @param NextToken The token that specifies the next page of results to return. To request the first page, leave NextToken empty. The token will expire in 24 hours, and cannot be shared with other accounts.
 #' @param RegistryName &#91;required&#93; The name of the registry.
 #'
 #' @keywords internal
@@ -946,8 +927,7 @@ schemas_untag_resource <- function(ResourceArn, TagKeys) {
 #'
 #' @param Description The description of the discoverer to update.
 #' @param DiscovererId &#91;required&#93; The ID of the discoverer.
-#' @param CrossAccount Support discovery of schemas in events sent to the bus from another
-#' account. (default: true)
+#' @param CrossAccount Support discovery of schemas in events sent to the bus from another account. (default: true)
 #'
 #' @keywords internal
 #'

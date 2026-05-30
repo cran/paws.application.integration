@@ -11,8 +11,7 @@ swf_tag_resource(resourceArn, tags)
 
 \item{tags}{[required] The list of tags to add to a domain.
 
-Tags may only contain unicode letters, digits, whitespace, or these
-symbols: \verb{_ . : / = + - @}.}
+Tags may only contain unicode letters, digits, whitespace, or these symbols: \verb{_ . : / = + - @}.}
 }
 \description{
 Add a tag to a Amazon SWF domain.

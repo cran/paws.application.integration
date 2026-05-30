@@ -18,8 +18,7 @@ sfn_update_state_machine_alias(
 
 \item{routingConfiguration}{The routing configuration of the state machine alias.
 
-An array of \code{RoutingConfig} objects that specifies up to two state
-machine versions that the alias starts executions for.}
+An array of \code{RoutingConfig} objects that specifies up to two state machine versions that the alias starts executions for.}
 }
 \description{
 Updates the configuration of an existing state machine \href{https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html}{alias} by modifying its \code{description} or \code{routingConfiguration}.

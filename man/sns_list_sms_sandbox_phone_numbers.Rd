@@ -8,8 +8,7 @@ pending destination phone numbers in the SMS sandbox}
 sns_list_sms_sandbox_phone_numbers(NextToken = NULL, MaxResults = NULL)
 }
 \arguments{
-\item{NextToken}{Token that the previous \code{ListSMSSandboxPhoneNumbersInput} request
-returns.}
+\item{NextToken}{Token that the previous \code{ListSMSSandboxPhoneNumbersInput} request returns.}
 
 \item{MaxResults}{The maximum number of phone numbers to return.}
 }

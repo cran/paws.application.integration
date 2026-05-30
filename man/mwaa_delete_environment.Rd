@@ -8,8 +8,7 @@ environment}
 mwaa_delete_environment(Name)
 }
 \arguments{
-\item{Name}{[required] The name of the Amazon MWAA environment. For example,
-\code{MyMWAAEnvironment}.}
+\item{Name}{[required] The name of the Amazon MWAA environment. For example, \code{MyMWAAEnvironment}.}
 }
 \description{
 Deletes an Amazon Managed Workflows for Apache Airflow (Amazon MWAA) environment.

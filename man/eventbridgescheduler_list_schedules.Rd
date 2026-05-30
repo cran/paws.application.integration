@@ -13,20 +13,15 @@ eventbridgescheduler_list_schedules(
 )
 }
 \arguments{
-\item{GroupName}{If specified, only lists the schedules whose associated schedule group
-matches the given filter.}
+\item{GroupName}{If specified, only lists the schedules whose associated schedule group matches the given filter.}
 
-\item{MaxResults}{If specified, limits the number of results returned by this operation.
-The operation also returns a \code{NextToken} which you can use in a
-subsequent operation to retrieve the next set of results.}
+\item{MaxResults}{If specified, limits the number of results returned by this operation. The operation also returns a \code{NextToken} which you can use in a subsequent operation to retrieve the next set of results.}
 
 \item{NamePrefix}{Schedule name prefix to return the filtered list of resources.}
 
-\item{NextToken}{The token returned by a previous call to retrieve the next set of
-results.}
+\item{NextToken}{The token returned by a previous call to retrieve the next set of results.}
 
-\item{State}{If specified, only lists the schedules whose current state matches the
-given filter.}
+\item{State}{If specified, only lists the schedules whose current state matches the given filter.}
 }
 \description{
 Returns a paginated list of your EventBridge Scheduler schedules.

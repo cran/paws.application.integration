@@ -24,8 +24,7 @@ eventbridge_update_api_destination(
 
 \item{HttpMethod}{The method to use for the API destination.}
 
-\item{InvocationRateLimitPerSecond}{The maximum number of invocations per second to send to the API
-destination.}
+\item{InvocationRateLimitPerSecond}{The maximum number of invocations per second to send to the API destination.}
 }
 \description{
 Updates an API destination.

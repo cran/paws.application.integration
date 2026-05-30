@@ -5,39 +5,13 @@ NULL
 #' AWS Resource Explorer
 #'
 #' @description
-#' Amazon Web Services Resource Explorer is a resource search and discovery
-#' service. By using Resource Explorer, you can explore your resources
-#' using an internet search engine-like experience. Examples of resources
-#' include Amazon Relational Database Service (Amazon RDS) instances,
-#' Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB
-#' tables. You can search for your resources using resource metadata like
-#' names, tags, and IDs. Resource Explorer can search across all of the
-#' Amazon Web Services Regions in your account in which you turn the
-#' service on, to simplify your cross-Region workloads.
+#' Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can explore your resources using an internet search engine-like experience. Examples of resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB tables. You can search for your resources using resource metadata like names, tags, and IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn the service on, to simplify your cross-Region workloads.
 #' 
-#' Resource Explorer scans the resources in each of the Amazon Web Services
-#' Regions in your Amazon Web Services account in which you turn on
-#' Resource Explorer. Resource Explorer [creates and maintains an
-#' index](https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index)
-#' in each Region, with the details of that Region's resources.
+#' Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which you turn on Resource Explorer. Resource Explorer [creates and maintains an index](https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index) in each Region, with the details of that Region's resources.
 #' 
-#' You can [search across all of the indexed Regions in your
-#' account](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
-#' by designating one of your Amazon Web Services Regions to contain the
-#' aggregator index for the account. When you [promote a local index in a
-#' Region to become the aggregator index for the
-#' account](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html),
-#' Resource Explorer automatically replicates the index information from
-#' all local indexes in the other Regions to the aggregator index.
-#' Therefore, the Region with the aggregator index has a copy of all
-#' resource information for all Regions in the account where you turned on
-#' Resource Explorer. As a result, views in the aggregator index Region
-#' include resources from all of the indexed Regions in your account.
+#' You can [search across all of the indexed Regions in your account](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html) by designating one of your Amazon Web Services Regions to contain the aggregator index for the account. When you [promote a local index in a Region to become the aggregator index for the account](https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html), Resource Explorer automatically replicates the index information from all local indexes in the other Regions to the aggregator index. Therefore, the Region with the aggregator index has a copy of all resource information for all Regions in the account where you turned on Resource Explorer. As a result, views in the aggregator index Region include resources from all of the indexed Regions in your account.
 #' 
-#' For more information about Amazon Web Services Resource Explorer,
-#' including how to enable and configure the service, see the [Amazon Web
-#' Services Resource Explorer User
-#' Guide](https://docs.aws.amazon.com/resource-explorer/latest/userguide/).
+#' For more information about Amazon Web Services Resource Explorer, including how to enable and configure the service, see the [Amazon Web Services Resource Explorer User Guide](https://docs.aws.amazon.com/resource-explorer/latest/userguide/).
 #'
 #' @param
 #' config
@@ -125,19 +99,27 @@ NULL
 #'  \link[=resourceexplorer_associate_default_view]{associate_default_view} \tab Sets the specified view as the default for the Amazon Web Services Region in which you call this operation\cr
 #'  \link[=resourceexplorer_batch_get_view]{batch_get_view} \tab Retrieves details about a list of views\cr
 #'  \link[=resourceexplorer_create_index]{create_index} \tab Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating an index\cr
+#'  \link[=resourceexplorer_create_resource_explorer_setup]{create_resource_explorer_setup} \tab Creates a Resource Explorer setup configuration across multiple Amazon Web Services Regions\cr
 #'  \link[=resourceexplorer_create_view]{create_view} \tab Creates a view that users can query by using the Search operation\cr
 #'  \link[=resourceexplorer_delete_index]{delete_index} \tab Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region\cr
+#'  \link[=resourceexplorer_delete_resource_explorer_setup]{delete_resource_explorer_setup} \tab Deletes a Resource Explorer setup configuration\cr
 #'  \link[=resourceexplorer_delete_view]{delete_view} \tab Deletes the specified view\cr
 #'  \link[=resourceexplorer_disassociate_default_view]{disassociate_default_view} \tab After you call this operation, the affected Amazon Web Services Region no longer has a default view\cr
 #'  \link[=resourceexplorer_get_account_level_service_configuration]{get_account_level_service_configuration} \tab Retrieves the status of your account's Amazon Web Services service access, and validates the service linked role required to access the multi-account search feature\cr
 #'  \link[=resourceexplorer_get_default_view]{get_default_view} \tab Retrieves the Amazon Resource Name (ARN) of the view that is the default for the Amazon Web Services Region in which you call this operation\cr
 #'  \link[=resourceexplorer_get_index]{get_index} \tab Retrieves details about the Amazon Web Services Resource Explorer index in the Amazon Web Services Region in which you invoked the operation\cr
 #'  \link[=resourceexplorer_get_managed_view]{get_managed_view} \tab Retrieves details of the specified Amazon Web Services-managed view\cr
+#'  \link[=resourceexplorer_get_resource_explorer_setup]{get_resource_explorer_setup} \tab Retrieves the status and details of a Resource Explorer setup operation\cr
+#'  \link[=resourceexplorer_get_service_index]{get_service_index} \tab Retrieves information about the Resource Explorer index in the current Amazon Web Services Region\cr
+#'  \link[=resourceexplorer_get_service_view]{get_service_view} \tab Retrieves details about a specific Resource Explorer service view\cr
 #'  \link[=resourceexplorer_get_view]{get_view} \tab Retrieves details of the specified view\cr
 #'  \link[=resourceexplorer_list_indexes]{list_indexes} \tab Retrieves a list of all of the indexes in Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer\cr
 #'  \link[=resourceexplorer_list_indexes_for_members]{list_indexes_for_members} \tab Retrieves a list of a member's indexes in all Amazon Web Services Regions that are currently collecting resource information for Amazon Web Services Resource Explorer\cr
 #'  \link[=resourceexplorer_list_managed_views]{list_managed_views} \tab Lists the Amazon resource names (ARNs) of the Amazon Web Services-managed views available in the Amazon Web Services Region in which you call this operation\cr
 #'  \link[=resourceexplorer_list_resources]{list_resources} \tab Returns a list of resources and their details that match the specified criteria\cr
+#'  \link[=resourceexplorer_list_service_indexes]{list_service_indexes} \tab Lists all Resource Explorer indexes across the specified Amazon Web Services Regions\cr
+#'  \link[=resourceexplorer_list_service_views]{list_service_views} \tab Lists all Resource Explorer service views available in the current Amazon Web Services account\cr
+#'  \link[=resourceexplorer_list_streaming_access_for_services]{list_streaming_access_for_services} \tab Returns a list of Amazon Web Services services that have been granted streaming access to your Resource Explorer data\cr
 #'  \link[=resourceexplorer_list_supported_resource_types]{list_supported_resource_types} \tab Retrieves a list of all resource types currently supported by Amazon Web Services Resource Explorer\cr
 #'  \link[=resourceexplorer_list_tags_for_resource]{list_tags_for_resource} \tab Lists the tags that are attached to the specified resource\cr
 #'  \link[=resourceexplorer_list_views]{list_views} \tab Lists the Amazon resource names (ARNs) of the views available in the Amazon Web Services Region in which you call this operation\cr
@@ -177,11 +159,11 @@ resourceexplorer <- function(config = list(), credentials = list(), endpoint = N
 
 .resourceexplorer$metadata <- list(
   service_name = "resourceexplorer",
-  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.csp.hci.ic.gov", global = FALSE)),
+  endpoints = list("^(us|eu|ap|sa|ca|me|af|il|mx)\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com", global = FALSE), "^cn\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com.cn", global = FALSE), "^us\\-gov\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.com", global = FALSE), "^us\\-iso\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.c2s.ic.gov", global = FALSE), "^us\\-isob\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.sc2s.sgov.gov", global = FALSE), "^eu\\-isoe\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.cloud.adc-e.uk", global = FALSE), "^us\\-isof\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.csp.hci.ic.gov", global = FALSE), "^eusc\\-(de)\\-\\w+\\-\\d+$" = list(endpoint = "resource-explorer-2.{region}.amazonaws.eu", global = FALSE)),
   service_id = "Resource Explorer 2",
   api_version = "2022-07-28",
   signing_name = "resource-explorer-2",
-  json_version = "1.1",
+  json_version = "",
   target_prefix = ""
 )
 

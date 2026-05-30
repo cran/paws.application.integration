@@ -8,12 +8,9 @@ for Apache Airflow (MWAA) environment}
 mwaa_untag_resource(ResourceArn, tagKeys)
 }
 \arguments{
-\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the Amazon MWAA environment. For
-example,
-\code{arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment}.}
+\item{ResourceArn}{[required] The Amazon Resource Name (ARN) of the Amazon MWAA environment. For example, \code{arn:aws:airflow:us-east-1:123456789012:environment/MyMWAAEnvironment}.}
 
-\item{tagKeys}{[required] The key-value tag pair you want to remove. For example,
-\code{"Environment": "Staging"}.}
+\item{tagKeys}{[required] The key-value tag pair you want to remove. For example, \code{"Environment": "Staging"}.}
 }
 \description{
 Removes key-value tag pairs associated to your Amazon Managed Workflows for Apache Airflow (MWAA) environment. For example, \code{"Environment": "Staging"}.

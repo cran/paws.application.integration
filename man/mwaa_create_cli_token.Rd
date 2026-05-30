@@ -7,8 +7,7 @@
 mwaa_create_cli_token(Name)
 }
 \arguments{
-\item{Name}{[required] The name of the Amazon MWAA environment. For example,
-\code{MyMWAAEnvironment}.}
+\item{Name}{[required] The name of the Amazon MWAA environment. For example, \code{MyMWAAEnvironment}.}
 }
 \description{
 Creates a CLI token for the Airflow CLI. To learn more, see \href{https://docs.aws.amazon.com/mwaa/latest/userguide/call-mwaa-apis-cli.html}{Creating an Apache Airflow CLI token}.
